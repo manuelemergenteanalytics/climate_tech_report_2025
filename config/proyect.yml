@@ -1,0 +1,8 @@
+countries: [MX, BR, CO, CL, AR]
+industries: [energy_utilities, agro_food, construction_realestate, retail_consumer, manufacturing]
+size_bins:
+- {name: s, min: 50, max: 249}
+- {name: m, min: 250, max: 999}
+- {name: l, min: 1000, max: null}
+window_months: 12
+hot_days: 90

@@ -1,0 +1,3 @@
+- Usa ramas feature/* y PRs pequeños.
+- Formato: black/isort (opcional), convenciones PEP8.
+- Tests mínimos en `tests/` para IIC y PS.

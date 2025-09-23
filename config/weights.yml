@@ -1,0 +1,8 @@
+alpha: 0.7
+beta: 0.3
+pilar_weights:
+H: 0.25
+C: 0.20
+F: 0.20
+P: 0.20
+X: 0.15

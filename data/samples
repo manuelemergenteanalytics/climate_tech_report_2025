@@ -1,0 +1,31 @@
+universe_mock.csv
+company_id,company_name,country,industry,size_bin
+1,Empresa Uno,AR,manufacturing,m
+2,Empresa Dois,BR,energy_utilities,l
+3,Empresa Tres,MX,retail_consumer,s
+4,Empresa Quatro,BR,agro_food,m
+5,Empresa Cinco,CL,construction_realestate,l
+
+company_size_lookup.csv
+company_id,employees
+1,600
+2,5000
+3,120
+4,700
+5,2500
+
+signals_jobs_mock.csv
+company_id,company_name,country,industry,size_bin,source,signal_type,signal_strength,ts,url,title,text_snippet
+1,Empresa Uno,AR,manufacturing,m,jobs,job_posting,3,2025-08-10,https://ejemplo.com/1,ESG Analyst,Vacante ESG
+2,Empresa Dois,BR,energy_utilities,l,jobs,job_posting,8,2025-07-20,https://ejemplo.com/2,Sustainability Lead,Vaga ESG
+
+signals_memberships_mock.csv
+company_id,company_name,country,industry,size_bin,source,signal_type,signal_strength,ts,url,title,text_snippet
+2,Empresa Dois,BR,energy_utilities,l,memberships,sbti,5,2025-05-15,https://ejemplo.com/sbti,Joined SBTi,SBTi member
+3,Empresa Tres,MX,retail_consumer,s,memberships,re100,4,2025-04-02,https://ejemplo.com/re100,RE100 Participant,RE100
+
+signals_news_mock.csv
+company_id,company_name,country,industry,size_bin,source,signal_type,signal_strength,ts,url,title,text_snippet
+1,Empresa Uno,AR,manufacturing,m,news,newsroom,2,2025-09-01,https://ejemplo.com/n1,Press Release,Net zero roadmap
+4,Empresa Quatro,BR,agro_food,m,news,pilot_news,6,2025-08-25,https://ejemplo.com/n2,Biogas Pilot,Biogas project
+5,Empresa Cinco,CL,construction_realestate,l,news,green_bond,7,2025-06-10,https://ejemplo.com/n3,Green Bond,US$200M green bond

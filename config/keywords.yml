@@ -1,0 +1,10 @@
+jobs:
+es: [sostenibilidad, "cambio climático", carbono, emisiones, mrv, biodiversidad, esg, "energía renovable", hidrógeno, biogás, fotovoltaica]
+pt: [sustentabilidade, carbono, emissões, esg, renovável, hidrogênio, biogás, fotovoltaico]
+en: [sustainability, climate, carbon, emissions, esg, renewable, hydrogen, biogas, photovoltaic, mrv, biodiversity]
+
+
+news:
+es: [bono verde, préstamo sostenible, sbti, re100, corsia, icvcm, ghg protocol, tokenización, offsets]
+pt: [título verde, empréstimo sustentável, sbti, re100, corsia, icvcm]
+en: [green bond, sustainability-linked loan, sbti, re100, corsia, icvcm, ghg protocol]
