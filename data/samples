@@ -5,6 +5,7 @@ company_id,company_name,country,industry,size_bin
 3,Empresa Tres,MX,retail_consumer,s
 4,Empresa Quatro,BR,agro_food,m
 5,Empresa Cinco,CL,construction_realestate,l
+6,Empresa Seis,UY,energy_utilities,m
 
 company_size_lookup.csv
 company_id,employees

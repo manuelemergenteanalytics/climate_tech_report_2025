@@ -1,0 +1,56 @@
+energy_power:
+  - energia
+  - utilities
+  - power
+  - generation
+  - renewables
+oil_gas:
+  - oil & gas
+  - upstream
+  - downstream
+  - petroquimica
+mining_metals:
+  - mineria
+  - metals
+  - steel
+  - acero
+chemicals_materials:
+  - quimica
+  - materiales
+  - plásticos
+manufacturing:
+  - industria manufacturera
+  - fabril
+  - factory
+construction_realestate:
+  - construccion
+  - real estate
+  - inmobiliario
+transport_logistics:
+  - transporte
+  - logistica
+  - supply chain
+agro_food:
+  - agro
+  - agricultura
+  - alimentos
+  - food & bev
+retail_consumer:
+  - retail
+  - consumo masivo
+  - e-commerce
+water_waste_circularity:
+  - agua
+  - residuos
+  - circularidad
+  - waste
+finance_insurance:
+  - banca
+  - finanzas
+  - seguros
+  - insurance
+ict_telecom:
+  - tecnologia
+  - telecom
+  - TIC
+  - software

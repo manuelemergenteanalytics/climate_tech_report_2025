@@ -1,3 +1,39 @@
-standards: [SBTi, RE100, "GHG Protocol", ICVCM, CORSIA, ISO 14001, Pacto Global]
-solutions: [mrv, offsets, tokenization, electrification, agrivoltaics, biogas, hydrogen, heat_pumps, reforestation]
-roles: [Chief Sustainability Officer, ESG Manager, Climate Analyst]
+standards: [SBTi, RE100, "GHG Protocol", ICVCM, CORSIA, ISO 14001, Pacto Global, Sistema B (B Corps), UN Global Compact]
+
+solutions:
+  - mrv
+  - offsets
+  - tokenization
+  - electrification
+  - agrivoltaics
+  - biogas
+  - hydrogen
+  - heat_pumps
+  - reforestation
+  # ampliaciones
+  - ccus            # captura y almacenamiento de carbono
+  - ev_charging     # infraestructura de vehículos eléctricos
+  - batteries       # almacenamiento energético/baterías
+  - solar_pv        # solar fotovoltaica
+  - wind_turbines   # energía eólica
+  - geothermal
+  - water_reuse     # reúso de agua
+  - bioinputs       # bioinsumos agrícolas
+  - precision_ag    # agricultura de precisión
+  - circular_packaging
+  - sustainable_fintech
+
+roles:
+  - Chief Sustainability Officer
+  - ESG Manager
+  - Climate Analyst
+  # ampliaciones
+  - Head of Climate Risk
+  - Net Zero Program Manager
+  - Renewable Energy Engineer
+  - Carbon Accounting Specialist
+  - Biodiversity Officer
+  - Green Finance Analyst
+  - Sustainability Data Scientist
+  - Environmental Compliance Manager
+  - Energy Transition Director
