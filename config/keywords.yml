@@ -1,10 +1,26 @@
-jobs:
-es: [sostenibilidad, "cambio climático", carbono, emisiones, mrv, biodiversidad, esg, "energía renovable", hidrógeno, biogás, fotovoltaica]
-pt: [sustentabilidade, carbono, emissões, esg, renovável, hidrogênio, biogás, fotovoltaico]
-en: [sustainability, climate, carbon, emissions, esg, renewable, hydrogen, biogas, photovoltaic, mrv, biodiversity]
-
-
-news:
-es: [bono verde, préstamo sostenible, sbti, re100, corsia, icvcm, ghg protocol, tokenización, offsets , Sistema B, Pacto Global ONU]
-pt: [título verde, empréstimo sustentável, sbti, re100, corsia, icvcm, Sistema B, Pacto Global ONU]
-en: [green bond, sustainability-linked loan, sbti, re100, corsia, icvcm, ghg protocol, B Corps, UN Global Compact]
+﻿news_keywords:
+  strong:
+    - "\\bgreen bond(s)?\\b"
+    - "\\bsustainability[- ]linked loan(s)?\\b"
+    - "\\bSLL\\b"
+    - "\\bbiogas\\b"
+    - "\\bhydrogen\\b"
+    - "\\bH2\\b"
+    - "\\bCCUS\\b"
+    - "\\bcarbon capture\\b"
+    - "\\bMRV\\b"
+    - "\\bISO\\s*14001\\b"
+    - "\\bTCFD\\b"
+    - "\\bTNFD\\b"
+    - "\\bCDP\\b"
+    - "\\bUN\\s*Global\\s*Compact\\b|\\bPacto\\s*Global\\b"
+    - "\\bB\\s*Corp\\b|\\bSistema\\s*B\\b"
+    - "\\bSBTi\\b"
+    - "\\bRE100\\b"
+  general:
+    - "\\bpilot(s)?\\b|\\bpiloto(s)?\\b|\\bprojeto piloto\\b"
+    - "\\brenewable(s)?\\b|\\brenovable(s)?\\b|\\brenovável(eis)?\\b"
+    - "\\bnet ?zero\\b"
+    - "\\bdecarboni[sz]ation\\b|\\bdescarbonización\\b|\\bdescarbonização\\b"
+    - "\\bESG\\b"
+    - "\\bsustainab(le|ility)\\b|\\bsustentable(s)?\\b|\\bsustentabilidade\\b"

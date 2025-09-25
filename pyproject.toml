@@ -1,3 +1,7 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "climate-tech-report-2025"
 version = "0.1.0"
@@ -6,26 +10,26 @@ authors = [{name = "Emergente Analytics"}]
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
-"pandas>=2.2",
-"numpy>=1.26",
-"pyyaml>=6.0",
-"typer>=0.12",
-"tqdm>=4.66",
-"requests>=2.32",
-"beautifulsoup4>=4.12",
-"lxml>=5.2",
-"plotly>=5.23",
-"tenacity>=9.0"
+  "pandas>=2.2",
+  "numpy>=1.26",
+  "pyyaml>=6.0",
+  "typer>=0.12",
+  "tqdm>=4.66",
+  "requests>=2.32",
+  "beautifulsoup4>=4.12",
+  "lxml>=5.2",
+  "plotly>=5.23",
+  "tenacity>=9.0",
+  "backoff>=2.2",
+  "requests-cache>=1.2",
+  "python-dateutil>=2.9"
 ]
-
 
 [project.scripts]
 ctr25 = "ctr25.cli:app"
 
-
 [tool.setuptools]
 package-dir = {"" = "src"}
-
 
 [tool.setuptools.packages.find]
 where = ["src"]

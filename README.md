@@ -5,7 +5,7 @@
 
 
 ## Alcance
-- Países: MX, BR, CO, CL, AR (ampliable)
+- Países: MX, BR, CO, CL, AR, UY (ampliable)
 - Industrias: Energía/Utilities, Agro/Alimentos, Construcción/Real Estate, Retail/Consumo, Manufactura
 - Tamaño: 50–249, 250–999, 1000+
 - Ventana: últimos 12 meses

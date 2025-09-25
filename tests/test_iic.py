@@ -7,4 +7,4 @@ from ctr25 import iic
 
 
 def test_placeholder():
-assert 1 + 1 == 2
+    assert 1 + 1 == 2
