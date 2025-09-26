@@ -1,19 +1,20 @@
-# Python
-__pycache__/
-*.py[cod]
-*.egg-info/
+# entornos / caches / builds
 .venv/
-.env
+env/
+*.egg-info/
+dist/
+build/
+__pycache__/
+.pytest_cache/
+.ipynb_checkpoints/
 
+# datos locales y cache
+data/interim/
+data/raw/
+data/interim/cache/
+data/processed/events_normalized.csv
+data/processed/universe_sample.csv
 
-# Data
-/data/raw/
-/data/interim/
-/data/processed/
-/reports/collaborators/
-
-
-# OS/IDE
-.DS_Store
+# IDEs
 .vscode/
 .idea/
