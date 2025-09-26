@@ -1,6 +1,8 @@
 # src/ctr25/cli.py (Typer)
 from __future__ import annotations
 import typer
+from ctr25.signals.jobs import run_collect_jobs
+from ctr25.signals.finance import run_collect_finance
 
 app = typer.Typer(help="CTR25 CLI")
 
@@ -44,3 +46,34 @@ def collect_news(
                          country=country, industry=industry, max_companies=max_companies)
     typer.echo(f"[collect-news] eventos agregados: {n}")
 
+@app.command("collect-jobs")
+def collect_jobs(
+    universe: str = "data/processed/universe_sample.csv",
+    keywords: str = "config/keywords.yml",
+    country: str | None = None,
+    industry: str | None = None,
+    max_companies: int = 0,
+):
+    n = run_collect_jobs(universe_path=universe, keywords_path=keywords,
+                         country=country, industry=industry, max_companies=max_companies)
+    print(f"[collect-jobs] eventos agregados: {n}")
+
+@app.command("collect-finance")
+def collect_finance(
+    universe: str = "data/processed/universe_sample.csv",
+    country: str | None = None,
+    industry: str | None = None,
+    max_companies: int = 0,
+):
+    n = run_collect_finance(universe_path=universe, country=country, industry=industry, max_companies=max_companies)
+    print(f"[collect-finance] eventos agregados: {n}")
+
+@app.command("collect-finance")
+def collect_finance(
+    universe: str = "data/processed/universe_sample.csv",
+    country: str | None = None,
+    industry: str | None = None,
+    max_companies: int = 0,
+):
+    n = run_collect_finance(universe_path=universe, country=country, industry=industry, max_companies=max_companies)
+    print(f"[collect-finance] eventos agregados: {n}")
