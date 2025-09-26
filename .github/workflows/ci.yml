@@ -1,15 +1,43 @@
-name: CI
+﻿name: CI
 on:
-  pull_request:
   push:
     branches: [ main ]
+  pull_request:
+
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
-      - run: pip install -e .
-      - run: python -m pytest -q
+          python-version: "3.12"
+
+      - name: Install package and test deps
+        run: |
+          python -m pip install -U pip setuptools wheel
+          python -m pip install -e .
+          python -m pip install pytest
+
+      - name: Create test fixtures (offline)
+        run: |
+          mkdir -p data/processed config
+          printf "company_id,company_name,country,industry,size_bin,company_domain,weight_stratum\n123,Ejemplo SA,AR,energy_power,500-999,example.com,1.0\n" > data/processed/universe_sample.csv
+          cat > config/keywords.yml << 'YAML'
+          news_keywords:
+            strong: ["\\bgreen bond(s)?\\b"]
+            general: ["\\bESG\\b"]
+          jobs_keywords:
+            - "\\bsustainab(le|ility)\\b"
+          YAML
+          cat > config/news.yml << 'YAML'
+          enabled: false
+          provider: gnews
+          api_key:
+          YAML
+
+      - name: Run tests
+        env:
+          CTR25_OFFLINE: "1"
+        run: python -m pytest -q
