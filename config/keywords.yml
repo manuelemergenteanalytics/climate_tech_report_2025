@@ -24,3 +24,12 @@
     - "\\bdecarboni[sz]ation\\b|\\bdescarbonización\\b|\\bdescarbonização\\b"
     - "\\bESG\\b"
     - "\\bsustainab(le|ility)\\b|\\bsustentable(s)?\\b|\\bsustentabilidade\\b"
+webscan_terms:
+  - "\\bESG\\b|\\bASG\\b"
+  - "net ?zero"
+  - "carbon(?!ated)|carb[oó]n(?!ico)|emissions?|emisiones|emiss[oõ]es"
+  - "renewab|renovabl|renov[aá]vel"
+  - "biodiversit|nature|naturaleza|natureza"
+  - "CCUS|carbon capture|captura de carbono"
+  - "\\bMRV\\b"
+  - "TCFD|TNFD|CDP|ISO\\s*14001"

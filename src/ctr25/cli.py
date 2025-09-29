@@ -3,6 +3,10 @@ from __future__ import annotations
 import typer
 from ctr25.signals.jobs import run_collect_jobs
 from ctr25.signals.finance import run_collect_finance
+from ctr25.signals.webscan import run_collect_webscan
+from ctr25.utils.qa import run_qa
+from ctr25.iic import compute_iic_cli
+from ctr25.prospect import compute_ps_cli
 
 app = typer.Typer(help="CTR25 CLI")
 
@@ -77,3 +81,38 @@ def collect_finance(
 ):
     n = run_collect_finance(universe_path=universe, country=country, industry=industry, max_companies=max_companies)
     print(f"[collect-finance] eventos agregados: {n}")
+
+@app.command("collect-webscan")
+def collect_webscan(
+    universe: str = "data/processed/universe_sample.csv",
+    keywords: str = "config/keywords.yml",
+    country: str | None = None,
+    industry: str | None = None,
+    max_companies: int = 0,
+):
+    n = run_collect_webscan(universe_path=universe, keywords_path=keywords,
+                            country=country, industry=industry, max_companies=max_companies)
+    print(f"[collect-webscan] eventos agregados: {n}")
+
+@app.command("qa")
+def qa_cmd(
+    universe: str = "data/processed/universe_sample.csv",
+    events: str = "data/processed/events_normalized.csv",
+    out_dir: str = "data/interim/qa",
+):
+    out = run_qa(universe_path=universe, events_path=events, out_dir=out_dir)
+    print(f"[qa] summary: {out}")
+
+@app.command("compute-iic")
+def compute_iic_cmd():
+    compute_iic_cli()
+
+@app.command("compute-ps")
+def compute_ps_cmd():
+    compute_ps_cli()
+
+@app.command("sample")
+def sample_cmd():
+    from ctr25.sample_frame import build_sample as do_sample
+    p = do_sample()
+    print(f"[sample] wrote {p}")

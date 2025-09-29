@@ -6,3 +6,20 @@ pacto_global: C
 green_bond: F
 pilot_news: P
 newsroom: X
+
+# config/signal_map.yml
+H:
+  - job_posting
+C:
+  - sbti
+  - re100
+  - sistemab
+  - ungc
+F:
+  - green_bond
+  - sll
+P:
+  - pilot_news
+X:
+  - newsroom
+  - web_esg
