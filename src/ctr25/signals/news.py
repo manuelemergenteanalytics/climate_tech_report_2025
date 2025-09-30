@@ -302,7 +302,11 @@ def fetch_article_detail(u: str) -> tuple[str, str, datetime | None]:
     except Exception:
         return "", "", None
 
-def collect_news_for_company(row: dict, keywords_cfg: dict, agg_cfg: dict) -> list[dict]:
+def collect_news_for_company(
+    row: dict,
+    keywords_cfg: dict,
+    agg_cfg: dict,
+) -> tuple[list[dict], list[dict]]:
     company_id = str(row["company_id"])
     domain = (row.get("company_domain") or "").strip().lower()
     out_rows = []
@@ -310,7 +314,7 @@ def collect_news_for_company(row: dict, keywords_cfg: dict, agg_cfg: dict) -> li
 
     strong_rx, general_rx = keyword_matchers(keywords_cfg)
     if not domain:
-        return []
+        return [], []
 
     # 1) newsroom candidates
     for base_url in find_newsroom_urls(domain):
