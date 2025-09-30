@@ -1,0 +1,3 @@
+company_id,company_name,country,industry,size_bin,source,signal_type,signal_strength,ts,url,title,text_snippet
+1,Empresa Uno,AR,manufacturing,m,jobs,job_posting,0.6,2024-08-10T00:00:00Z,https://ejemplo.com/1,ESG Analyst,Vacante ESG
+2,Empresa Dois,BR,energy_power,l,jobs,job_posting,0.85,2024-07-20T00:00:00Z,https://ejemplo.com/2,Sustainability Lead,Vaga ESG

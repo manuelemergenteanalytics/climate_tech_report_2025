@@ -1,3 +1,8 @@
-﻿enabled: false
-provider: gnews
-api_key:
+﻿providers:
+  rss:
+    enabled: true
+    feeds: []
+  gdelt:
+    enabled: true
+  web:
+    enabled: false

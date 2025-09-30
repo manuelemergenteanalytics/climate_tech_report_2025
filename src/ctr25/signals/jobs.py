@@ -35,6 +35,10 @@ SITES = [
   ("linkedin", "https://www.linkedin.com/jobs/search/?keywords={q}", ["linkedin.com"])
 ]
 
+# asegurar estructura necesaria antes de inicializar cache
+for _dir in (RAW_DIR, PROC_DIR, CACHE_DIR, LOG_DIR):
+    os.makedirs(_dir, exist_ok=True)
+
 requests_cache.install_cache(CACHE_PATH, backend="sqlite", expire_after=86400)
 session = requests.Session()
 session.headers.update({"User-Agent": UA, "Accept-Language":"es-AR,es;q=0.9,pt;q=0.8,en;q=0.7"})

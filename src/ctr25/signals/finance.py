@@ -24,6 +24,10 @@ STRONG_RX = [
 ]
 AMOUNT_RX = re.compile(r"(\$|USD|US\$|R\$|MXN|ARS|CLP|COP|U\$S|€)\s?(\d[\d\., ]{2,})", re.I)
 
+# asegurar estructura antes de inicializar cache
+for _dir in (RAW_DIR, PROC_DIR, CACHE, os.path.join(INTERIM, "logs")):
+    os.makedirs(_dir, exist_ok=True)
+
 requests_cache.install_cache(CACHE_PATH, backend="sqlite", expire_after=86400)
 session = requests.Session(); session.headers.update({"User-Agent":UA})
 

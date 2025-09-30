@@ -6,8 +6,13 @@ import numpy as np
 
 
 def _load_project():
-    with open("config/project.yml", "r", encoding="utf-8") as f:
-        return yaml.safe_load(f) or {}
+    """Carga configuración de muestreo tolerando ambas variantes de nombre."""
+    candidates = [Path("config/project.yml"), Path("config/proyect.yml")]
+    for path in candidates:
+        if path.exists():
+            with open(path, "r", encoding="utf-8") as f:
+                return yaml.safe_load(f) or {}
+    return {}
 
 
 def _load_universe() -> pd.DataFrame:
@@ -108,3 +113,4 @@ def build_sample():
     out.parent.mkdir(parents=True, exist_ok=True)
     sample_df.to_csv(out, index=False)
     print(f"Muestra estratificada → {out} (n={len(sample_df)})")
+    return str(out)

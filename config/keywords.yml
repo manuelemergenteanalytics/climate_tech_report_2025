@@ -1,35 +1,9 @@
-﻿news_keywords:
-  strong:
-    - "\\bgreen bond(s)?\\b"
-    - "\\bsustainability[- ]linked loan(s)?\\b"
-    - "\\bSLL\\b"
-    - "\\bbiogas\\b"
-    - "\\bhydrogen\\b"
-    - "\\bH2\\b"
-    - "\\bCCUS\\b"
-    - "\\bcarbon capture\\b"
-    - "\\bMRV\\b"
-    - "\\bISO\\s*14001\\b"
-    - "\\bTCFD\\b"
-    - "\\bTNFD\\b"
-    - "\\bCDP\\b"
-    - "\\bUN\\s*Global\\s*Compact\\b|\\bPacto\\s*Global\\b"
-    - "\\bB\\s*Corp\\b|\\bSistema\\s*B\\b"
-    - "\\bSBTi\\b"
-    - "\\bRE100\\b"
-  general:
-    - "\\bpilot(s)?\\b|\\bpiloto(s)?\\b|\\bprojeto piloto\\b"
-    - "\\brenewable(s)?\\b|\\brenovable(s)?\\b|\\brenovável(eis)?\\b"
-    - "\\bnet ?zero\\b"
-    - "\\bdecarboni[sz]ation\\b|\\bdescarbonización\\b|\\bdescarbonização\\b"
-    - "\\bESG\\b"
-    - "\\bsustainab(le|ility)\\b|\\bsustentable(s)?\\b|\\bsustentabilidade\\b"
-webscan_terms:
-  - "\\bESG\\b|\\bASG\\b"
-  - "net ?zero"
-  - "carbon(?!ated)|carb[oó]n(?!ico)|emissions?|emisiones|emiss[oõ]es"
-  - "renewab|renovabl|renov[aá]vel"
-  - "biodiversit|nature|naturaleza|natureza"
-  - "CCUS|carbon capture|captura de carbono"
-  - "\\bMRV\\b"
-  - "TCFD|TNFD|CDP|ISO\\s*14001"
+﻿include:
+  - renewable
+  - solar
+  - wind
+  - hidrógeno
+  - baterías
+  - carbon capture
+  - eficiencia energética
+exclude: []

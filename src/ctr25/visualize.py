@@ -1,10 +1,20 @@
+from pathlib import Path
+
 import pandas as pd
 import plotly.express as px
-from pathlib import Path
+
+
+PROSPECT_PATH = Path("data/processed/prospect_score.csv")
+
+
+def _load_prospects() -> pd.DataFrame:
+    if not PROSPECT_PATH.exists():
+        raise FileNotFoundError(f"Missing prospects file: {PROSPECT_PATH}")
+    return pd.read_csv(PROSPECT_PATH)
 
 
 def build_all():
-    df = pd.read_csv("data/processed/company_prospects.csv")
+    df = _load_prospects()
 
     # Asegurar carpetas de salida
     Path("reports/figures").mkdir(parents=True, exist_ok=True)
@@ -31,8 +41,12 @@ def build_all():
 
 
 def export_prospects(path: str):
-    df = pd.read_csv("data/processed/company_prospects.csv")
-    cols = ["company_name", "country", "industry", "size_bin", "IIC", "PS", "label"]
+    df = _load_prospects()
+    cols = ["company_name", "country", "industry", "size_bin", "IIC", "PS", "PS_label"]
     Path(path).parent.mkdir(parents=True, exist_ok=True)
     df[cols].sort_values("PS", ascending=False).to_csv(path, index=False)
     print(f"Prospects exportados → {path}")
+
+
+def main():
+    build_all()

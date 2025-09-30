@@ -166,6 +166,10 @@ def detect_rss(soup: BeautifulSoup, base: str) -> str | None:
 # --------------------------
 # HTTP with caching & backoff
 # --------------------------
+# asegurar estructura para cache/logs
+for _dir in (RAW_DIR, PROC_DIR, CACHE_DIR, LOG_DIR):
+    os.makedirs(_dir, exist_ok=True)
+
 requests_cache.install_cache(CACHE_PATH, backend="sqlite", expire_after=86400)
 
 session = requests.Session()
@@ -409,10 +413,8 @@ def run_collect_news(universe_path: str = os.path.join(PROC_DIR, "universe_sampl
                      country: str | None = None, industry: str | None = None, max_companies: int = 0):
     
     df = _load_universe(universe_path)
-    
+
     ensure_dirs()
-    # carga universe
-    df = pd.read_csv(universe_path, dtype=str)
     if country:
         df = df[df["country"] == country]
     if industry:

@@ -1,0 +1,7 @@
+company_id,company_name,country,industry,size_bin,company_domain
+1,Empresa Uno,AR,manufacturing,m,empresauno.com
+2,Empresa Dois,BR,energy_power,l,empresadois.com.br
+3,Empresa Tres,MX,retail_consumer,s,empresatres.mx
+4,Empresa Quatro,BR,agro_food,m,empresaquatro.com
+5,Empresa Cinco,CL,construction_realestate,l,empresacinco.cl
+6,Empresa Seis,UY,energy_power,m,empresaseis.com.uy

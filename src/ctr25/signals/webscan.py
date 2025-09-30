@@ -26,6 +26,10 @@ DEFAULT_TERMS = [
   r"climate|clim[aá]tico", r"CCUS|carbon capture|captura de carbono", r"\bMRV\b", r"TCFD|TNFD|CDP|ISO\s*14001"
 ]
 
+# asegurar estructura necesaria antes de inicializar cache
+for _dir in (RAW_DIR, PROC_DIR, CACHE, os.path.join(INTERIM, "logs")):
+    os.makedirs(_dir, exist_ok=True)
+
 requests_cache.install_cache(CACHE_PATH, backend="sqlite", expire_after=86400)
 session = requests.Session()
 session.headers.update({"User-Agent": UA, "Accept-Language":"es-AR,es;q=0.9,pt;q=0.8,en;q=0.7"})

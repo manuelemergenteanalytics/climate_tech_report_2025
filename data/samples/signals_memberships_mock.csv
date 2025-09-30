@@ -1,0 +1,3 @@
+company_id,company_name,country,industry,size_bin,source,signal_type,signal_strength,ts,url,title,text_snippet
+2,Empresa Dois,BR,energy_power,l,memberships,sbti,1.0,2024-05-15T00:00:00Z,https://ejemplo.com/sbti,Joined SBTi,SBTi member
+3,Empresa Tres,MX,retail_consumer,s,memberships,re100,1.0,2024-04-02T00:00:00Z,https://ejemplo.com/re100,RE100 Participant,RE100
