@@ -1,56 +1,25 @@
-energy_power:
-  - energia
-  - utilities
-  - power
-  - generation
-  - renewables
-oil_gas:
-  - oil & gas
-  - upstream
-  - downstream
-  - petroquimica
-mining_metals:
-  - mineria
-  - metals
-  - steel
-  - acero
-chemicals_materials:
-  - quimica
-  - materiales
-  - plásticos
-manufacturing:
-  - industria manufacturera
-  - fabril
-  - factory
-construction_realestate:
-  - construccion
-  - real estate
-  - inmobiliario
-transport_logistics:
-  - transporte
-  - logistica
-  - supply chain
-agro_food:
-  - agro
-  - agricultura
-  - alimentos
-  - food & bev
-retail_consumer:
-  - retail
-  - consumo masivo
-  - e-commerce
-water_waste_circularity:
-  - agua
-  - residuos
-  - circularidad
-  - waste
-finance_insurance:
-  - banca
-  - finanzas
-  - seguros
-  - insurance
-ict_telecom:
-  - tecnologia
-  - telecom
-  - TIC
-  - software
+mappings:
+  - pattern: "(?i)oil|petro|gas|hidrocarb"
+    to: "oil_gas"
+  - pattern: "(?i)energy|energ[ií]a|eléctr|electric|power"
+    to: "energy_power"
+  - pattern: "(?i)mining|min[ií]er|minería|minera"
+    to: "mining_metals"
+  - pattern: "(?i)chem|qu[ií]m|material|siderurg|metalúrg"
+    to: "chemicals_materials"
+  - pattern: "(?i)manufact|fábric|industrial|automotriz|automotive"
+    to: "manufacturing"
+  - pattern: "(?i)construct|construcci[oó]n|real estate|inmobili|infraestruct"
+    to: "construction_realestate"
+  - pattern: "(?i)transport|logist|ferro|a[eé]re|aero|aviaci|metro|naval|shipping"
+    to: "transport_logistics"
+  - pattern: "(?i)agri|agro|food|alimento|lácteo|bev"
+    to: "agro_food"
+  - pattern: "(?i)retail|consumer|consumo|comercio|minoris"
+    to: "retail_consumer"
+  - pattern: "(?i)water|waste|residu|circular|h[ií]dric"
+    to: "water_waste_circularity"
+  - pattern: "(?i)finance|bank|banca|financ|insur|seguro|holding"
+    to: "finance_insurance"
+  - pattern: "(?i)ict|telecom|telefon|software|internet|tech|tecnolog|medios|cine|animaci"
+    to: "ict_telecom"

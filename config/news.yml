@@ -1,8 +1,11 @@
-﻿providers:
-  rss:
-    enabled: true
-    feeds: []
+providers:
   gdelt:
     enabled: true
-  web:
-    enabled: false
+    days: 7
+    max_records: 250
+  rss:
+    enabled: true
+    feeds:
+      - https://news.google.com/rss/search?q=climate+tech
+      - https://feeds.arstechnica.com/arstechnica/technology-lab
+    limit_per_feed: 30

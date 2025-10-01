@@ -15,7 +15,7 @@ def _norm01_by_stratum(df: pd.DataFrame, col: str) -> pd.DataFrame:
     def _f(g: pd.DataFrame) -> pd.DataFrame:
         x = g[col]
         if x.max() == x.min():
-            g[col+"_norm"] = 50.0  # plano → valor medio
+            g[col+"_norm"] = 50.0  # plano -> valor medio
         else:
             # percentil rank 0–100 (robusto y monotónico)
             g[col+"_norm"] = (100.0 * (x.rank(method="average") - 1) / (len(x) - 1)).round(2)

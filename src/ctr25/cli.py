@@ -27,10 +27,14 @@ def init_cmd():
 
 
 @app.command("sample")
-def sample_cmd():
+def sample_cmd(
+    force: bool = typer.Option(False, "--force", help="Reconstruye el universo aunque ya exista."),
+    per_country: int = typer.Option(500, "--per-country", help="Máximo de empresas por país desde Wikidata."),
+    save_raw: Path | None = typer.Option(None, "--save-raw", help="Ruta CSV para guardar el dump crudo de Wikidata."),
+):
     from ctr25.sample_frame import build_sample
 
-    path = build_sample()
+    path = build_sample(force=force, per_country=per_country, save_raw=str(save_raw) if save_raw else None)
     typer.echo(f"[sample] wrote {path}")
 
 
@@ -39,7 +43,8 @@ def collect_memberships_cmd():
     from ctr25.signals.membership import collect_memberships
 
     events = collect_memberships()
-    typer.echo(f"[collect-memberships] eventos agregados: {len(events)}")
+    added = events.attrs.get("added", len(events)) if hasattr(events, "attrs") else len(events)
+    typer.echo(f"[collect-memberships] eventos agregados: {added}")
 
 
 @app.command("collect-news")

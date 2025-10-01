@@ -37,7 +37,7 @@ def build_all():
     top = df.sort_values("PS", ascending=False).head(200)
     top.to_csv("reports/public/top_companies.csv", index=False)
 
-    print("Visualizaciones generadas → reports/figures, reports/public")
+    print("Visualizaciones generadas -> reports/figures, reports/public")
 
 
 def export_prospects(path: str):
@@ -45,7 +45,7 @@ def export_prospects(path: str):
     cols = ["company_name", "country", "industry", "size_bin", "IIC", "PS", "PS_label"]
     Path(path).parent.mkdir(parents=True, exist_ok=True)
     df[cols].sort_values("PS", ascending=False).to_csv(path, index=False)
-    print(f"Prospects exportados → {path}")
+    print(f"Prospects exportados -> {path}")
 
 
 def main():

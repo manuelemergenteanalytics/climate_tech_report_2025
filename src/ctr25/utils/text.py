@@ -10,7 +10,7 @@ def clean_text(s: str) -> str:
 
 
 def load_industry_map(path: str = "config/industry_map.yml") -> dict:
-    """Carga el mapa alias→slug canónico de industrias."""
+    """Carga el mapa alias->slug canónico de industrias."""
     with open(path, "r", encoding="utf-8") as f:
         return yaml.safe_load(f) or {}
 

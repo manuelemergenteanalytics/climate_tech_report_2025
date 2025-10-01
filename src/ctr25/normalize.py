@@ -15,12 +15,12 @@ def combine_mock_signals():
     ]
     df = pd.concat(base, ignore_index=True)[COMMON_COLS]
 
-    # Normalización de industria (alias → slug canónico)
+    # Normalización de industria (alias -> slug canónico)
     imap = load_industry_map()  # lee config/industry_map.yml
     df["industry"] = df["industry"].apply(lambda x: normalize_industry(str(x), imap))
 
     out = Path("data/processed/events_normalized.csv")
     out.parent.mkdir(parents=True, exist_ok=True)
     df.to_csv(out, index=False)
-    print(f"Signals normalized → {out}")
+    print(f"Signals normalized -> {out}")
 

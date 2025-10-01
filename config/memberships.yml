@@ -1,0 +1,4 @@
+sbti_url: "https://example.org/sbti_list.csv"
+re100_url: "https://example.org/re100_members.csv"
+ungc_url: "https://example.org/ungc_participants.csv"
+bcorps_url: "https://example.org/bcorps_directory.csv"
