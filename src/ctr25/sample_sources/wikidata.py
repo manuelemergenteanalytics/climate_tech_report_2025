@@ -12,21 +12,23 @@ from urllib.parse import urlparse
 import pandas as pd
 import requests
 import requests_cache
+import yaml
 
+# --- Default industry regex mappings (fallback file is created if missing) ---
 default_cfg_mappings = {
     "mappings": [
-        {"pattern": "(?i)oil|petro|gas|hidrocarb", "to": "oil_gas"},
-        {"pattern": "(?i)energy|energ[ií]a|eléctr|electric|power", "to": "energy_power"},
-        {"pattern": "(?i)mining|min[ií]er|minería|minera", "to": "mining_metals"},
-        {"pattern": "(?i)chem|qu[ií]m|material", "to": "chemicals_materials"},
-        {"pattern": "(?i)manufactur|fábric|industrial", "to": "manufacturing"},
-        {"pattern": "(?i)construct|construcci[oó]n|real estate|inmobili", "to": "construction_realestate"},
-        {"pattern": "(?i)transport|logist|ferro|a[eé]re|aero|aviaci|metro", "to": "transport_logistics"},
-        {"pattern": "(?i)agri|agro|food|alimento", "to": "agro_food"},
-        {"pattern": "(?i)retail|consumer|consumo|comercio", "to": "retail_consumer"},
-        {"pattern": "(?i)water|waste|residu|circular|h[ií]dric", "to": "water_waste_circularity"},
-        {"pattern": "(?i)finance|bank|banca|financ|insur|seguro", "to": "finance_insurance"},
-        {"pattern": "(?i)ict|telecom|telefon|software|internet|tech|tecnolog", "to": "ict_telecom"},
+        {"pattern": r"(?i)oil|petro|gas|hidrocarb|upstream|downstream", "to": "oil_gas"},
+        {"pattern": r"(?i)energy|energ[ií]a|eléctr|electric|power|solar|fotovoltaic|e[oó]lic|wind|hidroel[eé]ctric|geoterm|renew|bioenerg|biofuel", "to": "energy_power"},
+        {"pattern": r"(?i)mining|min[ií]er|minería|minera", "to": "mining_metals"},
+        {"pattern": r"(?i)chem|qu[ií]m|material|siderurg|metalúrg|fertiliz|plástic|petroqu[ií]m|pol[ií]mer", "to": "chemicals_materials"},
+        {"pattern": r"(?i)manufactur|fábric|industrial|automotriz|automotive|textil|maquil|ensambl", "to": "manufacturing"},
+        {"pattern": r"(?i)construct|construcci[oó]n|real estate|inmobili|infraestruct|desarroll|viviend|obra", "to": "construction_realestate"},
+        {"pattern": r"(?i)transport|logist|ferro|a[eé]re|aero|aviaci|metro|naval|shipping|turism|turíst|portu|mar[ií]t|aerol[ií]n", "to": "transport_logistics"},
+        {"pattern": r"(?i)agri|agro|food|alimento|lácteo|bev|cervec|brew|helad|c[aá]fe|cacao|ganad|harin|az[ií]car", "to": "agro_food"},
+        {"pattern": r"(?i)retail|consumer|consumo|comercio|minoris|tienda|supermerc|farmac|ferreter|cosm[eé]t|perfume|hogar|departamental|e-?commerce", "to": "retail_consumer"},
+        {"pattern": r"(?i)water|waste|residu|circular|h[ií]dric|saneam|sanit|alcantarill|tratamiento", "to": "water_waste_circularity"},
+        {"pattern": r"(?i)finance|bank|banca|financ|insur|seguro|holding|banco|fond[oa]|inversion|burs[aá]til|cooperativ|microfin", "to": "finance_insurance"},
+        {"pattern": r"(?i)ict|telecom|telefon|software|internet|tech|tecnolog|medios|cine|animaci|televis|notici|audiovisual|videojueg|stream|rad[ií]o|digital|m[oó]vil", "to": "ict_telecom"},
     ]
 }
 
@@ -38,8 +40,21 @@ COUNTRY_QIDS: Dict[str, str] = {
     "CL": "wd:Q298",
     "AR": "wd:Q414",
     "UY": "wd:Q77",
+    "PE": "wd:Q419",
+    "EC": "wd:Q736",
+    "BO": "wd:Q750",
+    "PY": "wd:Q733",
+    "PA": "wd:Q804",
+    "DO": "wd:Q786",
+    "VE": "wd:Q717",
+    "GT": "wd:Q774",
+    "SV": "wd:Q792",
+    "HN": "wd:Q783",
+    "NI": "wd:Q811",
+    "CR": "wd:Q800",
 }
 
+# Cache HTTP 1h
 _CACHE_PATH = Path("data/interim/cache/wikidata.sqlite")
 _CACHE_PATH.parent.mkdir(parents=True, exist_ok=True)
 requests_cache.install_cache(str(_CACHE_PATH), backend="sqlite", expire_after=3600)
@@ -52,14 +67,14 @@ def _run_sparql(query: str) -> dict:
     }
     for attempt in range(3):
         try:
-            response = requests.get(
+            r = requests.get(
                 ENDPOINT,
                 params={"format": "json", "query": query},
                 headers=headers,
-                timeout=120,
+                timeout=60,
             )
-            response.raise_for_status()
-            return response.json()
+            r.raise_for_status()
+            return r.json()
         except requests.exceptions.Timeout:
             if attempt == 2:
                 raise
@@ -81,14 +96,40 @@ def _domain_from_url(url: str) -> str:
     return host.split("/")[0]
 
 
-def _size_bin(employees: float) -> str:
-    if employees >= 1000:
+def _normalize_numeric(value: object) -> float | None:
+    if value is None:
+        return None
+    if isinstance(value, (int, float)):
+        return float(value)
+    if isinstance(value, str):
+        cleaned = re.sub(r"[^0-9.,-]", "", value.strip()).replace(",", "")
+        if not cleaned:
+            return None
+        try:
+            return float(cleaned)
+        except ValueError:
+            return None
+    return None
+
+
+def _size_bin(employees: float | None, revenue: float | None, ticker: str | None) -> str:
+    if employees is not None:
+        if employees >= 1000:
+            return "l"
+        if employees >= 250:
+            return "m"
+        if employees >= 50:
+            return "s"
+    if revenue is not None:
+        if revenue >= 1_000_000_000:
+            return "l"
+        if revenue >= 100_000_000:
+            return "m"
+        if revenue >= 10_000_000:
+            return "s"
+    if ticker:
         return "l"
-    if employees >= 250:
-        return "m"
-    if employees >= 50:
-        return "s"
-    return ""
+    return "m"
 
 
 def _hash_company_id(qid: str) -> int:
@@ -97,161 +138,163 @@ def _hash_company_id(qid: str) -> int:
 
 
 SPARQL_TEMPLATE = """
-SELECT ?company ?companyLabel ?countryCode ?industryLabel ?employees ?website ?ticker ?exchangeLabel WHERE {{
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX bd: <http://www.bigdata.com/rdf#>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+SELECT DISTINCT ?company ?companyLabel ?companyDescription ?industryLabel ?employees1128 ?employees1081 ?revenue ?website ?ticker ?exchangeLabel WHERE {{
   VALUES ?targetCountry {{ {country_qid} }}
-  ?company wdt:P31/wdt:P279* wd:Q4830453.
-  {location_block}
-  ?company {employee_property} ?employees.
+  ?company wdt:P31/wdt:P279* wd:Q4830453 .
+  {{
+    ?company wdt:P17 ?targetCountry .
+  }} UNION {{
+    ?company wdt:P159 ?hq . ?hq wdt:P17 ?targetCountry .
+  }}
+  OPTIONAL {{ ?company wdt:P1128 ?employees1128. }}
+  OPTIONAL {{ ?company wdt:P1081 ?employees1081. }}
+  OPTIONAL {{ ?company wdt:P2139 ?revenue. }}
   OPTIONAL {{ ?company wdt:P856 ?website. }}
-  OPTIONAL {{ ?company wdt:P452 ?industry. }}
+  ?company wdt:P452 ?industry.
   OPTIONAL {{
     ?company p:P414 ?exchangeStmt.
-    ?exchangeStmt ps:P414 ?exchange;
-                   pq:P249 ?ticker.
+    ?exchangeStmt ps:P414 ?exchange ;
+                   pq:P249 ?ticker .
+    OPTIONAL {{ ?exchange rdfs:label ?exchangeLabel FILTER (lang(?exchangeLabel) = "en") }}
   }}
-  SERVICE wikibase:label {{ bd:serviceParam wikibase:language "es,en". }}
+  SERVICE wikibase:label {{ bd:serviceParam wikibase:language "es,en,pt". }}
 }}
 LIMIT {limit}
 OFFSET {offset}
 """
 
 
-def query_wikidata(companies_per_country: int = 500) -> pd.DataFrame:
+def query_wikidata(
+    companies_per_country: int = 500,
+    countries: Iterable[str] | None = None,
+) -> pd.DataFrame:
+    target = max(1, int(companies_per_country))
+    chunk = max(25, min(50, max(25, target // 4)))
+
+    if countries:
+        country_codes = []
+        for code in countries:
+            if not isinstance(code, str):
+                continue
+            iso = code.strip().upper()
+            if iso in COUNTRY_QIDS:
+                country_codes.append(iso)
+        if not country_codes:
+            raise ValueError("No se definieron países válidos para el muestreo.")
+    else:
+        country_codes = list(COUNTRY_QIDS.keys())
+
     records: Dict[str, Dict[str, object]] = {}
-    country_records: Dict[str, set] = {code: set() for code in COUNTRY_QIDS}
+    seen_by_country: Dict[str, set] = {code: set() for code in country_codes}
 
-    chunk = max(25, min(80, int(companies_per_country)))
-
-    location_blocks = [
-        """
-  ?company wdt:P17 ?targetCountry.
-  BIND(?targetCountry AS ?countryEntity)
-  ?countryEntity wdt:P297 ?countryCode.
-""",
-        """
-  ?company wdt:P159 ?hq.
-  ?hq wdt:P17 ?targetCountry.
-  BIND(?targetCountry AS ?countryEntity)
-  ?countryEntity wdt:P297 ?countryCode.
-""",
-    ]
-
-    employee_properties = ["wdt:P1128", "wdt:P1081"]
-
-    for loop_country_code, country_qid in COUNTRY_QIDS.items():
-        for location_block in location_blocks:
-            if len(country_records[loop_country_code]) >= companies_per_country:
+    for iso in country_codes:
+        qid = COUNTRY_QIDS[iso]
+        if len(seen_by_country[iso]) >= target:
+            continue
+        offset = 0
+        while len(seen_by_country[iso]) < target:
+            remaining = target - len(seen_by_country[iso])
+            limit = min(chunk, remaining)
+            query = SPARQL_TEMPLATE.format(country_qid=qid, limit=int(limit), offset=int(offset))
+            try:
+                payload = _run_sparql(query)
+            except requests.exceptions.RequestException:
                 break
-            for employee_property in employee_properties:
-                if len(country_records[loop_country_code]) >= companies_per_country:
-                    break
-                offset = 0
-                while len(country_records[loop_country_code]) < companies_per_country:
-                    remaining = companies_per_country - len(country_records[loop_country_code])
-                    limit = min(chunk, remaining)
-                    query = SPARQL_TEMPLATE.format(
-                        country_qid=country_qid,
-                        location_block=location_block,
-                        employee_property=employee_property,
-                        limit=int(limit),
-                        offset=int(offset),
-                    )
-                    try:
-                        payload = _run_sparql(query)
-                    except requests.exceptions.RequestException:
-                        break
-                    bindings = payload.get("results", {}).get("bindings", [])
-                    if not bindings:
-                        break
-                    offset += limit
-                    for item in bindings:
-                        uri = item.get("company", {}).get("value")
-                        if not uri:
-                            continue
-                        qid = uri.rsplit("/", 1)[-1]
-                        country_code = item.get("countryCode", {}).get("value", loop_country_code)
-                        country_code = country_code.upper() if isinstance(country_code, str) else loop_country_code
-                        rec = records.setdefault(
-                            qid,
-                            {
-                                "qid": qid,
-                                "company_name": item.get("companyLabel", {}).get("value", "").strip(),
-                                "country": country_code,
-                                "industry_labels": set(),
-                                "employees": None,
-                                "company_domain": "",
-                                "tickers": set(),
-                            },
-                        )
 
-                        industry_label = item.get("industryLabel", {}).get("value")
-                        if industry_label:
-                            rec["industry_labels"].add(industry_label.strip())
+            bindings = payload.get("results", {}).get("bindings", [])
+            if not bindings:
+                break
+            offset += limit
 
-                        employees_value = item.get("employees", {}).get("value")
-                        if employees_value:
-                            try:
-                                employees = float(employees_value)
-                            except (TypeError, ValueError):
-                                employees = None
-                            if employees is not None:
-                                current = rec.get("employees") or 0.0
-                                if employees > current:
-                                    rec["employees"] = employees
+            for b in bindings:
+                uri = b.get("company", {}).get("value")
+                if not uri:
+                    continue
+                qid_item = uri.rsplit("/", 1)[-1]
 
-                        website = item.get("website", {}).get("value")
-                        if website:
-                            domain = _domain_from_url(website)
-                            if domain:
-                                rec["company_domain"] = domain
+                rec = records.setdefault(
+                    qid_item,
+                    {
+                        "qid": qid_item,
+                        "company_name": b.get("companyLabel", {}).get("value", "").strip(),
+                        "country": iso,
+                        "industry_labels": set(),
+                        "description": b.get("companyDescription", {}).get("value", "").strip(),
+                        "employees": None,
+                        "revenue": None,
+                        "company_domain": "",
+                        "tickers": set(),
+                    },
+                )
 
-                        ticker_value = item.get("ticker", {}).get("value")
-                        if ticker_value:
-                            exchange_label = item.get("exchangeLabel", {}).get("value", "").strip()
-                            ticker = ticker_value.strip()
-                            if exchange_label:
-                                rec["tickers"].add(f"{ticker}@{exchange_label}")
-                            else:
-                                rec["tickers"].add(ticker)
+                ind = b.get("industryLabel", {}).get("value")
+                if ind:
+                    rec["industry_labels"].add(ind.strip())
 
-                        country_records[loop_country_code].add(qid)
+                e1 = _normalize_numeric(b.get("employees1128", {}).get("value"))
+                e2 = _normalize_numeric(b.get("employees1081", {}).get("value"))
+                if e1 is not None or e2 is not None:
+                    cand = max([v for v in (e1, e2) if v is not None])
+                    rec["employees"] = max(rec.get("employees") or 0.0, cand)
 
-                    if len(bindings) < limit:
-                        break
-                    time.sleep(0.5)
+                rev = _normalize_numeric(b.get("revenue", {}).get("value"))
+                if rev is not None:
+                    rec["revenue"] = max(rec.get("revenue") or 0.0, rev)
+
+                web = b.get("website", {}).get("value")
+                if web:
+                    dom = _domain_from_url(web)
+                    if dom:
+                        rec["company_domain"] = dom
+
+                tic = b.get("ticker", {}).get("value")
+                if tic:
+                    exch = b.get("exchangeLabel", {}).get("value", "").strip()
+                    rec["tickers"].add(f"{tic}@{exch}" if exch else tic)
+
+                seen_by_country[iso].add(qid_item)
+
+            if len(bindings) < limit:
+                break
+            time.sleep(0.4)  # politeness
 
     rows: List[Dict[str, object]] = []
     for data in records.values():
-        company_name = data.get("company_name", "").strip()
-        employees = data.get("employees")
-        if not company_name or employees is None:
+        name = (data.get("company_name") or "").strip()
+        if not name:
             continue
-        size = _size_bin(employees)
-        if not size:
+        country = data.get("country", "")
+        if country not in COUNTRY_QIDS:
             continue
-        country_code = data.get("country", "")
-        if country_code not in COUNTRY_QIDS:
-            continue
+
         industries = sorted(data.get("industry_labels", []))
-        if not industries:
-            continue
         domain = data.get("company_domain", "")
         tickers = sorted(data.get("tickers", []))
-        if not domain and not tickers:
-            continue
+        employees = data.get("employees")
+        revenue = data.get("revenue")
+
+        # Requisitos mínimos: al menos dominio o ticker
+        size = _size_bin(employees, revenue, tickers[0] if tickers else "")
         rows.append(
             {
                 "qid": data["qid"],
-                "company_name": company_name,
-                "country": country_code,
+                "company_name": name,
+                "country": country,
                 "industry_raw": "; ".join(industries),
+                "description": data.get("description", ""),
                 "employees": employees,
+                "revenue": revenue,
                 "company_domain": domain,
                 "ticker": tickers[0] if tickers else "",
                 "size_bin": size,
+                "source": "wikidata",
+                "source_rank": 1,
             }
         )
-
     return pd.DataFrame(rows)
 
 
@@ -262,12 +305,8 @@ def map_industries(df: pd.DataFrame, map_path: str = "config/industry_map.yml") 
     path = Path(map_path)
     if not path.exists():
         path.parent.mkdir(parents=True, exist_ok=True)
-        import yaml
-
         with path.open("w", encoding="utf-8") as fh:
             yaml.safe_dump(default_cfg_mappings, fh, sort_keys=False, allow_unicode=False)
-
-    import yaml
 
     with path.open("r", encoding="utf-8") as fh:
         cfg = yaml.safe_load(fh) or {}
@@ -281,68 +320,65 @@ def map_industries(df: pd.DataFrame, map_path: str = "config/industry_map.yml") 
             for alias in aliases:
                 if not isinstance(alias, str):
                     continue
-                pattern = rf"(?i){re.escape(alias.strip())}"
-                legacy.append({"pattern": pattern, "to": slug})
+                legacy.append({"pattern": rf"(?i){re.escape(alias.strip())}", "to": slug})
         mappings = legacy
+
     patterns: List[Tuple[re.Pattern, str]] = []
     for entry in mappings:
-        pattern = entry.get("pattern")
-        target = entry.get("to")
-        if not pattern or not target:
-            continue
-        patterns.append((re.compile(pattern), target))
+        pat, target = entry.get("pattern"), entry.get("to")
+        if pat and target:
+            patterns.append((re.compile(pat), target))
 
     def _map(row: pd.Series) -> str:
-        raw = str(row.get("industry_raw", ""))
+        raw = " ".join(
+            p for p in (row.get("industry_raw", ""), row.get("description", ""))
+            if isinstance(p, str)
+        )
         for rx, target in patterns:
             if rx.search(raw):
                 return target
         return ""
 
-    df = df.copy()
-    df["industry"] = df.apply(_map, axis=1)
-    df = df[df["industry"].astype(bool)].copy()
-    return df
+    out = df.copy()
+    out["industry"] = out.apply(_map, axis=1)
+    out = out[out["industry"].astype(bool)].copy()
+    return out
 
 
 def apply_sampling(df: pd.DataFrame, project_cfg: Dict[str, object]) -> pd.DataFrame:
-    sample_cfg = (project_cfg or {}).get("sample", project_cfg or {})
-    countries = sample_cfg.get("countries")
-    industries = sample_cfg.get("industries")
-    min_per_stratum = int(sample_cfg.get("min_per_stratum", 20))
-    total_target = int(sample_cfg.get("total_target", 1200))
+    # Lee de sample.* y, si faltan claves, cae al nivel raíz del project.yml
+    sample_cfg = (project_cfg or {}).get("sample", {}) or {}
+    countries = sample_cfg.get("countries") or (project_cfg or {}).get("countries")
+    industries = sample_cfg.get("industries") or (project_cfg or {}).get("industries")
+    min_per_stratum = int(sample_cfg.get("min_per_stratum", (project_cfg or {}).get("min_per_stratum", 20)))
+    total_target = int(sample_cfg.get("total_target", (project_cfg or {}).get("total_target", 1200)))
 
+    df = df.copy()
     if countries:
-        df = df[df["country"].isin(countries)].copy()
+        df = df[df["country"].isin(countries)]
     if industries:
-        df = df[df["industry"].isin(industries)].copy()
+        df = df[df["industry"].isin(industries)]
 
     df = df[df["size_bin"].isin(["s", "m", "l"])]
-    df = df.drop_duplicates(subset=["qid"])
-    df = df.sort_values(["country", "industry", "employees"], ascending=[True, True, False])
+    df = df.drop_duplicates(subset=["qid"]).sort_values(
+        ["country", "industry", "employees"], ascending=[True, True, False]
+    )
 
-    strata = []
+    # Construye strata
+    strata: List[Tuple[str, str, pd.DataFrame]] = []
     if countries and industries:
-        for country in countries:
-            for industry in industries:
-                mask = (df["country"] == country) & (df["industry"] == industry)
-                slice_df = df[mask]
-                if not slice_df.empty:
-                    strata.append((country, industry, slice_df))
+        for c in countries:
+            for i in industries:
+                sl = df[(df["country"] == c) & (df["industry"] == i)]
+                if not sl.empty:
+                    strata.append((c, i, sl))
     else:
-        for key, slice_df in df.groupby(["country", "industry"], sort=False):
-            strata.append((key[0], key[1], slice_df))
+        for (c, i), sl in df.groupby(["country", "industry"], sort=False):
+            strata.append((c, i, sl))
 
     if not strata:
         return pd.DataFrame(columns=[
-            "company_id",
-            "company_name",
-            "country",
-            "industry",
-            "size_bin",
-            "company_domain",
-            "weight_stratum",
-            "ticker",
+            "company_id","company_name","country","industry","size_bin","company_domain","weight_stratum","ticker"
         ])
 
     n_strata = len(strata)
@@ -350,54 +386,40 @@ def apply_sampling(df: pd.DataFrame, project_cfg: Dict[str, object]) -> pd.DataF
     sampled_frames: List[pd.DataFrame] = []
     stratum_sizes: Dict[Tuple[str, str], int] = {}
 
-    for country, industry, slice_df in strata:
-        take = min(len(slice_df), target_per_stratum)
+    for c, i, sl in strata:
+        take = min(len(sl), target_per_stratum)
         if take <= 0:
             continue
-        sampled = slice_df.head(take).copy()
-        sampled_frames.append(sampled)
-        stratum_sizes[(country, industry)] = len(sampled)
+        smp = sl.head(take).copy()
+        sampled_frames.append(smp)
+        stratum_sizes[(c, i)] = len(smp)
 
     if not sampled_frames:
         return pd.DataFrame(columns=[
-            "company_id",
-            "company_name",
-            "country",
-            "industry",
-            "size_bin",
-            "company_domain",
-            "weight_stratum",
-            "ticker",
+            "company_id","company_name","country","industry","size_bin","company_domain","weight_stratum","ticker"
         ])
 
-    sample_df = pd.concat(sampled_frames, ignore_index=True)
-    sample_df = sample_df.sort_values(["country", "industry", "company_name"]).reset_index(drop=True)
+    sample_df = pd.concat(sampled_frames, ignore_index=True).sort_values(
+        ["country", "industry", "company_name"]
+    ).reset_index(drop=True)
 
-    weight_map: Dict[Tuple[str, str], float] = {}
-    for key, count in stratum_sizes.items():
-        if count <= 0:
-            continue
-        weight_map[key] = total_target / (n_strata * count)
+    # Pesos por estrato
+    weights: Dict[Tuple[str, str], float] = {}
+    for key, cnt in stratum_sizes.items():
+        if cnt > 0:
+            weights[key] = total_target / (n_strata * cnt)
 
     sample_df["weight_stratum"] = sample_df.apply(
-        lambda row: weight_map.get((row["country"], row["industry"]), 1.0),
-        axis=1,
+        lambda r: weights.get((r["country"], r["industry"]), 1.0), axis=1
     )
 
+    # IDs determinísticos por QID
     ordered_qids = sorted(sample_df["qid"].tolist())
     qid_to_id = {qid: idx + 1 for idx, qid in enumerate(ordered_qids)}
     sample_df["company_id"] = sample_df["qid"].map(qid_to_id)
 
-    columns = [
-        "company_id",
-        "company_name",
-        "country",
-        "industry",
-        "size_bin",
-        "company_domain",
-        "weight_stratum",
-        "ticker",
+    cols = [
+        "company_id","company_name","country","industry","size_bin",
+        "company_domain","weight_stratum","ticker",
     ]
-
-    result = sample_df[columns].copy().sort_values("company_id").reset_index(drop=True)
-    return result
+    return sample_df[cols].sort_values("company_id").reset_index(drop=True)
