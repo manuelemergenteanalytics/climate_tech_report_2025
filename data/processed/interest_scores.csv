@@ -1,0 +1,307 @@
+company_id,company_name,country,industry,size_bin,group_memberships,signals_count,last_ts,score_0_100
+101,Empresa Provincial de la Energía de Santa Fe,AR,energy_power,m,13.180642585701733,1,2025-02-12T00:00:00Z,13.18
+102,Empresa Ferroviaria Andina,BO,transport_logistics,m,10.049434917191546,1,2024-11-05T00:00:00Z,10.05
+209,Brazil Great Southern Railway,BR,transport_logistics,m,0.0,0,,0.0
+208,Ferrocarril Central Argentino,AR,transport_logistics,m,0.0,0,,0.0
+207,Belgrano Cargas,AR,transport_logistics,m,0.0,0,,0.0
+206,Bancóldex,CO,finance_insurance,m,0.0,0,,0.0
+205,Banco Itaú Paraguay S.A.,PY,finance_insurance,m,0.0,0,,0.0
+204,Banco Económico,BO,finance_insurance,m,0.0,0,,0.0
+154,Banco General,PA,finance_insurance,m,0.0,0,,0.0
+202,Aztec Brewing Company,MX,agro_food,m,0.0,0,,0.0
+201,Ferrocarril Nordeste Argentino,AR,transport_logistics,m,0.0,0,,0.0
+200,Ferrocarril Gran Oeste Argentino,AR,transport_logistics,m,0.0,0,,0.0
+199,Grupo Televisa,MX,ict_telecom,l,0.0,0,,0.0
+198,Air Century,DO,transport_logistics,m,0.0,0,,0.0
+197,Aeropuertos del Perú,PE,transport_logistics,m,0.0,0,,0.0
+196,Aerolíneas Ejecutivas,MX,transport_logistics,m,0.0,0,,0.0
+195,Banco Central del Paraguay,PY,finance_insurance,m,0.0,0,,0.0
+194,Ualá,MX,finance_insurance,m,0.0,0,,0.0
+203,Ferrocarril Bahía Blanca al Noroeste,AR,transport_logistics,m,0.0,0,,0.0
+228,Administración Nacional de Electricidad,PY,energy_power,m,0.0,0,,0.0
+227,Banco Hipotecario de Chile,CL,finance_insurance,m,0.0,0,,0.0
+226,Administrador Financiero de Transantiago,CL,transport_logistics,m,0.0,0,,0.0
+225,Banesco Panamá,PA,finance_insurance,l,0.0,0,,0.0
+224,Ferrocarril del Pacífico (México),MX,transport_logistics,m,0.0,0,,0.0
+223,Ferrocarril de Veracruz al Istmo,MX,transport_logistics,m,0.0,0,,0.0
+222,Tren Interoceánico,MX,transport_logistics,m,0.0,0,,0.0
+221,Frávega,AR,retail_consumer,m,0.0,0,,0.0
+210,Ferrocarril del Sud,AR,transport_logistics,m,0.0,0,,0.0
+219,LATAM Cargo Colombia,CO,transport_logistics,m,0.0,0,,0.0
+218,Edegel,PE,energy_power,m,0.0,0,,0.0
+217,Grupo Modelo,MX,agro_food,m,0.0,0,,0.0
+216,Compañía Nacional de Chocolates de Perú,PE,agro_food,m,0.0,0,,0.0
+215,Central Uruguay Railway,UY,transport_logistics,m,0.0,0,,0.0
+214,Ferrocarril Oeste de Buenos Aires,AR,transport_logistics,m,0.0,0,,0.0
+213,Ferrocarril Buenos Aires al Pacífico,AR,transport_logistics,m,0.0,0,,0.0
+212,Ferrocarril del Norte de Buenos Aires,AR,transport_logistics,m,0.0,0,,0.0
+211,Ferrocarril Midland de Buenos Aires,AR,transport_logistics,m,0.0,0,,0.0
+220,Ferrocarril Entre Ríos,AR,transport_logistics,m,0.0,0,,0.0
+172,Marathon Sports,EC,manufacturing,m,0.0,0,,0.0
+171,Pressenza,EC,ict_telecom,m,0.0,0,,0.0
+170,Cervecería Boliviana Nacional,BO,agro_food,m,0.0,0,,0.0
+169,CORPAC,PE,transport_logistics,m,0.0,0,,0.0
+168,Banco de la Nación Argentina,AR,finance_insurance,m,0.0,0,,0.0
+167,Banco Hipotecario,AR,finance_insurance,m,0.0,0,,0.0
+166,Banco GNB Paraguay,PY,finance_insurance,m,0.0,0,,0.0
+165,Compañía Peruana de Teléfonos S.A.,PE,ict_telecom,m,0.0,0,,0.0
+193,Ferrocarril Central Córdoba,AR,transport_logistics,m,0.0,0,,0.0
+163,Ferrocarril Central Norte,AR,transport_logistics,m,0.0,0,,0.0
+162,Cervecería Backus y Johnston,PE,agro_food,m,0.0,0,,0.0
+161,Mexican Southern Railroad,MX,transport_logistics,m,0.0,0,,0.0
+160,Eg3,AR,oil_gas,m,0.0,0,,0.0
+159,Agencia Boliviana de Información,BO,ict_telecom,m,0.0,0,,0.0
+158,Aerolíneas Sudamericanas,BO,transport_logistics,m,0.0,0,,0.0
+157,Aerocon,BO,transport_logistics,m,0.0,0,,0.0
+156,Unidad de Gestión Operativa Ferroviaria de Emergencia,AR,transport_logistics,m,0.0,0,,0.0
+155,Yanbal,PE,retail_consumer,m,0.0,0,,0.0
+164,Altán Redes,MX,ict_telecom,m,0.0,0,,0.0
+192,Banco Hipotecario del Uruguay,UY,finance_insurance,m,0.0,0,,0.0
+191,Ferrocarril de Antofagasta a Bolivia,CL,mining_metals,m,0.0,0,,0.0
+190,Air Panamá,PA,transport_logistics,m,0.0,0,,0.0
+189,Agencia ANDINA,PE,ict_telecom,m,0.0,0,,0.0
+188,Metrovías,AR,transport_logistics,l,0.0,0,,0.0
+187,DHL Aero Expreso,PA,transport_logistics,m,0.0,0,,0.0
+186,AeroSur,BO,transport_logistics,m,0.0,0,,0.0
+185,Cervejaria Feldmann,BR,agro_food,m,0.0,0,,0.0
+184,Almacenes Tía,EC,retail_consumer,m,0.0,0,,0.0
+173,Aeroservicios Gama,MX,transport_logistics,m,0.0,0,,0.0
+182,LATAM Paraguay,PY,transport_logistics,m,0.0,0,,0.0
+181,Estudios Churubusco,MX,ict_telecom,m,0.0,0,,0.0
+180,Northeast Bolivian Airways,BO,transport_logistics,m,0.0,0,,0.0
+179,Sky México,MX,ict_telecom,m,0.0,0,,0.0
+178,Lima Airport Partners,PE,transport_logistics,m,0.0,0,,0.0
+177,Transporte Aéreo Militar,BO,transport_logistics,m,0.0,0,,0.0
+176,ViaQuatro,BR,transport_logistics,m,0.0,0,,0.0
+175,Entel Bolivia,BO,ict_telecom,m,0.0,0,,0.0
+174,Empresa Nacional de Ferrocarriles del Perú,PE,transport_logistics,m,0.0,0,,0.0
+183,telnor,MX,ict_telecom,m,0.0,0,,0.0
+302,Andes Iron,CL,mining_metals,m,0.0,0,,0.0
+301,Baden Baden,BR,agro_food,m,0.0,0,,0.0
+300,Personal Paraguay,PY,ict_telecom,m,0.0,0,,0.0
+299,C6 Bank,BR,finance_insurance,m,0.0,0,,0.0
+298,Clan del Golfo,CO,oil_gas,m,0.0,0,,0.0
+297,Brasil Ferrovias,BR,transport_logistics,m,0.0,0,,0.0
+296,Boliviana de Aviación,BO,transport_logistics,l,0.0,0,,0.0
+295,Amares Costafusion,CL,oil_gas,m,0.0,0,,0.0
+229,Agencia de Noticias Fides (ANF),BO,ict_telecom,m,0.0,0,,0.0
+293,Bäcker Brewery,BR,agro_food,m,0.0,0,,0.0
+292,Hipermaxi,BO,retail_consumer,m,0.0,0,,0.0
+275,Banistmo,PA,finance_insurance,m,0.0,0,,0.0
+274,Petropar,PY,oil_gas,m,0.0,0,,0.0
+273,Puntacana Resort & Club,DO,transport_logistics,m,0.0,0,,0.0
+272,Ferrocentral,AR,transport_logistics,m,0.0,0,,0.0
+271,Megacable,MX,ict_telecom,m,0.0,0,,0.0
+270,Megabús,CO,transport_logistics,m,0.0,0,,0.0
+269,Empresa de los Ferrocarriles del Estado,CL,transport_logistics,l,0.0,0,,0.0
+294,Brubank,AR,finance_insurance,m,0.0,0,,0.0
+17,Centro Acuático Porvenir,BO,transport_logistics,m,0.0,0,,0.0
+16,Mass,PE,retail_consumer,m,0.0,0,,0.0
+15,El Oro Mining and Railway,MX,mining_metals,m,0.0,0,,0.0
+14,Barranquilla Railway and Pier Company Ltd,CO,construction_realestate,m,0.0,0,,0.0
+13,Grupo Monte Carlo (Uruguay),UY,ict_telecom,m,0.0,0,,0.0
+12,Piscinão de Ramos,BR,water_waste_circularity,m,0.0,0,,0.0
+11,Lojas Colombo,BR,retail_consumer,m,0.0,0,,0.0
+10,Industrias Reunidas Fábrica Matarazzo,BR,manufacturing,m,0.0,0,,0.0
+303,Ferromex,MX,transport_logistics,m,0.0,0,,0.0
+8,Imagem Filmes,BR,ict_telecom,m,0.0,0,,0.0
+7,The Great Western of Brazil Railway Company Ltd.,BR,transport_logistics,m,0.0,0,,0.0
+6,Ferrocarril de Sobral,BR,construction_realestate,m,0.0,0,,0.0
+5,Ferrocarril de Bahía a São Francisco,BR,transport_logistics,m,0.0,0,,0.0
+4,Estrada de Ferro de Goiás,BR,transport_logistics,m,0.0,0,,0.0
+291,IC Norte,BO,retail_consumer,m,0.0,0,,0.0
+290,Manaco,BO,manufacturing,m,0.0,0,,0.0
+305,Vista Energy,AR,oil_gas,m,0.0,0,,0.0
+304,Banco de Inversión y Comercio Exterior,AR,finance_insurance,m,0.0,0,,0.0
+9,IMPSA,AR,energy_power,m,0.0,0,,0.0
+247,Organización Nacional de Autobuses,UY,transport_logistics,m,0.0,0,,0.0
+246,Infinitum,MX,ict_telecom,m,0.0,0,,0.0
+245,Grupo ATV,PE,ict_telecom,m,0.0,0,,0.0
+244,GV Producciones,PE,ict_telecom,m,0.0,0,,0.0
+243,Ferrocarriles del Sur,CL,transport_logistics,m,0.0,0,,0.0
+242,Supermercados Vea,AR,retail_consumer,m,0.0,0,,0.0
+241,Paranair,PY,transport_logistics,m,0.0,0,,0.0
+240,Empresa de Acueducto y Alcantarillado de Bogotá,CO,water_waste_circularity,m,0.0,0,,0.0
+268,Línea Coahuila Durango,MX,transport_logistics,m,0.0,0,,0.0
+238,DRB Dribbling,AR,manufacturing,m,0.0,0,,0.0
+237,Compañía de Ómnibus de Pando,UY,transport_logistics,m,0.0,0,,0.0
+236,Compañía Oriental de Transporte,UY,transport_logistics,m,0.0,0,,0.0
+235,Cusqueña,PE,agro_food,m,0.0,0,,0.0
+234,Banesco Banco Múltiple,DO,finance_insurance,m,0.0,0,,0.0
+233,Banco del Estado de Chile,CL,finance_insurance,m,0.0,0,,0.0
+232,Banco de Seguros del Estado,UY,finance_insurance,m,0.0,0,,0.0
+231,BAC Credomatic,PA,finance_insurance,m,0.0,0,,0.0
+230,Almac,CL,retail_consumer,m,0.0,0,,0.0
+239,Educativa,PA,ict_telecom,m,0.0,0,,0.0
+267,Líder (supermercado),CL,retail_consumer,m,0.0,0,,0.0
+266,Transnordestina Logística,BR,transport_logistics,m,0.0,0,,0.0
+265,Radiodifusión Nacional del Uruguay,UY,ict_telecom,m,0.0,0,,0.0
+264,La Ibérica,PE,manufacturing,m,0.0,0,,0.0
+263,Tambo+,PE,retail_consumer,m,0.0,0,,0.0
+262,Brasil Kirin,BR,agro_food,m,0.0,0,,0.0
+261,Chilefilms,CL,ict_telecom,m,0.0,0,,0.0
+260,Copetrol,PY,oil_gas,m,0.0,0,,0.0
+259,Despegar,AR,transport_logistics,l,0.0,0,,0.0
+248,Sweet & Coffee,EC,agro_food,m,0.0,0,,0.0
+257,Banco Fassil,BO,finance_insurance,m,0.0,0,,0.0
+256,Banco Continental,PY,finance_insurance,m,0.0,0,,0.0
+255,Etesa,PA,energy_power,m,0.0,0,,0.0
+254,Central Romana Corporation,DO,manufacturing,m,0.0,0,,0.0
+253,Ferrocarril Uruguayo del Este,UY,transport_logistics,m,0.0,0,,0.0
+252,Vox (Paraguay),PY,ict_telecom,m,0.0,0,,0.0
+251,Totalplay Telecomunicaciones,MX,ict_telecom,m,0.0,0,,0.0
+250,Tienda Inglesa,UY,retail_consumer,m,0.0,0,,0.0
+249,Grupo Globo,BR,ict_telecom,m,0.0,0,,0.0
+258,Banco Sol,BO,finance_insurance,m,0.0,0,,0.0
+56,Expreso Pocitos,UY,agro_food,m,0.0,0,,0.0
+55,Confitería Lion d'Or,UY,agro_food,m,0.0,0,,0.0
+54,Avianca Cargo,CO,transport_logistics,m,0.0,0,,0.0
+53,FluyezCambios,PE,ict_telecom,m,0.0,0,,0.0
+52,Corporación Minera de Bolivia,BO,mining_metals,m,0.0,0,,0.0
+51,Nutrisa,MX,agro_food,m,0.0,0,,0.0
+50,Vianney,MX,manufacturing,m,0.0,0,,0.0
+49,Interceramic,MX,retail_consumer,m,0.0,0,,0.0
+153,Wingo,CO,transport_logistics,m,0.0,0,,0.0
+47,Ferrocarril de Piria,UY,transport_logistics,m,0.0,0,,0.0
+46,Frigorífico Reyes,BO,transport_logistics,m,0.0,0,,0.0
+45,SuperVia,BR,transport_logistics,m,0.0,0,,0.0
+44,Ferrovías,AR,construction_realestate,m,0.0,0,,0.0
+43,Trenes de Buenos Aires,AR,transport_logistics,l,0.0,0,,0.0
+42,Grupo R5,CO,finance_insurance,m,0.0,0,,0.0
+41,Frigorífico Santa Rita,BO,transport_logistics,m,0.0,0,,0.0
+40,Companhia Paulista de Trens Metropolitanos,BR,transport_logistics,m,0.0,0,,0.0
+39,Companhia Brasileira de Trens Urbanos,BR,transport_logistics,m,0.0,0,,0.0
+48,Modatelas,MX,manufacturing,m,0.0,0,,0.0
+75,People in Profit System,PA,chemicals_materials,m,0.0,0,,0.0
+74,Global Investment International Corp.,PA,chemicals_materials,m,0.0,0,,0.0
+73,Emerald Passport,PA,construction_realestate,m,0.0,0,,0.0
+72,COETC Inter,UY,transport_logistics,m,0.0,0,,0.0
+71,MasAir Cargo México,MX,transport_logistics,m,0.0,0,,0.0
+70,Cervecería Oriental,UY,agro_food,m,0.0,0,,0.0
+69,Banco Hypothecario e Agricola do Estado de Minas Geraes,BR,finance_insurance,m,0.0,0,,0.0
+68,Banco de la Republica del Paraguay,PY,finance_insurance,m,0.0,0,,0.0
+57,La Casa de Lucy,UY,agro_food,m,0.0,0,,0.0
+66,"Sud-América, Compañía de Seguros de Vida",CL,finance_insurance,m,0.0,0,,0.0
+65,Planta de Alimentos Balanceados La Estrella,CL,agro_food,m,0.0,0,,0.0
+64,Agricultural Mortgage Bank,CO,finance_insurance,m,0.0,0,,0.0
+63,Banco Hipotecario de Panama,PA,finance_insurance,m,0.0,0,,0.0
+62,Canadian Pacific Kansas City,MX,transport_logistics,l,0.0,0,,0.0
+61,Monarca Films,UY,ict_telecom,m,0.0,0,,0.0
+60,Navegación Aérea y Aeropuertos Bolivianos,BO,transport_logistics,m,0.0,0,,0.0
+59,Qik Banco Digital Dominicano,DO,finance_insurance,m,0.0,0,,0.0
+58,Petrobahia,BR,oil_gas,m,0.0,0,,0.0
+67,Banco Agricola del Paraguay,PY,finance_insurance,m,0.0,0,,0.0
+18,NotiPress,MX,ict_telecom,m,0.0,0,,0.0
+289,MultiCine,BO,ict_telecom,m,0.0,0,,0.0
+288,Cine Center,BO,ict_telecom,m,0.0,0,,0.0
+287,Banco Ganadero,BO,finance_insurance,m,0.0,0,,0.0
+286,Banco Fortaleza,BO,finance_insurance,m,0.0,0,,0.0
+285,Banco Fie,BO,finance_insurance,m,0.0,0,,0.0
+284,Banco Internacional,EC,finance_insurance,m,0.0,0,,0.0
+283,WIND Telecom,DO,ict_telecom,m,0.0,0,,0.0
+38,EcuaMedios,EC,ict_telecom,m,0.0,0,,0.0
+281,Televisa San Ángel,MX,ict_telecom,m,0.0,0,,0.0
+280,Telecom Colombia,CO,ict_telecom,m,0.0,0,,0.0
+279,Sodimac,MX,retail_consumer,m,0.0,0,,0.0
+278,Administración de los Ferrocarriles del Estado,UY,transport_logistics,m,0.0,0,,0.0
+277,Lloyd Aéreo Boliviano,BO,transport_logistics,m,0.0,0,,0.0
+276,Produbanco,EC,finance_insurance,m,0.0,0,,0.0
+3,Estrada de Ferro Araraquara,BR,transport_logistics,m,0.0,0,,0.0
+2,"Dorada Railway Company, Ltd.",CO,transport_logistics,m,0.0,0,,0.0
+1,Cervecería CCU Limache,CL,agro_food,m,0.0,0,,0.0
+282,Ferrocarril Norte del Uruguay,UY,transport_logistics,m,0.0,0,,0.0
+37,Departamentos & Suites Villa Teresa,MX,ict_telecom,m,0.0,0,,0.0
+36,Sociedad Anónima de Radioemisoras del Plata,UY,ict_telecom,m,0.0,0,,0.0
+35,Servindustriales Del Valle,CO,manufacturing,m,0.0,0,,0.0
+34,Ferrocarriles y Tranvías del Estado,UY,transport_logistics,m,0.0,0,,0.0
+33,Alia Revestimientos,PA,construction_realestate,m,0.0,0,,0.0
+32,Alia Concretos,PA,construction_realestate,m,0.0,0,,0.0
+31,Grupo Oti,PA,manufacturing,m,0.0,0,,0.0
+30,Bolivia Railway Company,BO,transport_logistics,m,0.0,0,,0.0
+19,Ferrocarril Domingo Faustino Sarmiento,AR,transport_logistics,m,0.0,0,,0.0
+28,Central Uruguay Western Extension Railway,UY,transport_logistics,m,0.0,0,,0.0
+27,Central Uruguay Eastern Extension Railway,UY,transport_logistics,m,0.0,0,,0.0
+26,Colombia Railway and Navigation Company,CO,transport_logistics,m,0.0,0,,0.0
+25,Central Uruguay Northern Extension Railway,UY,transport_logistics,m,0.0,0,,0.0
+24,Taltal Railway,CL,transport_logistics,m,0.0,0,,0.0
+23,Ferrocarril Central del Paraguay,PY,transport_logistics,m,0.0,0,,0.0
+22,Grupo Ukamau,BO,ict_telecom,m,0.0,0,,0.0
+21,Ferrocarriles Argentinos,AR,transport_logistics,m,0.0,0,,0.0
+20,HEINEKEN México,MX,agro_food,m,0.0,0,,0.0
+29,Ta-Ta,UY,retail_consumer,m,0.0,0,,0.0
+134,Ferrocarril Noroeste del Uruguay,UY,transport_logistics,m,0.0,0,,0.0
+133,EASY TAXI,BR,transport_logistics,m,0.0,0,,0.0
+132,Baja California Railroad,MX,transport_logistics,m,0.0,0,,0.0
+131,Aeronaves TSM,MX,transport_logistics,m,0.0,0,,0.0
+130,Banco de Crédito de Bolivia,BO,finance_insurance,m,0.0,0,,0.0
+129,Plaza Lama,DO,retail_consumer,m,0.0,0,,0.0
+128,Noticias Argentinas,AR,ict_telecom,m,0.0,0,,0.0
+127,Multi Ahorro,UY,retail_consumer,m,0.0,0,,0.0
+76,T6poker,PA,chemicals_materials,m,0.0,0,,0.0
+125,Los 40 Paraguay,PY,ict_telecom,m,0.0,0,,0.0
+124,KDY,AR,manufacturing,m,0.0,0,,0.0
+123,TAR México,MX,transport_logistics,m,0.0,0,,0.0
+122,Empresa Generadora de Electricidad Haina,DO,energy_power,m,0.0,0,,0.0
+121,Ecojet,BO,transport_logistics,m,0.0,0,,0.0
+120,Rede Ferroviária Federal,BR,transport_logistics,m,0.0,0,,0.0
+119,Fomento Económico Mexicano,MX,agro_food,l,0.0,0,,0.0
+118,Telmex,MX,ict_telecom,m,0.0,0,,0.0
+117,Ferroviaria Oriental,BO,transport_logistics,m,0.0,0,,0.0
+126,Los 40 República Dominicana,DO,ict_telecom,m,0.0,0,,0.0
+306,Ferrocarril Leopoldina,BR,transport_logistics,m,0.0,0,,0.0
+152,Boomerang TV,CL,ict_telecom,m,0.0,0,,0.0
+151,Banco Mercantil Santa Cruz S.A.,BO,finance_insurance,m,0.0,0,,0.0
+150,Rumo S.A.,BR,transport_logistics,l,0.0,0,,0.0
+149,Nubank,MX,finance_insurance,l,0.0,0,,0.0
+148,Fondo Financiero para el Desarrollo de los Países de la Cuenca del Plata,BO,construction_realestate,m,0.0,0,,0.0
+147,Baja Brewing Company,MX,agro_food,m,0.0,0,,0.0
+146,Amaszonas Paraguay,PY,transport_logistics,m,0.0,0,,0.0
+135,Bitel,PE,ict_telecom,m,0.0,0,,0.0
+144,Banco BISA,BO,finance_insurance,m,0.0,0,,0.0
+143,Wäls Brewing Company,BR,agro_food,m,0.0,0,,0.0
+142,Arajet,DO,transport_logistics,m,0.0,0,,0.0
+141,Cervecería Nacional,PA,agro_food,m,0.0,0,,0.0
+140,Isaura S.A.,AR,oil_gas,m,0.0,0,,0.0
+139,Tigo Paraguay,PY,ict_telecom,m,0.0,0,,0.0
+138,MRS Logística,BR,transport_logistics,l,0.0,0,,0.0
+137,Cooperativa de Transporte de Paysandú,UY,transport_logistics,m,0.0,0,,0.0
+136,Promart Homecenter,PE,retail_consumer,m,0.0,0,,0.0
+145,Banco Nacional de Bolivia,BO,finance_insurance,m,0.0,0,,0.0
+94,Banco de Asunción,PY,finance_insurance,m,0.0,0,,0.0
+93,Gas Express Nieto,MX,oil_gas,m,0.0,0,,0.0
+92,Mobo,MX,retail_consumer,m,0.0,0,,0.0
+91,lojas MM,PY,retail_consumer,m,0.0,0,,0.0
+90,Fraiche,MX,retail_consumer,m,0.0,0,,0.0
+89,YPF Full,AR,retail_consumer,m,0.0,0,,0.0
+88,Metabiblioteca SAS,PA,construction_realestate,m,0.0,0,,0.0
+87,Ferrocarril del Norte (Paraguay),PY,transport_logistics,m,0.0,0,,0.0
+116,Ferrovia Sul Atlântico,BR,transport_logistics,m,0.0,0,,0.0
+85,La Rodó,UY,transport_logistics,m,0.0,0,,0.0
+84,Las panteras de Benguela,UY,transport_logistics,m,0.0,0,,0.0
+83,Yahayra Films,MX,ict_telecom,m,0.0,0,,0.0
+82,Supermercados El Dorado,UY,retail_consumer,m,0.0,0,,0.0
+81,Ferrovia Centro-Atlântica,BR,transport_logistics,l,0.0,0,,0.0
+80,Ferrocarriles Suburbanos,MX,transport_logistics,m,0.0,0,,0.0
+79,Portren,UY,transport_logistics,m,0.0,0,,0.0
+78,Super Xtra,PA,retail_consumer,m,0.0,0,,0.0
+77,Casanova,UY,transport_logistics,m,0.0,0,,0.0
+86,M.Q.L.,UY,transport_logistics,m,0.0,0,,0.0
+115,Ferrovia Novoeste S.A.,BR,transport_logistics,m,0.0,0,,0.0
+114,Ferrosur,MX,transport_logistics,m,0.0,0,,0.0
+113,PeruRail,PE,transport_logistics,m,0.0,0,,0.0
+112,Ferrocarril del Pacífico,CL,transport_logistics,m,0.0,0,,0.0
+111,Ferrocarril Interoceánico de México,MX,transport_logistics,m,0.0,0,,0.0
+110,Ferroban,BR,transport_logistics,m,0.0,0,,0.0
+109,Motta Internacional,PA,retail_consumer,m,0.0,0,,0.0
+108,On City,AR,retail_consumer,m,0.0,0,,0.0
+95,ODM Express,MX,transport_logistics,m,0.0,0,,0.0
+106,Moving Pics,AR,ict_telecom,m,0.0,0,,0.0
+105,KoKoK The Roach,PA,retail_consumer,m,0.0,0,,0.0
+104,Empresa Panameña de Alimentos,PA,finance_insurance,m,0.0,0,,0.0
+103,"Gold Mills de Panamá, S.A.",PA,agro_food,m,0.0,0,,0.0
+100,Parque Turístico Din Kong,BO,transport_logistics,m,0.0,0,,0.0
+99,LATAM Cargo,CL,transport_logistics,m,0.0,0,,0.0
+98,Pluz Energía Perú,PE,energy_power,m,0.0,0,,0.0
+97,Banco Continental,PY,finance_insurance,m,0.0,0,,0.0
+96,Grupo Puntacana,DO,construction_realestate,m,0.0,0,,0.0
+107,Kansas City Southern de México,MX,transport_logistics,m,0.0,0,,0.0

@@ -2,7 +2,8 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Iterable
+import datetime as dt
+from typing import Iterable, Optional
 
 import pandas as pd
 
@@ -28,6 +29,23 @@ def _load_events() -> pd.DataFrame:
     if EVENTS_PATH.exists():
         return pd.read_csv(EVENTS_PATH)
     return pd.DataFrame(columns=_EVENT_COLUMNS)
+
+
+def resolve_since(months: Optional[int] = 12, since: Optional[str] = None) -> dt.datetime:
+    """Compute the earliest timestamp to collect signals from."""
+    if since:
+        try:
+            parsed = dt.datetime.fromisoformat(since)
+            if parsed.tzinfo is None:
+                parsed = parsed.replace(tzinfo=dt.timezone.utc)
+            return parsed
+        except ValueError as exc:
+            raise ValueError(f"Formato inválido para --since: {since}") from exc
+    months = months or 12
+    if months <= 0:
+        months = 12
+    today = dt.datetime.now(dt.timezone.utc)
+    return today - dt.timedelta(days=int(months * 30.5))
 
 
 def _ensure_columns(df: pd.DataFrame, *, source: str, signal_type: str) -> pd.DataFrame:
@@ -66,7 +84,9 @@ def append_events(df: pd.DataFrame, *, source: str, signal_type: str) -> int:
     current = _load_events()
     before = len(current)
     combined = pd.concat([current, df], ignore_index=True)
-    combined = combined.drop_duplicates(subset=["company_id", "signal_type", "url"], keep="last")
+    combined = combined.drop_duplicates(
+        subset=["company_id", "signal_type", "url", "ts"], keep="last"
+    )
     added = len(combined) - before
     combined.to_csv(EVENTS_PATH, index=False)
     return max(0, added)
@@ -84,7 +104,9 @@ def append_multiple(dfs: Iterable[pd.DataFrame]) -> int:
     current = _load_events()
     before = len(current)
     merged = pd.concat([current, combined[_EVENT_COLUMNS]], ignore_index=True)
-    merged = merged.drop_duplicates(subset=["company_id", "signal_type", "url"], keep="last")
+    merged = merged.drop_duplicates(
+        subset=["company_id", "signal_type", "url", "ts"], keep="last"
+    )
     added = len(merged) - before
     merged.to_csv(EVENTS_PATH, index=False)
     return max(0, added)

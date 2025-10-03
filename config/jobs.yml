@@ -1,6 +1,10 @@
-greenhouse_boards:
-  - exxonmobil
-  - orsted
-lever_companies:
-  - tesla
-  - stripe
+greenhouse:
+  - slug: "enel"
+    company_domain: "enel.com"
+  - slug: "aes"
+    company_domain: "aes.com"
+lever:
+  - slug: "globant"
+    company_domain: "globant.com"
+  - slug: "10pearls"
+    company_domain: "10pearls.com"

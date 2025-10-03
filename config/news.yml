@@ -9,3 +9,8 @@ providers:
       - https://news.google.com/rss/search?q=climate+tech
       - https://feeds.arstechnica.com/arstechnica/technology-lab
     limit_per_feed: 30
+  google_news:
+    enabled: true
+    language: es
+    region: AR
+    limit_per_company: 5

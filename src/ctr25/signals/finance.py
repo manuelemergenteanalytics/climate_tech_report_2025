@@ -1,14 +1,15 @@
-"""Finance signals using Yahoo Finance (yfinance)."""
+"""Finance signals derived from public Yahoo Finance endpoints."""
 from __future__ import annotations
 
 import datetime as dt
 from pathlib import Path
-from typing import Dict
+from typing import List
 
 import pandas as pd
 import yfinance as yf
 
-from ctr25.utils.events import append_multiple
+from ctr25.utils.events import append_events, resolve_since
+from ctr25.utils.universe import UniverseFilters, load_universe
 
 EVENT_COLUMNS = [
     "company_id",
@@ -26,81 +27,111 @@ EVENT_COLUMNS = [
 ]
 
 
-def _iso_from_timestamp(ts) -> str:
-    if isinstance(ts, dt.datetime):
-        if ts.tzinfo:
-            return ts.astimezone(dt.timezone.utc).isoformat()
-        return ts.replace(tzinfo=dt.timezone.utc).isoformat()
-    return dt.datetime.now(dt.timezone.utc).isoformat()
+def _strength_from_change(change: float) -> float:
+    change_abs = abs(change)
+    if change_abs >= 0.2:
+        return 1.0
+    if change_abs >= 0.1:
+        return 0.75
+    if change_abs >= 0.05:
+        return 0.6
+    return 0.4
 
 
-def _fetch_price_for_ticker(ticker: str):
-    try:
-        history = yf.Ticker(ticker).history(period="5d")
-    except Exception:
-        return None
-    if history.empty:
-        return None
-    last = history.tail(1)
-    close = float(last["Close"].iloc[0])
-    ts_index = last.index[-1]
-    ts_iso = _iso_from_timestamp(ts_index.to_pydatetime() if hasattr(ts_index, "to_pydatetime") else ts_index)
-    return ts_iso, close
+def _period_from_months(months: int) -> str:
+    months = max(1, months)
+    if months >= 24:
+        return "2y"
+    if months >= 12:
+        return "1y"
+    if months >= 6:
+        return "6mo"
+    if months >= 3:
+        return "3mo"
+    return "1mo"
 
 
-def run_collect_finance(
+def collect_finance(
+    *,
     universe_path: str = "data/processed/universe_sample.csv",
+    months: int = 12,
+    since: str | None = None,
+    max_companies: int = 0,
     country: str | None = None,
     industry: str | None = None,
-    max_companies: int = 0,
 ) -> int:
-    uni_path = Path(universe_path)
-    if not uni_path.exists():
-        raise FileNotFoundError(f"Universe missing: {universe_path}")
-    universe = pd.read_csv(uni_path, dtype=str)
-    if "ticker" not in universe.columns:
+    since_dt = resolve_since(months, since)
+
+    filters = UniverseFilters(
+        countries=[country] if country else None,
+        industries=[industry] if industry else None,
+    )
+    universe = load_universe(
+        path=universe_path,
+        filters=filters,
+        max_companies=max_companies,
+    )
+    if universe.empty or "ticker" not in universe.columns:
         return 0
 
-    if country:
-        universe = universe[universe["country"] == country]
-    if industry:
-        universe = universe[universe["industry"] == industry]
-    if max_companies > 0:
-        universe = universe.head(max_companies)
-
-    tickers = universe["ticker"].dropna().str.strip()
-    tickers = tickers[tickers != ""]
-    if tickers.empty:
+    universe = universe.dropna(subset=["ticker"])
+    universe["ticker"] = universe["ticker"].str.strip()
+    universe = universe[universe["ticker"].astype(bool)]
+    if universe.empty:
         return 0
 
-    events_rows = []
-    grouped = universe[universe["ticker"].isin(tickers)].groupby("ticker")
-    for ticker, rows in grouped:
-        result = _fetch_price_for_ticker(ticker)
-        if not result:
+    ticker_groups = universe.groupby("ticker")
+    period = _period_from_months(months)
+    events: List[pd.DataFrame] = []
+
+    for ticker, rows in ticker_groups:
+        try:
+            hist = yf.download(ticker, period=period, progress=False)
+        except Exception:
             continue
-        ts_iso, close = result
+        if hist.empty or "Close" not in hist.columns:
+            continue
+        hist = hist.dropna(subset=["Close"])
+        if hist.empty:
+            continue
+        hist.index = pd.to_datetime(hist.index, utc=True)
+        hist = hist[hist.index >= since_dt]
+        if hist.empty:
+            continue
+        first_close = float(hist["Close"].iloc[0])
+        last_close = float(hist["Close"].iloc[-1])
+        if first_close == 0:
+            continue
+        change = (last_close - first_close) / first_close
+        ts_iso = hist.index[-1].isoformat()
+        snippet = f"Δp {change*100:.1f}% (period {period})"
+        strength = _strength_from_change(change)
         url = f"https://finance.yahoo.com/quote/{ticker}"
-        title = f"{ticker} close={close:.2f}"
-        for _, row in rows.iterrows():
-            events_rows.append({
-                "company_id": row.get("company_id", ""),
-                "company_name": row.get("company_name", ""),
-                "country": row.get("country", ""),
-                "industry": row.get("industry", ""),
-                "size_bin": row.get("size_bin", ""),
+
+        df_rows = []
+        for _, company in rows.iterrows():
+            df_rows.append({
+                "company_id": company.get("company_id", ""),
+                "company_name": company.get("company_name", ""),
+                "country": company.get("country", ""),
+                "industry": company.get("industry", ""),
+                "size_bin": company.get("size_bin", ""),
                 "source": "finance",
-                "signal_type": "price",
-                "signal_strength": 1.0,
+                "signal_type": "finance",
+                "signal_strength": strength,
                 "ts": ts_iso,
                 "url": url,
-                "title": title,
-                "text_snippet": "",
+                "title": f"{ticker} activity",
+                "text_snippet": snippet,
             })
+        events.append(pd.DataFrame(df_rows, columns=EVENT_COLUMNS))
 
-    if not events_rows:
+    if not events:
         return 0
 
-    events_df = pd.DataFrame(events_rows, columns=EVENT_COLUMNS)
-    added = append_multiple([events_df])
-    return added
+    combined = pd.concat(events, ignore_index=True)
+    return append_events(combined, source="finance", signal_type="finance")
+
+
+def run_collect_finance(**kwargs) -> int:
+    return collect_finance(**kwargs)

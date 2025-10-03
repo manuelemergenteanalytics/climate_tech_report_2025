@@ -1,9 +1,15 @@
-﻿include:
+include:
+  - climate
   - renewable
   - solar
   - wind
-  - hidrógeno
-  - baterías
-  - carbon capture
-  - eficiencia energética
+  - hidrogeno
+  - battery
+  - efficiency
+  - emissions
+  - carbono
+  - digital
+  - blockchain
+  - token
+  - carbono digital
 exclude: []

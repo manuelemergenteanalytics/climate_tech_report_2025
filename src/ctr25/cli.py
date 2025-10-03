@@ -31,10 +31,16 @@ def sample_cmd(
     force: bool = typer.Option(False, "--force", help="Reconstruye el universo aunque ya exista."),
     per_country: int = typer.Option(500, "--per-country", help="Máximo de empresas por país desde Wikidata."),
     save_raw: Path | None = typer.Option(None, "--save-raw", help="Ruta CSV para guardar el dump crudo de Wikidata."),
+    max_workers: int = typer.Option(4, "--max-workers", help="Número de hilos concurrentes por muestreo."),
 ):
     from ctr25.sample_frame import build_sample
 
-    path = build_sample(force=force, per_country=per_country, save_raw=str(save_raw) if save_raw else None)
+    path = build_sample(
+        force=force,
+        per_country=per_country,
+        save_raw=str(save_raw) if save_raw else None,
+        max_workers=max_workers,
+    )
     typer.echo(f"[sample] wrote {path}")
 
 
@@ -42,8 +48,7 @@ def sample_cmd(
 def collect_memberships_cmd():
     from ctr25.signals.membership import collect_memberships
 
-    events = collect_memberships()
-    added = events.attrs.get("added", len(events)) if hasattr(events, "attrs") else len(events)
+    added = collect_memberships()
     typer.echo(f"[collect-memberships] eventos agregados: {added}")
 
 
@@ -52,9 +57,11 @@ def collect_news(
     universe: str = typer.Option("data/processed/universe_sample.csv", help="Ruta universe_sample.csv"),
     keywords: str = typer.Option("config/keywords.yml", help="Ruta keywords.yml"),
     news_cfg: str = typer.Option("config/news.yml", help="Config de agregador"),
-    country: str | None = typer.Option(None, help="MX,BR,CO,CL,AR,UY"),
-    industry: str | None = typer.Option(None, help="slug industria"),
-    max_companies: int = typer.Option(0, help="límite debug"),
+    country: str | None = typer.Option(None, help="Filtra por país"),
+    industry: str | None = typer.Option(None, help="Filtra por industria"),
+    max_companies: int = typer.Option(0, help="Límite de empresas evaluadas"),
+    months: int = typer.Option(12, help="Ventana temporal en meses"),
+    since: str | None = typer.Option(None, help="Fecha ISO para reemplazar la ventana"),
 ):
     from ctr25.signals.news import run_collect_news
 
@@ -65,6 +72,8 @@ def collect_news(
         country=country,
         industry=industry,
         max_companies=max_companies,
+        months=months,
+        since=since,
     )
     typer.echo(f"[collect-news] eventos agregados: {n}")
 
@@ -76,6 +85,9 @@ def collect_jobs(
     country: str | None = None,
     industry: str | None = None,
     max_companies: int = 0,
+    months: int = 12,
+    since: str | None = None,
+    jobs_cfg: str = "config/jobs.yml",
 ):
     from ctr25.signals.jobs import run_collect_jobs
 
@@ -85,6 +97,9 @@ def collect_jobs(
         country=country,
         industry=industry,
         max_companies=max_companies,
+        months=months,
+        since=since,
+        jobs_cfg_path=jobs_cfg,
     )
     typer.echo(f"[collect-jobs] eventos agregados: {n}")
 
@@ -95,6 +110,8 @@ def collect_finance(
     country: str | None = None,
     industry: str | None = None,
     max_companies: int = 0,
+    months: int = 12,
+    since: str | None = None,
 ):
     from ctr25.signals.finance import run_collect_finance
 
@@ -103,6 +120,8 @@ def collect_finance(
         country=country,
         industry=industry,
         max_companies=max_companies,
+        months=months,
+        since=since,
     )
     typer.echo(f"[collect-finance] eventos agregados: {n}")
 

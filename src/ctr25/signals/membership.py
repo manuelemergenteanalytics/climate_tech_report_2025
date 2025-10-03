@@ -5,6 +5,8 @@ from typing import Dict, Iterable, List
 import pandas as pd
 from datetime import datetime, timezone
 
+from ctr25.utils.events import append_events
+
 from ctr25.signals.memberships_live import (
     fetch_bcorps as fetch_bcorps_live,
     fetch_re100 as fetch_re100_live,
@@ -119,26 +121,6 @@ def _load_universe_sample() -> pd.DataFrame:
     if "company_id" not in df.columns or "company_name" not in df.columns:
         raise ValueError("universe_sample.csv debe tener company_id y company_name.")
     df["company_name_norm"] = df["company_name"].apply(_norm)
-    return df
-
-def _load_events() -> pd.DataFrame:
-    p = Path("data/processed/events_normalized.csv")
-    if p.exists():
-        return pd.read_csv(p)
-    cols = [
-        "company_id","company_name","country","industry","size_bin",
-        "source","signal_type","signal_strength","ts","url","title","text_snippet"
-    ]
-    return pd.DataFrame(columns=cols)
-
-def _write_events(df: pd.DataFrame):
-    out = Path("data/processed/events_normalized.csv")
-    out.parent.mkdir(parents=True, exist_ok=True)
-    df.to_csv(out, index=False)
-
-def _dedupe_events(df: pd.DataFrame) -> pd.DataFrame:
-    # Dedupe conservador por (company_id, signal_type, url)
-    df = df.drop_duplicates(subset=["company_id","signal_type","url"], keep="last")
     return df
 
 def _match_memberships_to_universe(universe: pd.DataFrame, members: pd.DataFrame) -> pd.DataFrame:
@@ -345,7 +327,7 @@ def fetch_bcorps() -> pd.DataFrame:
         required_cols=["member_name","url","ts"],
         aliases={"member_name": ["company_name"]},
     )
-    return _ensure_membership_df(raw, default_signal_type="sistema_b", default_source="memberships")
+    return _ensure_membership_df(raw, default_signal_type="bcorp", default_source="memberships")
 
 def fetch_ungc() -> pd.DataFrame:
     raw = _load_csv_if_exists(
@@ -353,7 +335,7 @@ def fetch_ungc() -> pd.DataFrame:
         required_cols=["member_name","url","ts"],
         aliases={"member_name": ["company_name"]},
     )
-    return _ensure_membership_df(raw, default_signal_type="pacto_global", default_source="memberships")
+    return _ensure_membership_df(raw, default_signal_type="ungc", default_source="memberships")
 
 def fetch_linkedin_memberships() -> pd.DataFrame:
     raw = _load_csv_if_exists(
@@ -369,7 +351,7 @@ def fetch_linkedin_memberships() -> pd.DataFrame:
 
 
 # ---------- entrypoint ----------
-def collect_memberships(cfg_path: str = "config/memberships.yml") -> pd.DataFrame:
+def collect_memberships(cfg_path: str = "config/memberships.yml") -> int:
     universe = _load_universe_sample()
     sources = [
         fetch_sbti(),
@@ -384,8 +366,8 @@ def collect_memberships(cfg_path: str = "config/memberships.yml") -> pd.DataFram
         mapping = [
             ("sbti_url", fetch_sbti_live, "sbti"),
             ("re100_url", fetch_re100_live, "re100"),
-            ("ungc_url", fetch_ungc_live, "pacto_global"),
-            ("bcorps_url", fetch_bcorps_live, "sistema_b"),
+            ("ungc_url", fetch_ungc_live, "ungc"),
+            ("bcorps_url", fetch_bcorps_live, "bcorp"),
         ]
         for key, func, kind in mapping:
             url = cfg.get(key)
@@ -406,21 +388,11 @@ def collect_memberships(cfg_path: str = "config/memberships.yml") -> pd.DataFram
     sources = [s for s in sources if not s.empty]
     if not sources:
         print("No se encontraron memberships locales ni remotos. Revisá data/raw/memberships o config/memberships.yml.")
-        return pd.DataFrame()
+        return 0
 
     members = pd.concat(sources, ignore_index=True)
     matched = _match_memberships_to_universe(universe, members)
     events = _events_from_matches(matched)
-
-    current = _load_events()
-    before = len(current)
-    out = pd.concat([current, events], ignore_index=True)
-    out = _dedupe_events(out)
-    added = len(out) - before
-    _write_events(out)
-    print(f"Members -> events_normalized.csv (+{added})")
-    try:
-        events.attrs["added"] = added
-    except AttributeError:
-        pass
-    return events
+    if events.empty:
+        return 0
+    return append_events(events, source="memberships", signal_type="memberships")

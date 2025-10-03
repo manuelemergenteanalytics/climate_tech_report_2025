@@ -1,8 +1,23 @@
-﻿news:
-  include: true
-jobs:
-  include: true
-finance:
-  include: true
-webscan:
-  include: true
+decay:
+  half_life_days: 365
+
+groups:
+  news:
+    cap: 40
+    types:
+      news: 10
+  jobs:
+    cap: 45
+    types:
+      job_posting: 15
+  memberships:
+    cap: 50
+    types:
+      sbti: 25
+      re100: 25
+      ungc: 20
+      bcorp: 20
+  finance:
+    cap: 20
+    types:
+      finance: 8

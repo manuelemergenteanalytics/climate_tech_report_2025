@@ -1,73 +1,81 @@
+"""Prospect index builder based on interest scores."""
 from __future__ import annotations
-import os, math
-from datetime import datetime, timedelta, timezone
+
+from pathlib import Path
+from typing import Tuple
+
 import pandas as pd
 
-IIC_IN = "data/processed/iic_by_company.csv"
-EVENTS = "data/processed/events_normalized.csv"
-OUT = "data/processed/prospect_score.csv"
+INTEREST_PATH = Path("data/processed/interest_scores.csv")
+PROSPECT_PATH = Path("data/processed/prospect_index.csv")
+SOLAR_OUTPUT = Path("data/processed/prospects_solar_co.csv")
+DIGITAL_OUTPUT = Path("data/processed/prospects_digital_assets_ar.csv")
 
-HOT_WINDOW_DAYS = 90
-ALPHA = 0.6  # peso de IIC
-BETA  = 0.4  # peso de señales calientes
 
-def _norm01_by_stratum(df: pd.DataFrame, col: str) -> pd.DataFrame:
-    def _f(g: pd.DataFrame) -> pd.DataFrame:
-        x = g[col]
-        if x.max() == x.min():
-            g[col+"_norm"] = 50.0  # plano -> valor medio
-        else:
-            # percentil rank 0–100 (robusto y monotónico)
-            g[col+"_norm"] = (100.0 * (x.rank(method="average") - 1) / (len(x) - 1)).round(2)
-        return g
-    return df.groupby(["country","industry"], group_keys=False).apply(_f)
+def _load_interest(path: Path) -> pd.DataFrame:
+    if not path.exists():
+        raise FileNotFoundError(
+            f"No se encontró {path}. Corré `ctr25 compute-iic` para generar interest_scores.csv."
+        )
+    df = pd.read_csv(path)
+    if df.empty:
+        raise ValueError("interest_scores.csv está vacío")
+    return df
+
+
+def _prospect_columns(df: pd.DataFrame) -> pd.DataFrame:
+    cols = [
+        "company_id",
+        "company_name",
+        "country",
+        "industry",
+        "size_bin",
+        "score_0_100",
+        "signals_count",
+        "last_ts",
+    ]
+    group_cols = [c for c in df.columns if c.startswith("group_")]
+    cols.extend(group_cols)
+    missing = [c for c in cols if c not in df.columns]
+    if missing:
+        raise ValueError(f"interest_scores.csv carece de columnas: {missing}")
+    return df[cols].copy()
+
+
+def _write_targeted(df: pd.DataFrame, *, output: Path, countries: Tuple[str, ...], industries: Tuple[str, ...], limit: int = 25) -> None:
+    subset = df[df["country"].isin(countries) & df["industry"].isin(industries)].copy()
+    subset = subset[subset["score_0_100"] >= 40]
+    subset = subset.sort_values("score_0_100", ascending=False).head(limit)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    subset.to_csv(output, index=False)
+
 
 def compute_ps(
-    iic_path: str = IIC_IN,
-    events_path: str = EVENTS,
-    out_path: str = OUT,
-    alpha: float = ALPHA,
-    beta: float = BETA,
+    interest_path: str | Path = INTEREST_PATH,
+    out_path: str | Path = PROSPECT_PATH,
 ) -> str:
-    if not os.path.exists(iic_path):
-        raise FileNotFoundError(f"Missing IIC file: {iic_path}")
-    iic = pd.read_csv(iic_path, dtype=str)
-    for c in ["H","C","F","P","X","IIC"]:
-        iic[c] = pd.to_numeric(iic[c], errors="coerce").fillna(0.0)
+    interest = _load_interest(Path(interest_path))
+    df = _prospect_columns(interest)
+    df = df.sort_values("score_0_100", ascending=False)
+    Path(out_path).parent.mkdir(parents=True, exist_ok=True)
+    df.to_csv(out_path, index=False)
 
-    # señales calientes: suma de strengths en 90 días
-    if os.path.exists(events_path):
-        e = pd.read_csv(events_path, dtype=str)
-        e["ts_dt"] = pd.to_datetime(e["ts"], errors="coerce", utc=True)
-        cutoff = datetime.now(timezone.utc) - timedelta(days=HOT_WINDOW_DAYS)
-        e = e[e["ts_dt"] >= cutoff].copy()
-        e["signal_strength"] = pd.to_numeric(e["signal_strength"], errors="coerce").fillna(0.0)
-        hot = e.groupby("company_id")["signal_strength"].sum().rename("hot_sum")
-    else:
-        hot = pd.Series(dtype=float, name="hot_sum")
+    # Targeted views
+    _write_targeted(
+        df,
+        output=SOLAR_OUTPUT,
+        countries=("CO",),
+        industries=("energy_power", "water_waste_circularity"),
+    )
+    _write_targeted(
+        df,
+        output=DIGITAL_OUTPUT,
+        countries=("AR",),
+        industries=("finance_insurance", "ict_telecom"),
+    )
+    return str(out_path)
 
-    df = iic.merge(hot, left_on="company_id", right_index=True, how="left")
-    df["hot_sum"] = df["hot_sum"].fillna(0.0)
 
-    # normalizar hot_sum por estrato a 0–100 (percentil rank)
-    df = _norm01_by_stratum(df, "hot_sum")
-    df["hot_norm"] = df["hot_sum_norm"]; df.drop(columns=["hot_sum_norm"], inplace=True)
-
-    # PS = α·IIC + β·hot_norm
-    df["PS"] = (alpha*df["IIC"] + beta*df["hot_norm"]).round(2)
-
-    # etiquetas
-    def _bucket(v: float) -> str:
-        if v >= 75: return "Muy Alto"
-        if v >= 50: return "Alto"
-        return "Medio"
-    df["PS_label"] = df["PS"].map(_bucket)
-
-    out_cols = ["company_id","company_name","country","industry","size_bin","IIC","hot_norm","PS","PS_label","H","C","F","P","X"]
-    df[out_cols].to_csv(out_path, index=False, encoding="utf-8")
-    return out_path
-
-# CLI-friendly
-def compute_ps_cli():
+def compute_ps_cli() -> None:
     path = compute_ps()
     print(f"[compute-ps] wrote {path}")

@@ -5,6 +5,7 @@ import hashlib
 import math
 import re
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from typing import Dict, Iterable, List, Tuple
 from urllib.parse import urlparse
@@ -13,6 +14,7 @@ import pandas as pd
 import requests
 import requests_cache
 import yaml
+from threading import local
 
 # --- Default industry regex mappings (fallback file is created if missing) ---
 default_cfg_mappings = {
@@ -57,7 +59,20 @@ COUNTRY_QIDS: Dict[str, str] = {
 # Cache HTTP 1h
 _CACHE_PATH = Path("data/interim/cache/wikidata.sqlite")
 _CACHE_PATH.parent.mkdir(parents=True, exist_ok=True)
-requests_cache.install_cache(str(_CACHE_PATH), backend="sqlite", expire_after=3600)
+_CACHE_BASENAME = str(_CACHE_PATH.with_suffix(""))
+_THREAD_LOCAL = local()
+
+
+def _get_session() -> requests_cache.CachedSession:
+    session = getattr(_THREAD_LOCAL, "session", None)
+    if session is None:
+        session = requests_cache.CachedSession(
+            cache_name=_CACHE_BASENAME,
+            backend="sqlite",
+            expire_after=3600,
+        )
+        _THREAD_LOCAL.session = session
+    return session
 
 
 def _run_sparql(query: str) -> dict:
@@ -67,7 +82,8 @@ def _run_sparql(query: str) -> dict:
     }
     for attempt in range(3):
         try:
-            r = requests.get(
+            session = _get_session()
+            r = session.get(
                 ENDPOINT,
                 params={"format": "json", "query": query},
                 headers=headers,
@@ -154,7 +170,7 @@ SELECT DISTINCT ?company ?companyLabel ?companyDescription ?industryLabel ?emplo
   OPTIONAL {{ ?company wdt:P1081 ?employees1081. }}
   OPTIONAL {{ ?company wdt:P2139 ?revenue. }}
   OPTIONAL {{ ?company wdt:P856 ?website. }}
-  ?company wdt:P452 ?industry.
+  OPTIONAL {{ ?company wdt:P452 ?industry. }}
   OPTIONAL {{
     ?company p:P414 ?exchangeStmt.
     ?exchangeStmt ps:P414 ?exchange ;
@@ -171,12 +187,13 @@ OFFSET {offset}
 def query_wikidata(
     companies_per_country: int = 500,
     countries: Iterable[str] | None = None,
+    max_workers: int = 4,
 ) -> pd.DataFrame:
     target = max(1, int(companies_per_country))
     chunk = max(25, min(50, max(25, target // 4)))
 
     if countries:
-        country_codes = []
+        country_codes: List[str] = []
         for code in countries:
             if not isinstance(code, str):
                 continue
@@ -188,26 +205,29 @@ def query_wikidata(
     else:
         country_codes = list(COUNTRY_QIDS.keys())
 
-    records: Dict[str, Dict[str, object]] = {}
-    seen_by_country: Dict[str, set] = {code: set() for code in country_codes}
-
-    for iso in country_codes:
-        qid = COUNTRY_QIDS[iso]
-        if len(seen_by_country[iso]) >= target:
-            continue
+    def _fetch_country(iso: str) -> Dict[str, Dict[str, object]]:
+        qid_country = COUNTRY_QIDS[iso]
+        records: Dict[str, Dict[str, object]] = {}
+        seen: set[str] = set()
         offset = 0
-        while len(seen_by_country[iso]) < target:
-            remaining = target - len(seen_by_country[iso])
+
+        while len(seen) < target:
+            remaining = target - len(seen)
             limit = min(chunk, remaining)
-            query = SPARQL_TEMPLATE.format(country_qid=qid, limit=int(limit), offset=int(offset))
+            query = SPARQL_TEMPLATE.format(
+                country_qid=qid_country,
+                limit=int(limit),
+                offset=int(offset),
+            )
             try:
                 payload = _run_sparql(query)
-            except requests.exceptions.RequestException:
-                break
+            except requests.exceptions.RequestException as exc:
+                raise RuntimeError(f"SPARQL falló para {iso} offset {offset}: {exc}") from exc
 
             bindings = payload.get("results", {}).get("bindings", [])
             if not bindings:
                 break
+
             offset += limit
 
             for b in bindings:
@@ -256,14 +276,75 @@ def query_wikidata(
                     exch = b.get("exchangeLabel", {}).get("value", "").strip()
                     rec["tickers"].add(f"{tic}@{exch}" if exch else tic)
 
-                seen_by_country[iso].add(qid_item)
+                seen.add(qid_item)
 
             if len(bindings) < limit:
                 break
-            time.sleep(0.4)  # politeness
+            time.sleep(0.4)
+
+        return records
+
+    all_records: Dict[str, Dict[str, object]] = {}
+    max_workers = max(1, int(max_workers))
+
+    errors: List[str] = []
+
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        futures = {executor.submit(_fetch_country, iso): iso for iso in country_codes}
+        for future in as_completed(futures):
+            iso = futures[future]
+            try:
+                country_records = future.result()
+            except Exception as exc:  # pragma: no cover - surfaced to caller
+                errors.append(f"{iso}: {exc}")
+                continue
+
+            for qid_item, data in country_records.items():
+                existing = all_records.get(qid_item)
+                if not existing:
+                    all_records[qid_item] = data
+                    continue
+
+                # Mezcla heurística para conservar información más rica
+                if not existing.get("company_domain") and data.get("company_domain"):
+                    existing["company_domain"] = data["company_domain"]
+                if (data.get("employees") or 0) > (existing.get("employees") or 0):
+                    existing["employees"] = data.get("employees")
+                if (data.get("revenue") or 0) > (existing.get("revenue") or 0):
+                    existing["revenue"] = data.get("revenue")
+                existing["industry_labels"].update(data.get("industry_labels", set()))
+                existing["tickers"].update(data.get("tickers", set()))
+
+    if not all_records and errors:
+        sequential_errors: List[str] = []
+        for iso in country_codes:
+            try:
+                country_records = _fetch_country(iso)
+            except Exception as exc:  # pragma: no cover
+                sequential_errors.append(f"{iso} (fallback): {exc}")
+                continue
+            for qid_item, data in country_records.items():
+                existing = all_records.get(qid_item)
+                if not existing:
+                    all_records[qid_item] = data
+                    continue
+                if not existing.get("company_domain") and data.get("company_domain"):
+                    existing["company_domain"] = data["company_domain"]
+                if (data.get("employees") or 0) > (existing.get("employees") or 0):
+                    existing["employees"] = data.get("employees")
+                if (data.get("revenue") or 0) > (existing.get("revenue") or 0):
+                    existing["revenue"] = data.get("revenue")
+                existing["industry_labels"].update(data.get("industry_labels", set()))
+                existing["tickers"].update(data.get("tickers", set()))
+
+        if not all_records:
+            raise RuntimeError(
+                "Fallo al consultar Wikidata en todos los países: "
+                + "; ".join(errors + sequential_errors)
+            )
 
     rows: List[Dict[str, object]] = []
-    for data in records.values():
+    for data in all_records.values():
         name = (data.get("company_name") or "").strip()
         if not name:
             continue

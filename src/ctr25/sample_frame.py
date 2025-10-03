@@ -35,6 +35,7 @@ def build_sample(
     force: bool = False,
     per_country: int = 500,
     save_raw: str | None = None,
+    max_workers: int = 4,
 ) -> str:
     """
     Construye data/processed/universe_sample.csv desde Wikidata:
@@ -56,6 +57,7 @@ def build_sample(
     raw = query_wikidata(
         companies_per_country=per_country,
         countries=countries,
+        max_workers=max_workers,
     )
     if raw.empty:
         raise ValueError(

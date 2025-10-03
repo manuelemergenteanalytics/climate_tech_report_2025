@@ -1,17 +1,25 @@
-"""Simple news collectors (GDELT + RSS)."""
+"""News adapters for GDELT + RSS feeds matched to the CTR25 universe."""
 from __future__ import annotations
 
 import datetime as dt
-from email.utils import parsedate_to_datetime
+import re
+from collections import defaultdict
+from dataclasses import dataclass
 from pathlib import Path
-from typing import Iterable, Sequence
+from typing import Iterable, List, Sequence
 
 import feedparser
 import pandas as pd
+import requests
+import requests_cache
 import yaml
 
-from ctr25.utils.events import append_multiple
-from ctr25.utils.http import get
+from ctr25.utils.events import append_events, resolve_since
+from ctr25.utils.universe import UniverseFilters, load_universe
+
+_CACHE_PATH = Path("data/interim/cache/news_requests.sqlite")
+_CACHE_PATH.parent.mkdir(parents=True, exist_ok=True)
+requests_cache.install_cache(str(_CACHE_PATH), backend="sqlite", expire_after=3600)
 
 EVENT_COLUMNS = [
     "company_id",
@@ -28,167 +36,398 @@ EVENT_COLUMNS = [
     "text_snippet",
 ]
 
-
-def _utc_now_iso() -> str:
-    return dt.datetime.now(dt.timezone.utc).isoformat()
+GDELT_ENDPOINT = "https://api.gdeltproject.org/api/v2/doc/doc"
 
 
-def _gdelt_ts(value: str | None) -> str:
-    if not value:
-        return _utc_now_iso()
-    value = value.strip()
-    try:
-        parsed = dt.datetime.strptime(value, "%Y%m%d%H%M%S")
-        return parsed.replace(tzinfo=dt.timezone.utc).isoformat()
-    except ValueError:
-        return _utc_now_iso()
+@dataclass
+class NewsProviders:
+    gdelt_enabled: bool = True
+    gdelt_days: int = 7
+    gdelt_max_records: int = 75
+    rss_enabled: bool = False
+    rss_feeds: Sequence[str] = ()
+    rss_limit_per_feed: int = 50
+    google_enabled: bool = False
+    google_language: str = "en"
+    google_region: str = "US"
+    google_limit_per_company: int = 5
 
 
-def _rss_ts(value: str | None) -> str:
-    if not value:
-        return _utc_now_iso()
-    try:
-        parsed = parsedate_to_datetime(value)
-        if not parsed.tzinfo:
-            parsed = parsed.replace(tzinfo=dt.timezone.utc)
-        return parsed.astimezone(dt.timezone.utc).isoformat()
-    except Exception:
-        return _utc_now_iso()
+@dataclass
+class KeywordConfig:
+    include: Sequence[str]
+    exclude: Sequence[str]
 
 
-def _make_event(*, url: str, title: str, snippet: str, ts: str) -> dict:
-    return {
-        "company_id": "",
-        "company_name": "",
-        "country": "",
-        "industry": "",
-        "size_bin": "",
-        "source": "news",
-        "signal_type": "news",
-        "signal_strength": 1.0,
-        "ts": ts,
-        "url": url,
-        "title": title[:300],
-        "text_snippet": snippet[:500],
-    }
+def _load_keywords(path: str) -> KeywordConfig:
+    p = Path(path)
+    if not p.exists():
+        return KeywordConfig(include=(), exclude=())
+    with p.open("r", encoding="utf-8") as fh:
+        data = yaml.safe_load(fh) or {}
+    return KeywordConfig(
+        include=tuple(map(str, data.get("include", []))),
+        exclude=tuple(map(str, data.get("exclude", []))),
+    )
 
 
-def fetch_gdelt(keywords: Sequence[str], days: int = 7, max_records: int = 250) -> pd.DataFrame:
-    if not keywords:
-        return pd.DataFrame(columns=EVENT_COLUMNS)
-    query_terms = [k for k in keywords if k]
-    query = " OR ".join(f'"{term}"' for term in query_terms)
-    if query:
-        query = f"({query})"
+def _load_providers(path: str) -> NewsProviders:
+    p = Path(path)
+    if not p.exists():
+        return NewsProviders()
+    with p.open("r", encoding="utf-8") as fh:
+        data = yaml.safe_load(fh) or {}
+    providers = data.get("providers", {})
+    gdelt = providers.get("gdelt", {})
+    rss = providers.get("rss", {})
+    google = providers.get("google_news", {})
+    return NewsProviders(
+        gdelt_enabled=gdelt.get("enabled", True),
+        gdelt_days=int(gdelt.get("days", 7)),
+        gdelt_max_records=int(gdelt.get("max_records", 75)),
+        rss_enabled=rss.get("enabled", False),
+        rss_feeds=tuple(rss.get("feeds", [])),
+        rss_limit_per_feed=int(rss.get("limit_per_feed", 50)),
+        google_enabled=google.get("enabled", False),
+        google_language=str(google.get("language", "en")),
+        google_region=str(google.get("region", "US")),
+        google_limit_per_company=int(google.get("limit_per_company", 5)),
+    )
+
+
+def _normalize(text: str) -> str:
+    return re.sub(r"\s+", " ", text or "").strip()
+
+
+def _contains_keyword(text: str, keywords: Sequence[str]) -> bool:
+    lowered = text.lower()
+    return any(kw.lower() in lowered for kw in keywords)
+
+
+def _has_excluded(text: str, keywords: KeywordConfig) -> bool:
+    lowered = text.lower()
+    return any(kw.lower() in lowered for kw in keywords.exclude)
+
+
+def _gdelt_query(company_name: str, domain: str | None, keywords: KeywordConfig) -> str:
+    terms: List[str] = []
+    if company_name:
+        terms.append(f'"{company_name}"')
+    if domain:
+        terms.append(f'"{domain}"')
+    company_clause = " OR ".join(terms)
+    include_clause = " OR ".join(f'"{kw}"' for kw in keywords.include) if keywords.include else ""
+    query_parts = []
+    if company_clause:
+        query_parts.append(f"({company_clause})")
+    if include_clause:
+        query_parts.append(f"({include_clause})")
+    if not query_parts:
+        return ""
+    return " AND ".join(query_parts)
+
+
+def _fetch_gdelt(
+    *,
+    company_name: str,
+    domain: str | None,
+    keywords: KeywordConfig,
+    since: dt.datetime,
+    max_records: int,
+) -> pd.DataFrame:
+    query = _gdelt_query(company_name, domain, keywords)
     if not query:
         return pd.DataFrame(columns=EVENT_COLUMNS)
-
-    since = (dt.datetime.utcnow() - dt.timedelta(days=days)).strftime("%Y%m%d%H%M%S")
     params = {
         "query": query,
         "mode": "ArtList",
-        "format": "json",
         "maxrecords": str(max_records),
-        "startdatetime": since,
+        "format": "json",
+        "startdatetime": since.strftime("%Y%m%d%H%M%S"),
     }
-    response = get("https://api.gdeltproject.org/api/v2/doc/doc", params=params)
     try:
+        response = requests.get(GDELT_ENDPOINT, params=params, timeout=30)
+        response.raise_for_status()
         payload = response.json()
-    except ValueError:
+    except Exception:
+        return pd.DataFrame(columns=EVENT_COLUMNS)
+
+    rows: List[dict] = []
+    for article in payload.get("articles", [])[:max_records]:
+        url = article.get("url") or ""
+        title = _normalize(article.get("title", ""))
+        snippet = _normalize(article.get("snippet", ""))
+        if not url or not title:
+            continue
+        seen = article.get("seendate")
+        if seen:
+            ts_dt = dt.datetime.strptime(seen, "%Y%m%d%H%M%S").replace(tzinfo=dt.timezone.utc)
+        else:
+            ts_dt = dt.datetime.now(dt.timezone.utc)
+        if ts_dt < since:
+            continue
+        strength = 1.0 if _contains_keyword(title + " " + snippet, keywords.include) else 0.5
+        if _has_excluded(title + " " + snippet, keywords):
+            continue
+        rows.append({
+            "url": url,
+            "title": title,
+            "text_snippet": snippet,
+            "ts": ts_dt.isoformat(),
+            "signal_strength": strength,
+        })
+    return pd.DataFrame(rows)
+
+
+def _fetch_rss(feeds: Sequence[str], limit: int) -> dict[str, List[dict]]:
+    """Return feed entries keyed by feed URL."""
+    data: dict[str, List[dict]] = {}
+    for feed_url in feeds:
+        parsed = feedparser.parse(feed_url)
+        entries: List[dict] = []
+        for entry in parsed.entries[:limit]:
+            url = getattr(entry, "link", "")
+            title = _normalize(getattr(entry, "title", ""))
+            snippet = _normalize(getattr(entry, "summary", ""))
+            if not url or not title:
+                continue
+            ts_dt: dt.datetime
+            ts_struct = getattr(entry, "published_parsed", None) or getattr(entry, "updated_parsed", None)
+            if ts_struct:
+                ts_dt = dt.datetime(*ts_struct[:6], tzinfo=dt.timezone.utc)
+            else:
+                ts_dt = dt.datetime.now(dt.timezone.utc)
+            entries.append({
+                "url": url,
+                "title": title,
+                "text_snippet": snippet,
+                "ts_dt": ts_dt,
+            })
+        data[feed_url] = entries
+    return data
+
+
+def _match_rss_entries(
+    rss_data: dict[str, List[dict]],
+    *,
+    company_name: str,
+    keywords: KeywordConfig,
+    since: dt.datetime,
+) -> pd.DataFrame:
+    if not rss_data:
         return pd.DataFrame(columns=EVENT_COLUMNS)
     rows = []
-    for article in payload.get("articles", []):
-        url = article.get("url") or ""
-        if not url:
-            continue
-        title = article.get("title") or ""
-        snippet = article.get("snippet") or ""
-        ts = _gdelt_ts(article.get("seendate"))
-        rows.append(_make_event(url=url, title=title, snippet=snippet, ts=ts))
-    return pd.DataFrame(rows, columns=EVENT_COLUMNS)
-
-
-def fetch_rss(feeds: Iterable[str], limit_per_feed: int = 50) -> pd.DataFrame:
-    rows: list[dict] = []
-    for feed_url in feeds:
-        if not feed_url:
-            continue
-        parsed = feedparser.parse(feed_url)
-        for entry in parsed.entries[:limit_per_feed]:
-            url = getattr(entry, "link", "")
-            if not url:
+    pattern = re.compile(re.escape(company_name), re.IGNORECASE)
+    for entries in rss_data.values():
+        for item in entries:
+            text = f"{item['title']} {item['text_snippet']}"
+            if not pattern.search(text):
                 continue
-            title = getattr(entry, "title", "")
-            snippet = getattr(entry, "summary", "")
-            ts_value = getattr(entry, "published", None) or getattr(entry, "updated", None)
-            ts = _rss_ts(ts_value)
-            rows.append(_make_event(url=url, title=title, snippet=snippet, ts=ts))
-    return pd.DataFrame(rows, columns=EVENT_COLUMNS)
+            strength = 1.0 if _contains_keyword(text, keywords.include) else 0.5
+            if _has_excluded(text, keywords):
+                continue
+            if item["ts_dt"] < since:
+                continue
+            rows.append({
+                "url": item["url"],
+                "title": item["title"],
+                "text_snippet": item["text_snippet"],
+                "ts": item["ts_dt"].isoformat(),
+                "signal_strength": strength,
+            })
+    return pd.DataFrame(rows)
 
 
-def _load_keywords(path: str) -> dict:
-    config = {"include": [], "exclude": []}
-    p = Path(path)
-    if p.exists():
-        with p.open("r", encoding="utf-8") as fh:
-            data = yaml.safe_load(fh) or {}
-        config["include"] = data.get("include", [])
-        config["exclude"] = data.get("exclude", [])
-    return config
+def _build_google_query(company_name: str, keywords: KeywordConfig, domain: str | None = None) -> str:
+    terms = [f'"{company_name}"']
+    if domain:
+        terms.append(f'"{domain}"')
+    if keywords.include:
+        include_clause = " OR ".join(f'"{kw}"' for kw in keywords.include)
+        terms.append(f"({include_clause})")
+    return " ".join(terms)
 
 
-def _load_news_cfg(path: str) -> dict:
-    default = {
-        "providers": {
-            "gdelt": {"enabled": True, "days": 7, "max_records": 250},
-            "rss": {"enabled": False, "feeds": [], "limit_per_feed": 50},
-        }
-    }
-    p = Path(path)
-    if not p.exists():
-        return default
-    with p.open("r", encoding="utf-8") as fh:
-        loaded = yaml.safe_load(fh) or {}
-    return {**default, **loaded}
+def _fetch_google_news(
+    *,
+    company_name: str,
+    keywords: KeywordConfig,
+    language: str,
+    region: str,
+    limit: int,
+    since: dt.datetime,
+    domain: str | None = None,
+) -> pd.DataFrame:
+    if limit <= 0:
+        return pd.DataFrame(columns=EVENT_COLUMNS)
+
+    from urllib.parse import quote
+
+    def _request_feed(query: str) -> List[dict]:
+        q = quote(query)
+        lang = language or "en"
+        reg = region or "US"
+        url = (
+            "https://news.google.com/rss/search?q="
+            + q
+            + f"&hl={lang}&gl={reg}&ceid={reg}:{lang}"
+        )
+        try:
+            response = requests.get(url, timeout=30)
+            response.raise_for_status()
+        except Exception:
+            return []
+        parsed = feedparser.parse(response.content)
+        entries: List[dict] = []
+        for entry in parsed.entries[:limit]:
+            url_entry = getattr(entry, "link", "")
+            title = _normalize(getattr(entry, "title", ""))
+            snippet = _normalize(getattr(entry, "summary", ""))
+            if not url_entry or not title:
+                continue
+            ts_struct = getattr(entry, "published_parsed", None) or getattr(entry, "updated_parsed", None)
+            if ts_struct:
+                ts_dt = dt.datetime(*ts_struct[:6], tzinfo=dt.timezone.utc)
+            else:
+                ts_dt = dt.datetime.now(dt.timezone.utc)
+            entries.append({
+                "url": url_entry,
+                "title": title,
+                "snippet": snippet,
+                "ts_dt": ts_dt,
+            })
+        return entries
+
+    rows: List[dict] = []
+    primary_query = _build_google_query(company_name, keywords, domain)
+    if primary_query:
+        for item in _request_feed(primary_query):
+            if item["ts_dt"] < since:
+                continue
+            text = f"{item['title']} {item['snippet']}"
+            if _has_excluded(text, keywords):
+                continue
+            strength = 1.0 if keywords.include and _contains_keyword(text, keywords.include) else 0.6
+            rows.append({
+                "url": item["url"],
+                "title": item["title"],
+                "text_snippet": item["snippet"],
+                "ts": item["ts_dt"].isoformat(),
+                "signal_strength": strength,
+            })
+
+    if not rows:
+        fallback_terms = [f'"{company_name}"']
+        if domain:
+            fallback_terms.append(f'"{domain}"')
+        fallback_query = " OR ".join(fallback_terms)
+        for item in _request_feed(fallback_query):
+            if item["ts_dt"] < since:
+                continue
+            rows.append({
+                "url": item["url"],
+                "title": item["title"],
+                "text_snippet": item["snippet"],
+                "ts": item["ts_dt"].isoformat(),
+                "signal_strength": 0.4,
+            })
+
+    if not rows:
+        return pd.DataFrame(columns=EVENT_COLUMNS)
+    return pd.DataFrame(rows)
 
 
-def run_collect_news(
+def collect_news(
+    *,
     universe_path: str = "data/processed/universe_sample.csv",
     keywords_path: str = "config/keywords.yml",
     aggregator_path: str = "config/news.yml",
+    months: int = 12,
+    since: str | None = None,
+    max_companies: int = 0,
     country: str | None = None,
     industry: str | None = None,
-    max_companies: int = 0,
 ) -> int:
-    # universe filters are kept for CLI compatibility but not used directly yet
-    keywords_cfg = _load_keywords(keywords_path)
-    news_cfg = _load_news_cfg(aggregator_path)
+    keywords = _load_keywords(keywords_path)
+    providers = _load_providers(aggregator_path)
+    since_dt = resolve_since(months, since)
 
-    frames: list[pd.DataFrame] = []
-    providers = news_cfg.get("providers", {})
+    filters = UniverseFilters(
+        countries=[country] if country else None,
+        industries=[industry] if industry else None,
+    )
+    universe = load_universe(
+        path=universe_path,
+        filters=filters,
+        max_companies=max_companies,
+    )
+    if universe.empty:
+        return 0
 
-    gdelt_cfg = providers.get("gdelt", {})
-    if gdelt_cfg.get("enabled", True):
-        frames.append(
-            fetch_gdelt(
-                keywords_cfg.get("include", []),
-                days=int(gdelt_cfg.get("days", 7)),
-                max_records=int(gdelt_cfg.get("max_records", 250)),
+    rss_data = _fetch_rss(providers.rss_feeds, providers.rss_limit_per_feed) if providers.rss_enabled else {}
+
+    frames: List[pd.DataFrame] = []
+    for _, row in universe.iterrows():
+        company_id = row["company_id"]
+        company_name = row["company_name"]
+        domain = row.get("company_domain", "")
+        domain = domain if isinstance(domain, str) and domain else None
+
+        company_frames: List[pd.DataFrame] = []
+        if providers.gdelt_enabled:
+            df_gdelt = _fetch_gdelt(
+                company_name=company_name,
+                domain=domain,
+                keywords=keywords,
+                since=since_dt,
+                max_records=providers.gdelt_max_records,
             )
-        )
+            if not df_gdelt.empty:
+                company_frames.append(df_gdelt)
 
-    rss_cfg = providers.get("rss", {})
-    if rss_cfg.get("enabled", False):
-        frames.append(
-            fetch_rss(
-                rss_cfg.get("feeds", []),
-                limit_per_feed=int(rss_cfg.get("limit_per_feed", 50)),
+        if providers.rss_enabled and rss_data:
+            df_rss = _match_rss_entries(
+                rss_data,
+                company_name=company_name,
+                keywords=keywords,
+                since=since_dt,
             )
-        )
+            if not df_rss.empty:
+                company_frames.append(df_rss)
 
-    frames = [df for df in frames if isinstance(df, pd.DataFrame) and not df.empty]
+        if providers.google_enabled:
+            df_google = _fetch_google_news(
+                company_name=company_name,
+                keywords=keywords,
+                language=providers.google_language,
+                region=providers.google_region,
+                limit=providers.google_limit_per_company,
+                since=since_dt,
+                domain=domain,
+            )
+            if not df_google.empty:
+                company_frames.append(df_google)
+
+        if not company_frames:
+            continue
+
+        combined = pd.concat(company_frames, ignore_index=True)
+        combined["company_id"] = company_id
+        combined["company_name"] = company_name
+        combined["country"] = row.get("country", "")
+        combined["industry"] = row.get("industry", "")
+        combined["size_bin"] = row.get("size_bin", "")
+        combined["source"] = "news"
+        combined["signal_type"] = "news"
+        frames.append(combined[EVENT_COLUMNS])
+
     if not frames:
         return 0
 
-    added = append_multiple(frames)
-    return added
+    combined = pd.concat(frames, ignore_index=True)
+    return append_events(combined, source="news", signal_type="news")
+
+
+def run_collect_news(**kwargs) -> int:
+    """CLI shim for backwards compatibility."""
+    return collect_news(**kwargs)
