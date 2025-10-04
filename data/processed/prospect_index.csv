@@ -1,307 +1,1202 @@
-company_id,company_name,country,industry,size_bin,score_0_100,signals_count,last_ts,group_memberships
-101,Empresa Provincial de la Energía de Santa Fe,AR,energy_power,m,13.18,1,2025-02-12T00:00:00Z,13.180642585701731
-102,Empresa Ferroviaria Andina,BO,transport_logistics,m,10.05,1,2024-11-05T00:00:00Z,10.049434917191546
-209,Brazil Great Southern Railway,BR,transport_logistics,m,0.0,0,,0.0
-208,Ferrocarril Central Argentino,AR,transport_logistics,m,0.0,0,,0.0
-207,Belgrano Cargas,AR,transport_logistics,m,0.0,0,,0.0
-206,Bancóldex,CO,finance_insurance,m,0.0,0,,0.0
-205,Banco Itaú Paraguay S.A.,PY,finance_insurance,m,0.0,0,,0.0
-204,Banco Económico,BO,finance_insurance,m,0.0,0,,0.0
-154,Banco General,PA,finance_insurance,m,0.0,0,,0.0
-202,Aztec Brewing Company,MX,agro_food,m,0.0,0,,0.0
-201,Ferrocarril Nordeste Argentino,AR,transport_logistics,m,0.0,0,,0.0
-200,Ferrocarril Gran Oeste Argentino,AR,transport_logistics,m,0.0,0,,0.0
-199,Grupo Televisa,MX,ict_telecom,l,0.0,0,,0.0
-198,Air Century,DO,transport_logistics,m,0.0,0,,0.0
-197,Aeropuertos del Perú,PE,transport_logistics,m,0.0,0,,0.0
-196,Aerolíneas Ejecutivas,MX,transport_logistics,m,0.0,0,,0.0
-195,Banco Central del Paraguay,PY,finance_insurance,m,0.0,0,,0.0
-194,Ualá,MX,finance_insurance,m,0.0,0,,0.0
-203,Ferrocarril Bahía Blanca al Noroeste,AR,transport_logistics,m,0.0,0,,0.0
-228,Administración Nacional de Electricidad,PY,energy_power,m,0.0,0,,0.0
-227,Banco Hipotecario de Chile,CL,finance_insurance,m,0.0,0,,0.0
-226,Administrador Financiero de Transantiago,CL,transport_logistics,m,0.0,0,,0.0
-225,Banesco Panamá,PA,finance_insurance,l,0.0,0,,0.0
-224,Ferrocarril del Pacífico (México),MX,transport_logistics,m,0.0,0,,0.0
-223,Ferrocarril de Veracruz al Istmo,MX,transport_logistics,m,0.0,0,,0.0
-222,Tren Interoceánico,MX,transport_logistics,m,0.0,0,,0.0
-221,Frávega,AR,retail_consumer,m,0.0,0,,0.0
-210,Ferrocarril del Sud,AR,transport_logistics,m,0.0,0,,0.0
-219,LATAM Cargo Colombia,CO,transport_logistics,m,0.0,0,,0.0
-218,Edegel,PE,energy_power,m,0.0,0,,0.0
-217,Grupo Modelo,MX,agro_food,m,0.0,0,,0.0
-216,Compañía Nacional de Chocolates de Perú,PE,agro_food,m,0.0,0,,0.0
-215,Central Uruguay Railway,UY,transport_logistics,m,0.0,0,,0.0
-214,Ferrocarril Oeste de Buenos Aires,AR,transport_logistics,m,0.0,0,,0.0
-213,Ferrocarril Buenos Aires al Pacífico,AR,transport_logistics,m,0.0,0,,0.0
-212,Ferrocarril del Norte de Buenos Aires,AR,transport_logistics,m,0.0,0,,0.0
-211,Ferrocarril Midland de Buenos Aires,AR,transport_logistics,m,0.0,0,,0.0
-220,Ferrocarril Entre Ríos,AR,transport_logistics,m,0.0,0,,0.0
-172,Marathon Sports,EC,manufacturing,m,0.0,0,,0.0
-171,Pressenza,EC,ict_telecom,m,0.0,0,,0.0
-170,Cervecería Boliviana Nacional,BO,agro_food,m,0.0,0,,0.0
-169,CORPAC,PE,transport_logistics,m,0.0,0,,0.0
-168,Banco de la Nación Argentina,AR,finance_insurance,m,0.0,0,,0.0
-167,Banco Hipotecario,AR,finance_insurance,m,0.0,0,,0.0
-166,Banco GNB Paraguay,PY,finance_insurance,m,0.0,0,,0.0
-165,Compañía Peruana de Teléfonos S.A.,PE,ict_telecom,m,0.0,0,,0.0
-193,Ferrocarril Central Córdoba,AR,transport_logistics,m,0.0,0,,0.0
-163,Ferrocarril Central Norte,AR,transport_logistics,m,0.0,0,,0.0
-162,Cervecería Backus y Johnston,PE,agro_food,m,0.0,0,,0.0
-161,Mexican Southern Railroad,MX,transport_logistics,m,0.0,0,,0.0
-160,Eg3,AR,oil_gas,m,0.0,0,,0.0
-159,Agencia Boliviana de Información,BO,ict_telecom,m,0.0,0,,0.0
-158,Aerolíneas Sudamericanas,BO,transport_logistics,m,0.0,0,,0.0
-157,Aerocon,BO,transport_logistics,m,0.0,0,,0.0
-156,Unidad de Gestión Operativa Ferroviaria de Emergencia,AR,transport_logistics,m,0.0,0,,0.0
-155,Yanbal,PE,retail_consumer,m,0.0,0,,0.0
-164,Altán Redes,MX,ict_telecom,m,0.0,0,,0.0
-192,Banco Hipotecario del Uruguay,UY,finance_insurance,m,0.0,0,,0.0
-191,Ferrocarril de Antofagasta a Bolivia,CL,mining_metals,m,0.0,0,,0.0
-190,Air Panamá,PA,transport_logistics,m,0.0,0,,0.0
-189,Agencia ANDINA,PE,ict_telecom,m,0.0,0,,0.0
-188,Metrovías,AR,transport_logistics,l,0.0,0,,0.0
-187,DHL Aero Expreso,PA,transport_logistics,m,0.0,0,,0.0
-186,AeroSur,BO,transport_logistics,m,0.0,0,,0.0
-185,Cervejaria Feldmann,BR,agro_food,m,0.0,0,,0.0
-184,Almacenes Tía,EC,retail_consumer,m,0.0,0,,0.0
-173,Aeroservicios Gama,MX,transport_logistics,m,0.0,0,,0.0
-182,LATAM Paraguay,PY,transport_logistics,m,0.0,0,,0.0
-181,Estudios Churubusco,MX,ict_telecom,m,0.0,0,,0.0
-180,Northeast Bolivian Airways,BO,transport_logistics,m,0.0,0,,0.0
-179,Sky México,MX,ict_telecom,m,0.0,0,,0.0
-178,Lima Airport Partners,PE,transport_logistics,m,0.0,0,,0.0
-177,Transporte Aéreo Militar,BO,transport_logistics,m,0.0,0,,0.0
-176,ViaQuatro,BR,transport_logistics,m,0.0,0,,0.0
-175,Entel Bolivia,BO,ict_telecom,m,0.0,0,,0.0
-174,Empresa Nacional de Ferrocarriles del Perú,PE,transport_logistics,m,0.0,0,,0.0
-183,telnor,MX,ict_telecom,m,0.0,0,,0.0
-302,Andes Iron,CL,mining_metals,m,0.0,0,,0.0
-301,Baden Baden,BR,agro_food,m,0.0,0,,0.0
-300,Personal Paraguay,PY,ict_telecom,m,0.0,0,,0.0
-299,C6 Bank,BR,finance_insurance,m,0.0,0,,0.0
-298,Clan del Golfo,CO,oil_gas,m,0.0,0,,0.0
-297,Brasil Ferrovias,BR,transport_logistics,m,0.0,0,,0.0
-296,Boliviana de Aviación,BO,transport_logistics,l,0.0,0,,0.0
-295,Amares Costafusion,CL,oil_gas,m,0.0,0,,0.0
-229,Agencia de Noticias Fides (ANF),BO,ict_telecom,m,0.0,0,,0.0
-293,Bäcker Brewery,BR,agro_food,m,0.0,0,,0.0
-292,Hipermaxi,BO,retail_consumer,m,0.0,0,,0.0
-275,Banistmo,PA,finance_insurance,m,0.0,0,,0.0
-274,Petropar,PY,oil_gas,m,0.0,0,,0.0
-273,Puntacana Resort & Club,DO,transport_logistics,m,0.0,0,,0.0
-272,Ferrocentral,AR,transport_logistics,m,0.0,0,,0.0
-271,Megacable,MX,ict_telecom,m,0.0,0,,0.0
-270,Megabús,CO,transport_logistics,m,0.0,0,,0.0
-269,Empresa de los Ferrocarriles del Estado,CL,transport_logistics,l,0.0,0,,0.0
-294,Brubank,AR,finance_insurance,m,0.0,0,,0.0
-17,Centro Acuático Porvenir,BO,transport_logistics,m,0.0,0,,0.0
-16,Mass,PE,retail_consumer,m,0.0,0,,0.0
-15,El Oro Mining and Railway,MX,mining_metals,m,0.0,0,,0.0
-14,Barranquilla Railway and Pier Company Ltd,CO,construction_realestate,m,0.0,0,,0.0
-13,Grupo Monte Carlo (Uruguay),UY,ict_telecom,m,0.0,0,,0.0
-12,Piscinão de Ramos,BR,water_waste_circularity,m,0.0,0,,0.0
-11,Lojas Colombo,BR,retail_consumer,m,0.0,0,,0.0
-10,Industrias Reunidas Fábrica Matarazzo,BR,manufacturing,m,0.0,0,,0.0
-303,Ferromex,MX,transport_logistics,m,0.0,0,,0.0
-8,Imagem Filmes,BR,ict_telecom,m,0.0,0,,0.0
-7,The Great Western of Brazil Railway Company Ltd.,BR,transport_logistics,m,0.0,0,,0.0
-6,Ferrocarril de Sobral,BR,construction_realestate,m,0.0,0,,0.0
-5,Ferrocarril de Bahía a São Francisco,BR,transport_logistics,m,0.0,0,,0.0
-4,Estrada de Ferro de Goiás,BR,transport_logistics,m,0.0,0,,0.0
-291,IC Norte,BO,retail_consumer,m,0.0,0,,0.0
-290,Manaco,BO,manufacturing,m,0.0,0,,0.0
-305,Vista Energy,AR,oil_gas,m,0.0,0,,0.0
-304,Banco de Inversión y Comercio Exterior,AR,finance_insurance,m,0.0,0,,0.0
-9,IMPSA,AR,energy_power,m,0.0,0,,0.0
-247,Organización Nacional de Autobuses,UY,transport_logistics,m,0.0,0,,0.0
-246,Infinitum,MX,ict_telecom,m,0.0,0,,0.0
-245,Grupo ATV,PE,ict_telecom,m,0.0,0,,0.0
-244,GV Producciones,PE,ict_telecom,m,0.0,0,,0.0
-243,Ferrocarriles del Sur,CL,transport_logistics,m,0.0,0,,0.0
-242,Supermercados Vea,AR,retail_consumer,m,0.0,0,,0.0
-241,Paranair,PY,transport_logistics,m,0.0,0,,0.0
-240,Empresa de Acueducto y Alcantarillado de Bogotá,CO,water_waste_circularity,m,0.0,0,,0.0
-268,Línea Coahuila Durango,MX,transport_logistics,m,0.0,0,,0.0
-238,DRB Dribbling,AR,manufacturing,m,0.0,0,,0.0
-237,Compañía de Ómnibus de Pando,UY,transport_logistics,m,0.0,0,,0.0
-236,Compañía Oriental de Transporte,UY,transport_logistics,m,0.0,0,,0.0
-235,Cusqueña,PE,agro_food,m,0.0,0,,0.0
-234,Banesco Banco Múltiple,DO,finance_insurance,m,0.0,0,,0.0
-233,Banco del Estado de Chile,CL,finance_insurance,m,0.0,0,,0.0
-232,Banco de Seguros del Estado,UY,finance_insurance,m,0.0,0,,0.0
-231,BAC Credomatic,PA,finance_insurance,m,0.0,0,,0.0
-230,Almac,CL,retail_consumer,m,0.0,0,,0.0
-239,Educativa,PA,ict_telecom,m,0.0,0,,0.0
-267,Líder (supermercado),CL,retail_consumer,m,0.0,0,,0.0
-266,Transnordestina Logística,BR,transport_logistics,m,0.0,0,,0.0
-265,Radiodifusión Nacional del Uruguay,UY,ict_telecom,m,0.0,0,,0.0
-264,La Ibérica,PE,manufacturing,m,0.0,0,,0.0
-263,Tambo+,PE,retail_consumer,m,0.0,0,,0.0
-262,Brasil Kirin,BR,agro_food,m,0.0,0,,0.0
-261,Chilefilms,CL,ict_telecom,m,0.0,0,,0.0
-260,Copetrol,PY,oil_gas,m,0.0,0,,0.0
-259,Despegar,AR,transport_logistics,l,0.0,0,,0.0
-248,Sweet & Coffee,EC,agro_food,m,0.0,0,,0.0
-257,Banco Fassil,BO,finance_insurance,m,0.0,0,,0.0
-256,Banco Continental,PY,finance_insurance,m,0.0,0,,0.0
-255,Etesa,PA,energy_power,m,0.0,0,,0.0
-254,Central Romana Corporation,DO,manufacturing,m,0.0,0,,0.0
-253,Ferrocarril Uruguayo del Este,UY,transport_logistics,m,0.0,0,,0.0
-252,Vox (Paraguay),PY,ict_telecom,m,0.0,0,,0.0
-251,Totalplay Telecomunicaciones,MX,ict_telecom,m,0.0,0,,0.0
-250,Tienda Inglesa,UY,retail_consumer,m,0.0,0,,0.0
-249,Grupo Globo,BR,ict_telecom,m,0.0,0,,0.0
-258,Banco Sol,BO,finance_insurance,m,0.0,0,,0.0
-56,Expreso Pocitos,UY,agro_food,m,0.0,0,,0.0
-55,Confitería Lion d'Or,UY,agro_food,m,0.0,0,,0.0
-54,Avianca Cargo,CO,transport_logistics,m,0.0,0,,0.0
-53,FluyezCambios,PE,ict_telecom,m,0.0,0,,0.0
-52,Corporación Minera de Bolivia,BO,mining_metals,m,0.0,0,,0.0
-51,Nutrisa,MX,agro_food,m,0.0,0,,0.0
-50,Vianney,MX,manufacturing,m,0.0,0,,0.0
-49,Interceramic,MX,retail_consumer,m,0.0,0,,0.0
-153,Wingo,CO,transport_logistics,m,0.0,0,,0.0
-47,Ferrocarril de Piria,UY,transport_logistics,m,0.0,0,,0.0
-46,Frigorífico Reyes,BO,transport_logistics,m,0.0,0,,0.0
-45,SuperVia,BR,transport_logistics,m,0.0,0,,0.0
-44,Ferrovías,AR,construction_realestate,m,0.0,0,,0.0
-43,Trenes de Buenos Aires,AR,transport_logistics,l,0.0,0,,0.0
-42,Grupo R5,CO,finance_insurance,m,0.0,0,,0.0
-41,Frigorífico Santa Rita,BO,transport_logistics,m,0.0,0,,0.0
-40,Companhia Paulista de Trens Metropolitanos,BR,transport_logistics,m,0.0,0,,0.0
-39,Companhia Brasileira de Trens Urbanos,BR,transport_logistics,m,0.0,0,,0.0
-48,Modatelas,MX,manufacturing,m,0.0,0,,0.0
-75,People in Profit System,PA,chemicals_materials,m,0.0,0,,0.0
-74,Global Investment International Corp.,PA,chemicals_materials,m,0.0,0,,0.0
-73,Emerald Passport,PA,construction_realestate,m,0.0,0,,0.0
-72,COETC Inter,UY,transport_logistics,m,0.0,0,,0.0
-71,MasAir Cargo México,MX,transport_logistics,m,0.0,0,,0.0
-70,Cervecería Oriental,UY,agro_food,m,0.0,0,,0.0
-69,Banco Hypothecario e Agricola do Estado de Minas Geraes,BR,finance_insurance,m,0.0,0,,0.0
-68,Banco de la Republica del Paraguay,PY,finance_insurance,m,0.0,0,,0.0
-57,La Casa de Lucy,UY,agro_food,m,0.0,0,,0.0
-66,"Sud-América, Compañía de Seguros de Vida",CL,finance_insurance,m,0.0,0,,0.0
-65,Planta de Alimentos Balanceados La Estrella,CL,agro_food,m,0.0,0,,0.0
-64,Agricultural Mortgage Bank,CO,finance_insurance,m,0.0,0,,0.0
-63,Banco Hipotecario de Panama,PA,finance_insurance,m,0.0,0,,0.0
-62,Canadian Pacific Kansas City,MX,transport_logistics,l,0.0,0,,0.0
-61,Monarca Films,UY,ict_telecom,m,0.0,0,,0.0
-60,Navegación Aérea y Aeropuertos Bolivianos,BO,transport_logistics,m,0.0,0,,0.0
-59,Qik Banco Digital Dominicano,DO,finance_insurance,m,0.0,0,,0.0
-58,Petrobahia,BR,oil_gas,m,0.0,0,,0.0
-67,Banco Agricola del Paraguay,PY,finance_insurance,m,0.0,0,,0.0
-18,NotiPress,MX,ict_telecom,m,0.0,0,,0.0
-289,MultiCine,BO,ict_telecom,m,0.0,0,,0.0
-288,Cine Center,BO,ict_telecom,m,0.0,0,,0.0
-287,Banco Ganadero,BO,finance_insurance,m,0.0,0,,0.0
-286,Banco Fortaleza,BO,finance_insurance,m,0.0,0,,0.0
-285,Banco Fie,BO,finance_insurance,m,0.0,0,,0.0
-284,Banco Internacional,EC,finance_insurance,m,0.0,0,,0.0
-283,WIND Telecom,DO,ict_telecom,m,0.0,0,,0.0
-38,EcuaMedios,EC,ict_telecom,m,0.0,0,,0.0
-281,Televisa San Ángel,MX,ict_telecom,m,0.0,0,,0.0
-280,Telecom Colombia,CO,ict_telecom,m,0.0,0,,0.0
-279,Sodimac,MX,retail_consumer,m,0.0,0,,0.0
-278,Administración de los Ferrocarriles del Estado,UY,transport_logistics,m,0.0,0,,0.0
-277,Lloyd Aéreo Boliviano,BO,transport_logistics,m,0.0,0,,0.0
-276,Produbanco,EC,finance_insurance,m,0.0,0,,0.0
-3,Estrada de Ferro Araraquara,BR,transport_logistics,m,0.0,0,,0.0
-2,"Dorada Railway Company, Ltd.",CO,transport_logistics,m,0.0,0,,0.0
-1,Cervecería CCU Limache,CL,agro_food,m,0.0,0,,0.0
-282,Ferrocarril Norte del Uruguay,UY,transport_logistics,m,0.0,0,,0.0
-37,Departamentos & Suites Villa Teresa,MX,ict_telecom,m,0.0,0,,0.0
-36,Sociedad Anónima de Radioemisoras del Plata,UY,ict_telecom,m,0.0,0,,0.0
-35,Servindustriales Del Valle,CO,manufacturing,m,0.0,0,,0.0
-34,Ferrocarriles y Tranvías del Estado,UY,transport_logistics,m,0.0,0,,0.0
-33,Alia Revestimientos,PA,construction_realestate,m,0.0,0,,0.0
-32,Alia Concretos,PA,construction_realestate,m,0.0,0,,0.0
-31,Grupo Oti,PA,manufacturing,m,0.0,0,,0.0
-30,Bolivia Railway Company,BO,transport_logistics,m,0.0,0,,0.0
-19,Ferrocarril Domingo Faustino Sarmiento,AR,transport_logistics,m,0.0,0,,0.0
-28,Central Uruguay Western Extension Railway,UY,transport_logistics,m,0.0,0,,0.0
-27,Central Uruguay Eastern Extension Railway,UY,transport_logistics,m,0.0,0,,0.0
-26,Colombia Railway and Navigation Company,CO,transport_logistics,m,0.0,0,,0.0
-25,Central Uruguay Northern Extension Railway,UY,transport_logistics,m,0.0,0,,0.0
-24,Taltal Railway,CL,transport_logistics,m,0.0,0,,0.0
-23,Ferrocarril Central del Paraguay,PY,transport_logistics,m,0.0,0,,0.0
-22,Grupo Ukamau,BO,ict_telecom,m,0.0,0,,0.0
-21,Ferrocarriles Argentinos,AR,transport_logistics,m,0.0,0,,0.0
-20,HEINEKEN México,MX,agro_food,m,0.0,0,,0.0
-29,Ta-Ta,UY,retail_consumer,m,0.0,0,,0.0
-134,Ferrocarril Noroeste del Uruguay,UY,transport_logistics,m,0.0,0,,0.0
-133,EASY TAXI,BR,transport_logistics,m,0.0,0,,0.0
-132,Baja California Railroad,MX,transport_logistics,m,0.0,0,,0.0
-131,Aeronaves TSM,MX,transport_logistics,m,0.0,0,,0.0
-130,Banco de Crédito de Bolivia,BO,finance_insurance,m,0.0,0,,0.0
-129,Plaza Lama,DO,retail_consumer,m,0.0,0,,0.0
-128,Noticias Argentinas,AR,ict_telecom,m,0.0,0,,0.0
-127,Multi Ahorro,UY,retail_consumer,m,0.0,0,,0.0
-76,T6poker,PA,chemicals_materials,m,0.0,0,,0.0
-125,Los 40 Paraguay,PY,ict_telecom,m,0.0,0,,0.0
-124,KDY,AR,manufacturing,m,0.0,0,,0.0
-123,TAR México,MX,transport_logistics,m,0.0,0,,0.0
-122,Empresa Generadora de Electricidad Haina,DO,energy_power,m,0.0,0,,0.0
-121,Ecojet,BO,transport_logistics,m,0.0,0,,0.0
-120,Rede Ferroviária Federal,BR,transport_logistics,m,0.0,0,,0.0
-119,Fomento Económico Mexicano,MX,agro_food,l,0.0,0,,0.0
-118,Telmex,MX,ict_telecom,m,0.0,0,,0.0
-117,Ferroviaria Oriental,BO,transport_logistics,m,0.0,0,,0.0
-126,Los 40 República Dominicana,DO,ict_telecom,m,0.0,0,,0.0
-306,Ferrocarril Leopoldina,BR,transport_logistics,m,0.0,0,,0.0
-152,Boomerang TV,CL,ict_telecom,m,0.0,0,,0.0
-151,Banco Mercantil Santa Cruz S.A.,BO,finance_insurance,m,0.0,0,,0.0
-150,Rumo S.A.,BR,transport_logistics,l,0.0,0,,0.0
-149,Nubank,MX,finance_insurance,l,0.0,0,,0.0
-148,Fondo Financiero para el Desarrollo de los Países de la Cuenca del Plata,BO,construction_realestate,m,0.0,0,,0.0
-147,Baja Brewing Company,MX,agro_food,m,0.0,0,,0.0
-146,Amaszonas Paraguay,PY,transport_logistics,m,0.0,0,,0.0
-135,Bitel,PE,ict_telecom,m,0.0,0,,0.0
-144,Banco BISA,BO,finance_insurance,m,0.0,0,,0.0
-143,Wäls Brewing Company,BR,agro_food,m,0.0,0,,0.0
-142,Arajet,DO,transport_logistics,m,0.0,0,,0.0
-141,Cervecería Nacional,PA,agro_food,m,0.0,0,,0.0
-140,Isaura S.A.,AR,oil_gas,m,0.0,0,,0.0
-139,Tigo Paraguay,PY,ict_telecom,m,0.0,0,,0.0
-138,MRS Logística,BR,transport_logistics,l,0.0,0,,0.0
-137,Cooperativa de Transporte de Paysandú,UY,transport_logistics,m,0.0,0,,0.0
-136,Promart Homecenter,PE,retail_consumer,m,0.0,0,,0.0
-145,Banco Nacional de Bolivia,BO,finance_insurance,m,0.0,0,,0.0
-94,Banco de Asunción,PY,finance_insurance,m,0.0,0,,0.0
-93,Gas Express Nieto,MX,oil_gas,m,0.0,0,,0.0
-92,Mobo,MX,retail_consumer,m,0.0,0,,0.0
-91,lojas MM,PY,retail_consumer,m,0.0,0,,0.0
-90,Fraiche,MX,retail_consumer,m,0.0,0,,0.0
-89,YPF Full,AR,retail_consumer,m,0.0,0,,0.0
-88,Metabiblioteca SAS,PA,construction_realestate,m,0.0,0,,0.0
-87,Ferrocarril del Norte (Paraguay),PY,transport_logistics,m,0.0,0,,0.0
-116,Ferrovia Sul Atlântico,BR,transport_logistics,m,0.0,0,,0.0
-85,La Rodó,UY,transport_logistics,m,0.0,0,,0.0
-84,Las panteras de Benguela,UY,transport_logistics,m,0.0,0,,0.0
-83,Yahayra Films,MX,ict_telecom,m,0.0,0,,0.0
-82,Supermercados El Dorado,UY,retail_consumer,m,0.0,0,,0.0
-81,Ferrovia Centro-Atlântica,BR,transport_logistics,l,0.0,0,,0.0
-80,Ferrocarriles Suburbanos,MX,transport_logistics,m,0.0,0,,0.0
-79,Portren,UY,transport_logistics,m,0.0,0,,0.0
-78,Super Xtra,PA,retail_consumer,m,0.0,0,,0.0
-77,Casanova,UY,transport_logistics,m,0.0,0,,0.0
-86,M.Q.L.,UY,transport_logistics,m,0.0,0,,0.0
-115,Ferrovia Novoeste S.A.,BR,transport_logistics,m,0.0,0,,0.0
-114,Ferrosur,MX,transport_logistics,m,0.0,0,,0.0
-113,PeruRail,PE,transport_logistics,m,0.0,0,,0.0
-112,Ferrocarril del Pacífico,CL,transport_logistics,m,0.0,0,,0.0
-111,Ferrocarril Interoceánico de México,MX,transport_logistics,m,0.0,0,,0.0
-110,Ferroban,BR,transport_logistics,m,0.0,0,,0.0
-109,Motta Internacional,PA,retail_consumer,m,0.0,0,,0.0
-108,On City,AR,retail_consumer,m,0.0,0,,0.0
-95,ODM Express,MX,transport_logistics,m,0.0,0,,0.0
-106,Moving Pics,AR,ict_telecom,m,0.0,0,,0.0
-105,KoKoK The Roach,PA,retail_consumer,m,0.0,0,,0.0
-104,Empresa Panameña de Alimentos,PA,finance_insurance,m,0.0,0,,0.0
-103,"Gold Mills de Panamá, S.A.",PA,agro_food,m,0.0,0,,0.0
-100,Parque Turístico Din Kong,BO,transport_logistics,m,0.0,0,,0.0
-99,LATAM Cargo,CL,transport_logistics,m,0.0,0,,0.0
-98,Pluz Energía Perú,PE,energy_power,m,0.0,0,,0.0
-97,Banco Continental,PY,finance_insurance,m,0.0,0,,0.0
-96,Grupo Puntacana,DO,construction_realestate,m,0.0,0,,0.0
-107,Kansas City Southern de México,MX,transport_logistics,m,0.0,0,,0.0
+company_id,company_name,country,industry,size_bin,score_0_100,signals_count,last_ts,group_memberships,group_news
+286,X3,BO,construction_realestate,m,40.0,10,2025-10-04T14:30:57Z,0.0,40.0
+486,IMPA,AR,agro_food,m,35.3,5,2025-10-03T10:07:00Z,0.0,35.29535615841543
+562,CAF -banco de desarrollo de América Latina y el Caribe,VE,construction_realestate,m,29.42,3,2025-10-02T16:32:28Z,0.0,29.417609631606062
+1078,RACSA,GT,transport_logistics,m,28.29,3,2025-09-23T06:13:18Z,0.0,28.28938401219118
+113,Adhemar Capital,AR,finance_insurance,m,28.07,3,2025-09-22T15:47:14Z,0.0,28.06912713078905
+531,Banco Nacional de Desarrollo,AR,finance_insurance,m,26.04,3,2025-09-07T07:00:00Z,0.0,26.03615913594586
+888,CADA,VE,retail_consumer,m,25.68,3,2025-10-01T15:29:00Z,0.0,25.683569241649217
+779,Copa Holdings,PA,transport_logistics,l,25.68,3,2025-09-26T02:34:28Z,0.0,25.67651815224905
+398,Carrefour Argentina,AR,retail_consumer,m,25.56,3,2025-09-30T16:38:00Z,0.0,25.559991427927027
+1081,SACO,CO,transport_logistics,m,25.23,3,2025-09-12T07:00:00Z,0.0,25.22529630632144
+141,Mercado Abierto,AR,finance_insurance,m,24.83,3,2025-10-03T16:58:54Z,0.0,24.82907574869921
+628,Pressenza,EC,ict_telecom,m,24.71,3,2025-09-19T03:05:17Z,0.0,24.71050642263112
+288,Pablo Ernesto,BO,construction_realestate,m,23.64,3,2025-09-23T07:00:00Z,0.0,23.64085237848819
+930,GV Producciones,PE,ict_telecom,m,23.6,3,2025-09-13T02:48:17Z,0.0,23.60413091634645
+228,Casanova,UY,transport_logistics,m,23.4,3,2025-08-13T07:00:00Z,0.0,23.40246740387323
+336,Spid,PE,retail_consumer,m,23.11,4,2025-09-19T00:00:37Z,0.0,23.11027403644353
+581,Dedicado,UY,ict_telecom,m,22.84,3,2025-09-15T07:00:00Z,0.0,22.843709617941222
+937,Minera Escondida,CL,mining_metals,m,22.54,3,2025-08-20T07:00:00Z,0.0,22.53815975425023
+644,Dynamo,CO,ict_telecom,m,22.43,3,2025-09-30T10:23:53Z,0.0,22.433575069618552
+759,Belgrano Cargas,AR,transport_logistics,m,22.39,3,2025-10-02T18:32:11Z,0.0,22.38724095352409
+471,Litoral Gas,AR,oil_gas,m,22.22,3,2025-08-22T07:00:00Z,0.0,22.22169000831022
+268,La Rodó,UY,transport_logistics,m,22.21,3,2025-09-23T07:00:00Z,0.0,22.21471525847124
+32,NotiPress,MX,ict_telecom,m,22.1,3,2025-08-31T18:33:45Z,0.0,22.10399832656165
+586,Agencia Boliviana de Información,BO,ict_telecom,m,21.57,3,2025-09-19T07:00:00Z,0.0,21.566353422496054
+1165,VTR,CL,ict_telecom,m,21.24,4,2025-10-03T22:17:53Z,0.0,21.236002757419985
+964,Emisoras Unidas,GT,ict_telecom,m,20.9,3,2025-09-28T14:39:26Z,0.0,20.90178174696208
+301,Grupo Promerica,NI,finance_insurance,m,20.74,3,2025-07-30T07:00:00Z,0.0,20.74091537161378
+104,Enjoy Coquimbo,CL,chemicals_materials,m,20.66,3,2025-08-04T07:00:00Z,0.0,20.664681812264995
+626,CCU,CL,agro_food,l,20.6,3,2025-10-01T22:53:37Z,0.0,20.599110065080005
+74,Transpa S.A.,AR,energy_power,m,20.23,3,2025-10-01T13:12:16Z,0.0,20.23120996044465
+575,Volaris Costa Rica,CR,transport_logistics,m,19.56,3,2025-09-26T02:09:36Z,0.0,19.55530811035928
+108,Comisión Federal de Electricidad,MX,energy_power,l,19.26,3,2025-09-24T20:08:10Z,0.0,19.26219826227119
+916,Ente Provincial de Energía del Neuquén,AR,energy_power,m,19.23,3,2025-07-27T07:00:00Z,0.0,19.23271006999896
+627,Bancard,CL,finance_insurance,m,18.9,3,2025-08-22T07:00:00Z,0.0,18.895827532929925
+1200,Vista Energy,AR,oil_gas,m,18.12,3,2025-10-02T21:40:00Z,0.0,18.12384813047577
+915,Empresa de Acueducto y Alcantarillado de Bogotá,CO,water_waste_circularity,m,17.83,3,2025-10-01T15:56:15Z,0.0,17.831015884768284
+602,Banco GNB Paraguay,PY,finance_insurance,m,17.75,3,2025-09-15T07:00:00Z,0.0,17.752918936759606
+1115,Villa del Cine,VE,ict_telecom,m,17.72,3,2025-10-03T15:56:26Z,0.0,17.721214903141373
+687,Banco de Crédito,UY,finance_insurance,m,17.23,3,2025-10-02T17:03:00Z,0.0,17.228791737384704
+323,Ecopetrol,CO,oil_gas,l,17.2,3,2025-09-19T18:56:58Z,0.0,17.197328094769865
+857,Bancaribe,VE,finance_insurance,m,16.77,3,2025-09-16T07:00:00Z,0.0,16.76780137544334
+1029,LATAM,CL,transport_logistics,l,16.65,3,2025-09-30T13:13:04Z,0.0,16.650789651345352
+894,Chrysler Fevre Argentina S.A.,AR,manufacturing,m,16.42,3,2025-10-02T18:47:39Z,0.0,16.421859770462667
+608,Banco de Chile,CL,finance_insurance,l,16.22,3,2025-08-28T22:33:41Z,0.0,16.215853566643503
+266,La Carolina,UY,transport_logistics,m,16.21,3,2025-10-01T12:14:00Z,0.0,16.214115231472206
+204,Banco Atlántida,HN,finance_insurance,m,16.19,3,2025-07-14T07:00:00Z,0.0,16.18554372493201
+18,Stump,BR,manufacturing,m,15.82,3,2025-07-17T07:00:00Z,0.0,15.816761771771317
+1060,Banco de Costa Rica,CR,finance_insurance,m,15.49,3,2025-05-21T07:00:00Z,0.0,15.486597702579852
+347,Banco Continental,PY,finance_insurance,m,15.23,3,2025-08-28T07:00:00Z,0.0,15.234297358286124
+596,Ekono,CL,retail_consumer,m,15.13,3,2025-08-07T07:00:00Z,0.0,15.128162882065364
+680,Agencia ANDINA,PE,ict_telecom,m,15.12,3,2025-04-25T07:00:00Z,0.0,15.123779860494713
+235,Banco Popular Dominicano,DO,finance_insurance,m,15.12,3,2025-06-30T07:00:00Z,0.0,15.122636722710832
+1191,Rocchi,AR,construction_realestate,m,15.06,3,2025-10-02T16:31:45Z,0.0,15.059470962463338
+275,Banco Itaú,UY,finance_insurance,m,15.05,3,2025-09-17T07:00:00Z,0.0,15.048158385633013
+599,Altán Redes,MX,ict_telecom,m,15.02,3,2025-09-17T07:00:00Z,0.0,15.018916810217323
+1122,Banco de México,MX,finance_insurance,m,14.96,2,2025-09-23T07:00:00Z,0.0,14.958221697982808
+120,Hotel DEL Norte,UY,oil_gas,m,14.96,3,2025-10-03T03:17:00Z,0.0,14.958031874278271
+198,Ente Provincial de Agua y Saneamiento,AR,water_waste_circularity,m,14.93,3,2025-01-23T08:00:00Z,0.0,14.927036907778009
+375,Grupo MAS,MX,water_waste_circularity,m,14.91,3,2025-09-15T07:00:00Z,0.0,14.911916526935489
+1045,Malher,GT,agro_food,m,14.69,2,2025-09-17T23:15:44Z,0.0,14.68963684672394
+257,Liverpool,MX,retail_consumer,m,14.62,3,2025-07-08T07:00:00Z,0.0,14.621496188320103
+1121,Bancolombia,CO,finance_insurance,l,14.59,3,2025-09-03T07:00:00Z,0.0,14.59167675637113
+410,Claro Colombia,CO,ict_telecom,m,14.52,3,2025-09-22T07:00:00Z,0.0,14.515286233275404
+1083,SAHSA,HN,transport_logistics,m,14.46,3,2025-03-18T07:00:00Z,0.0,14.459015057136163
+611,Banco de la Nación Argentina,AR,finance_insurance,m,14.44,3,2025-07-16T07:00:00Z,0.0,14.437934516381624
+979,Sweet & Coffee,EC,agro_food,m,14.41,3,2025-06-12T07:00:00Z,0.0,14.409560983138425
+1145,Cine Colombia,CO,ict_telecom,m,14.38,3,2025-09-02T19:24:31Z,0.0,14.375192703732557
+442,Cerro Matoso,CO,transport_logistics,m,14.11,3,2025-07-09T07:00:00Z,0.0,14.112082876932943
+181,DyN,AR,ict_telecom,m,14.05,2,2025-09-21T14:15:00Z,0.0,14.051970163584858
+819,TIS Productions,CO,ict_telecom,m,14.02,3,2025-07-31T07:00:00Z,0.0,14.015035994470942
+997,YPFB Transporte,BO,oil_gas,m,13.98,3,2025-06-07T07:00:00Z,0.0,13.983606196482537
+641,Fiat Concord,AR,manufacturing,m,13.94,3,2025-08-27T07:00:00Z,0.0,13.942276105891604
+60,Alcoholes del Uruguay,UY,manufacturing,m,13.84,3,2025-06-23T07:00:00Z,0.0,13.841854909198696
+232,Top House,AR,retail_consumer,m,13.83,3,2025-09-13T07:00:00Z,0.0,13.834807782307434
+566,Banco Nacional de México,MX,finance_insurance,m,13.81,3,2025-05-23T07:00:00Z,0.0,13.81080382549621
+629,Elektro,AR,energy_power,m,13.7,2,2025-09-16T07:00:00Z,0.0,13.702799157073446
+865,Banco G&T Continental,GT,finance_insurance,m,13.68,2,2025-08-12T07:00:00Z,0.0,13.6782419037011
+580,Renault Argentina,AR,manufacturing,l,13.59,3,2025-08-18T07:00:00Z,0.0,13.591703397741965
+342,Entel Perú,PE,ict_telecom,m,13.58,3,2025-07-23T07:00:00Z,0.0,13.576003616265943
+200,Aguas Rionegrinas,AR,water_waste_circularity,m,13.55,2,2025-08-23T07:00:00Z,0.0,13.54541573244664
+1192,Grupo Razzini,AR,chemicals_materials,m,13.52,2,2025-08-04T07:00:00Z,0.0,13.51946965394272
+440,Industrias Kaiser Argentina,AR,manufacturing,m,13.48,3,2025-08-29T07:00:00Z,0.0,13.47640104092829
+439,Nuevo Continente,PE,transport_logistics,m,13.41,2,2025-09-18T07:00:00Z,0.0,13.413185790631465
+412,Tiendas 3A,PE,retail_consumer,m,13.34,3,2025-09-30T22:57:25Z,0.0,13.33741600485078
+918,Movistar Ecuador,EC,ict_telecom,m,13.22,2,2025-09-10T07:00:00Z,0.0,13.224897912564952
+101,Departamentos & Suites Villa Teresa,MX,ict_telecom,m,13.14,1,2025-02-12T00:00:00Z,13.139806096294008,0.0
+948,Televisión Nacional de Chile,CL,ict_telecom,m,13.13,3,2025-09-11T07:00:00Z,0.0,13.12868169176177
+850,Americatel,VE,ict_telecom,m,13.1,2,2025-07-24T07:00:00Z,0.0,13.104652750262323
+519,Banco Agrario de Colombia,CO,finance_insurance,m,13.08,3,2025-08-07T07:00:00Z,0.0,13.079029821192766
+34,Ferrocarril Domingo Faustino Sarmiento,AR,transport_logistics,m,13.05,2,2025-10-03T10:55:52Z,0.0,13.04959085639265
+1180,Andes Iron,CL,mining_metals,m,12.96,3,2025-09-16T07:00:00Z,0.0,12.956081493251933
+884,Bellavista Oveja Tomé,CL,manufacturing,m,12.93,3,2025-06-25T20:46:53Z,0.0,12.931640394633265
+103,Generación Zoe,AR,finance_insurance,m,12.88,3,2025-06-10T07:00:00Z,0.0,12.88153198052784
+505,Banco Centroamericano de Integración Económica,HN,construction_realestate,m,12.86,2,2025-05-19T07:00:00Z,0.0,12.858474907083163
+353,Pluz Energía Perú,PE,energy_power,m,12.85,3,2025-08-07T07:00:00Z,0.0,12.848768525230891
+138,JetSMART Perú,PE,transport_logistics,m,12.66,3,2025-07-25T07:00:00Z,0.0,12.655152190474883
+96,Codelco,CL,mining_metals,m,12.63,3,2025-01-30T08:00:00Z,0.0,12.630848545537004
+846,Agricultores Federados Argentinos,AR,agro_food,m,12.53,3,2025-08-22T07:00:00Z,0.0,12.528001387937389
+843,Trenes Argentinos Infraestructura,AR,construction_realestate,m,12.48,2,2025-07-12T07:00:00Z,0.0,12.477220182313731
+39,Ferrocarriles Argentinos,AR,transport_logistics,m,12.37,3,2025-08-05T07:00:00Z,0.0,12.370703622257093
+861,Banco Caja Social,CO,finance_insurance,m,12.36,3,2025-09-12T07:00:00Z,0.0,12.360668810696795
+1126,Aguas Andinas,CL,water_waste_circularity,l,12.35,2,2025-09-29T07:33:00Z,0.0,12.345258150252674
+559,Coppel,MX,retail_consumer,m,12.18,2,2025-09-02T07:00:00Z,0.0,12.177749958969082
+1146,Servicio de Comunicación Audiovisual Nacional,UY,ict_telecom,m,12.15,3,2025-09-07T07:00:00Z,0.0,12.154011377908692
+102,Lago Petroleum Corporation,VE,oil_gas,m,12.02,2,2025-01-25T08:00:00Z,10.018299588251306,2.003033869575669
+882,Banco del Bienestar,MX,finance_insurance,m,12.02,3,2025-08-14T21:02:44Z,0.0,12.021289045389535
+65,Monómeros Colombo-Venezolanos,VE,oil_gas,m,12.02,3,2025-07-23T07:00:00Z,0.0,12.0191448505839
+154,Stellantis Argentina,AR,manufacturing,m,12.0,3,2025-08-20T07:00:00Z,0.0,12.003029703476765
+907,Educativa,PE,ict_telecom,m,11.99,3,2025-10-04T16:08:57Z,0.0,11.989192969146512
+382,Kölbi,CR,ict_telecom,m,11.99,3,2025-03-11T07:00:00Z,0.0,11.990494199720391
+818,Fox,VE,ict_telecom,m,11.99,3,2025-10-04T15:00:00Z,0.0,11.988202477438945
+1150,Movistar,UY,ict_telecom,m,11.99,3,2025-10-04T18:16:00Z,0.0,11.988895271971732
+379,Todo,AR,retail_consumer,m,11.99,3,2025-10-04T16:24:00Z,0.0,11.99498901172447
+395,Plata,MX,finance_insurance,m,11.98,3,2025-10-04T11:53:01Z,0.0,11.984263710050694
+1015,Grupo México,MX,mining_metals,l,11.98,3,2025-10-04T03:25:00Z,0.0,11.97609417428727
+1011,Despegar,BR,transport_logistics,l,11.97,3,2025-10-04T11:42:00Z,0.0,11.971137889391152
+543,Corven,AR,manufacturing,m,11.97,3,2025-10-03T21:28:27Z,0.0,11.966758404867573
+952,Metrogas,CL,oil_gas,m,11.96,3,2025-10-03T21:04:14Z,0.0,11.956248027838775
+341,Prisa,MX,manufacturing,m,11.96,3,2025-10-03T23:21:37Z,0.0,11.963901612529146
+758,Movistar,VE,ict_telecom,m,11.95,3,2025-10-04T15:54:25Z,0.0,11.946430304596296
+119,Parisina,MX,manufacturing,m,11.95,3,2025-10-04T12:14:00Z,0.0,11.946173167662833
+1065,Corona,CO,manufacturing,m,11.94,3,2025-10-04T14:56:03Z,0.0,11.94203955162276
+1095,Soprole,CL,agro_food,m,11.94,3,2025-10-03T18:12:05Z,0.0,11.939973888930226
+28,Mass,PE,retail_consumer,m,11.94,3,2025-10-03T21:54:28Z,0.0,11.940195278386748
+643,Avianca,CO,transport_logistics,m,11.93,3,2025-10-04T04:55:58Z,0.0,11.929546878683055
+633,Energía Argentina,AR,oil_gas,m,11.93,3,2025-10-03T12:30:00Z,0.0,11.926839008354396
+495,AUBASA,AR,construction_realestate,m,11.93,3,2025-10-03T16:34:00Z,0.0,11.926205462557434
+545,Flow,AR,ict_telecom,m,11.93,3,2025-10-03T15:10:48Z,0.0,11.928539887266252
+255,Acindar,AR,chemicals_materials,m,11.93,3,2025-10-04T15:48:00Z,0.0,11.933342186813968
+374,WOW,PE,ict_telecom,m,11.92,3,2025-10-02T22:00:00Z,0.0,11.915490851416925
+610,Banco Nacional de Obras y Servicios Públicos,MX,construction_realestate,m,11.92,3,2025-10-03T11:30:13Z,0.0,11.922264712652002
+746,Banco de Bogotá,CO,finance_insurance,l,11.92,3,2025-10-04T02:37:27Z,0.0,11.91563084326733
+897,Enel Distribución Chile,CL,energy_power,m,11.92,3,2025-06-25T07:00:00Z,0.0,11.922539541805651
+589,Grupo Clarín,AR,ict_telecom,l,11.91,3,2025-10-03T10:05:00Z,0.0,11.91210703530846
+304,BanCoppel,MX,finance_insurance,m,11.91,3,2025-10-02T21:46:45Z,0.0,11.913064422331471
+578,Ugarte,AR,manufacturing,m,11.9,3,2025-10-04T12:45:00Z,0.0,11.895125129957236
+1142,Télam,AR,ict_telecom,m,11.9,3,2025-10-04T12:11:07Z,0.0,11.900481138991172
+76,Banco Santander,CL,finance_insurance,l,11.9,3,2025-10-03T08:10:28Z,0.0,11.903425986187786
+1147,Copa Airlines,PA,transport_logistics,l,11.89,3,2025-10-03T04:16:45Z,0.0,11.889353900435394
+667,Rappi,EC,agro_food,l,11.89,3,2025-10-02T14:25:36Z,0.0,11.893919711938578
+499,Marcopolo,BR,manufacturing,l,11.89,3,2025-10-03T23:52:01Z,0.0,11.89254656252618
+1075,Banistmo,PA,finance_insurance,m,11.88,3,2025-10-01T14:44:17Z,0.0,11.878122665500774
+152,Santandreu,MX,construction_realestate,m,11.88,3,2025-10-04T02:34:33Z,0.0,11.882053341993098
+700,Banco Central de Nicaragua,NI,finance_insurance,m,11.87,2,2025-03-28T07:00:00Z,0.0,11.868047880562658
+933,Gas del Estado,AR,oil_gas,m,11.87,2,2025-09-18T07:00:00Z,0.0,11.867776570776805
+1189,Banco de Inversión y Comercio Exterior,AR,finance_insurance,m,11.86,3,2025-10-01T20:10:00Z,0.0,11.856604151715963
+338,Electrosur,PE,energy_power,m,11.84,3,2025-10-03T16:12:58Z,0.0,11.840800543820311
+1048,CMO,CO,ict_telecom,m,11.83,3,2025-10-03T17:01:25Z,0.0,11.828567810542705
+790,Grupo Modelo,MX,agro_food,m,11.83,3,2025-10-03T15:02:13Z,0.0,11.831992396943404
+910,Ecogas,AR,oil_gas,m,11.83,2,2025-07-28T07:00:00Z,0.0,11.834874672337197
+6,Granix,AR,agro_food,m,11.82,3,2025-10-03T13:47:10Z,0.0,11.823016710114713
+856,BaNorte,VE,finance_insurance,m,11.81,3,2025-09-30T10:15:00Z,0.0,11.80512217003346
+786,Crepes & Waffles,CO,oil_gas,m,11.8,3,2025-10-03T21:11:09Z,0.0,11.802459559297876
+1127,Bath & Body Works,PA,retail_consumer,l,11.77,3,2025-10-03T19:09:27Z,0.0,11.7682300068153
+218,SAETA,UY,ict_telecom,m,11.74,3,2025-03-26T07:00:00Z,0.0,11.740346743290369
+256,Fresko,MX,retail_consumer,m,11.73,3,2025-10-01T12:17:00Z,0.0,11.727139076658316
+731,WOM Colombia,CO,ict_telecom,m,11.73,3,2025-09-30T15:16:40Z,0.0,11.73290445773398
+458,Plaza Lama,DO,retail_consumer,m,11.72,3,2025-10-01T13:32:36Z,0.0,11.715943783872326
+300,Mundo (Chile),CL,ict_telecom,m,11.72,2,2025-09-26T14:54:47Z,0.0,11.72095904844572
+1061,NXIVM,MX,construction_realestate,m,11.71,3,2025-10-02T18:35:00Z,0.0,11.706351224331469
+165,Avianca Cargo,CO,transport_logistics,m,11.7,3,2025-10-03T14:15:27Z,0.0,11.69605544002697
+373,Scotiabank (Perú),PE,finance_insurance,m,11.68,3,2025-08-05T07:00:00Z,0.0,11.679462915523276
+738,Banco Azteca,MX,finance_insurance,m,11.67,3,2025-09-30T22:30:00Z,0.0,11.674999172321431
+253,Río Uruguay Seguros,AR,finance_insurance,m,11.67,3,2025-09-29T07:00:00Z,0.0,11.66509903014489
+1072,Petropar,PY,oil_gas,m,11.66,3,2025-10-02T21:34:51Z,0.0,11.65762947319137
+773,Falabella,CL,retail_consumer,l,11.64,3,2025-10-02T15:45:03Z,0.0,11.644492663296448
+692,CANTV,VE,ict_telecom,m,11.63,3,2025-09-29T11:17:38Z,0.0,11.626005583522574
+150,Nutrisa,MX,agro_food,m,11.63,3,2025-10-03T03:15:26Z,0.0,11.628741083464185
+475,Bitel,PE,ict_telecom,m,11.62,3,2025-10-02T16:37:01Z,0.0,11.62179090145336
+407,Improving,GT,ict_telecom,m,11.62,3,2025-10-02T10:23:58Z,0.0,11.619284323830067
+81,Locatel,VE,retail_consumer,m,11.6,3,2025-09-28T16:21:00Z,0.0,11.601504529574818
+430,Mina La Escondida,CL,oil_gas,m,11.6,3,2025-09-23T07:00:00Z,0.0,11.596494395876762
+696,Ualá,MX,finance_insurance,m,11.59,3,2025-10-03T09:07:00Z,0.0,11.586159326719317
+437,Industrias Peñoles,MX,mining_metals,l,11.58,3,2025-10-03T23:26:05Z,0.0,11.5788888724113
+624,Compartamos Banco,MX,finance_insurance,m,11.56,3,2025-10-02T05:43:44Z,0.0,11.558214552540685
+1149,Brubank,AR,finance_insurance,m,11.56,3,2025-10-04T11:20:35Z,0.0,11.564127934987454
+650,Lima Airport Partners,PE,transport_logistics,m,11.54,3,2025-10-03T16:20:20Z,0.0,11.541542036228453
+359,EDESE,AR,energy_power,m,11.53,3,2025-10-01T16:51:52Z,0.0,11.529707375733263
+800,Edesur,AR,energy_power,m,11.53,3,2025-10-03T15:33:45Z,0.0,11.529635525105435
+259,El Nuevo Mundo,MX,retail_consumer,m,11.53,3,2025-10-03T11:00:28Z,0.0,11.529882961940132
+1166,Enel Américas,CL,energy_power,l,11.52,3,2025-10-01T07:00:00Z,0.0,11.515458379443988
+663,LATAM Paraguay,PY,transport_logistics,m,11.5,3,2025-10-02T07:15:00Z,0.0,11.49992045551856
+1032,LATAM Ecuador,EC,transport_logistics,m,11.5,3,2025-10-02T07:15:00Z,0.0,11.49992045551856
+1181,Central Puerto,AR,energy_power,m,11.44,3,2025-09-29T11:50:30Z,0.0,11.436887358975408
+1175,Badabun,MX,ict_telecom,m,11.43,3,2025-10-04T00:50:44Z,0.0,11.426986797132871
+417,PeruRail,PE,transport_logistics,m,11.43,3,2025-09-22T07:00:00Z,0.0,11.428919192589516
+983,Liberty Costa Rica,CR,ict_telecom,m,11.43,3,2025-09-22T08:11:14Z,0.0,11.42944310604393
+791,Davivienda,CO,finance_insurance,m,11.42,3,2025-10-04T01:13:22Z,0.0,11.422822075205794
+311,Credicorp,PE,finance_insurance,l,11.42,3,2025-10-02T17:03:00Z,0.0,11.424751260879772
+604,Grupo Lala,MX,agro_food,l,11.42,3,2025-10-01T16:27:43Z,0.0,11.416478423636446
+418,Ferrosur,MX,transport_logistics,m,11.42,3,2025-09-29T00:05:33Z,0.0,11.418114170682584
+969,Cablevisión,EC,ict_telecom,m,11.39,3,2025-07-19T07:00:00Z,0.0,11.38745906322461
+828,Garoto,BR,manufacturing,m,11.39,3,2025-09-30T21:12:00Z,0.0,11.390777223712671
+383,Saeta,EC,transport_logistics,m,11.37,3,2025-10-04T15:11:33Z,0.0,11.373240581962705
+569,Grupo Gloria,PE,agro_food,m,11.37,3,2025-10-03T20:56:09Z,0.0,11.365425055698228
+703,AES Andes,CL,energy_power,l,11.34,3,2025-09-30T16:02:56Z,0.0,11.344789343751485
+1106,Tottus,CL,retail_consumer,m,11.33,3,2025-10-01T19:50:00Z,0.0,11.32671001434141
+999,Bancoomeva,CO,finance_insurance,m,11.29,3,2025-09-30T19:23:46Z,0.0,11.286308691511508
+1055,Milpo,PE,mining_metals,m,11.29,3,2025-10-02T16:35:20Z,0.0,11.29089046506526
+989,Turbus,CL,transport_logistics,m,11.27,3,2025-10-02T15:36:23Z,0.0,11.2665321731303
+483,Banco Popular,CR,finance_insurance,m,11.23,3,2025-10-01T23:31:54Z,0.0,11.226661970179206
+1195,Granja Tres Arroyos,AR,agro_food,m,11.22,3,2025-09-28T14:42:31Z,0.0,11.215575568129925
+839,HSBC México,MX,finance_insurance,m,11.22,3,2025-09-30T07:00:00Z,0.0,11.216341054200338
+61,Clear,MX,construction_realestate,m,11.22,3,2025-10-04T03:58:28Z,0.0,11.21853177086012
+408,Motta Internacional,PA,retail_consumer,m,11.21,3,2025-09-10T07:00:00Z,0.0,11.207939526178228
+511,Cervecería Nacional,PA,agro_food,m,11.2,3,2025-10-02T06:24:17Z,0.0,11.201812272592967
+984,Grupo Globo,BR,ict_telecom,m,11.15,3,2025-09-25T18:51:55Z,0.0,11.151864658437043
+1151,Grupo Éxito,CO,retail_consumer,l,11.14,3,2025-09-19T07:00:00Z,0.0,11.140444311419111
+750,Banco Pichincha,EC,finance_insurance,m,11.1,3,2025-10-04T11:00:00Z,0.0,11.098897326933148
+664,Telefónica de Argentina,AR,ict_telecom,m,11.1,3,2025-10-04T07:15:20Z,0.0,11.095664162788056
+951,Maraven,VE,oil_gas,m,11.1,2,2025-09-08T07:00:00Z,0.0,11.099218957358346
+898,Compañía Minera del Pacífico,CL,mining_metals,m,11.08,3,2025-09-30T07:18:48Z,0.0,11.08375919914594
+487,Banco Central de la República Dominicana,DO,finance_insurance,m,11.05,3,2025-10-02T05:20:37Z,0.0,11.04508718396466
+546,Intercorp,PE,retail_consumer,m,11.05,3,2025-09-30T05:36:00Z,0.0,11.054609180893614
+191,Movilnet,VE,ict_telecom,m,11.04,3,2025-09-12T07:00:00Z,0.0,11.043666560043349
+1016,Farmacias Similares,GT,retail_consumer,m,11.03,3,2025-10-03T01:58:30Z,0.0,11.027872133789714
+993,Volcan Compañía Minera,PE,mining_metals,l,10.99,3,2025-09-26T18:14:36Z,0.0,10.986330351306483
+698,Entel Chile,CL,ict_telecom,l,10.98,3,2025-09-15T19:00:26Z,0.0,10.976327784071138
+1034,Servicios de Agua y Drenaje de Monterrey,MX,water_waste_circularity,m,10.97,3,2025-09-24T18:04:00Z,0.0,10.967346878184282
+1157,Boliviana de Aviación,BO,transport_logistics,l,10.94,3,2025-09-23T20:52:00Z,0.0,10.936307196584735
+1051,Megabús,CO,transport_logistics,m,10.93,3,2025-10-04T14:55:43Z,0.0,10.933731084203329
+873,Banco Guayaquil,EC,finance_insurance,m,10.93,3,2025-10-04T06:16:29Z,0.0,10.934437747716103
+1199,BANPAIS,HN,finance_insurance,m,10.92,3,2025-09-27T01:28:35Z,0.0,10.915659659912128
+1177,Oil Combustibles,AR,oil_gas,m,10.92,3,2025-05-08T07:00:00Z,0.0,10.918541903000516
+319,Pronto Copec,CL,retail_consumer,m,10.92,3,2025-10-01T16:07:29Z,0.0,10.9165894543047
+445,Abitab,UY,finance_insurance,m,10.91,3,2025-10-02T20:43:00Z,0.0,10.914039530719547
+961,Oechsle,PE,retail_consumer,m,10.9,3,2025-09-12T07:00:00Z,0.0,10.900856905552534
+944,JAC,CL,transport_logistics,m,10.87,3,2025-09-30T13:07:28Z,0.0,10.86951695438208
+36,HEINEKEN México,MX,agro_food,m,10.86,3,2025-10-03T17:40:01Z,0.0,10.859773450652
+577,Caffarena,CL,manufacturing,m,10.85,2,2025-03-17T07:00:00Z,0.0,10.848439657605446
+161,Litio para México,MX,mining_metals,m,10.84,2,2025-05-23T07:00:00Z,0.0,10.83673239152444
+312,YPF Full,AR,retail_consumer,m,10.84,3,2025-09-10T07:00:00Z,0.0,10.84360554345874
+660,Sigdo Koppers,CL,mining_metals,m,10.82,3,2025-08-28T07:00:00Z,0.0,10.818847878509114
+369,LATAM Airlines Group,CL,transport_logistics,l,10.81,3,2025-10-02T07:15:00Z,0.0,10.806586165954103
+510,Fabula,CL,ict_telecom,m,10.77,3,2025-10-02T06:16:02Z,0.0,10.767030199775569
+1076,Produbanco,EC,finance_insurance,m,10.76,3,2025-09-23T18:13:11Z,0.0,10.76365629930245
+931,Hochschild Mining,CL,mining_metals,m,10.71,3,2025-09-16T07:00:00Z,0.0,10.71459368093188
+1190,Austral Construcciones,AR,construction_realestate,m,10.67,3,2025-09-16T07:00:00Z,0.0,10.674321845567938
+985,Tienda Inglesa,UY,retail_consumer,m,10.63,3,2025-09-17T05:19:28Z,0.0,10.627672555645756
+729,Asenav,CL,construction_realestate,m,10.63,3,2025-09-18T07:00:00Z,0.0,10.626207393808048
+151,Sanborns,MX,retail_consumer,m,10.63,3,2025-10-03T18:37:03Z,0.0,10.630770718503175
+485,Banco Central del Ecuador,EC,finance_insurance,m,10.62,3,2025-09-16T07:00:00Z,0.0,10.617386236992925
+176,LATAM Perú,PE,transport_logistics,m,10.62,3,2025-10-02T07:15:00Z,0.0,10.619695451596916
+449,Finta,BR,manufacturing,m,10.61,3,2025-10-01T09:53:17Z,0.0,10.611807981965269
+1197,Simpletv,VE,ict_telecom,m,10.6,3,2025-10-03T18:58:19Z,0.0,10.596482129092074
+976,Suburbia,MX,retail_consumer,m,10.59,3,2025-10-02T01:15:00Z,0.0,10.589772546376098
+697,UCOCAR,VE,construction_realestate,m,10.56,3,2025-08-29T07:00:00Z,0.0,10.557466576834257
+1038,Luz del Sur,CL,energy_power,m,10.55,2,2025-09-16T02:21:36Z,0.0,10.553013403857712
+875,Banco de Seguros del Estado,UY,finance_insurance,m,10.54,3,2025-10-03T19:22:24Z,0.0,10.537773909310507
+816,GRUMA,MX,agro_food,m,10.54,3,2025-09-30T04:28:46Z,0.0,10.536804454478249
+380,Empresa Ferroviaria Andina,BO,transport_logistics,m,10.53,3,2025-08-31T07:00:00Z,0.0,10.530378910770697
+699,Banco Central De Costa Rica,CR,finance_insurance,m,10.53,2,2025-10-03T15:46:19Z,0.0,10.525158314751376
+684,Industria Azucarera Nacional,CL,manufacturing,l,10.49,3,2025-09-20T02:30:00Z,0.0,10.491854783151288
+135,Ferrovías,AR,construction_realestate,m,10.44,3,2025-10-04T13:37:00Z,0.0,10.44280052780185
+516,Altia,CL,construction_realestate,m,10.41,2,2025-09-22T07:00:00Z,0.0,10.410666389900094
+622,Colbún S.A.,CL,energy_power,l,10.36,3,2025-09-04T07:00:00Z,0.0,10.364158071802816
+620,ANTEL,UY,ict_telecom,m,10.35,3,2025-10-02T17:02:39Z,0.0,10.34576662869675
+792,Digitel,VE,ict_telecom,m,10.3,3,2025-10-04T12:26:58Z,0.0,10.295896968984552
+974,Siderúrgica Huachipato,CL,manufacturing,m,10.29,3,2025-09-24T16:09:03Z,0.0,10.293685865227436
+645,Intercam Banco,MX,finance_insurance,m,10.28,3,2025-08-21T07:00:00Z,0.0,10.28076055080483
+707,Aeropuertos del Perú,PE,transport_logistics,m,10.28,2,2025-09-25T15:21:00Z,0.0,10.284536176763172
+348,BancoSol,BO,finance_insurance,m,10.28,3,2025-09-30T18:51:15Z,0.0,10.283530600556777
+912,Electro Oriente,PE,energy_power,m,10.26,3,2025-09-22T05:20:00Z,0.0,10.25844916456322
+1069,Frontera Energy,PE,oil_gas,l,10.26,3,2025-08-19T07:00:00Z,0.0,10.263001211483692
+727,Aroma Café,AR,agro_food,m,10.25,3,2025-10-01T16:24:36Z,0.0,10.250110534465367
+747,Banco de Crédito del Perú,PE,finance_insurance,m,10.25,3,2025-04-16T07:00:00Z,0.0,10.252314489522178
+736,Banregio,MX,finance_insurance,m,10.2,3,2025-09-29T18:38:00Z,0.0,10.202496600296422
+966,Afirme,MX,finance_insurance,m,10.19,3,2025-10-02T00:39:50Z,0.0,10.187806308970629
+1050,Kunstmann,CL,agro_food,m,10.18,3,2025-10-03T01:47:13Z,0.0,10.178311139263435
+279,Banco Santiago del Estero,AR,finance_insurance,m,10.15,3,2025-08-27T07:00:00Z,0.0,10.15292635067664
+1000,Señor Frog's,MX,oil_gas,m,10.14,3,2025-09-27T11:20:33Z,0.0,10.14067091021246
+652,Teatro Mogador,CO,ict_telecom,m,10.11,2,2025-08-28T07:00:00Z,0.0,10.109789756931349
+895,Cines Unidos,VE,ict_telecom,m,10.1,3,2025-09-13T07:00:00Z,0.0,10.102981214134791
+1099,Yacimientos Carboníferos Río Turbio,AR,mining_metals,m,10.1,3,2025-10-03T01:25:15Z,0.0,10.103718773503148
+858,Banco Agrícola,SV,finance_insurance,m,10.1,3,2025-10-03T19:42:26Z,0.0,10.098269858852834
+155,Peugeot-Citroën Argentina,AR,manufacturing,m,10.1,3,2025-09-25T19:57:22Z,0.0,10.095125914327207
+1063,Obras Sanitarias del Estado,UY,water_waste_circularity,m,10.07,2,2025-08-11T07:00:00Z,0.0,10.073801369789289
+1103,Banmujer,VE,finance_insurance,m,10.06,3,2025-09-30T14:59:42Z,0.0,10.056239886838863
+617,CORPAC,PE,transport_logistics,m,10.05,3,2025-10-01T01:05:00Z,0.0,10.051926419932068
+234,Super Xtra,PA,retail_consumer,m,10.04,3,2025-09-14T14:28:34Z,0.0,10.039499110555106
+229,Ecocitex,CL,manufacturing,m,9.98,3,2025-09-27T21:00:26Z,0.0,9.978992000024096
+40,Hacienda Santa Teresa,VE,manufacturing,m,9.98,3,2025-10-02T16:26:30Z,0.0,9.98367482278296
+806,Claro Chile,CL,ict_telecom,m,9.96,3,2025-10-02T20:39:42Z,0.0,9.957182547104214
+576,Yanbal,PE,retail_consumer,m,9.94,3,2025-09-29T01:35:19Z,0.0,9.93523419105848
+737,Banco AV Villas,CO,finance_insurance,m,9.93,3,2025-06-12T07:00:00Z,0.0,9.92713769034432
+753,Bancóldex,CO,finance_insurance,m,9.92,3,2025-10-03T18:20:00Z,0.0,9.916037885987084
+743,"Banco Nacional de Crédito, C.A.",VE,finance_insurance,m,9.9,3,2025-09-19T22:16:41Z,0.0,9.900696031827426
+780,Corficolombiana,CO,finance_insurance,l,9.88,3,2025-08-21T07:00:00Z,0.0,9.8775230477388
+555,Banco Osorno y La Unión,CL,finance_insurance,m,9.88,3,2025-09-19T07:00:00Z,0.0,9.879582470349831
+1012,Pinulito,GT,oil_gas,m,9.87,3,2025-07-27T07:00:00Z,0.0,9.865748431237414
+954,Musimundo,AR,retail_consumer,m,9.87,3,2025-10-02T08:16:30Z,0.0,9.86862789638158
+1107,Tren Turístico de la Sabana,CO,transport_logistics,m,9.87,3,2025-09-22T07:00:00Z,0.0,9.869977692072172
+1144,Ferrocarril de Los Altos,GT,transport_logistics,m,9.84,3,2025-10-01T18:31:39Z,0.0,9.842831286425117
+533,Doe Run Perú,PE,mining_metals,m,9.8,3,2025-03-30T05:41:56Z,0.0,9.798188390336282
+1002,Despensa Familiar,GT,retail_consumer,m,9.77,3,2025-09-23T19:40:00Z,0.0,9.770163526194484
+657,Hondutel,HN,ict_telecom,m,9.75,3,2025-09-09T07:00:00Z,0.0,9.748422649864631
+649,Ledesma S.A.A.I.,AR,manufacturing,m,9.74,3,2025-08-06T07:00:00Z,0.0,9.738818522014544
+840,ATFX,MX,oil_gas,m,9.72,3,2025-10-03T09:34:01Z,0.0,9.72187935017662
+751,Banco Nacional de Comercio Exterior,MX,finance_insurance,m,9.67,3,2025-08-18T07:00:00Z,0.0,9.670821538092444
+872,Banco de Desarrollo Productivo,BO,finance_insurance,m,9.66,1,2025-09-21T23:21:28Z,0.0,9.65524594963256
+480,La Caja de Ahorro y Seguro,AR,finance_insurance,m,9.65,3,2025-09-11T07:00:00Z,0.0,9.651709751819308
+874,Banco de Santiago,CL,finance_insurance,m,9.64,1,2025-09-21T05:23:41Z,0.0,9.635467408859595
+821,BURA,CL,ict_telecom,m,9.63,3,2025-08-17T07:00:00Z,0.0,9.629295714842073
+265,Mr. Books,EC,retail_consumer,m,9.63,3,2025-10-01T16:35:00Z,0.0,9.626476375611007
+350,Caja Cusco,PE,finance_insurance,m,9.61,3,2025-10-02T15:36:41Z,0.0,9.608180025885254
+405,On City,AR,retail_consumer,m,9.6,3,2025-08-13T07:00:00Z,0.0,9.604534710562248
+149,Vianney,MX,manufacturing,m,9.59,3,2025-08-04T07:00:00Z,0.0,9.5882567602757
+313,Fraiche,MX,retail_consumer,m,9.58,3,2025-09-02T07:00:00Z,0.0,9.576753890475484
+1049,Empresa de los Ferrocarriles del Estado,CL,transport_logistics,l,9.58,3,2025-04-22T07:00:00Z,0.0,9.57755752446098
+1163,Instituto de Ferrocarriles del Estado,VE,transport_logistics,m,9.58,3,2025-09-27T20:26:15Z,0.0,9.57519469368859
+890,Cervecería Nacional,EC,agro_food,m,9.55,2,2025-08-30T07:00:00Z,0.0,9.549673150289586
+881,Banrural,GT,finance_insurance,m,9.52,3,2025-09-06T07:00:00Z,0.0,9.523607694818338
+784,Supermercados Coto,AR,retail_consumer,m,9.5,3,2025-05-04T07:00:00Z,0.0,9.499182068844112
+331,Rendichicas,MX,oil_gas,m,9.5,3,2025-09-19T07:00:00Z,0.0,9.504706385706854
+385,Yūsha,BR,oil_gas,m,9.49,3,2025-09-16T07:00:00Z,0.0,9.485136962945646
+855,BANADESA,HN,finance_insurance,m,9.49,3,2025-09-26T17:19:58Z,0.0,9.490140882948996
+781,Banco de Venezuela,VE,finance_insurance,m,9.49,2,2025-07-27T07:00:00Z,0.0,9.491027729585568
+842,Administración Nacional de Electricidad,PY,energy_power,m,9.49,3,2025-05-25T07:00:00Z,0.0,9.486687397692192
+273,Castello Mercuri,AR,finance_insurance,m,9.48,2,2025-07-10T22:19:35Z,0.0,9.476649224432382
+967,Quala,PA,retail_consumer,m,9.46,3,2025-09-23T00:39:42Z,0.0,9.45886866572251
+411,Toma La Mano,PE,mining_metals,m,9.45,1,2025-09-14T04:00:00Z,0.0,9.450933457418463
+1109,Grupo Unicomer,SV,retail_consumer,m,9.45,3,2025-10-03T18:25:00Z,0.0,9.454126755407945
+735,BBVA Perú,PE,finance_insurance,m,9.44,3,2025-09-29T09:17:38Z,0.0,9.443865396610786
+512,Aeropuertos Andinos del Perú,PE,transport_logistics,m,9.4,3,2025-09-25T07:00:00Z,0.0,9.399926632156628
+501,Colpatria,CO,finance_insurance,m,9.4,3,2025-09-16T07:00:00Z,0.0,9.402039985467589
+741,Banco Itaú Chile,CL,finance_insurance,m,9.38,3,2025-09-09T11:27:36Z,0.0,9.382256264061263
+190,Empresas Copec,CL,finance_insurance,m,9.36,3,2025-08-14T07:00:00Z,0.0,9.360443609487971
+303,Innovate Services Solutions,VE,ict_telecom,m,9.36,3,2025-09-11T07:00:00Z,0.0,9.35772265167009
+853,AntarChile,CL,finance_insurance,l,9.34,3,2025-08-29T07:00:00Z,0.0,9.340595907551071
+441,Biko,MX,oil_gas,m,9.34,3,2025-09-12T07:00:00Z,0.0,9.336593325673608
+938,Grupo ATV,PE,ict_telecom,m,9.32,3,2025-09-09T07:00:00Z,0.0,9.324549608811408
+810,FM Center,VE,ict_telecom,m,9.32,3,2025-10-01T17:26:39Z,0.0,9.321979325806598
+1057,Minsur,PE,mining_metals,m,9.3,3,2025-09-24T07:00:00Z,0.0,9.301128416295471
+805,Frávega,AR,retail_consumer,m,9.27,3,2025-08-28T07:00:00Z,0.0,9.270400952211848
+820,Grupo Indalo,AR,energy_power,m,9.24,3,2025-09-01T07:00:00Z,0.0,9.237081958042006
+782,Corporación Multi Inversiones,GT,manufacturing,m,9.21,3,2025-09-16T07:00:00Z,0.0,9.210773067666072
+636,Entel Bolivia,BO,ict_telecom,m,9.2,3,2025-08-05T07:00:00Z,0.0,9.195780009078495
+968,Quiñenco,CL,finance_insurance,m,9.18,3,2025-09-11T07:00:00Z,0.0,9.17771310676937
+503,Tigo Paraguay,PY,ict_telecom,m,9.17,3,2025-09-11T07:00:00Z,0.0,9.166892303515256
+459,Searca,CO,transport_logistics,m,9.16,3,2025-09-19T07:00:00Z,0.0,9.161568661434346
+647,Natura,BR,retail_consumer,m,9.16,2,2025-09-12T07:00:00Z,0.0,9.16311432049817
+763,Ferrocarril del Sud,AR,transport_logistics,m,9.14,3,2025-08-17T07:00:00Z,0.0,9.144834378232282
+638,Sociedad Química y Minera de Chile,CL,mining_metals,l,9.13,3,2025-08-26T07:00:00Z,0.0,9.130490202944117
+942,Infinitum,MX,ict_telecom,m,9.09,3,2025-08-15T07:00:00Z,0.0,9.090140641634786
+1033,Enel Chile,CL,energy_power,m,9.07,3,2025-09-30T11:59:42Z,0.0,9.06711124056122
+1132,MultiCine,BO,ict_telecom,m,9.06,3,2025-09-30T18:54:34Z,0.0,9.061844312543144
+955,Nacional Financiera,MX,construction_realestate,m,9.06,3,2025-08-18T07:00:00Z,0.0,9.059394161909609
+248,Desarrollo de Capital Humano Ferroviario,AR,transport_logistics,l,9.04,2,2025-09-17T07:00:00Z,0.0,9.0444117912598
+254,Cálidda,PE,energy_power,m,9.01,3,2025-09-17T07:00:00Z,0.0,9.008615329262923
+592,SKYhigh Dominicana,DO,transport_logistics,m,8.99,3,2025-05-31T07:00:00Z,0.0,8.994225528147542
+829,Gasoducto GasAndes,AR,oil_gas,m,8.96,3,2025-07-21T07:00:00Z,0.0,8.956140164598567
+15,IMPSA,AR,energy_power,m,8.93,3,2025-09-05T07:00:00Z,0.0,8.93272487872516
+1160,Clan del Golfo,CO,oil_gas,m,8.92,3,2025-04-10T07:00:00Z,0.0,8.924762868773417
+467,Soriana Híper,MX,retail_consumer,m,8.91,2,2025-07-14T07:00:00Z,0.0,8.914466465824454
+676,Metrovías,AR,transport_logistics,l,8.9,3,2025-08-07T07:00:00Z,0.0,8.896562327066503
+686,Banco Hipotecario del Uruguay,UY,finance_insurance,m,8.9,3,2025-10-02T14:08:00Z,0.0,8.898895988594372
+1104,Tigo El Salvador,SV,ict_telecom,m,8.9,3,2025-08-01T07:00:00Z,0.0,8.899774518052347
+371,Totto,CO,retail_consumer,m,8.84,3,2025-07-31T07:00:00Z,0.0,8.835522599615368
+447,BBVA Colombia,CO,finance_insurance,m,8.84,3,2025-09-10T07:00:00Z,0.0,8.84405471883791
+1037,BBVA Uruguay,UY,finance_insurance,m,8.84,3,2025-09-10T07:00:00Z,0.0,8.835203058741044
+683,Air Panamá,PA,transport_logistics,m,8.83,3,2025-08-05T07:00:00Z,0.0,8.825862433104067
+579,Unidad de Gestión Operativa Ferroviaria de Emergencia,AR,transport_logistics,m,8.8,1,2025-08-19T07:00:00Z,0.0,8.804149146015627
+100,Encuentra24,PA,retail_consumer,m,8.73,3,2025-08-28T07:00:00Z,0.0,8.728658706711618
+934,Gath & Chaves,AR,retail_consumer,m,8.72,2,2025-08-28T07:00:00Z,0.0,8.721285903257023
+390,Fly Travel Goo,VE,transport_logistics,m,8.71,3,2025-08-14T07:00:00Z,0.0,8.713349349162684
+715,Grupo Televisa,MX,ict_telecom,l,8.68,3,2025-07-23T07:00:00Z,0.0,8.681830906934563
+140,PF Compañía Constructora SA,AR,construction_realestate,m,8.66,3,2025-10-02T15:17:56Z,0.0,8.661019518615664
+721,Banco Crédito Agrícola de Cartago,CR,finance_insurance,m,8.65,3,2025-09-25T09:18:33Z,0.0,8.649783884523824
+179,Ktronix,CO,retail_consumer,m,8.65,3,2025-10-01T07:33:19Z,0.0,8.65276905257494
+526,Banco Hipotecario de El Salvador,SV,finance_insurance,m,8.64,1,2025-08-12T07:00:00Z,0.0,8.636911227136146
+939,Ficohsa,HN,finance_insurance,m,8.63,3,2025-09-16T07:00:00Z,0.0,8.628508065893772
+394,Aruma,PE,retail_consumer,m,8.61,1,2025-08-11T07:00:00Z,0.0,8.61328084182268
+958,Scotiabank Uruguay,UY,finance_insurance,m,8.61,3,2025-08-13T07:00:00Z,0.0,8.608463450408262
+1031,City Market,MX,retail_consumer,m,8.61,3,2025-07-24T07:00:00Z,0.0,8.61309945199657
+1098,Supermercados Peruanos,PE,retail_consumer,m,8.59,3,2025-10-02T16:59:51Z,0.0,8.587828320868173
+422,RUTACA Airlines,VE,transport_logistics,m,8.56,3,2025-07-07T07:00:00Z,0.0,8.557098931524367
+506,Avianca (Costa Rica),CR,transport_logistics,m,8.54,3,2025-07-15T21:41:40Z,0.0,8.54366691671008
+217,Petro Seven,MX,oil_gas,m,8.53,3,2025-06-13T07:00:00Z,0.0,8.53418414108722
+1118,Banco Internacional,EC,finance_insurance,m,8.5,1,2025-08-06T07:00:00Z,0.0,8.496095167419412
+1018,Juan Valdez Café,CO,retail_consumer,m,8.48,3,2025-08-11T07:00:00Z,0.0,8.475406078917011
+378,Platanitos,PE,retail_consumer,m,8.46,3,2025-07-17T07:00:00Z,0.0,8.458435791214864
+871,Bancom,PE,finance_insurance,m,8.45,3,2025-08-11T07:00:00Z,0.0,8.446474685356305
+1113,Avianca Guatemala,GT,transport_logistics,m,8.42,3,2025-07-15T21:41:40Z,0.0,8.423439409223661
+919,Antofagasta plc,CL,mining_metals,l,8.42,3,2025-07-01T07:00:00Z,0.0,8.41789264677784
+377,CAB,MX,water_waste_circularity,m,8.4,2,2025-06-09T07:00:00Z,0.0,8.403878779018434
+635,La Polar,CL,retail_consumer,l,8.39,3,2025-08-04T07:00:00Z,0.0,8.385462410928962
+956,NetUno,VE,ict_telecom,m,8.37,3,2025-09-18T07:00:00Z,0.0,8.367024308387343
+1097,De Candido,VE,retail_consumer,m,8.36,3,2025-10-02T13:36:55Z,0.0,8.355023397668415
+901,CEAMSE,AR,water_waste_circularity,m,8.35,3,2025-09-18T14:38:50Z,0.0,8.345630629210348
+673,Aerovías DAP,CL,transport_logistics,m,8.33,3,2025-05-29T07:00:00Z,0.0,8.325644896875147
+962,Alsuper,MX,retail_consumer,m,8.33,3,2025-10-02T21:18:46Z,0.0,8.328723347113003
+534,Banplus,VE,finance_insurance,m,8.31,3,2025-10-02T17:27:35Z,0.0,8.312858631512505
+201,Empresa de Energía de Río Negro Sociedad Anónima,AR,energy_power,m,8.31,3,2025-07-15T07:00:00Z,0.0,8.305953640800698
+1173,Pollo Campero,GT,oil_gas,m,8.3,3,2025-09-30T14:55:52Z,0.0,8.302229212708648
+202,Transcomahue,AR,energy_power,m,8.3,3,2025-06-06T07:00:00Z,0.0,8.297250116160278
+642,Fresnillo plc,MX,mining_metals,l,8.26,3,2025-08-05T07:00:00Z,0.0,8.26317182678226
+55,Ta-Ta,UY,retail_consumer,m,8.26,3,2025-07-13T07:00:00Z,0.0,8.260359505133351
+42,Éxito,CO,retail_consumer,m,8.26,2,2025-06-26T07:00:00Z,0.0,8.25566398150423
+832,Giannini,BR,manufacturing,m,8.25,3,2025-09-06T07:00:00Z,0.0,8.248910243111474
+199,Hidrocarburos del Neuquén S. A.,AR,oil_gas,m,8.24,3,2025-07-22T07:00:00Z,0.0,8.23884110775032
+157,Rímac Seguros,PE,finance_insurance,m,8.23,3,2025-07-02T07:00:00Z,0.0,8.225616412413789
+666,Almacenes Tía,EC,retail_consumer,m,8.17,3,2025-08-15T07:00:00Z,0.0,8.172911595248038
+1087,Santa Isabel,CL,retail_consumer,m,8.17,2,2025-09-10T07:00:00Z,0.0,8.173794018997883
+891,Cusqueña,PE,agro_food,m,8.17,3,2025-08-19T07:00:00Z,0.0,8.16645701793514
+854,BAC Credomatic,PA,finance_insurance,m,8.15,1,2025-07-22T07:00:00Z,0.0,8.154017702900202
+631,Marathon Sports,EC,manufacturing,m,8.14,3,2025-07-07T07:00:00Z,0.0,8.144884646301847
+880,Banesco Banco Múltiple,DO,finance_insurance,m,8.13,1,2025-07-21T07:00:00Z,0.0,8.131708502874275
+1039,Líder (supermercado),CL,retail_consumer,m,8.11,3,2025-07-11T07:00:00Z,0.0,8.109358521846444
+1003,Central Romana Corporation,DO,manufacturing,m,8.06,3,2025-06-18T07:00:00Z,0.0,8.063797292410714
+476,Montes del Plata,UY,manufacturing,m,8.03,2,2025-06-17T07:00:00Z,0.0,8.034864741258183
+867,Banco Plaza,VE,finance_insurance,m,8.02,3,2025-08-15T07:00:00Z,0.0,8.02397397391832
+529,Federación Patronal Seguros S.A.,AR,finance_insurance,m,8.02,3,2025-07-15T07:00:00Z,0.0,8.019661717697101
+276,Banco HSBC,UY,finance_insurance,m,8.0,1,2025-07-15T07:00:00Z,0.0,7.999129260130396
+20,Porta dos Fundos,BR,ict_telecom,m,7.98,3,2025-10-01T20:46:12Z,0.0,7.98045039098259
+317,Banco Itaú Uruguay,UY,finance_insurance,m,7.97,3,2025-09-19T07:00:00Z,0.0,7.971644422396685
+1135,Hipermaxi,BO,retail_consumer,m,7.96,3,2025-10-01T17:51:04Z,0.0,7.956013216296652
+1077,programadora,CO,ict_telecom,m,7.95,2,2025-05-15T07:00:00Z,0.0,7.952276684452412
+552,Grupo El Comercio,PE,ict_telecom,m,7.95,3,2025-07-15T07:00:00Z,0.0,7.950166841613073
+98,Derco,CL,manufacturing,m,7.94,3,2025-06-20T07:00:00Z,0.0,7.9351238094906815
+164,Avianca El Salvador,SV,transport_logistics,m,7.93,3,2025-07-15T21:41:40Z,0.0,7.928589641385858
+507,Avianca El Salvador,SV,transport_logistics,m,7.93,3,2025-07-15T21:41:40Z,0.0,7.928589641385858
+451,KDY,AR,manufacturing,m,7.91,2,2025-05-06T07:00:00Z,0.0,7.912980429353619
+1141,Yacimientos Carboníferos Fiscales,AR,mining_metals,m,7.89,3,2025-08-19T07:00:00Z,0.0,7.894816477063365
+1090,Siboney,DO,oil_gas,m,7.89,3,2025-06-08T07:00:00Z,0.0,7.889186271940805
+1014,Copetrol,PY,oil_gas,m,7.86,3,2025-07-10T07:00:00Z,0.0,7.864480527050857
+665,telnor,MX,ict_telecom,m,7.85,3,2025-08-26T07:00:00Z,0.0,7.854910537534659
+309,Quálitas México,MX,finance_insurance,m,7.84,2,2025-09-29T19:31:45Z,0.0,7.843327649509421
+416,Ferrocarril del Pacífico,CL,transport_logistics,m,7.84,3,2025-05-11T14:42:01Z,0.0,7.841052432712457
+192,Navegación Aérea y Aeropuertos Bolivianos,BO,transport_logistics,m,7.83,3,2025-07-10T07:00:00Z,0.0,7.825789496066436
+823,Corporación Eléctrica del Ecuador,EC,energy_power,m,7.83,2,2025-05-07T07:00:00Z,0.0,7.827617509297402
+551,Corporación Financiera de Desarrollo,PE,finance_insurance,m,7.81,3,2025-07-24T07:00:00Z,0.0,7.811551868037719
+769,Cenpro TV,CO,ict_telecom,m,7.8,2,2025-08-08T23:00:41Z,0.0,7.798381061906744
+851,Banco Exterior,VE,finance_insurance,m,7.8,2,2025-05-31T07:00:00Z,0.0,7.80319726412531
+156,Corporación Minera de Bolivia,BO,mining_metals,m,7.79,3,2025-09-02T07:00:00Z,0.0,7.789282611530333
+79,LEAP Game Studios,PE,ict_telecom,m,7.76,3,2025-09-18T07:00:00Z,0.0,7.764927860714533
+866,Banco Obrero,VE,finance_insurance,m,7.72,1,2025-07-02T07:00:00Z,0.0,7.71924263474267
+947,Los 40 Chile,CL,ict_telecom,m,7.68,2,2025-09-29T15:39:00Z,0.0,7.684661182736651
+550,Cocinera,CL,chemicals_materials,m,7.65,2,2025-02-06T08:00:00Z,0.0,7.648387935272029
+1062,C&A,MX,retail_consumer,l,7.64,2,2025-05-30T04:36:26Z,0.0,7.637731908295406
+1007,Banco Fassil,BO,finance_insurance,m,7.63,2,2025-09-17T07:00:00Z,0.0,7.625757087371199
+177,Banco Fassil,BO,finance_insurance,m,7.63,2,2025-09-17T07:00:00Z,0.0,7.625757087371199
+116,Wyndham Garden Antofagasta Pettra,CL,oil_gas,m,7.62,2,2025-05-10T07:00:00Z,0.0,7.624992449814362
+988,EFE Central,CL,transport_logistics,m,7.6,2,2025-08-18T07:00:00Z,0.0,7.602913513747469
+920,Paranair,PY,transport_logistics,m,7.6,3,2025-08-05T07:00:00Z,0.0,7.597735463706833
+262,Teatro República,PE,ict_telecom,m,7.59,3,2025-08-12T07:00:00Z,0.0,7.594283436468494
+833,MiBanco,PE,finance_insurance,m,7.58,2,2025-07-31T07:00:00Z,0.0,7.583481093772977
+114,Banco Nacional de Crédito Rural,MX,agro_food,m,7.52,3,2025-08-02T07:00:00Z,0.0,7.517222655560893
+802,Empresa Nacional de Energía Eléctrica,HN,energy_power,m,7.51,3,2025-08-22T07:00:00Z,0.0,7.505051485533047
+949,Lumiton,AR,ict_telecom,m,7.51,3,2025-06-10T07:00:00Z,0.0,7.505065556221257
+787,Cuatro Cabezas,AR,ict_telecom,m,7.49,3,2025-06-12T07:00:00Z,0.0,7.487171773151028
+926,Supermercados Vea,AR,retail_consumer,m,7.41,3,2025-06-25T07:00:00Z,0.0,7.414183199345153
+755,Banco de la Nación,PE,finance_insurance,m,7.36,2,2025-08-02T07:00:00Z,0.0,7.357862033205454
+244,Ferrocarriles Suburbanos,MX,transport_logistics,m,7.36,3,2025-05-19T07:00:00Z,0.0,7.355965308109232
+1114,Avior Airlines,VE,transport_logistics,m,7.33,3,2025-05-08T07:00:00Z,0.0,7.331539724907076
+911,El Vesuvio,AR,agro_food,m,7.31,2,2025-09-28T19:09:07Z,0.0,7.314858519819447
+1120,Banco del Pacífico,EC,finance_insurance,m,7.28,2,2025-04-10T07:00:00Z,0.0,7.279307576731325
+361,Grupo Petromil,CO,oil_gas,m,7.26,2,2025-08-31T07:00:00Z,0.0,7.258841856861066
+136,SuperVia,BR,transport_logistics,m,7.26,3,2025-05-27T01:26:52Z,0.0,7.256639025874912
+877,Banco del Estado de Chile,CL,finance_insurance,m,7.22,2,2025-09-30T03:03:32Z,0.0,7.219905079505364
+356,Asociación Nacional de Trabajadores Agropecuarios,SV,construction_realestate,m,7.21,3,2025-05-05T07:00:00Z,0.0,7.206240783287668
+494,TUFESA,MX,transport_logistics,m,7.19,3,2025-05-22T07:00:00Z,0.0,7.189222571697913
+465,Banco de Crédito de Bolivia,BO,finance_insurance,m,7.17,3,2025-05-20T07:00:00Z,0.0,7.174597549653542
+1,Popsy,CO,agro_food,m,7.17,3,2025-04-23T07:00:00Z,0.0,7.171933998799047
+1017,Fybeca,EC,retail_consumer,m,7.16,2,2025-09-07T07:00:00Z,0.0,7.155146467295441
+1155,Petróleos Mexicanos,MX,oil_gas,l,7.11,2,2025-05-06T07:00:00Z,0.0,7.109708866000499
+992,Redbus Urbano,CL,transport_logistics,m,7.04,2,2025-08-19T07:00:00Z,0.0,7.043319316812501
+1179,ProTV Producciones,PE,ict_telecom,m,6.83,2,2025-08-10T07:00:00Z,0.0,6.825026064083339
+688,Ferrocarril Central Córdoba,AR,transport_logistics,m,6.83,2,2025-10-03T03:00:00Z,0.0,6.83378310404674
+399,Cervecería Kross,CL,manufacturing,m,6.82,3,2025-08-20T07:00:00Z,0.0,6.815785247722881
+211,Compañía Huanchaca de Bolivia,BO,mining_metals,m,6.8,2,2024-11-26T08:00:00Z,0.0,6.797628255868856
+530,Instituto Costarricense de Ferrocarriles,CR,transport_logistics,m,6.8,2,2025-04-29T07:00:00Z,0.0,6.799524600508914
+1009,Banco del Austro,EC,finance_insurance,m,6.74,2,2025-09-19T20:05:41Z,0.0,6.738696868477375
+488,Yacimientos Petrolíferos Fiscales Bolivianos,BO,oil_gas,m,6.74,2,2025-03-25T07:00:00Z,0.0,6.7400207634369815
+929,Fondo Nacional del Ahorro,CO,finance_insurance,m,6.73,2,2025-03-18T07:00:00Z,0.0,6.726125528909825
+834,HQI Transelec,CL,energy_power,m,6.68,2,2025-09-26T12:10:16Z,0.0,6.677572457187059
+88,Inkafarma,PE,retail_consumer,m,6.66,3,2025-03-06T08:00:00Z,0.0,6.65650222931124
+982,Telefónica Móviles Argentina,AR,ict_telecom,l,6.64,3,2025-03-07T08:00:00Z,0.0,6.638324430418866
+1188,Compañía Administradora del Mercado Mayorista Eléctrico Sociedad Anónima,AR,energy_power,m,6.61,2,2025-09-16T07:00:00Z,0.0,6.607815684811738
+748,Banco de Occidente,CO,finance_insurance,m,6.61,2,2025-04-25T07:00:00Z,0.0,6.611768876115372
+479,Cooperativa Copelec,CL,energy_power,m,6.6,2,2025-09-30T13:46:09Z,0.0,6.602701061781503
+344,Planta Malvinas,PE,oil_gas,m,6.58,2,2024-11-27T08:00:00Z,0.0,6.575938068905463
+352,Arcadium Lithium,AR,chemicals_materials,l,6.57,3,2025-03-06T08:00:00Z,0.0,6.573686793473442
+1010,Bonafide,AR,agro_food,m,6.53,3,2025-04-12T07:00:00Z,0.0,6.534525496422036
+80,Traki,VE,retail_consumer,m,6.53,2,2025-08-12T07:00:00Z,0.0,6.525588925355305
+615,Banco Central de Honduras,HN,finance_insurance,m,6.53,2,2024-11-12T08:00:00Z,0.0,6.530647865750612
+618,Cervecería Boliviana Nacional,BO,agro_food,m,6.52,2,2025-09-27T21:01:33Z,0.0,6.523274696939502
+1176,Baden Baden,BR,agro_food,m,6.52,3,2025-04-23T07:00:00Z,0.0,6.520271378330097
+587,Banco Interbank,PE,finance_insurance,m,6.42,2,2025-05-14T07:00:00Z,0.0,6.423280597658653
+957,WOM,CL,ict_telecom,l,6.41,1,2025-04-25T07:00:00Z,0.0,6.407152119338926
+672,AeroSur,BO,transport_logistics,m,6.41,3,2025-03-22T07:00:00Z,0.0,6.407375428728843
+330,Doña Tota,MX,agro_food,m,6.39,3,2025-06-24T07:00:00Z,0.0,6.393935769904154
+605,Supermercados Wong,CL,retail_consumer,m,6.33,3,2025-03-18T21:14:36Z,0.0,6.326859684783739
+1093,Sodimac,PE,retail_consumer,m,6.29,1,2025-04-18T07:00:00Z,0.0,6.285446004572865
+1019,Haddock Films,AR,ict_telecom,m,6.29,3,2025-04-15T07:00:00Z,0.0,6.293246132239547
+1004,Etesa,PA,energy_power,m,6.25,3,2025-03-16T07:00:00Z,0.0,6.254948225450431
+249,Macro BMA,AR,finance_insurance,m,6.23,3,2025-06-17T07:00:00Z,0.0,6.225357646837496
+240,Banco Minero del Perú,PE,finance_insurance,m,6.18,3,2025-03-17T07:00:00Z,0.0,6.179704391317813
+762,LaFlia Contenidos,AR,ict_telecom,m,6.18,2,2025-07-03T07:00:00Z,0.0,6.1838651506470015
+936,Gramón Bagó,UY,retail_consumer,m,6.16,2,2025-08-08T07:00:00Z,0.0,6.161661241898491
+757,Beach Park,BR,water_waste_circularity,m,6.09,2,2025-06-30T07:00:00Z,0.0,6.09158219752895
+959,OK Market,CL,retail_consumer,m,6.06,3,2025-01-28T08:00:00Z,0.0,6.058695014289697
+886,Metbus,CL,transport_logistics,m,6.05,2,2025-07-02T07:00:00Z,0.0,6.048040279150434
+765,Ferrocarril Buenos Aires al Pacífico,AR,transport_logistics,m,6.03,2,2025-04-05T07:00:00Z,0.0,6.032477082872735
+339,Three Amigos Productions,MX,ict_telecom,m,5.96,2,2025-07-18T07:00:00Z,0.0,5.955611562907842
+597,Ferrocarril Central Norte,AR,transport_logistics,m,5.95,2,2025-06-23T07:00:00Z,0.0,5.951613739789709
+247,Construcciones Viales,AR,construction_realestate,m,5.92,2,2025-08-14T07:00:00Z,0.0,5.919978492547072
+30,Volaris El Salvador,SV,transport_logistics,m,5.91,3,2025-03-03T08:00:00Z,0.0,5.913517151762673
+771,Claro El Salvador,SV,ict_telecom,m,5.87,1,2025-03-24T07:00:00Z,0.0,5.869348573783912
+677,Compañía Primitiva de Gas,AR,oil_gas,m,5.86,1,2025-09-26T07:00:00Z,0.0,5.86209512472179
+1130,Banco Ganadero,BO,finance_insurance,m,5.85,2,2025-04-03T23:28:57Z,0.0,5.854864731703255
+714,Alas Nacionales,DO,transport_logistics,m,5.83,1,2025-09-24T07:00:00Z,0.0,5.830061897958485
+1067,Productora y Distribuidora Venezolana de Alimentos,VE,agro_food,m,5.83,2,2025-09-10T07:00:00Z,0.0,5.828684626414539
+426,Fomento Económico Mexicano,MX,agro_food,l,5.83,1,2025-09-24T03:59:00Z,0.0,5.828054554867629
+515,Avianca Ecuador,EC,transport_logistics,m,5.81,3,2025-01-13T08:00:00Z,0.0,5.814754358265605
+193,Monarca Films,UY,ict_telecom,m,5.8,2,2025-08-19T13:06:55Z,0.0,5.795927450509987
+72,Café OMA,CO,agro_food,m,5.78,2,2025-09-05T07:00:00Z,0.0,5.7823528647310045
+719,Alimentos Polar,VE,agro_food,m,5.77,2,2025-07-24T07:00:00Z,0.0,5.773126566374232
+798,Servicio Nacional de Derechos Intelectuales,EC,construction_realestate,m,5.77,1,2025-09-20T18:54:36Z,0.0,5.774365050415207
+389,Instituto Regulador del Transporte del Municipio de Managua,NI,transport_logistics,m,5.76,1,2025-03-17T07:00:00Z,0.0,5.757858227087311
+19,Paris Filmes,BR,ict_telecom,m,5.72,2,2025-06-17T07:00:00Z,0.0,5.715457515074186
+681,Bridas Corporation,AR,oil_gas,m,5.71,2,2025-08-13T07:00:00Z,0.0,5.705398417478358
+862,Banco Caroní,VE,finance_insurance,m,5.7,1,2025-09-16T07:00:00Z,0.0,5.703669896943051
+86,Colorshop,AR,retail_consumer,m,5.67,1,2025-09-13T19:57:24Z,0.0,5.66535581966973
+33,Cencosud,PE,retail_consumer,l,5.66,2,2025-02-12T08:00:00Z,0.0,5.65712407698836
+848,Almac,CL,retail_consumer,m,5.64,2,2025-01-12T08:00:00Z,0.0,5.636737324870786
+996,Waldo's Mart,MX,retail_consumer,m,5.64,3,2025-01-08T08:00:00Z,0.0,5.642525653660333
+971,Trenes Argentinos Operaciones,AR,transport_logistics,m,5.64,1,2025-09-12T07:00:00Z,0.0,5.641505176227822
+1101,Televisa San Ángel,MX,ict_telecom,m,5.63,1,2025-09-11T07:00:00Z,0.0,5.6260701511874665
+365,LATAM Cargo,CL,transport_logistics,m,5.63,1,2025-09-11T07:00:00Z,0.0,5.6260701511874665
+241,Minera Lincuna,PE,mining_metals,m,5.61,1,2025-09-10T07:00:00Z,0.0,5.610677356011404
+142,Emtrasur,VE,oil_gas,m,5.59,2,2025-08-05T07:00:00Z,0.0,5.593756093031059
+517,Arajet,DO,transport_logistics,m,5.58,1,2025-09-08T07:00:00Z,0.0,5.58001799340862
+794,Domínguez & Cía,VE,manufacturing,m,5.58,2,2025-09-05T07:00:00Z,0.0,5.575431374068337
+1056,Minera IRL,PE,mining_metals,m,5.56,2,2025-06-14T07:00:00Z,0.0,5.563518053144392
+224,Distribution Company,AR,ict_telecom,m,5.55,2,2025-10-02T10:39:40Z,0.0,5.55255153410526
+960,Organización Nacional de Autobuses,UY,transport_logistics,m,5.53,2,2025-08-18T07:00:00Z,0.0,5.53158948544419
+625,CGE,CL,energy_power,m,5.5,2,2025-01-07T08:00:00Z,0.0,5.50151236507314
+845,Agencia de Noticias Fides (ANF),BO,ict_telecom,m,5.49,2,2024-12-23T08:00:00Z,0.0,5.4896488719654695
+924,Farmacity,AR,retail_consumer,m,5.47,1,2025-09-01T07:00:00Z,0.0,5.474023583153765
+469,Baja California Railroad,MX,transport_logistics,m,5.47,2,2025-05-19T07:00:00Z,0.0,5.4665944387165295
+1183,América Producciones,PE,ict_telecom,m,5.43,2,2025-07-04T07:00:00Z,0.0,5.433184404633677
+582,Claro S.A.,BR,ict_telecom,m,5.4,3,2025-01-22T08:00:00Z,0.0,5.396938657700671
+1085,Servicios Industriales de la Marina,PE,chemicals_materials,m,5.39,3,2025-01-13T08:00:00Z,0.0,5.391020177623581
+1023,Felfort,AR,agro_food,m,5.37,2,2025-07-03T07:00:00Z,0.0,5.36797659138579
+849,Almacenes Siman,SV,retail_consumer,m,5.33,1,2025-08-22T07:00:00Z,0.0,5.326086128271799
+739,Banco Económico,BO,finance_insurance,m,5.33,1,2025-08-22T07:00:00Z,0.0,5.326086128271799
+126,Hostel Del Puerto,CL,chemicals_materials,m,5.33,1,2025-08-22T07:00:00Z,0.0,5.326086128271799
+1128,Banco Fie,BO,finance_insurance,m,5.31,2,2025-05-23T07:00:00Z,0.0,5.3090839609812
+425,Telmex,MX,ict_telecom,m,5.3,1,2025-08-20T07:00:00Z,0.0,5.296981905109619
+147,Modatelas,MX,manufacturing,m,5.3,1,2025-08-20T07:00:00Z,0.0,5.296981905109619
+134,Trenes de Buenos Aires,AR,transport_logistics,l,5.3,1,2025-08-20T07:00:00Z,0.0,5.296981905109619
+568,Wingo,CO,transport_logistics,m,5.3,1,2025-08-20T07:00:00Z,0.0,5.296981905109619
+372,Distriluz,PE,energy_power,m,5.28,1,2025-02-13T08:00:00Z,0.0,5.275157265903396
+231,servifácil,MX,oil_gas,m,5.27,2,2025-06-06T07:00:00Z,0.0,5.268601538385532
+603,Cable & Wireless,PA,ict_telecom,m,5.23,2,2025-05-31T07:00:00Z,0.0,5.234870436355151
+572,Pan American Energy,AR,oil_gas,m,5.21,2,2024-12-30T08:00:00Z,0.0,5.211164048424532
+1005,Banco Continental,PY,finance_insurance,m,5.21,1,2025-08-14T07:00:00Z,0.0,5.2106199985608015
+355,Asociación de Desarrollo Comunal de Mujeres de la Barra de Santiago,SV,oil_gas,m,5.17,1,2025-08-11T07:00:00Z,0.0,5.167968505093608
+1073,Petróleos de Venezuela,VE,oil_gas,m,5.15,1,2025-08-10T07:00:00Z,0.0,5.153829065211498
+824,Banesco Panamá,PA,finance_insurance,l,5.14,2,2025-08-20T07:00:00Z,0.0,5.140115356611886
+742,Banco Mercantil,VE,finance_insurance,m,5.1,1,2025-08-06T07:00:00Z,0.0,5.097657100451648
+669,Aerosucre,CO,transport_logistics,m,5.09,3,2024-12-11T08:00:00Z,0.0,5.0870442898164265
+953,Movistar El Salvador,SV,ict_telecom,m,5.07,1,2025-08-04T07:00:00Z,0.0,5.0698011202285205
+640,Ferrocarriles Nacionales de México,MX,transport_logistics,m,5.07,2,2024-12-24T08:00:00Z,0.0,5.068119488915091
+941,Industria Argentina Vehículos de Avanzada,AR,manufacturing,m,5.07,1,2025-08-04T07:00:00Z,0.0,5.0698011202285205
+928,Ferrocarriles del Sur,CL,transport_logistics,m,5.02,2,2025-05-16T01:42:42Z,0.0,5.019059627397184
+523,Rainforest Expeditions,PE,transport_logistics,m,5.0,2,2025-06-19T07:00:00Z,0.0,4.999224661022249
+1008,Banco Sol,BO,finance_insurance,m,4.99,2,2025-06-09T07:00:00Z,0.0,4.986198457497888
+594,Cooperativa Nacional de Productores de Leche,UY,finance_insurance,m,4.97,2,2025-07-17T07:00:00Z,0.0,4.973438719202661
+598,Edenor S.A.,AR,energy_power,l,4.95,2,2025-04-30T07:00:00Z,0.0,4.9523905075085946
+43,Grupo Magnolio,UY,ict_telecom,m,4.95,1,2025-07-26T07:00:00Z,0.0,4.946320940072586
+734,BBVA Provincial,VE,finance_insurance,m,4.95,1,2025-01-21T08:00:00Z,0.0,4.953006637633087
+508,Banco Industrial,GT,finance_insurance,m,4.89,1,2025-07-22T07:00:00Z,0.0,4.892410621740121
+367,Empresa Provincial de la Energía de Santa Fe,AR,energy_power,m,4.86,1,2025-01-14T08:00:00Z,0.0,4.858922529272784
+659,Siderúrgica del Orinoco,VE,chemicals_materials,m,4.84,2,2025-05-02T07:00:00Z,0.0,4.838097955633411
+963,Petroquímica de Venezuela,VE,oil_gas,m,4.84,1,2025-07-18T07:00:00Z,0.0,4.8390878759606535
+965,Café Retiro,AR,agro_food,m,4.81,1,2025-07-16T07:00:00Z,0.0,4.812644838793875
+675,DHL Aero Expreso,PA,transport_logistics,m,4.8,1,2025-07-15T07:00:00Z,0.0,4.799477556078238
+745,Banco Penta,CL,finance_insurance,m,4.8,2,2025-07-14T07:00:00Z,0.0,4.804105317463455
+778,San Esteban Primera S.A.,CL,mining_metals,m,4.79,2,2025-07-25T07:00:00Z,0.0,4.794766523894996
+1035,Transnordestina Logística,BR,transport_logistics,m,4.75,2,2025-07-08T07:00:00Z,0.0,4.752080976160331
+540,Coopesa,CR,transport_logistics,m,4.73,1,2025-01-04T08:00:00Z,0.0,4.727608401459849
+1054,Mercantil Servicios Financieros,VE,finance_insurance,m,4.71,2,2025-05-02T07:00:00Z,0.0,4.705276941006257
+481,Volkswagen Argentina,AR,manufacturing,m,4.7,1,2025-07-07T07:00:00Z,0.0,4.695427962307405
+722,Machasa,CL,manufacturing,m,4.69,2,2025-05-13T07:00:00Z,0.0,4.689970396656925
+464,Administracion Nacional de Usinas y Trasmisiones Electricas,UY,energy_power,m,4.67,2,2025-04-13T23:42:01Z,0.0,4.671275016729343
+899,Compañía Oriental de Transporte,UY,transport_logistics,m,4.65,3,2024-10-24T11:57:01Z,0.0,4.653607590713454
+1020,Jumbo,AR,retail_consumer,m,4.61,1,2025-06-30T07:00:00Z,0.0,4.606236651751271
+607,Banco de Crédito e Inversiones,CL,finance_insurance,l,4.59,2,2025-03-27T07:00:00Z,0.0,4.589926311579635
+1184,Banco Wiese Sudameris,PE,finance_insurance,m,4.54,2,2025-03-15T07:00:00Z,0.0,4.5440276926394905
+998,Yacimientos Petrolíferos Fiscales Bolivianos-Corporación,BO,oil_gas,m,4.49,2,2025-03-25T07:00:00Z,0.0,4.493347175624654
+1123,Banco del Sur,VE,finance_insurance,m,4.48,1,2025-06-20T07:00:00Z,0.0,4.481751450602115
+132,Companhia Paulista de Trens Metropolitanos,BR,transport_logistics,m,4.48,2,2025-06-03T07:00:00Z,0.0,4.482849861728137
+402,Tigo Honduras,HN,ict_telecom,m,4.47,2,2025-05-14T07:00:00Z,0.0,4.46715537440949
+187,Qik Banco Digital Dominicano,DO,finance_insurance,m,4.46,2,2025-05-28T07:00:00Z,0.0,4.463385357481917
+274,Sevel Uruguay,UY,manufacturing,m,4.44,2,2025-05-13T07:00:00Z,0.0,4.439026602685348
+145,Bloodious Games,AR,construction_realestate,m,4.43,2,2025-04-17T07:00:00Z,0.0,4.429685578125976
+1043,BE-TV,CO,ict_telecom,m,4.43,2,2025-04-08T11:20:22Z,0.0,4.428646572851367
+1088,Lloyd Aéreo Boliviano,BO,transport_logistics,m,4.42,2,2025-03-23T07:00:00Z,0.0,4.422671083203262
+783,CERTV,DO,ict_telecom,m,4.42,2,2025-03-28T07:00:00Z,0.0,4.421030211306078
+1131,Cine Center,BO,ict_telecom,m,4.42,1,2025-06-15T07:00:00Z,0.0,4.420776187413612
+444,Aerolíneas Estelar,VE,transport_logistics,m,4.41,2,2025-05-27T07:00:00Z,0.0,4.410901448197835
+387,Empresa Panameña de Alimentos,PA,finance_insurance,m,4.4,2,2025-03-22T07:00:00Z,0.0,4.399228380814095
+656,Autobuses de Oriente,MX,transport_logistics,m,4.38,1,2025-06-12T07:00:00Z,0.0,4.384589954925065
+917,TIM Perú,PE,ict_telecom,m,4.37,2,2025-04-15T07:00:00Z,0.0,4.371674620649095
+438,Empresa Generadora de Electricidad Haina,DO,energy_power,m,4.36,1,2025-06-10T07:00:00Z,0.0,4.360630506758162
+1052,Megacable,MX,ict_telecom,m,4.32,1,2025-06-07T07:00:00Z,0.0,4.324936596316947
+847,Agua y Energía Eléctrica,AR,energy_power,m,4.31,1,2025-06-06T07:00:00Z,0.0,4.313103671844344
+63,Aeroregional,EC,transport_logistics,m,4.31,1,2025-06-06T07:00:00Z,0.0,4.313103671844344
+243,Grupo La República Publicaciones,PE,ict_telecom,m,4.27,1,2025-06-02T07:00:00Z,0.0,4.266094835424877
+1089,Faucett Perú,PE,transport_logistics,m,4.25,1,2025-06-01T07:00:00Z,0.0,4.254422900621594
+583,"Administración Nacional de Combustibles, Alcohol y Portland",UY,oil_gas,m,4.25,2,2025-04-29T07:00:00Z,0.0,4.2536664636936
+1186,Ferromex,MX,transport_logistics,m,4.23,1,2025-05-30T07:00:00Z,0.0,4.231174746058582
+764,Ferrocarril Midland de Buenos Aires,AR,transport_logistics,m,4.19,1,2025-05-26T07:00:00Z,0.0,4.185058859070271
+760,Bolívar Films,VE,ict_telecom,m,4.17,1,2025-05-25T07:00:00Z,0.0,4.173608636786099
+167,Confitería Lion d'Or,UY,agro_food,m,4.16,2,2025-02-09T08:00:00Z,0.0,4.157046691524094
+148,Interceramic,MX,retail_consumer,m,4.13,1,2025-05-21T07:00:00Z,0.0,4.12812016708705
+2,Compañía de Minas Buenaventura S.A.A.,PE,mining_metals,l,4.05,2,2025-02-06T08:00:00Z,0.0,4.045763648424613
+360,Supercundi,CO,retail_consumer,m,4.01,1,2025-05-10T14:59:28Z,0.0,4.009222687426855
+694,Rosario Mining Company,HN,mining_metals,m,3.99,2,2025-02-01T08:00:00Z,0.0,3.988084477102293
+925,Farmatodo,VE,retail_consumer,m,3.98,1,2025-05-08T07:00:00Z,0.0,3.9836787428785634
+940,Guatel,GT,ict_telecom,m,3.98,1,2025-10-02T16:45:36Z,0.0,3.97726530094975
+513,Inter (empresa),VE,ict_telecom,m,3.97,1,2025-10-01T22:06:02Z,0.0,3.968802449712048
+639,ViaQuatro,BR,transport_logistics,m,3.96,1,2025-09-30T21:00:00Z,0.0,3.95744667799656
+58,Dollar City,PA,retail_consumer,m,3.94,2,2025-04-01T07:00:00Z,0.0,3.935171626933671
+935,General Motors de Argentina,AR,manufacturing,m,3.94,2,2025-03-02T08:00:00Z,0.0,3.942192842108138
+1108,Altice Dominicana S.A.,DO,ict_telecom,m,3.94,1,2025-09-28T19:13:19Z,0.0,3.935022550452258
+756,Banco de la Provincia de Buenos Aires,AR,finance_insurance,m,3.93,1,2025-05-03T07:00:00Z,0.0,3.929479873868808
+109,Nuevo Banco del Chaco S.A.,AR,finance_insurance,m,3.92,1,2025-05-02T07:00:00Z,0.0,3.918728909657286
+230,Agrosuper,CL,agro_food,m,3.89,1,2025-04-29T07:00:00Z,0.0,3.886652181641021
+1026,Junta de Fomento de San Salvador,SV,water_waste_circularity,m,3.88,1,2025-09-23T07:00:00Z,0.0,3.876073990784548
+883,Bansí,MX,finance_insurance,m,3.87,2,2025-02-04T08:00:00Z,0.0,3.868609098317634
+84,Supermercados Santo Tomé,VE,retail_consumer,m,3.85,1,2025-09-21T07:00:00Z,0.0,3.854893311444404
+809,FEMESA,AR,transport_logistics,m,3.84,1,2025-09-20T07:00:00Z,0.0,3.844346414307666
+601,Compañía Peruana de Teléfonos S.A.,PE,ict_telecom,m,3.83,1,2025-04-24T07:00:00Z,0.0,3.8337733813974486
+463,Unión del Transporte,CL,transport_logistics,m,3.82,1,2025-09-17T17:02:40Z,0.0,3.817252997108453
+306,Quero-Quero,BR,retail_consumer,m,3.81,1,2025-09-17T07:00:00Z,0.0,3.8128785436856
+720,Muricy,CL,retail_consumer,m,3.8,1,2025-09-16T07:00:00Z,0.0,3.8024465979620334
+766,Ferrocarril Oeste de Buenos Aires,AR,transport_logistics,m,3.8,1,2025-04-21T07:00:00Z,0.0,3.802392056262141
+1138,Farmacia Hipermaxi,BO,retail_consumer,m,3.77,2,2025-02-10T08:00:00Z,0.0,3.77367610172548
+775,Autobuses Unidos,MX,transport_logistics,m,3.76,1,2025-09-12T07:00:00Z,0.0,3.761003450818549
+1071,Peruvian Corporation,PE,mining_metals,m,3.76,1,2025-09-11T19:54:20Z,0.0,3.756243196015422
+574,Cerro de Pasco Corporation,PE,mining_metals,m,3.76,2,2025-03-12T07:00:00Z,0.0,3.761633101857232
+278,Mercantil Atacado,BR,retail_consumer,m,3.75,1,2025-04-16T07:00:00Z,0.0,3.750659634477505
+560,Petroperú,PE,oil_gas,m,3.75,1,2025-04-16T07:00:00Z,0.0,3.750659634477505
+570,Banco General,PA,finance_insurance,m,3.73,1,2025-04-14T07:00:00Z,0.0,3.730164277778752
+482,SCADTA,CO,transport_logistics,m,3.72,2,2025-01-19T08:00:00Z,0.0,3.71698626025232
+1027,La Ibérica,PE,manufacturing,m,3.72,1,2025-04-13T07:00:00Z,0.0,3.71995863633491
+826,Subus Chile,CL,transport_logistics,m,3.7,2,2025-01-10T08:00:00Z,0.0,3.7028156217565584
+169,El Palacio del Café,UY,agro_food,m,3.69,1,2025-09-05T07:00:00Z,0.0,3.6895618634962704
+927,Ferrocarril del Pacífico de Nicaragua,NI,transport_logistics,m,3.69,1,2025-09-05T07:00:00Z,0.0,3.6895618634962704
+454,Los 40 Guatemala,GT,ict_telecom,m,3.67,2,2025-02-04T08:00:00Z,0.0,3.671877955871013
+183,Justo y Bueno,CO,retail_consumer,m,3.67,1,2025-09-03T07:00:00Z,0.0,3.669400373565445
+173,Banco Nacional de Crédito Agrícola,MX,finance_insurance,m,3.65,1,2025-09-01T07:00:00Z,0.0,3.649349055435843
+1100,Telecom Colombia,CO,ict_telecom,m,3.63,2,2025-01-15T08:00:00Z,0.0,3.625187397812405
+431,Dorian's,MX,retail_consumer,m,3.61,1,2025-08-28T07:00:00Z,0.0,3.609574529749296
+1102,Terpel,CO,oil_gas,m,3.59,1,2025-03-31T07:00:00Z,0.0,3.589798635733953
+1158,Banco Santander México S.A.,MX,finance_insurance,l,3.55,1,2025-08-22T07:00:00Z,0.0,3.550724085514532
+203,Industrias Siderúrgicas Grassi,AR,chemicals_materials,m,3.54,1,2025-03-26T07:00:00Z,0.0,3.5409585965170978
+493,Companhia Nacional de Abastecimento,BR,agro_food,m,3.53,1,2025-03-25T07:00:00Z,0.0,3.5312706173525283
+754,Banesco,VE,finance_insurance,m,3.52,1,2025-03-24T07:00:00Z,0.0,3.5216091442703474
+97,Banco Mercantil del Norte,MX,finance_insurance,m,3.51,1,2025-08-18T07:00:00Z,0.0,3.5120244806809584
+889,The Bolivar Railway Company Limited,VE,transport_logistics,m,3.5,1,2025-08-17T07:00:00Z,0.0,3.5024156645745625
+260,Salinas & Rocha,MX,retail_consumer,m,3.5,1,2025-03-22T07:00:00Z,0.0,3.5023654264715005
+424,Bognor,UY,manufacturing,m,3.47,1,2025-08-14T07:00:00Z,0.0,3.4737466657072007
+404,Kansas City Southern de México,MX,transport_logistics,m,3.46,1,2025-08-13T07:00:00Z,0.0,3.464242576799337
+903,Corporación de Ventas de Salitre y Yodo de Chile,CL,manufacturing,m,3.46,1,2025-03-18T07:00:00Z,0.0,3.464192886245081
+868,Banco Santander Uruguay,UY,finance_insurance,m,3.45,1,2025-08-12T07:00:00Z,0.0,3.4547644908544584
+362,Ban Bif,PE,finance_insurance,m,3.43,1,2025-03-14T07:00:00Z,0.0,3.426436391362282
+634,Empresa Nacional de Ferrocarriles del Perú,PE,transport_logistics,m,3.42,1,2025-08-08T07:00:00Z,0.0,3.4171107567514447
+26,Dreams Uncorporated,CO,construction_realestate,m,3.41,2,2024-12-12T08:00:00Z,0.0,3.411017075481334
+227,Colombraro,AR,chemicals_materials,m,3.4,1,2025-08-06T07:00:00Z,0.0,3.398438066967765
+1139,Farmacias Bolivia,BO,retail_consumer,m,3.4,2,2024-12-17T08:00:00Z,0.0,3.404441039324799
+900,Compañía de Ómnibus de Pando,UY,transport_logistics,m,3.37,1,2025-08-03T07:00:00Z,0.0,3.370620175996639
+556,Sociedad Anónima Molinos Arroceros Nacionales,UY,agro_food,m,3.35,1,2025-08-01T07:00:00Z,0.0,3.352201532468435
+1164,Servicios Eléctricos del Gran Buenos Aires,AR,energy_power,m,3.34,1,2025-03-05T08:00:00Z,0.0,3.343363677013852
+327,Drogasmil,BR,retail_consumer,m,3.34,1,2025-07-31T07:00:00Z,0.0,3.3430299881770296
+567,Boomerang TV,CL,ict_telecom,m,3.33,1,2025-03-03T18:48:08Z,0.0,3.329196779290672
+384,Whiteboard Games,AR,construction_realestate,m,3.26,1,2025-02-24T08:00:00Z,0.0,3.2619326426647435
+646,Brasil Paralelo,BR,ict_telecom,s,3.25,2,2024-11-11T08:00:00Z,0.0,3.2530555421818947
+490,EP Petroecuador,EC,oil_gas,m,3.24,1,2025-02-21T08:00:00Z,0.0,3.235232115887227
+658,Ripley Corp. S.A.,CL,retail_consumer,l,3.21,1,2025-07-16T07:00:00Z,0.0,3.20842989252925
+701,Banco Central del Paraguay,PY,finance_insurance,m,3.18,1,2025-02-15T08:00:00Z,0.0,3.182484944259839
+654,Banco de Guatemala,GT,finance_insurance,m,3.17,1,2025-02-13T08:00:00Z,0.0,3.1650943595420378
+1187,Nature Air,CR,transport_logistics,m,3.12,1,2025-07-06T03:57:11Z,0.0,3.120635298611952
+689,Banco Nacional de Panamá,PA,finance_insurance,m,3.09,1,2025-02-04T08:00:00Z,0.0,3.088005256348742
+827,Pacífico Seguros,PE,finance_insurance,m,3.09,1,2025-02-04T08:00:00Z,0.0,3.088005256348742
+450,General Motors de Chile,CL,manufacturing,m,3.09,1,2025-07-02T07:00:00Z,0.0,3.087697053897068
+914,Empresa Provincial de Energía de Córdoba,AR,energy_power,m,3.07,1,2025-02-02T08:00:00Z,0.0,3.071130952790321
+573,Café Brasilero,UY,agro_food,m,3.06,1,2025-02-01T08:00:00Z,0.0,3.062728410972531
+368,Conexión Ganadera,UY,construction_realestate,m,3.03,1,2025-01-28T08:00:00Z,0.0,3.0293475071448484
+986,Cervecería Cuauhtémoc,MX,agro_food,m,3.03,1,2025-01-28T08:00:00Z,0.0,3.0293475071448484
+612,Central Madeirense,VE,retail_consumer,m,3.0,1,2025-06-22T07:00:00Z,0.0,3.0042509311938645
+595,Cervecería Backus y Johnston,PE,agro_food,m,2.99,1,2025-06-20T07:00:00Z,0.0,2.98783430040141
+443,ENATRU,PE,transport_logistics,m,2.99,1,2025-01-23T08:00:00Z,0.0,2.9881325349239374
+730,América Móvil,MX,ict_telecom,l,2.98,1,2025-01-22T08:00:00Z,0.0,2.979957074818929
+491,Aeropostal,VE,transport_logistics,m,2.97,1,2025-06-18T07:00:00Z,0.0,2.971507377750102
+153,Livent Corp.,AR,mining_metals,l,2.97,2,2024-10-08T07:00:00Z,0.0,2.9674319917139567
+878,Banco del Tesoro,VE,finance_insurance,m,2.94,1,2025-01-17T08:00:00Z,0.0,2.9394140708325933
+767,Corporación Nacional de Telecomunicaciones,EC,ict_telecom,m,2.94,1,2025-01-17T08:00:00Z,0.0,2.9394140708325933
+662,Estudios Churubusco,MX,ict_telecom,m,2.93,1,2025-01-16T08:00:00Z,0.0,2.9313719032957355
+381,Empresa Nacional del Petróleo,CL,oil_gas,m,2.92,1,2025-01-15T08:00:00Z,0.0,2.923351738939489
+591,iShopMixup,MX,retail_consumer,m,2.9,1,2025-06-09T07:00:00Z,0.0,2.8991332830592373
+1133,Manaco,BO,manufacturing,m,2.88,1,2025-06-06T07:00:00Z,0.0,2.875402447896229
+318,Gas Express Nieto,MX,oil_gas,m,2.86,1,2025-06-04T07:00:00Z,0.0,2.859689905419601
+690,Hotel Samán,VE,oil_gas,m,2.86,1,2025-06-04T07:00:00Z,0.0,2.859689905419601
+78,Tigo Bolivia,BO,ict_telecom,m,2.8,1,2025-05-27T07:00:00Z,0.0,2.797693663225983
+1096,Super Market,PE,retail_consumer,m,2.78,1,2024-12-27T08:00:00Z,0.0,2.775070130907239
+470,LANICA,NI,transport_logistics,m,2.78,1,2025-05-25T07:00:00Z,0.0,2.7824057578574
+797,Easy S.A.,AR,retail_consumer,m,2.77,1,2025-05-23T07:00:00Z,0.0,2.7672013927468617
+295,Virtual Life,BO,construction_realestate,m,2.77,1,2025-05-24T07:00:00Z,0.0,2.774793161359939
+429,MMC Automotriz,VE,manufacturing,m,2.77,1,2025-05-23T07:00:00Z,0.0,2.7672013927468617
+46,Taltal Railway,CL,transport_logistics,m,2.76,1,2025-05-22T07:00:00Z,0.0,2.759630395033568
+478,Promart Homecenter,PE,retail_consumer,m,2.75,1,2024-12-24T08:00:00Z,0.0,2.75235481380638
+1172,Constructora Meco,CR,construction_realestate,l,2.74,1,2025-05-20T07:00:00Z,0.0,2.744550485147047
+3,Cervecería CCU Limache,CL,agro_food,m,2.74,1,2025-05-20T07:00:00Z,0.0,2.744550485147047
+334,Banco Unión,BO,finance_insurance,m,2.72,1,2024-12-20T08:00:00Z,0.0,2.7223566948056304
+990,Unimarc,CL,retail_consumer,m,2.69,1,2024-12-15T08:00:00Z,0.0,2.685318403461639
+830,KaBuM!,BR,retail_consumer,m,2.69,1,2025-05-13T07:00:00Z,0.0,2.6924167804831067
+695,Lufussa,HN,energy_power,m,2.65,1,2025-05-07T07:00:00Z,0.0,2.648519661226903
+541,Corporación Universal,PE,ict_telecom,m,2.65,1,2025-05-07T07:00:00Z,0.0,2.648519661226903
+1140,Argentina Sono Film,AR,ict_telecom,m,2.65,1,2025-05-07T07:00:00Z,0.0,2.648519661226903
+186,Beond,MX,water_waste_circularity,m,2.64,1,2025-05-06T07:00:00Z,0.0,2.641273373930532
+653,Compañía de Galletas Noel,CO,agro_food,m,2.64,1,2025-05-06T07:00:00Z,0.0,2.641273373930532
+1169,Transportes Aéreos Guatemaltecos,GT,transport_logistics,m,2.61,1,2025-05-01T07:00:00Z,0.0,2.6053382398867724
+812,Tren Interoceánico,MX,transport_logistics,m,2.61,1,2024-12-05T08:00:00Z,0.0,2.6127467084148037
+614,Programar Televisión,CO,ict_telecom,m,2.61,1,2025-05-01T07:00:00Z,0.0,2.6053382398867724
+1079,Rosmo,GT,manufacturing,m,2.6,1,2025-04-30T07:00:00Z,0.0,2.598210095940242
+544,DINA Camiones S.A.,MX,manufacturing,m,2.59,1,2025-04-29T07:00:00Z,0.0,2.5911014544273474
+143,RED Air,DO,transport_logistics,m,2.55,1,2025-04-23T07:00:00Z,0.0,2.548856178593971
+436,GMV Innovating Solutions,CO,transport_logistics,l,2.54,1,2025-04-22T07:00:00Z,0.0,2.5418825682343384
+902,Corporación Financiera Nacional,EC,finance_insurance,m,2.51,1,2024-11-20T08:00:00Z,0.0,2.507549938388871
+196,Canadian Pacific Kansas City,MX,transport_logistics,l,2.51,1,2024-11-20T08:00:00Z,0.0,2.507549938388871
+1198,Corporación Financiera Nacional,EC,finance_insurance,m,2.51,1,2024-11-20T08:00:00Z,0.0,2.507549938388871
+128,Hotel Florencia Suites & Apartments,CL,oil_gas,m,2.5,1,2024-11-19T08:00:00Z,0.0,2.5006893409277424
+536,Banco BISA,BO,finance_insurance,m,2.5,1,2024-11-19T08:00:00Z,0.0,2.5006893409277424
+685,Ferrocarril de Antofagasta a Bolivia,BO,mining_metals,m,2.5,1,2024-11-19T08:00:00Z,0.0,2.5006893409277424
+813,Ferrocarril de Veracruz al Istmo,MX,transport_logistics,m,2.49,1,2024-11-17T08:00:00Z,0.0,2.4870244059483184
+521,HV Multiplay,CO,ict_telecom,m,2.45,1,2025-04-08T07:00:00Z,0.0,2.4462318268398717
+427,VIASA,VE,transport_logistics,m,2.43,1,2024-11-08T08:00:00Z,0.0,2.426450388464007
+709,Aerovías,GT,transport_logistics,m,2.43,1,2024-11-08T08:00:00Z,0.0,2.426450388464007
+269,M.Q.L.,UY,transport_logistics,m,2.43,1,2024-11-08T08:00:00Z,0.0,2.426450388464007
+632,Grupo Sutton Dabbah,AR,retail_consumer,m,2.42,1,2025-04-04T07:00:00Z,0.0,2.4195701649506187
+346,ChangoMâs,AR,retail_consumer,m,2.42,1,2024-11-07T08:00:00Z,0.0,2.419811677457778
+661,Socovesa,CL,construction_realestate,m,2.41,1,2024-11-06T08:00:00Z,0.0,2.4131911298082094
+370,Banco de la Vivienda del Perú,PE,finance_insurance,m,2.41,1,2025-04-03T07:00:00Z,0.0,2.4129502780735703
+590,Eg3,AR,oil_gas,m,2.37,1,2025-03-27T07:00:00Z,0.0,2.3671154363220186
+718,Alimentos La Giralda,VE,agro_food,m,2.36,1,2025-03-26T07:00:00Z,0.0,2.360639064344732
+561,Nubank,BR,finance_insurance,l,2.36,1,2024-10-29T07:00:00Z,0.0,2.3606052037068275
+991,Venirauto,VE,manufacturing,m,2.35,1,2025-03-24T21:26:25Z,0.0,2.3516127134721154
+245,Sierra Andina,PE,agro_food,m,2.32,1,2025-03-20T07:00:00Z,0.0,2.322151243558753
+489,Satena,CO,transport_logistics,m,2.24,1,2024-10-10T07:00:00Z,0.0,2.240867872453652
+233,Contreras Hermanos,AR,construction_realestate,m,2.23,1,2024-10-09T07:00:00Z,0.0,2.234736910832063
+1167,Ternium,AR,chemicals_materials,l,2.23,1,2024-10-08T07:00:00Z,0.0,2.2286227233767986
+1185,Scotiabank Perú,PE,finance_insurance,m,2.23,1,2024-10-09T07:00:00Z,0.0,2.234736910832063
+37,mi.com.co,CO,ict_telecom,m,2.22,1,2024-10-06T07:00:00Z,0.0,2.216444487515917
+1148,ARM Aviación,GT,transport_logistics,m,2.2,1,2025-02-28T08:00:00Z,0.0,2.198584294869922
+315,Mobo,MX,retail_consumer,m,2.15,1,2025-02-19T08:00:00Z,0.0,2.1450355306520645
+27,Aviatsa,HN,transport_logistics,m,2.14,1,2025-02-18T08:00:00Z,0.0,2.139166764056302
+619,Cervecería Bavaria & CIA S.C.A.,CO,agro_food,m,2.14,1,2025-02-18T08:00:00Z,0.0,2.139166764056302
+221,Bogotá Beer Company,CO,manufacturing,m,2.13,1,2025-02-17T08:00:00Z,0.0,2.133314054267461
+651,Sky México,MX,ict_telecom,m,2.06,1,2025-02-05T08:00:00Z,0.0,2.064318096499761
+565,Aero Boero,AR,manufacturing,m,2.05,1,2025-02-03T08:00:00Z,0.0,2.053037697889732
+770,Central Uruguay Railway,UY,transport_logistics,m,2.03,1,2025-01-30T08:00:00Z,0.0,2.0306614879383886
+876,Banco de Talca,CL,finance_insurance,m,1.99,1,2025-01-23T08:00:00Z,0.0,1.9920883566159584
+340,Nuvemshop,AR,retail_consumer,m,1.99,1,2025-01-22T08:00:00Z,0.0,1.986638049879286
+47,Salvador Railway Company,SV,transport_logistics,m,1.93,1,2025-01-11T08:00:00Z,0.0,1.927659941189896
+357,Asociación de Reconstrucción y Desarrollo Municipal,SV,construction_realestate,m,1.92,1,2025-01-09T08:00:00Z,0.0,1.917126306592554
+711,Agrinar,AR,agro_food,m,1.92,1,2025-01-09T08:00:00Z,0.0,1.917126306592554
+172,Cine Mestizo,VE,ict_telecom,m,1.9,1,2025-01-05T08:00:00Z,0.0,1.8962314049628128
+112,Stericlycle,AR,water_waste_circularity,m,1.88,1,2025-01-02T08:00:00Z,0.0,1.8807098160917384
+294,hctr,BO,construction_realestate,m,1.83,1,2024-12-23T08:00:00Z,0.0,1.8298829573218232
+817,LATAM Express,CL,transport_logistics,m,1.77,1,2024-12-10T15:19:52Z,0.0,1.7673344544158829
+1182,Cinema Productions,GT,ict_telecom,m,1.76,1,2024-12-08T08:00:00Z,0.0,1.7562065553897934
+195,Banco Central Hipotecario del Perú,PE,finance_insurance,m,1.7,1,2024-11-26T08:00:00Z,0.0,1.699407063967214
+726,Argos Media Group,MX,ict_telecom,m,1.7,1,2024-11-27T08:00:00Z,0.0,1.7040693575187005
+446,Banco Popular (Colombia),CO,finance_insurance,m,1.68,1,2024-11-22T08:00:00Z,0.0,1.680885100490746
+668,Crespi Competición,AR,manufacturing,m,1.68,1,2024-11-21T08:00:00Z,0.0,1.6762862385194126
+413,Maxi Ahorro,PE,retail_consumer,m,1.67,1,2024-11-19T08:00:00Z,0.0,1.6671262272851617
+648,Inversiones Aguas Metropolitanas,CL,water_waste_circularity,m,1.67,1,2024-11-20T08:00:00Z,0.0,1.671699958925914
+922,Express de Santiago Uno,CL,transport_logistics,m,1.64,1,2024-11-14T08:00:00Z,0.0,1.6444445900731042
+386,"Gold Mills de Panamá, S.A.",PA,agro_food,m,1.62,1,2024-11-08T08:00:00Z,0.0,1.617633592309338
+1117,Banco Nacional de Desenvolvimento Econômico e Social,BR,construction_realestate,m,1.62,1,2024-11-08T21:22:30Z,0.0,1.6201053245924943
+1129,Banco Fortaleza,BO,finance_insurance,m,1.62,1,2024-11-08T08:00:00Z,0.0,1.617633592309338
+740,Banco Itaú Paraguay S.A.,PY,finance_insurance,m,1.61,1,2024-11-06T08:00:00Z,0.0,1.6087940865388062
+870,Banco Agromercantil,GT,finance_insurance,m,1.6,1,2024-11-04T08:00:00Z,0.0,1.60000288395797
+242,Sunna Entertainment,CR,ict_telecom,m,1.6,1,2024-11-05T08:00:00Z,0.0,1.6043924638805236
+168,Expreso Pocitos,UY,agro_food,m,1.58,1,2024-10-30T07:00:00Z,0.0,1.578054321858698
+1041,LANSA (Perú),PE,transport_logistics,m,1.57,1,2024-10-28T22:00:39Z,0.0,1.572122724097201
+539,TCC (Uruguay),UY,ict_telecom,m,1.49,1,2024-10-09T07:00:00Z,0.0,1.4898246072213754
+522,Wäls Brewing Company,BR,agro_food,m,0.0,0,,0.0,0.0
+354,Mancomunidad la Montañona,SV,construction_realestate,m,0.0,0,,0.0,0.0
+524,Jaguar Energy,GT,energy_power,m,0.0,0,,0.0,0.0
+115,Hotel Diego De Almagro Costanera - Antofagasta,CL,oil_gas,m,0.0,0,,0.0,0.0
+343,Planta Melchorita,PE,oil_gas,m,0.0,0,,0.0,0.0
+548,Baja Brewing Company,MX,agro_food,m,0.0,0,,0.0,0.0
+950,IguanaBee,CL,ict_telecom,m,0.0,0,,0.0,0.0
+461,Grupo Ta-Ta,UY,retail_consumer,m,0.0,0,,0.0,0.0
+337,Instituto de Genética Barbara McClintock,PE,construction_realestate,m,0.0,0,,0.0,0.0
+496,Busscar de Colombia,CO,manufacturing,m,0.0,0,,0.0,0.0
+492,Cooperativa de Transporte de Paysandú,UY,transport_logistics,m,0.0,0,,0.0,0.0
+117,RQ Antofagasta,CL,oil_gas,m,0.0,0,,0.0,0.0
+118,Hampton by Hilton Antofagasta,CL,oil_gas,m,0.0,0,,0.0,0.0
+498,Camisaria Colombo,BR,retail_consumer,m,0.0,0,,0.0,0.0
+549,Blim TV,MX,ict_telecom,m,0.0,0,,0.0,0.0
+95,Zinzane,BR,retail_consumer,m,0.0,0,,0.0,0.0
+553,SABB S.A.,AR,manufacturing,m,0.0,0,,0.0,0.0
+94,Commercial Carpets,AR,finance_insurance,m,0.0,0,,0.0,0.0
+93,Gino Bazzo Food Court,BR,agro_food,m,0.0,0,,0.0,0.0
+92,Sociedad Anónima de Radioemisoras del Plata,UY,ict_telecom,m,0.0,0,,0.0,0.0
+554,Banco Itaú Corpbanca,CL,finance_insurance,l,0.0,0,,0.0,0.0
+91,Gunstone Studios,SV,ict_telecom,m,0.0,0,,0.0,0.0
+518,Telecorporación Salvadoreña,SV,ict_telecom,m,0.0,0,,0.0,0.0
+457,Multi Ahorro,UY,retail_consumer,m,0.0,0,,0.0,0.0
+82,Aerocav,VE,transport_logistics,m,0.0,0,,0.0,0.0
+1024,Brasil Kirin,BR,agro_food,m,0.0,0,,0.0,0.0
+1025,Tambo+,PE,retail_consumer,m,0.0,0,,0.0,0.0
+363,FuXion Biotech,PE,agro_food,m,0.0,0,,0.0,0.0
+364,Cooperativa Eléctrica Charrúa Ltda.,CL,energy_power,m,0.0,0,,0.0,0.0
+520,Farmahorro,VE,retail_consumer,m,0.0,0,,0.0,0.0
+366,Parque Turístico Din Kong,BO,transport_logistics,m,0.0,0,,0.0,0.0
+358,Asociación de Tortugueros de Playa Los Pinos Cangrejera,SV,oil_gas,m,0.0,0,,0.0,0.0
+460,Supermercados Disco del Uruguay,UY,retail_consumer,m,0.0,0,,0.0,0.0
+83,Botiquería,VE,retail_consumer,m,0.0,0,,0.0,0.0
+85,Searen SA,AR,construction_realestate,m,0.0,0,,0.0,0.0
+497,Brazilian Portland Cement,BR,manufacturing,m,0.0,0,,0.0,0.0
+970,Roos Film,CL,ict_telecom,m,0.0,0,,0.0,0.0
+1028,Radiodifusión Nacional del Uruguay,UY,ict_telecom,m,0.0,0,,0.0,0.0
+351,MSU Argentina,AR,energy_power,m,0.0,0,,0.0,0.0
+349,UShop,UY,retail_consumer,m,0.0,0,,0.0,0.0
+972,STP Santiago,CL,transport_logistics,m,0.0,0,,0.0,0.0
+345,Q130493915,CO,finance_insurance,m,0.0,0,,0.0,0.0
+973,Sears Perú,PE,retail_consumer,m,0.0,0,,0.0,0.0
+535,Videxport,MX,agro_food,m,0.0,0,,0.0,0.0
+462,Tiendas Metro,PE,retail_consumer,m,0.0,0,,0.0,0.0
+528,Vídeo Brinquedo,BR,ict_telecom,m,0.0,0,,0.0,0.0
+527,ACE Team,CL,construction_realestate,m,0.0,0,,0.0,0.0
+525,Albatros Corporation,VE,transport_logistics,m,0.0,0,,0.0,0.0
+975,Sol América,VE,transport_logistics,m,0.0,0,,0.0,0.0
+977,Supermercados Disco,AR,retail_consumer,m,0.0,0,,0.0,0.0
+484,Costa Rica's Craft Brewing Company,CR,agro_food,m,0.0,0,,0.0,0.0
+514,Companhia de Água e Esgoto do Ceará,BR,water_waste_circularity,m,0.0,0,,0.0,0.0
+509,Aeropanamericano,VE,transport_logistics,m,0.0,0,,0.0,0.0
+504,Isaura S.A.,AR,oil_gas,m,0.0,0,,0.0,0.0
+978,Supermercados Monterey,PE,retail_consumer,m,0.0,0,,0.0,0.0
+532,Air Costa Rica,CR,transport_logistics,m,0.0,0,,0.0,0.0
+1022,Cerveza Cordillera,BO,agro_food,m,0.0,0,,0.0,0.0
+1021,Liberty Reserve,CR,finance_insurance,m,0.0,0,,0.0,0.0
+1040,Línea Coahuila Durango,MX,transport_logistics,m,0.0,0,,0.0,0.0
+99,Mesón Español,AR,oil_gas,m,0.0,0,,0.0,0.0
+502,Líneas Aéreas Suramericanas,CO,transport_logistics,m,0.0,0,,0.0,0.0
+500,MRS Logística,BR,transport_logistics,l,0.0,0,,0.0,0.0
+105,Geotel Antofagasta,CL,oil_gas,m,0.0,0,,0.0,0.0
+987,Totalplay Telecomunicaciones,MX,ict_telecom,m,0.0,0,,0.0,0.0
+981,"Telcel, C.A.",VE,ict_telecom,m,0.0,0,,0.0,0.0
+106,Holiday Inn Express Antofagasta,CL,oil_gas,m,0.0,0,,0.0,0.0
+127,Apart Hotel Serena Beach,CL,chemicals_materials,m,0.0,0,,0.0,0.0
+107,Bloooz,BO,ict_telecom,m,0.0,0,,0.0,0.0
+1006,Servicios Asociados Nacionales de Transporte Aéreo,CO,transport_logistics,m,0.0,0,,0.0,0.0
+110,Vayo Business,AR,finance_insurance,m,0.0,0,,0.0,0.0
+1001,Ferrocarril Uruguayo del Este,UY,transport_logistics,m,0.0,0,,0.0,0.0
+995,Vtelca,VE,ict_telecom,m,0.0,0,,0.0,0.0
+994,Vox (Paraguay),PY,ict_telecom,m,0.0,0,,0.0,0.0
+124,Gran Hotel de Lago - Lago Agrio,EC,agro_food,m,0.0,0,,0.0,0.0
+111,EcuaMedios,EC,ict_telecom,m,0.0,0,,0.0,0.0
+89,Round 2 Games,EC,ict_telecom,m,0.0,0,,0.0,0.0
+87,EquAir,EC,transport_logistics,m,0.0,0,,0.0,0.0
+125,Hotel La Cascada - Lago Agrio,EC,agro_food,m,0.0,0,,0.0,0.0
+1013,Pollo Granjero Guatemala,GT,oil_gas,m,0.0,0,,0.0,0.0
+44,NonStop TV,AR,ict_telecom,m,0.0,0,,0.0,0.0
+41,Librerías de Cristal S. A. De C. V.,MX,retail_consumer,m,0.0,0,,0.0,0.0
+38,Batovi Games Studio,UY,ict_telecom,m,0.0,0,,0.0,0.0
+35,Gamaga,CL,ict_telecom,m,0.0,0,,0.0,0.0
+1136,FarmaElías,BO,retail_consumer,m,0.0,0,,0.0,0.0
+1134,IC Norte,BO,retail_consumer,m,0.0,0,,0.0,0.0
+1156,KagariSoft,AR,construction_realestate,m,0.0,0,,0.0,0.0
+1154,Amares Costafusion,CL,oil_gas,m,0.0,0,,0.0,0.0
+1153,Indústria de Louças Zappi S/A,BR,manufacturing,m,0.0,0,,0.0,0.0
+1124,Astilleros Navales Ecuatorianos,EC,construction_realestate,m,0.0,0,,0.0,0.0
+1119,Banco Popular del Uruguay,UY,finance_insurance,m,0.0,0,,0.0,0.0
+1116,WIND Telecom,DO,ict_telecom,m,0.0,0,,0.0,0.0
+547,Ibis Aircraft,CO,manufacturing,m,0.0,0,,0.0,0.0
+400,Brownie do Ton,BR,agro_food,m,0.0,0,,0.0,0.0
+397,Effa Motors,UY,manufacturing,m,0.0,0,,0.0,0.0
+396,KoKoK The Roach,PA,retail_consumer,m,0.0,0,,0.0,0.0
+393,Spence mine,CL,oil_gas,m,0.0,0,,0.0,0.0
+376,Aguas de Río Medio,MX,water_waste_circularity,m,0.0,0,,0.0,0.0
+432,AmnesiaGames,CL,ict_telecom,m,0.0,0,,0.0,0.0
+428,Automóviles de Ecuador,EC,manufacturing,m,0.0,0,,0.0,0.0
+1112,Avianca Group,SV,transport_logistics,l,0.0,0,,0.0,0.0
+1111,Venezolana de Industria Tecnológica,VE,manufacturing,m,0.0,0,,0.0,0.0
+52,Central Uruguay Western Extension Railway,UY,transport_logistics,m,0.0,0,,0.0,0.0
+423,Nanque Indumentaria,AR,manufacturing,m,0.0,0,,0.0,0.0
+421,Ferroviaria Oriental,BO,transport_logistics,m,0.0,0,,0.0,0.0
+420,Ferrovia Sul Atlântico,BR,transport_logistics,m,0.0,0,,0.0,0.0
+401,Sinteplast S.A.,AR,manufacturing,m,0.0,0,,0.0,0.0
+1143,Bäcker Brewery,BR,agro_food,m,0.0,0,,0.0,0.0
+17,InterAirports,HN,transport_logistics,m,0.0,0,,0.0,0.0
+1168,Mariategui JLT,PE,finance_insurance,m,0.0,0,,0.0,0.0
+1162,Petrolera Cerro Negro,AR,oil_gas,m,0.0,0,,0.0,0.0
+1161,Metrogas (Argentina),AR,oil_gas,m,0.0,0,,0.0,0.0
+1159,Brasil Ferrovias,BR,transport_logistics,m,0.0,0,,0.0,0.0
+419,Ferrovia Novoeste S.A.,BR,transport_logistics,m,0.0,0,,0.0,0.0
+415,Ferrocarril Interoceánico de México,MX,transport_logistics,m,0.0,0,,0.0,0.0
+414,Ferroban,BR,transport_logistics,m,0.0,0,,0.0,0.0
+409,Biodiet - Contorno Estetico,VE,retail_consumer,m,0.0,0,,0.0,0.0
+406,BanComunidad,BO,finance_insurance,m,0.0,0,,0.0,0.0
+31,Metrovision Producciones,AR,ict_telecom,m,0.0,0,,0.0,0.0
+9,"Dorada Railway Company, Ltd.",CO,transport_logistics,m,0.0,0,,0.0,0.0
+45,Ferrocarril Central del Paraguay,PY,transport_logistics,m,0.0,0,,0.0,0.0
+11,Estrada de Ferro de Goiás,BR,transport_logistics,m,0.0,0,,0.0,0.0
+12,Ferrocarril de Bahía a São Francisco,BR,transport_logistics,m,0.0,0,,0.0,0.0
+25,El Oro Mining and Railway,MX,transport_logistics,m,0.0,0,,0.0,0.0
+24,Barranquilla Railway and Pier Company Ltd,CO,construction_realestate,m,0.0,0,,0.0,0.0
+23,Grupo Monte Carlo (Uruguay),UY,ict_telecom,m,0.0,0,,0.0,0.0
+22,Viação Forte,BR,transport_logistics,l,0.0,0,,0.0,0.0
+21,Sociedade Cosmopolita de Beneficios Mutuos Previdente Amazonense,BR,finance_insurance,m,0.0,0,,0.0,0.0
+1171,Personal Paraguay,PY,ict_telecom,m,0.0,0,,0.0,0.0
+1170,SBA Airlines,VE,transport_logistics,m,0.0,0,,0.0,0.0
+7,Planta Madre Producciones,PE,ict_telecom,m,0.0,0,,0.0,0.0
+1110,Ferrocarril Norte del Uruguay,UY,transport_logistics,m,0.0,0,,0.0,0.0
+1105,Tikal Jets Airlines,GT,transport_logistics,m,0.0,0,,0.0,0.0
+64,Auto Club - Compras Programadas,EC,finance_insurance,m,0.0,0,,0.0,0.0
+10,Estrada de Ferro Araraquara,BR,transport_logistics,m,0.0,0,,0.0,0.0
+474,SM-Chile,CL,finance_insurance,m,0.0,0,,0.0,0.0
+473,Sidetur,VE,chemicals_materials,m,0.0,0,,0.0,0.0
+472,Ferrocarril Noroeste del Uruguay,UY,transport_logistics,m,0.0,0,,0.0,0.0
+468,Citibank Ecuador,EC,finance_insurance,m,0.0,0,,0.0,0.0
+466,Banco de la Producción,NI,finance_insurance,m,0.0,0,,0.0,0.0
+1058,Ferrocentral,AR,transport_logistics,m,0.0,0,,0.0,0.0
+77,Ritmos Beach Cafe,MX,agro_food,m,0.0,0,,0.0,0.0
+75,Compañía de Ómnibus del Este,UY,transport_logistics,m,0.0,0,,0.0,0.0
+90,Servindustriales Del Valle,CO,chemicals_materials,m,0.0,0,,0.0,0.0
+71,Poker Sports,BR,manufacturing,m,0.0,0,,0.0,0.0
+70,Urbania Brasil,BR,construction_realestate,m,0.0,0,,0.0,0.0
+69,A Patriarca - Seguros Gerais,BR,finance_insurance,m,0.0,0,,0.0,0.0
+456,Los 40 República Dominicana,DO,ict_telecom,m,0.0,0,,0.0,0.0
+67,Alia Concretos,PA,construction_realestate,m,0.0,0,,0.0,0.0
+66,Grupo Oti,PA,manufacturing,m,0.0,0,,0.0,0.0
+1053,Melendez Films,MX,ict_telecom,s,0.0,0,,0.0,0.0
+1047,Mayan World Airlines,GT,transport_logistics,m,0.0,0,,0.0,0.0
+1046,Maple Energy,PE,oil_gas,m,0.0,0,,0.0,0.0
+1044,Peruvian Airlines,PE,transport_logistics,m,0.0,0,,0.0,0.0
+1042,Aerolíneas Peruanas,PE,transport_logistics,m,0.0,0,,0.0,0.0
+1070,Banco Pan,BR,finance_insurance,l,0.0,0,,0.0,0.0
+1068,Puntacana Resort & Club,DO,transport_logistics,m,0.0,0,,0.0,0.0
+1066,Grupo Chaski,PE,ict_telecom,m,0.0,0,,0.0,0.0
+1064,COVETEL,VE,ict_telecom,m,0.0,0,,0.0,0.0
+1036,Sastrería de París,SV,manufacturing,m,0.0,0,,0.0,0.0
+1030,Ferrocarril Puerto Cabello y Valencia,VE,transport_logistics,m,0.0,0,,0.0,0.0
+68,Alia Revestimientos,PA,construction_realestate,m,0.0,0,,0.0,0.0
+455,Los 40 Paraguay,PY,ict_telecom,m,0.0,0,,0.0,0.0
+453,Los 40 Costa Rica,CR,ict_telecom,m,0.0,0,,0.0,0.0
+452,"Lever, Murphy & Co.",CL,manufacturing,m,0.0,0,,0.0,0.0
+448,Casa Tosi,EC,retail_consumer,m,0.0,0,,0.0,0.0
+51,Central Uruguay Eastern Extension Railway,UY,transport_logistics,m,0.0,0,,0.0,0.0
+50,Colombia Railway and Navigation Company,CO,transport_logistics,m,0.0,0,,0.0,0.0
+49,Central Uruguay Northern Extension Railway,UY,transport_logistics,m,0.0,0,,0.0,0.0
+1125,Zuliana de Aviación,VE,transport_logistics,m,0.0,0,,0.0,0.0
+73,Maximus Gaming Hardware,AR,retail_consumer,m,0.0,0,,0.0,0.0
+1094,Behaviour Santiago,CL,construction_realestate,m,0.0,0,,0.0,0.0
+1092,Sivensa,VE,chemicals_materials,m,0.0,0,,0.0,0.0
+1091,Bombozila,BR,ict_telecom,m,0.0,0,,0.0,0.0
+1086,DataXype,AR,construction_realestate,m,0.0,0,,0.0,0.0
+477,Cooperativa de Trolebuses,UY,transport_logistics,m,0.0,0,,0.0,0.0
+1082,Saereo,EC,transport_logistics,m,0.0,0,,0.0,0.0
+1080,Rádio Inconfidência,BR,ict_telecom,m,0.0,0,,0.0,0.0
+1074,Aserca Airlines,VE,transport_logistics,m,0.0,0,,0.0,0.0
+62,Obstech (Chile),CL,chemicals_materials,m,0.0,0,,0.0,0.0
+59,Bolivia Railway Company,BO,transport_logistics,m,0.0,0,,0.0,0.0
+57,Q1070493,UY,manufacturing,m,0.0,0,,0.0,0.0
+56,Venezuela Central Railway Company,VE,transport_logistics,m,0.0,0,,0.0,0.0
+54,Empresa Petrolera Fiscal,PE,oil_gas,m,0.0,0,,0.0,0.0
+53,Gotti Hermanos,AR,construction_realestate,m,0.0,0,,0.0,0.0
+1059,Mystery Studio,UY,ict_telecom,m,0.0,0,,0.0,0.0
+435,Rutas Aéreas de Venezuela,VE,transport_logistics,m,0.0,0,,0.0,0.0
+434,Rede Ferroviária Federal,BR,transport_logistics,m,0.0,0,,0.0,0.0
+433,Ticos Air,CR,transport_logistics,m,0.0,0,,0.0,0.0
+1084,SARPA,CO,transport_logistics,m,0.0,0,,0.0,0.0
+772,Telgua,GT,ict_telecom,m,0.0,0,,0.0,0.0
+637,Tele Antillas,DO,ict_telecom,m,0.0,0,,0.0,0.0
+630,Greca Films,AR,ict_telecom,m,0.0,0,,0.0,0.0
+655,JBN-TV,HN,ict_telecom,m,0.0,0,,0.0,0.0
+223,Global Investment International Corp.,PA,chemicals_materials,m,0.0,0,,0.0,0.0
+222,Emerald Passport,PA,construction_realestate,m,0.0,0,,0.0,0.0
+214,Banco Agricola del Paraguay,PY,finance_insurance,m,0.0,0,,0.0,0.0
+213,Caja Autonoma de Amortizacion,UY,finance_insurance,m,0.0,0,,0.0,0.0
+212,"Sud-América, Compañía de Seguros de Vida",CL,finance_insurance,m,0.0,0,,0.0,0.0
+210,Planta de Alimentos Balanceados La Estrella,CL,agro_food,m,0.0,0,,0.0,0.0
+287,Lechuza Play,BO,construction_realestate,m,0.0,0,,0.0,0.0
+285,Ancestral Gods,BO,construction_realestate,m,0.0,0,,0.0,0.0
+537,Banco Nacional de Bolivia,BO,finance_insurance,m,0.0,0,,0.0,0.0
+271,Ferrocarril del Norte (Paraguay),PY,transport_logistics,m,0.0,0,,0.0,0.0
+270,Ediciones Kimün SpA,CL,ict_telecom,m,0.0,0,,0.0,0.0
+267,Las panteras de Benguela,UY,transport_logistics,m,0.0,0,,0.0,0.0
+264,Bow3 Games,CL,ict_telecom,m,0.0,0,,0.0,0.0
+263,Tiendas Introzzi,UY,retail_consumer,m,0.0,0,,0.0,0.0
+261,Autobuses Tlajomulco,MX,transport_logistics,m,0.0,0,,0.0,0.0
+682,Chincul,AR,transport_logistics,m,0.0,0,,0.0,0.0
+733,Aztec Brewing Company,MX,agro_food,m,0.0,0,,0.0,0.0
+732,Aviones Comerciales de Guatemala,GT,transport_logistics,m,0.0,0,,0.0,0.0
+728,Compañía Ítalo Argentina de Electricidad,AR,energy_power,m,0.0,0,,0.0,0.0
+725,Ferrocarril Nordeste Argentino,AR,transport_logistics,m,0.0,0,,0.0,0.0
+761,Brazil Great Southern Railway,BR,transport_logistics,m,0.0,0,,0.0,0.0
+752,Banco del Nordeste,BR,finance_insurance,l,0.0,0,,0.0,0.0
+284,Juan Ruiz Portugal,BO,construction_realestate,m,0.0,0,,0.0,0.0
+283,Demonio Studios,BO,construction_realestate,m,0.0,0,,0.0,0.0
+282,Calavera Studio,BO,construction_realestate,m,0.0,0,,0.0,0.0
+281,Movie (Uruguay),UY,ict_telecom,m,0.0,0,,0.0,0.0
+280,Metabiblioteca SAS,PE,construction_realestate,m,0.0,0,,0.0,0.0
+277,Banco Bandes del Uruguay,UY,finance_insurance,m,0.0,0,,0.0,0.0
+194,De Loscalzo Del Curto SRL,AR,finance_insurance,m,0.0,0,,0.0,0.0
+815,Peruvian International Airways,PE,transport_logistics,m,0.0,0,,0.0,0.0
+814,Ferrocarril del Pacífico (México),MX,transport_logistics,m,0.0,0,,0.0,0.0
+808,Market San Jorge,PE,retail_consumer,m,0.0,0,,0.0,0.0
+807,Libreflix,BR,ict_telecom,m,0.0,0,,0.0,0.0
+804,Ferrocarril Entre Ríos,AR,transport_logistics,m,0.0,0,,0.0,0.0
+803,Empresas 1BC,VE,ict_telecom,m,0.0,0,,0.0,0.0
+801,LATAM Cargo Colombia,CO,transport_logistics,m,0.0,0,,0.0,0.0
+774,Colombiana de Televisión,CO,ict_telecom,m,0.0,0,,0.0,0.0
+796,ECAMI,NI,energy_power,m,0.0,0,,0.0,0.0
+795,Dunkelvolk,CL,manufacturing,m,0.0,0,,0.0,0.0
+793,Dirección de la Industria Aeronáutica Ecuador,EC,manufacturing,m,0.0,0,,0.0,0.0
+789,DHL de Guatemala,GT,transport_logistics,m,0.0,0,,0.0,0.0
+788,12 Hit Combo,CO,ict_telecom,m,0.0,0,,0.0,0.0
+206,Agricultural Mortgage Bank,CO,finance_insurance,m,0.0,0,,0.0,0.0
+205,Banco Hipotecario de Panama,PA,finance_insurance,m,0.0,0,,0.0,0.0
+197,Optaris,AR,ict_telecom,s,0.0,0,,0.0,0.0
+209,Fabulosa Mines,BO,mining_metals,m,0.0,0,,0.0,0.0
+768,California Burrito Co.,AR,agro_food,m,0.0,0,,0.0,0.0
+785,Creole Petroleum Corporation,VE,oil_gas,m,0.0,0,,0.0,0.0
+777,Compañía Nacional de Chocolates de Perú,PE,agro_food,m,0.0,0,,0.0,0.0
+776,Compañía Cervecera de Nicaragua,NI,agro_food,m,0.0,0,,0.0,0.0
+799,Edegel,PE,energy_power,m,0.0,0,,0.0,0.0
+710,Aexpa,CO,transport_logistics,m,0.0,0,,0.0,0.0
+29,Centro Acuático Porvenir,BO,transport_logistics,m,0.0,0,,0.0,0.0
+392,RedeBr Internet,BR,ict_telecom,m,0.0,0,,0.0,0.0
+391,Zaldívar mine,CL,oil_gas,m,0.0,0,,0.0,0.0
+388,Kentucky Fried Chicken en Perú,PE,agro_food,m,0.0,0,,0.0,0.0
+1196,junta de aguas de El Salvador,SV,construction_realestate,m,0.0,0,,0.0,0.0
+1194,Companhia Pernambucana de Saneamento,BR,water_waste_circularity,m,0.0,0,,0.0,0.0
+252,Credisol S.A.,AR,finance_insurance,m,0.0,0,,0.0,0.0
+251,Global Pharmacy Service,AR,retail_consumer,m,0.0,0,,0.0,0.0
+250,Route 5 Games,CL,ict_telecom,m,0.0,0,,0.0,0.0
+246,CFS Construcciones,AR,construction_realestate,m,0.0,0,,0.0,0.0
+724,Ferrocarril Gran Oeste Argentino,AR,transport_logistics,m,0.0,0,,0.0,0.0
+723,Arepera Socialista,VE,agro_food,m,0.0,0,,0.0,0.0
+749,Banco del Cafe,GT,finance_insurance,m,0.0,0,,0.0,0.0
+1152,Cerâmica São Caetano,BR,manufacturing,m,0.0,0,,0.0,0.0
+1137,Farmacia Chávez,BO,retail_consumer,m,0.0,0,,0.0,0.0
+48,Lautaro Nitrate Company,CL,mining_metals,m,0.0,0,,0.0,0.0
+13,Ferrocarril de Sobral,BR,construction_realestate,m,0.0,0,,0.0,0.0
+1178,Dixey,AR,construction_realestate,m,0.0,0,,0.0,0.0
+1174,Ylang Ylang Beach Resort,CR,transport_logistics,m,0.0,0,,0.0,0.0
+1193,Companhia Brasileira de Material Ferroviário,BR,manufacturing,m,0.0,0,,0.0,0.0
+4,Estudios Río de la Plata,AR,ict_telecom,m,0.0,0,,0.0,0.0
+1201,Ferrocarril Leopoldina,BR,transport_logistics,m,0.0,0,,0.0,0.0
+16,Industrias Reunidas Fábrica Matarazzo,BR,manufacturing,m,0.0,0,,0.0,0.0
+403,Q136033368,BR,ict_telecom,m,0.0,0,,0.0,0.0
+5,SocialForAll.net,AR,construction_realestate,m,0.0,0,,0.0,0.0
+14,Grupo PlayArte,BR,ict_telecom,m,0.0,0,,0.0,0.0
+717,Alegro PCS,EC,ict_telecom,m,0.0,0,,0.0,0.0
+744,Banco Occidental de Descuento,VE,finance_insurance,m,0.0,0,,0.0,0.0
+239,"Banco Mercantil del Río de la Plata, Uruguay",UY,finance_insurance,m,0.0,0,,0.0,0.0
+220,COETC Inter,UY,transport_logistics,m,0.0,0,,0.0,0.0
+219,MasAir Cargo México,MX,transport_logistics,m,0.0,0,,0.0,0.0
+216,Banco Hypothecario e Agricola do Estado de Minas Geraes,BR,finance_insurance,m,0.0,0,,0.0,0.0
+215,Banco de la Republica del Paraguay,PY,finance_insurance,m,0.0,0,,0.0,0.0
+708,Aeroquetzal,GT,transport_logistics,m,0.0,0,,0.0,0.0
+706,Aerolíneas Mas,DO,transport_logistics,m,0.0,0,,0.0,0.0
+238,Banco la Caja Obrera del Uruguay,UY,finance_insurance,m,0.0,0,,0.0,0.0
+237,Nuevo Banco Comercial del Uruguay,UY,finance_insurance,m,0.0,0,,0.0,0.0
+236,Banco Comercial de Uruguay,UY,finance_insurance,m,0.0,0,,0.0,0.0
+226,T6poker,PA,chemicals_materials,m,0.0,0,,0.0,0.0
+225,People in Profit System,PA,chemicals_materials,m,0.0,0,,0.0,0.0
+712,Compañía Salus,UY,mining_metals,m,0.0,0,,0.0,0.0
+671,AeroPerú Sac,PE,transport_logistics,m,0.0,0,,0.0,0.0
+670,Grupo Compás,EC,oil_gas,m,0.0,0,,0.0,0.0
+716,Albuquerque & Takaoka,BR,construction_realestate,m,0.0,0,,0.0,0.0
+679,Centro de Medios Audiovisuales,UY,ict_telecom,m,0.0,0,,0.0,0.0
+678,Agencia Venezolana de Noticias,VE,ict_telecom,m,0.0,0,,0.0,0.0
+674,WayraPerú,PE,transport_logistics,m,0.0,0,,0.0,0.0
+272,Provalor,AR,finance_insurance,m,0.0,0,,0.0,0.0
+705,"Aeroexpresos Ejecutivos, C.A.",VE,transport_logistics,m,0.0,0,,0.0,0.0
+704,ASA Aluminium Body,AR,manufacturing,m,0.0,0,,0.0,0.0
+702,Amazonas Motos Especiais,BR,manufacturing,m,0.0,0,,0.0,0.0
+693,Cuyamel Fruit Company,HN,agro_food,m,0.0,0,,0.0,0.0
+691,Electricidad de Caracas,VE,energy_power,m,0.0,0,,0.0,0.0
+713,Air Venture Tours,GT,transport_logistics,m,0.0,0,,0.0,0.0
+258,Ferrovia Centro-Atlântica,BR,transport_logistics,l,0.0,0,,0.0,0.0
+158,Líneas Aéreas Canedo,BO,transport_logistics,m,0.0,0,,0.0,0.0
+146,Ferrocarril de Piria,UY,transport_logistics,m,0.0,0,,0.0,0.0
+325,Tintas MC,BR,chemicals_materials,m,0.0,0,,0.0,0.0
+324,Bruno Fritsch (empresa automotriz),CL,ict_telecom,m,0.0,0,,0.0,0.0
+322,Promoda Outlet,MX,retail_consumer,m,0.0,0,,0.0,0.0
+321,Los Arcos Restaurants,MX,agro_food,m,0.0,0,,0.0,0.0
+558,Grupo Plural TV,PE,ict_telecom,m,0.0,0,,0.0,0.0
+557,Fondo Financiero para el Desarrollo de los Países de la Cuenca del Plata,BO,construction_realestate,m,0.0,0,,0.0,0.0
+308,Estaleiro Navship,BR,construction_realestate,m,0.0,0,,0.0,0.0
+307,Tele Imagen Codificada,AR,ict_telecom,m,0.0,0,,0.0,0.0
+305,Merkosurci,CL,retail_consumer,m,0.0,0,,0.0,0.0
+571,Yaesta.com,EC,retail_consumer,m,0.0,0,,0.0,0.0
+621,Navistar International,MX,manufacturing,l,0.0,0,,0.0,0.0
+908,Argentine Estates of Bovril,AR,agro_food,m,0.0,0,,0.0,0.0
+906,DRB Dribbling,AR,manufacturing,m,0.0,0,,0.0,0.0
+905,Nimble Giant Entertainment,AR,construction_realestate,m,0.0,0,,0.0,0.0
+892,Chilean Electric Tramway and Light Company,CL,energy_power,m,0.0,0,,0.0,0.0
+564,Banco Mercantil Santa Cruz S.A.,BO,finance_insurance,m,0.0,0,,0.0,0.0
+563,Rumo S.A.,BR,transport_logistics,l,0.0,0,,0.0,0.0
+593,Mexican Southern Railroad,MX,transport_logistics,m,0.0,0,,0.0,0.0
+588,Aerocondor Colombia,CO,transport_logistics,m,0.0,0,,0.0,0.0
+585,Aerolíneas Sudamericanas,BO,transport_logistics,m,0.0,0,,0.0,0.0
+584,Aerocon,BO,transport_logistics,m,0.0,0,,0.0,0.0
+887,Complejo Manufacturero de Equipos Telefónicos,CL,ict_telecom,m,0.0,0,,0.0,0.0
+885,Bunge Argentina,AR,energy_power,m,0.0,0,,0.0,0.0
+175,Q114403968,GT,ict_telecom,m,0.0,0,,0.0,0.0
+909,EDATEL,CO,ict_telecom,m,0.0,0,,0.0,0.0
+946,Lagoven,VE,oil_gas,m,0.0,0,,0.0,0.0
+980,Servicio Aéreo Ejecutivo,PE,transport_logistics,m,0.0,0,,0.0,0.0
+326,Mercadão dos Óculos,BR,retail_consumer,m,0.0,0,,0.0,0.0
+923,Farmacia SAAS,VE,retail_consumer,m,0.0,0,,0.0,0.0
+921,Expreso Aéreo,PE,transport_logistics,m,0.0,0,,0.0,0.0
+913,Empresa Nacional de Edificaciones,PE,construction_realestate,m,0.0,0,,0.0,0.0
+945,Compañía Anglo-salvadoreña de Minería en San Miguel,SV,mining_metals,m,0.0,0,,0.0,0.0
+943,Instituto Nacional de Electrificación (Guatemala),GT,energy_power,m,0.0,0,,0.0,0.0
+932,GasAtacama,CL,oil_gas,m,0.0,0,,0.0,0.0
+144,eScire,PA,ict_telecom,m,0.0,0,,0.0,0.0
+139,Miller Building International SA,AR,construction_realestate,m,0.0,0,,0.0,0.0
+137,Frigorífico Reyes,BO,transport_logistics,m,0.0,0,,0.0,0.0
+133,4TER SA,AR,construction_realestate,m,0.0,0,,0.0,0.0
+328,Lojas Benoit,BR,retail_consumer,m,0.0,0,,0.0,0.0
+122,Hosteria El Encanto,EC,finance_insurance,m,0.0,0,,0.0,0.0
+121,Hemisferio Films,AR,ict_telecom,m,0.0,0,,0.0,0.0
+904,Corpoven,VE,oil_gas,m,0.0,0,,0.0,0.0
+131,Companhia Brasileira de Trens Urbanos,BR,transport_logistics,m,0.0,0,,0.0,0.0
+130,Hotel Costa Pacifico - Express,CL,oil_gas,m,0.0,0,,0.0,0.0
+129,Hotel Diego de Almagro Antofagasta Express,CL,oil_gas,m,0.0,0,,0.0,0.0
+542,Latin American Wings,CL,transport_logistics,m,0.0,0,,0.0,0.0
+538,Amaszonas Paraguay,PY,transport_logistics,m,0.0,0,,0.0,0.0
+8,"Agar, Cross and Co.",AR,energy_power,m,0.0,0,,0.0,0.0
+335,ODM Express,MX,transport_logistics,m,0.0,0,,0.0,0.0
+333,Q129648294,CR,finance_insurance,m,0.0,0,,0.0,0.0
+332,Muebles América,MX,retail_consumer,m,0.0,0,,0.0,0.0
+329,Magazine Liliani,BR,retail_consumer,m,0.0,0,,0.0,0.0
+123,Platinum Class Hostal,EC,agro_food,m,0.0,0,,0.0,0.0
+600,Animex Producciones,MX,ict_telecom,m,0.0,0,,0.0,0.0
+302,wasii,PE,construction_realestate,m,0.0,0,,0.0,0.0
+299,pr00thmatic,BO,construction_realestate,m,0.0,0,,0.0,0.0
+298,Epicness For Everyone,BO,construction_realestate,m,0.0,0,,0.0,0.0
+297,Neko Dev,BO,construction_realestate,m,0.0,0,,0.0,0.0
+296,Mampel Skyliner studios,BO,construction_realestate,m,0.0,0,,0.0,0.0
+293,Andres Daniel Rodriguez Castro,BO,construction_realestate,m,0.0,0,,0.0,0.0
+292,TodoGames Studios,BO,construction_realestate,m,0.0,0,,0.0,0.0
+844,Aeronor Chile,CL,transport_logistics,m,0.0,0,,0.0,0.0
+841,Banco Hipotecario de Chile,CL,finance_insurance,m,0.0,0,,0.0,0.0
+838,HSBC Bank (El Salvador),SV,finance_insurance,m,0.0,0,,0.0,0.0
+837,HSBC Bank Panama,PA,finance_insurance,m,0.0,0,,0.0,0.0
+811,Feng Office,UY,ict_telecom,m,0.0,0,,0.0,0.0
+174,Banco Nacional de Crédito Ejidal,MX,finance_insurance,m,0.0,0,,0.0,0.0
+835,Gran Ferrocarril de Venezuela,VE,transport_logistics,m,0.0,0,,0.0,0.0
+831,Producciones Cinevisión,CO,ict_telecom,m,0.0,0,,0.0,0.0
+825,Petroquímica Comodoro Rivadavia de Grupo Guevara,AR,oil_gas,m,0.0,0,,0.0,0.0
+822,Hot Park Rio Quente,BR,water_waste_circularity,m,0.0,0,,0.0,0.0
+208,Lima Light Power and Tramways Company,PE,energy_power,m,0.0,0,,0.0,0.0
+207,Banco Agricola del Peru,PE,finance_insurance,m,0.0,0,,0.0,0.0
+185,Freaky Creations,EC,ict_telecom,m,0.0,0,,0.0,0.0
+184,Concessionária Litoral Norte,BR,construction_realestate,m,0.0,0,,0.0,0.0
+182,Petrobahia,BR,oil_gas,m,0.0,0,,0.0,0.0
+291,Dreamleak,BO,construction_realestate,m,0.0,0,,0.0,0.0
+290,Qamaqi Studio,BO,construction_realestate,m,0.0,0,,0.0,0.0
+289,zorro  de agua,BO,construction_realestate,m,0.0,0,,0.0,0.0
+623,Ave Fenix Pictures Studios,MX,ict_telecom,m,0.0,0,,0.0,0.0
+836,AGTV Producciones,CL,ict_telecom,m,0.0,0,,0.0,0.0
+160,FluyezCambios,PE,ict_telecom,m,0.0,0,,0.0,0.0
+159,Itaú Corpbanca Colombia S.A.,CO,finance_insurance,m,0.0,0,,0.0,0.0
+852,Sociedad Independiente Filmadora Argentina,AR,ict_telecom,m,0.0,0,,0.0,0.0
+189,EasySky,HN,transport_logistics,m,0.0,0,,0.0,0.0
+188,Past Post,MX,finance_insurance,m,0.0,0,,0.0,0.0
+171,Compañía del Ferrocarril de Acajutla,SV,transport_logistics,m,0.0,0,,0.0,0.0
+170,La Casa de Lucy,UY,agro_food,m,0.0,0,,0.0,0.0
+166,Criadero Diluo,CO,agro_food,m,0.0,0,,0.0,0.0
+163,Helados Río Soto,SV,agro_food,m,0.0,0,,0.0,0.0
+162,Teravision Games,CO,ict_telecom,m,0.0,0,,0.0,0.0
+879,Bancoro,VE,finance_insurance,m,0.0,0,,0.0,0.0
+896,Comisión Ejecutiva del Río Lempa,SV,energy_power,m,0.0,0,,0.0,0.0
+893,China Wok,PE,oil_gas,m,0.0,0,,0.0,0.0
+178,Velocette,BR,manufacturing,m,0.0,0,,0.0,0.0
+864,Banco Español-Chile,CL,finance_insurance,m,0.0,0,,0.0,0.0
+863,Banco Edwards Citi,CL,finance_insurance,m,0.0,0,,0.0,0.0
+860,Banco Austral de Chile,CL,finance_insurance,m,0.0,0,,0.0,0.0
+859,Banco Agrícola de Venezuela,VE,finance_insurance,m,0.0,0,,0.0,0.0
+320,Banco de Asunción,PY,finance_insurance,m,0.0,0,,0.0,0.0
+316,Sul Brasileiro Seguros Gerais,BR,finance_insurance,m,0.0,0,,0.0,0.0
+314,lojas MM,PY,retail_consumer,m,0.0,0,,0.0,0.0
+310,Lojas Benoit,BR,retail_consumer,m,0.0,0,,0.0,0.0
+616,Compañía de Acero del Pacífico,CL,chemicals_materials,l,0.0,0,,0.0,0.0
+613,Cervecería Regional,VE,agro_food,m,0.0,0,,0.0,0.0
+609,Freddo Helados,AR,agro_food,m,0.0,0,,0.0,0.0
+606,RTI Producciones,CO,ict_telecom,m,0.0,0,,0.0,0.0
+180,Sol Petróleo S.A.,AR,oil_gas,m,0.0,0,,0.0,0.0
+869,Banco Sofitasa,VE,finance_insurance,m,0.0,0,,0.0,0.0

@@ -1,5 +1,35 @@
 sample:
   total_target: 1200
   min_per_stratum: 20
-  countries: [MX, BR, CO, CL, AR, UY, PE, EC, BO, PY, PA, DO]
-  industries: [energy_power, oil_gas, mining_metals, chemicals_materials, manufacturing, construction_realestate, transport_logistics, agro_food, retail_consumer, water_waste_circularity, finance_insurance, ict_telecom]
+  countries:
+  - MX
+  - BR
+  - CO
+  - CL
+  - AR
+  - UY
+  - PE
+  - EC
+  - BO
+  - PY
+  - PA
+  - DO
+  - GT
+  - SV
+  - HN
+  - NI
+  - CR
+  - VE
+  industries:
+  - energy_power
+  - oil_gas
+  - mining_metals
+  - chemicals_materials
+  - manufacturing
+  - construction_realestate
+  - transport_logistics
+  - agro_food
+  - retail_consumer
+  - water_waste_circularity
+  - finance_insurance
+  - ict_telecom
