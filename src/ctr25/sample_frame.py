@@ -8,6 +8,7 @@ from ctr25.sample_sources.wikidata import (
     map_industries,
     apply_sampling,
 )
+from ctr25.sample_sources.external import load_wikipedia_companies
 
 
 def _load_project() -> dict:
@@ -77,8 +78,21 @@ def build_sample(
             "No se pudo mapear industrias. Revisá config/industry_map.yml y 'industry_raw'."
         )
 
+    external_sources = []
+
+    wiki_extra = load_wikipedia_companies(target_countries=countries or raw["country"].unique())
+    if not wiki_extra.empty:
+        external_sources.append(wiki_extra)
+
+    if external_sources:
+        external_df = pd.concat(external_sources, ignore_index=True)
+        combined = pd.concat([mapped, external_df], ignore_index=True)
+        combined = combined.drop_duplicates(subset=["company_name", "country"], keep="first")
+    else:
+        combined = mapped
+
     # 3) Sampling estratificado
-    final = apply_sampling(mapped, project_cfg)
+    final = apply_sampling(combined, project_cfg)
     if final.empty:
         raise ValueError(
             "No se pudo construir el universo estratificado. Verificá filtros en project.yml."

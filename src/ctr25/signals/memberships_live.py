@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from pathlib import Path
 from typing import Callable
+from urllib.parse import urlparse
 
 import pandas as pd
 from bs4 import BeautifulSoup
@@ -10,7 +11,15 @@ import yaml
 
 from ctr25.utils.http import get
 
-COLUMNS = ["member_name", "url", "ts", "source", "signal_type"]
+COLUMNS = [
+    "member_name",
+    "url",
+    "ts",
+    "source",
+    "signal_type",
+    "country",
+    "sector",
+]
 
 
 def _mk_record(name: str, url: str, ts: str, kind: str) -> dict:
@@ -25,21 +34,46 @@ def _mk_record(name: str, url: str, ts: str, kind: str) -> dict:
 
 def _from_csv(url: str, kind: str) -> pd.DataFrame:
     try:
-        df = pd.read_csv(url)
+        df = pd.read_csv(url, dtype=str)
     except Exception:
         return pd.DataFrame(columns=COLUMNS)
     lower_cols = {c.lower(): c for c in df.columns}
     name_col = None
-    for key in ("company", "organization", "organizacion", "nombre"):
+    for key in (
+        "company_name",
+        "company",
+        "organization",
+        "organizacion",
+        "organización",
+        "nome",
+        "nombre",
+    ):
         if key in lower_cols:
             name_col = lower_cols[key]
             break
     if not name_col:
         name_col = df.columns[0]
     ts_col = None
-    for key in ("date", "fecha", "joined", "approved", "commitment"):
+    for key in (
+        "date_updated",
+        "date",
+        "fecha",
+        "joined",
+        "approved",
+        "commitment",
+    ):
         if key in lower_cols:
             ts_col = lower_cols[key]
+            break
+    country_col = None
+    for key in ("country", "location", "pais", "país"):
+        if key in lower_cols:
+            country_col = lower_cols[key]
+            break
+    sector_col = None
+    for key in ("sector", "industry", "categoria"):
+        if key in lower_cols:
+            sector_col = lower_cols[key]
             break
     records = []
     for _, row in df.iterrows():
@@ -47,8 +81,15 @@ def _from_csv(url: str, kind: str) -> pd.DataFrame:
         if not name.strip():
             continue
         ts_value = str(row.get(ts_col, "")) if ts_col else ""
-        records.append(_mk_record(name=name, url=url, ts=ts_value, kind=kind))
-    return pd.DataFrame(records, columns=COLUMNS)
+        record = _mk_record(name=name, url=url, ts=ts_value, kind=kind)
+        if country_col:
+            record["country"] = row.get(country_col, "")
+        if sector_col:
+            record["sector"] = row.get(sector_col, "")
+        records.append(record)
+    if not records:
+        return pd.DataFrame(columns=COLUMNS)
+    return pd.DataFrame.from_records(records)
 
 
 def _from_html(url: str, kind: str) -> pd.DataFrame:
@@ -78,10 +119,53 @@ def _from_html(url: str, kind: str) -> pd.DataFrame:
 def _fetch(url: str, kind: str) -> pd.DataFrame:
     if not url:
         return pd.DataFrame(columns=COLUMNS)
+    suffix = Path(urlparse(url).path).suffix.lower()
+    if suffix in {".xlsx", ".xls"}:
+        try:
+            df = pd.read_excel(url, dtype=str)
+        except Exception:
+            return pd.DataFrame(columns=COLUMNS)
+        lower_cols = {c.lower(): c for c in df.columns}
+        name_col = (
+            lower_cols.get("company_name")
+            or lower_cols.get("company")
+            or lower_cols.get("organization")
+            or lower_cols.get("organización")
+            or lower_cols.get("organisação")
+            or df.columns[0]
+        )
+        ts_col = (
+            lower_cols.get("date_updated")
+            or lower_cols.get("date")
+            or lower_cols.get("joined")
+            or lower_cols.get("commitment")
+            or lower_cols.get("approved")
+            or lower_cols.get("fecha")
+        )
+        country_col = lower_cols.get("location") or lower_cols.get("country")
+        sector_col = lower_cols.get("sector")
+        records = []
+        for _, row in df.iterrows():
+            name = str(row.get(name_col, ""))
+            if not name.strip():
+                continue
+            ts_value = str(row.get(ts_col, "")) if ts_col else ""
+            record = _mk_record(name=name, url=url, ts=ts_value, kind=kind)
+            if country_col:
+                record["country"] = row.get(country_col, "")
+            if sector_col:
+                record["sector"] = row.get(sector_col, "")
+            records.append(record)
+        if not records:
+            return pd.DataFrame(columns=COLUMNS)
+        return pd.DataFrame.from_records(records)
     try:
-        return _from_csv(url, kind)
+        df_csv = _from_csv(url, kind)
     except Exception:
-        return _from_html(url, kind)
+        df_csv = pd.DataFrame(columns=COLUMNS)
+    if not df_csv.empty:
+        return df_csv
+    return _from_html(url, kind)
 
 
 def fetch_sbti(list_url: str) -> pd.DataFrame:

@@ -15,6 +15,7 @@ import requests_cache
 import yaml
 
 from ctr25.utils.events import append_events, resolve_since
+from ctr25.utils.keywords import expand_keywords
 from ctr25.utils.universe import UniverseFilters, load_universe
 
 _CACHE_PATH = Path("data/interim/cache/news_requests.sqlite")
@@ -65,10 +66,11 @@ def _load_keywords(path: str) -> KeywordConfig:
         return KeywordConfig(include=(), exclude=())
     with p.open("r", encoding="utf-8") as fh:
         data = yaml.safe_load(fh) or {}
-    return KeywordConfig(
-        include=tuple(map(str, data.get("include", []))),
-        exclude=tuple(map(str, data.get("exclude", []))),
-    )
+    include = tuple(map(str, data.get("include", [])))
+    exclude = tuple(map(str, data.get("exclude", [])))
+    if include:
+        include = tuple(expand_keywords(include))
+    return KeywordConfig(include=include, exclude=exclude)
 
 
 def _load_providers(path: str) -> NewsProviders:
@@ -425,9 +427,37 @@ def collect_news(
         return 0
 
     combined = pd.concat(frames, ignore_index=True)
+    raw_path = _persist_raw_news(
+        combined[EVENT_COLUMNS], country=country, industry=industry
+    )
+    if raw_path is not None:
+        print(f"[collect-news] dump crudo -> {raw_path}")
     return append_events(combined, source="news", signal_type="news")
 
 
 def run_collect_news(**kwargs) -> int:
     """CLI shim for backwards compatibility."""
     return collect_news(**kwargs)
+RAW_NEWS_DIR = Path("data/raw/news")
+
+
+def _slug(value: str | None, fallback: str) -> str:
+    if not value:
+        return fallback
+    cleaned = re.sub(r"[^a-zA-Z0-9]+", "_", value.strip())
+    cleaned = cleaned.strip("_") or fallback
+    return cleaned[:40]
+
+
+def _persist_raw_news(df: pd.DataFrame, *, country: str | None, industry: str | None) -> Path | None:
+    if df.empty:
+        return None
+    RAW_NEWS_DIR.mkdir(parents=True, exist_ok=True)
+    country_slug = _slug(country, "ALL")
+    industry_slug = _slug(industry, "ALL")
+    run_dir = RAW_NEWS_DIR / f"{country_slug}_{industry_slug}"
+    run_dir.mkdir(parents=True, exist_ok=True)
+    ts_label = dt.datetime.utcnow().strftime("%Y%m%dT%H%M%SZ")
+    path = run_dir / f"{ts_label}_{len(df)}.csv"
+    df.to_csv(path, index=False)
+    return path

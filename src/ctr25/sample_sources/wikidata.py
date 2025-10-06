@@ -411,10 +411,13 @@ def map_industries(df: pd.DataFrame, map_path: str = "config/industry_map.yml") 
             patterns.append((re.compile(pat), target))
 
     def _map(row: pd.Series) -> str:
-        raw = " ".join(
-            p for p in (row.get("industry_raw", ""), row.get("description", ""))
-            if isinstance(p, str)
-        )
+        fields = [
+            row.get("industry_raw", ""),
+            row.get("description", ""),
+            row.get("company_name", ""),
+            row.get("company_domain", ""),
+        ]
+        raw = " ".join(p for p in fields if isinstance(p, str))
         for rx, target in patterns:
             if rx.search(raw):
                 return target
@@ -427,80 +430,166 @@ def map_industries(df: pd.DataFrame, map_path: str = "config/industry_map.yml") 
 
 
 def apply_sampling(df: pd.DataFrame, project_cfg: Dict[str, object]) -> pd.DataFrame:
-    # Lee de sample.* y, si faltan claves, cae al nivel raíz del project.yml
+    """Return a stratified sample honouring minimum employee thresholds."""
+
+    output_cols = [
+        "company_id","company_name","country","industry","size_bin",
+        "company_domain","weight_stratum","ticker",
+    ]
+
+    def _stratified_sample(working: pd.DataFrame) -> pd.DataFrame:
+        if working.empty:
+            return pd.DataFrame(columns=output_cols)
+
+        base = working.copy()
+        if countries:
+            base = base[base["country"].isin(countries)]
+        if industries:
+            base = base[base["industry"].isin(industries)]
+
+        base = base[base["size_bin"].isin(["s", "m", "l"])]
+        base = base.drop_duplicates(subset=["qid"]).sort_values(
+            ["country", "industry", "employees"], ascending=[True, True, False]
+        )
+
+        strata: List[Tuple[str, str, pd.DataFrame]] = []
+        if countries and industries:
+            for c in countries:
+                for i in industries:
+                    sl = base[(base["country"] == c) & (base["industry"] == i)]
+                    if not sl.empty:
+                        strata.append((c, i, sl.reset_index(drop=True)))
+        else:
+            for (c, i), sl in base.groupby(["country", "industry"], sort=False):
+                strata.append((c, i, sl.reset_index(drop=True)))
+
+        if not strata:
+            return pd.DataFrame(columns=output_cols)
+
+        n_strata = len(strata)
+        target_per_stratum = max(min_per_stratum, math.floor(total_target / n_strata))
+        sampled_frames: List[pd.DataFrame] = []
+        stratum_sizes: Dict[Tuple[str, str], int] = {}
+        remainder: List[Tuple[str, str, pd.DataFrame]] = []
+
+        collected = 0
+        for c, i, sl in strata:
+            take = min(len(sl), target_per_stratum)
+            if take > 0:
+                smp = sl.head(take).copy()
+                sampled_frames.append(smp)
+                stratum_sizes[(c, i)] = take
+                collected += take
+            else:
+                stratum_sizes[(c, i)] = 0
+
+            if len(sl) > take:
+                remainder.append((c, i, sl.iloc[take:].copy()))
+
+        remaining_needed = max(0, total_target - collected)
+        if remaining_needed > 0 and remainder:
+            remainder.sort(key=lambda item: len(item[2]), reverse=True)
+            for c, i, extra in remainder:
+                if remaining_needed <= 0:
+                    break
+                add = min(len(extra), remaining_needed)
+                if add <= 0:
+                    continue
+                sampled_frames.append(extra.head(add).copy())
+                stratum_sizes[(c, i)] = stratum_sizes.get((c, i), 0) + add
+                remaining_needed -= add
+                collected += add
+
+        if not sampled_frames:
+            return pd.DataFrame(columns=output_cols)
+
+        sample_df = pd.concat(sampled_frames, ignore_index=True).sort_values(
+            ["country", "industry", "company_name"]
+        ).reset_index(drop=True)
+
+        weights: Dict[Tuple[str, str], float] = {}
+        for key, cnt in stratum_sizes.items():
+            if cnt > 0:
+                weights[key] = total_target / (n_strata * cnt)
+
+        sample_df["weight_stratum"] = sample_df.apply(
+            lambda r: weights.get((r["country"], r["industry"]), 1.0), axis=1
+        )
+
+        ordered_qids = sorted(sample_df["qid"].tolist())
+        qid_to_id = {qid: idx + 1 for idx, qid in enumerate(ordered_qids)}
+        sample_df["company_id"] = sample_df["qid"].map(qid_to_id)
+
+        return sample_df[output_cols].sort_values("company_id").reset_index(drop=True)
+
+    # Lee configuraciones de project.yml
     sample_cfg = (project_cfg or {}).get("sample", {}) or {}
     countries = sample_cfg.get("countries") or (project_cfg or {}).get("countries")
     industries = sample_cfg.get("industries") or (project_cfg or {}).get("industries")
     min_per_stratum = int(sample_cfg.get("min_per_stratum", (project_cfg or {}).get("min_per_stratum", 20)))
     total_target = int(sample_cfg.get("total_target", (project_cfg or {}).get("total_target", 1200)))
 
+    raw_thresholds = sample_cfg.get("min_employees_options")
+    if not raw_thresholds:
+        raw_thresholds = [sample_cfg.get("min_employees", 0)]
+    thresholds = [int(t) for t in raw_thresholds if t is not None]
+    if not thresholds:
+        thresholds = [0]
+
     df = df.copy()
-    if countries:
-        df = df[df["country"].isin(countries)]
-    if industries:
-        df = df[df["industry"].isin(industries)]
+    df["employees"] = pd.to_numeric(df.get("employees"), errors="coerce")
 
-    df = df[df["size_bin"].isin(["s", "m", "l"])]
-    df = df.drop_duplicates(subset=["qid"]).sort_values(
-        ["country", "industry", "employees"], ascending=[True, True, False]
-    )
+    def _mask_by_threshold(base: pd.DataFrame, threshold: int) -> pd.Series:
+        if threshold <= 0:
+            return pd.Series(True, index=base.index)
 
-    # Construye strata
-    strata: List[Tuple[str, str, pd.DataFrame]] = []
-    if countries and industries:
-        for c in countries:
-            for i in industries:
-                sl = df[(df["country"] == c) & (df["industry"] == i)]
-                if not sl.empty:
-                    strata.append((c, i, sl))
-    else:
-        for (c, i), sl in df.groupby(["country", "industry"], sort=False):
-            strata.append((c, i, sl))
+        emp = base["employees"].fillna(0)
+        mask = emp >= threshold
 
-    if not strata:
-        return pd.DataFrame(columns=[
-            "company_id","company_name","country","industry","size_bin","company_domain","weight_stratum","ticker"
-        ])
+        size_bin = base.get("size_bin")
+        ticker_series = base.get("ticker")
 
-    n_strata = len(strata)
-    target_per_stratum = max(min_per_stratum, math.floor(total_target / n_strata))
-    sampled_frames: List[pd.DataFrame] = []
-    stratum_sizes: Dict[Tuple[str, str], int] = {}
+        if threshold <= 100:
+            if size_bin is not None:
+                mask |= size_bin.isin(["m", "l"])
+            if ticker_series is not None:
+                mask |= ticker_series.fillna("").astype(str).str.len() > 0
+        elif threshold <= 250:
+            if size_bin is not None:
+                mask |= size_bin.isin(["m", "l"])
+        else:
+            if size_bin is not None:
+                mask |= size_bin.isin(["l"])
+        return mask
 
-    for c, i, sl in strata:
-        take = min(len(sl), target_per_stratum)
-        if take <= 0:
+    last_sample = pd.DataFrame(columns=output_cols)
+    for idx, threshold in enumerate(thresholds):
+        working_mask = _mask_by_threshold(df, threshold)
+        working = df[working_mask].copy()
+
+        sample_df = _stratified_sample(working)
+        if not sample_df.empty:
+            sample_df.attrs["min_employees_threshold"] = threshold
+        last_sample = sample_df
+
+        if len(sample_df) >= total_target:
+            print(
+                f"[apply_sampling] objetivo cubierto con umbral ≥{threshold} empleados (n={len(sample_df)})."
+            )
+            break
+
+        if idx < len(thresholds) - 1:
+            print(
+                f"[apply_sampling] muestra parcial (n={len(sample_df)}) con umbral ≥{threshold}; probando siguiente umbral {thresholds[idx + 1]}"
+            )
             continue
-        smp = sl.head(take).copy()
-        sampled_frames.append(smp)
-        stratum_sizes[(c, i)] = len(smp)
 
-    if not sampled_frames:
-        return pd.DataFrame(columns=[
-            "company_id","company_name","country","industry","size_bin","company_domain","weight_stratum","ticker"
-        ])
-
-    sample_df = pd.concat(sampled_frames, ignore_index=True).sort_values(
-        ["country", "industry", "company_name"]
-    ).reset_index(drop=True)
-
-    # Pesos por estrato
-    weights: Dict[Tuple[str, str], float] = {}
-    for key, cnt in stratum_sizes.items():
-        if cnt > 0:
-            weights[key] = total_target / (n_strata * cnt)
-
-    sample_df["weight_stratum"] = sample_df.apply(
-        lambda r: weights.get((r["country"], r["industry"]), 1.0), axis=1
-    )
-
-    # IDs determinísticos por QID
-    ordered_qids = sorted(sample_df["qid"].tolist())
-    qid_to_id = {qid: idx + 1 for idx, qid in enumerate(ordered_qids)}
-    sample_df["company_id"] = sample_df["qid"].map(qid_to_id)
-
-    cols = [
-        "company_id","company_name","country","industry","size_bin",
-        "company_domain","weight_stratum","ticker",
-    ]
-    return sample_df[cols].sort_values("company_id").reset_index(drop=True)
+        if len(sample_df) >= total_target or idx == len(thresholds) - 1:
+            break
+    if last_sample.empty:
+        print("[apply_sampling] advertencia: no se pudo construir muestra con los umbrales configurados.")
+    elif len(last_sample) < total_target:
+        print(
+            f"[apply_sampling] advertencia: muestra final n={len(last_sample)} por debajo del objetivo {total_target}."
+        )
+    return last_sample

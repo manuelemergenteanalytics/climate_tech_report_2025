@@ -28,6 +28,22 @@ def _now_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
+RAW_DIR = Path("data/raw/memberships")
+
+
+def _persist_raw_membership(df: pd.DataFrame, label: str) -> Path | None:
+    if df.empty:
+        return None
+    RAW_DIR.mkdir(parents=True, exist_ok=True)
+    safe_label = re.sub(r"[^a-z0-9]+", "_", label.lower()).strip("_") or "memberships"
+    out_dir = RAW_DIR / safe_label
+    out_dir.mkdir(parents=True, exist_ok=True)
+    ts_stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    path = out_dir / f"{ts_stamp}_{len(df)}.csv"
+    df.to_csv(path, index=False)
+    return path
+
+
 def _coerce_company_id(value) -> str:
     if pd.isna(value):
         return ""
@@ -373,9 +389,16 @@ def collect_memberships(cfg_path: str = "config/memberships.yml") -> int:
             url = cfg.get(key)
             if not url:
                 continue
-            df_live = func(url)
+            try:
+                df_live = func(url)
+            except Exception as exc:
+                print(f"[collect-memberships] fallo al descargar {kind} ({url}): {exc}")
+                continue
             if df_live.empty:
                 continue
+            raw_path = _persist_raw_membership(df_live, kind)
+            if raw_path is not None:
+                print(f"[collect-memberships] dump crudo -> {raw_path}")
             df_live["signal_type"] = kind
             df_live = _ensure_membership_df(
                 df_live,

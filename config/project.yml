@@ -2,24 +2,13 @@ sample:
   total_target: 1200
   min_per_stratum: 20
   countries:
-  - MX
-  - BR
-  - CO
-  - CL
   - AR
-  - UY
+  - BR
+  - CL
+  - CO
+  - MX
   - PE
-  - EC
-  - BO
-  - PY
-  - PA
-  - DO
-  - GT
-  - SV
-  - HN
-  - NI
-  - CR
-  - VE
+  - UY
   industries:
   - energy_power
   - oil_gas
@@ -33,3 +22,6 @@ sample:
   - water_waste_circularity
   - finance_insurance
   - ict_telecom
+  min_employees_options:
+  - 100
+  - 250
