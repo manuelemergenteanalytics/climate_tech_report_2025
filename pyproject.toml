@@ -26,7 +26,8 @@ dependencies = [
   "backoff>=2.2",
   "requests-cache>=1.2",
   "python-dateutil>=2.9",
-  "yfinance>=0.2"
+  "yfinance>=0.2",
+  "vaderSentiment>=3.3"
 ]
 
 [project.scripts]

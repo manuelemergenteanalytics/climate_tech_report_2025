@@ -16,6 +16,7 @@ import yaml
 
 from ctr25.utils.events import append_events, resolve_since
 from ctr25.utils.keywords import expand_keywords
+from ctr25.utils.sentiment import analyze_sentiment
 from ctr25.utils.universe import UniverseFilters, load_universe
 
 _CACHE_PATH = Path("data/interim/cache/news_requests.sqlite")
@@ -35,6 +36,9 @@ EVENT_COLUMNS = [
     "url",
     "title",
     "text_snippet",
+    "climate_score",
+    "sentiment_label",
+    "sentiment_score",
 ]
 
 GDELT_ENDPOINT = "https://api.gdeltproject.org/api/v2/doc/doc"
@@ -109,6 +113,88 @@ def _contains_keyword(text: str, keywords: Sequence[str]) -> bool:
 def _has_excluded(text: str, keywords: KeywordConfig) -> bool:
     lowered = text.lower()
     return any(kw.lower() in lowered for kw in keywords.exclude)
+
+
+def _count_matches(text: str, keywords: Sequence[str]) -> int:
+    lowered = text.lower()
+    return sum(1 for kw in keywords if kw.lower() in lowered)
+
+
+def _climate_score(match_count: int) -> float:
+    if match_count >= 3:
+        return 1.0
+    if match_count == 2:
+        return 0.85
+    if match_count == 1:
+        return 0.65
+    return 0.0
+
+
+def _enrich_events(df: pd.DataFrame, keywords: KeywordConfig) -> pd.DataFrame:
+    if df.empty:
+        return df
+
+    include_keywords = tuple(dict.fromkeys(kw.lower() for kw in keywords.include))
+    exclude_keywords = tuple(dict.fromkeys(kw.lower() for kw in keywords.exclude))
+
+    def _evaluate(row: pd.Series) -> pd.Series:
+        title = row.get("title", "") or ""
+        snippet = row.get("text_snippet", "") or ""
+        text = f"{title} {snippet}".strip()
+        lowered = text.lower()
+
+        if exclude_keywords and any(ex_kw in lowered for ex_kw in exclude_keywords):
+            return pd.Series(
+                {
+                    "signal_strength": 0.0,
+                    "climate_score": 0.0,
+                    "sentiment_label": "excluded",
+                    "sentiment_score": 0.0,
+                }
+            )
+
+        match_count = _count_matches(lowered, include_keywords) if include_keywords else 0
+        relevance = _climate_score(match_count)
+
+        sentiment_score, sentiment_label = analyze_sentiment(text)
+
+        base_strength = float(row.get("signal_strength", 0.5) or 0.0)
+
+        if relevance == 0.0:
+            return pd.Series(
+                {
+                    "signal_strength": 0.0,
+                    "climate_score": 0.0,
+                    "sentiment_label": "irrelevant",
+                    "sentiment_score": 0.0,
+                }
+            )
+
+        adjusted_strength = base_strength * relevance
+
+        if sentiment_label == "negative":
+            adjusted_strength = -abs(adjusted_strength * (1.0 + abs(sentiment_score)))
+        elif sentiment_label == "neutral":
+            adjusted_strength = adjusted_strength * 0.5
+        else:  # positive
+            adjusted_strength = adjusted_strength * (1.0 + sentiment_score * 0.5)
+
+        adjusted_strength = max(min(adjusted_strength, 1.0), -1.0)
+
+        return pd.Series(
+            {
+                "signal_strength": adjusted_strength,
+                "climate_score": relevance,
+                "sentiment_label": sentiment_label,
+                "sentiment_score": sentiment_score,
+            }
+        )
+
+    metrics = df.apply(_evaluate, axis=1)
+    enriched = df.copy()
+    enriched[["signal_strength", "climate_score", "sentiment_label", "sentiment_score"]] = metrics
+    enriched = enriched[enriched["signal_strength"] != 0.0]
+    return enriched
 
 
 def _gdelt_query(company_name: str, domain: str | None, keywords: KeywordConfig) -> str:
@@ -421,6 +507,9 @@ def collect_news(
         combined["size_bin"] = row.get("size_bin", "")
         combined["source"] = "news"
         combined["signal_type"] = "news"
+        combined = _enrich_events(combined, keywords)
+        if combined.empty:
+            continue
         frames.append(combined[EVENT_COLUMNS])
 
     if not frames:

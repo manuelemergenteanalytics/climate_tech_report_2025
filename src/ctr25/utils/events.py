@@ -22,12 +22,37 @@ _EVENT_COLUMNS: list[str] = [
     "url",
     "title",
     "text_snippet",
+    "climate_score",
+    "sentiment_label",
+    "sentiment_score",
 ]
+
+_DEFAULTS = {
+    "company_id": "",
+    "company_name": "",
+    "country": "",
+    "industry": "",
+    "size_bin": "",
+    "source": "",
+    "signal_type": "",
+    "signal_strength": 0.0,
+    "ts": "",
+    "url": "",
+    "title": "",
+    "text_snippet": "",
+    "climate_score": 0.0,
+    "sentiment_label": "",
+    "sentiment_score": 0.0,
+}
 
 
 def _load_events() -> pd.DataFrame:
     if EVENTS_PATH.exists():
-        return pd.read_csv(EVENTS_PATH)
+        df = pd.read_csv(EVENTS_PATH)
+        for col, default in _DEFAULTS.items():
+            if col not in df.columns:
+                df[col] = default
+        return df[_EVENT_COLUMNS]
     return pd.DataFrame(columns=_EVENT_COLUMNS)
 
 
@@ -53,20 +78,12 @@ def _ensure_columns(df: pd.DataFrame, *, source: str, signal_type: str) -> pd.Da
         return df
 
     out = df.copy()
-    defaults = {
-        "company_id": "",
-        "company_name": "",
-        "country": "",
-        "industry": "",
-        "size_bin": "",
+    defaults = _DEFAULTS.copy()
+    defaults.update({
         "source": source,
-        "signal_type": signal_type,
         "signal_strength": 1.0,
-        "ts": "",
-        "url": "",
-        "title": "",
-        "text_snippet": "",
-    }
+        "signal_type": signal_type,
+    })
     for col, default in defaults.items():
         if col not in out.columns:
             out[col] = default
@@ -100,6 +117,12 @@ def append_multiple(dfs: Iterable[pd.DataFrame]) -> int:
     combined = pd.concat(frames, ignore_index=True)
     if combined.empty:
         return 0
+
+    for col, default in _DEFAULTS.items():
+        if col not in combined.columns:
+            combined[col] = default
+        else:
+            combined[col] = combined[col].fillna(default)
 
     current = _load_events()
     before = len(current)

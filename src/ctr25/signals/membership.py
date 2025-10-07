@@ -290,6 +290,9 @@ def _events_from_matches(matched: pd.DataFrame) -> pd.DataFrame:
         "url": matched.get("url",""),
         "title": matched["signal_type"].apply(lambda s: f"Membership: {s}"),
         "text_snippet": matched["member_name"],
+        "climate_score": 1.0,
+        "sentiment_label": "positive",
+        "sentiment_score": 0.6,
     })
     return events
 

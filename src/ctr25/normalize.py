@@ -5,6 +5,7 @@ from .utils.text import load_industry_map, normalize_industry
 COMMON_COLS = [
     "company_id", "company_name", "country", "industry", "size_bin",
     "source", "signal_type", "signal_strength", "ts", "url", "title", "text_snippet",
+    "climate_score", "sentiment_label", "sentiment_score",
 ]
 
 def combine_mock_signals():

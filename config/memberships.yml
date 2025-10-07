@@ -1,4 +1,4 @@
 sbti_url: "https://files.sciencebasedtargets.org/production/files/companies-excel.xlsx"
-re100_url: "https://example.org/re100_members.csv"
-ungc_url: "https://example.org/ungc_participants.csv"
-bcorps_url: "https://example.org/bcorps_directory.csv"
+re100_url: "https://www.there100.org/re100-members"
+ungc_url: "https://unglobalcompact.org/what-is-gc/participants/search"
+bcorps_url: "https://www.bcorporation.net/en-us/find-a-b-corp/"
