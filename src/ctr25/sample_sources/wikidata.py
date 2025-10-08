@@ -433,8 +433,15 @@ def apply_sampling(df: pd.DataFrame, project_cfg: Dict[str, object]) -> pd.DataF
     """Return a stratified sample honouring minimum employee thresholds."""
 
     output_cols = [
-        "company_id","company_name","country","industry","size_bin",
-        "company_domain","weight_stratum","ticker",
+        "company_id",
+        "company_qid",
+        "company_name",
+        "country",
+        "industry",
+        "size_bin",
+        "company_domain",
+        "weight_stratum",
+        "ticker",
     ]
 
     def _stratified_sample(working: pd.DataFrame) -> pd.DataFrame:
@@ -519,6 +526,7 @@ def apply_sampling(df: pd.DataFrame, project_cfg: Dict[str, object]) -> pd.DataF
         ordered_qids = sorted(sample_df["qid"].tolist())
         qid_to_id = {qid: idx + 1 for idx, qid in enumerate(ordered_qids)}
         sample_df["company_id"] = sample_df["qid"].map(qid_to_id)
+        sample_df["company_qid"] = sample_df["qid"]
 
         return sample_df[output_cols].sort_values("company_id").reset_index(drop=True)
 

@@ -11,6 +11,7 @@ EVENTS_PATH = Path("data/processed/events_normalized.csv")
 
 _EVENT_COLUMNS: list[str] = [
     "company_id",
+    "company_qid",
     "company_name",
     "country",
     "industry",
@@ -29,6 +30,7 @@ _EVENT_COLUMNS: list[str] = [
 
 _DEFAULTS = {
     "company_id": "",
+    "company_qid": "",
     "company_name": "",
     "country": "",
     "industry": "",

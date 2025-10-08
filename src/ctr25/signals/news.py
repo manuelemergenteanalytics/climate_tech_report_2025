@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import datetime as dt
 import re
+import unicodedata
 from collections import defaultdict
 from dataclasses import dataclass
 from pathlib import Path
@@ -25,6 +26,7 @@ requests_cache.install_cache(str(_CACHE_PATH), backend="sqlite", expire_after=36
 
 EVENT_COLUMNS = [
     "company_id",
+    "company_qid",
     "company_name",
     "country",
     "industry",
@@ -105,19 +107,45 @@ def _normalize(text: str) -> str:
     return re.sub(r"\s+", " ", text or "").strip()
 
 
+def _normalize_for_match(text: str) -> str:
+    if not text:
+        return ""
+    decomposed = unicodedata.normalize("NFKD", text)
+    stripped = "".join(ch for ch in decomposed if not unicodedata.combining(ch))
+    collapsed = re.sub(r"\s+", " ", stripped)
+    return collapsed.strip().lower()
+
+
+def _prepare_keywords(keywords: Sequence[str]) -> tuple[str, ...]:
+    prepared: list[str] = []
+    for kw in keywords:
+        normalized = _normalize_for_match(kw)
+        if not normalized or normalized in prepared:
+            continue
+        prepared.append(normalized)
+    return tuple(prepared)
+
+
 def _contains_keyword(text: str, keywords: Sequence[str]) -> bool:
-    lowered = text.lower()
-    return any(kw.lower() in lowered for kw in keywords)
+    prepared = _prepare_keywords(keywords)
+    if not prepared:
+        return False
+    target = _normalize_for_match(text)
+    if not target:
+        return False
+    return any(kw in target for kw in prepared)
 
 
 def _has_excluded(text: str, keywords: KeywordConfig) -> bool:
-    lowered = text.lower()
-    return any(kw.lower() in lowered for kw in keywords.exclude)
-
-
-def _count_matches(text: str, keywords: Sequence[str]) -> int:
-    lowered = text.lower()
-    return sum(1 for kw in keywords if kw.lower() in lowered)
+    if not keywords.exclude:
+        return False
+    prepared_exclude = _prepare_keywords(keywords.exclude)
+    if not prepared_exclude:
+        return False
+    target = _normalize_for_match(text)
+    if not target:
+        return False
+    return any(ex_kw in target for ex_kw in prepared_exclude)
 
 
 def _climate_score(match_count: int) -> float:
@@ -134,16 +162,16 @@ def _enrich_events(df: pd.DataFrame, keywords: KeywordConfig) -> pd.DataFrame:
     if df.empty:
         return df
 
-    include_keywords = tuple(dict.fromkeys(kw.lower() for kw in keywords.include))
-    exclude_keywords = tuple(dict.fromkeys(kw.lower() for kw in keywords.exclude))
+    include_keywords = _prepare_keywords(keywords.include)
+    exclude_keywords = _prepare_keywords(keywords.exclude)
 
     def _evaluate(row: pd.Series) -> pd.Series:
         title = row.get("title", "") or ""
         snippet = row.get("text_snippet", "") or ""
         text = f"{title} {snippet}".strip()
-        lowered = text.lower()
+        normalized = _normalize_for_match(text)
 
-        if exclude_keywords and any(ex_kw in lowered for ex_kw in exclude_keywords):
+        if exclude_keywords and any(ex_kw in normalized for ex_kw in exclude_keywords):
             return pd.Series(
                 {
                     "signal_strength": 0.0,
@@ -153,7 +181,7 @@ def _enrich_events(df: pd.DataFrame, keywords: KeywordConfig) -> pd.DataFrame:
                 }
             )
 
-        match_count = _count_matches(lowered, include_keywords) if include_keywords else 0
+        match_count = sum(1 for kw in include_keywords if kw in normalized)
         relevance = _climate_score(match_count)
 
         sentiment_score, sentiment_label = analyze_sentiment(text)
@@ -501,6 +529,7 @@ def collect_news(
 
         combined = pd.concat(company_frames, ignore_index=True)
         combined["company_id"] = company_id
+        combined["company_qid"] = row.get("company_qid", row.get("qid", ""))
         combined["company_name"] = company_name
         combined["country"] = row.get("country", "")
         combined["industry"] = row.get("industry", "")

@@ -136,6 +136,8 @@ def _load_universe_sample() -> pd.DataFrame:
     df = pd.read_csv(p)
     if "company_id" not in df.columns or "company_name" not in df.columns:
         raise ValueError("universe_sample.csv debe tener company_id y company_name.")
+    if "company_qid" not in df.columns:
+        df["company_qid"] = ""
     df["company_name_norm"] = df["company_name"].apply(_norm)
     return df
 
@@ -182,6 +184,7 @@ def _match_memberships_to_universe(universe: pd.DataFrame, members: pd.DataFrame
                 "source": row["source"],
                 "signal_type": row["signal_type"],
                 "company_id": _normalize_company_id_output(company_id_val),
+                "company_qid": best.get("company_qid", "") if best is not None else "",
                 "company_name": best.get("company_name", row.get("company_name", row["member_name"])) if best is not None else (row.get("company_name") or row["member_name"]),
                 "country": best.get("country", row.get("country", "")) if best is not None else row.get("country", ""),
                 "industry": best.get("industry", row.get("industry", "")) if best is not None else row.get("industry", ""),
@@ -199,7 +202,7 @@ def _match_memberships_to_universe(universe: pd.DataFrame, members: pd.DataFrame
         base_cols = ["member_name", "member_name_norm", "url", "ts", "source", "signal_type", "_orig_idx"]
         left = remaining[base_cols]
         exact = left.merge(
-            universe[["company_id", "company_name", "company_name_norm", "country", "industry", "size_bin"]],
+            universe[["company_id", "company_qid", "company_name", "company_name_norm", "country", "industry", "size_bin"]],
             left_on="member_name_norm",
             right_on="company_name_norm",
             how="inner",
@@ -214,6 +217,7 @@ def _match_memberships_to_universe(universe: pd.DataFrame, members: pd.DataFrame
                 "source",
                 "signal_type",
                 "company_id",
+                "company_qid",
                 "company_name",
                 "country",
                 "industry",
@@ -248,6 +252,7 @@ def _match_memberships_to_universe(universe: pd.DataFrame, members: pd.DataFrame
                     "source": row["source"],
                     "signal_type": row["signal_type"],
                     "company_id": best["company_id"],
+                    "company_qid": best.get("company_qid", ""),
                     "company_name": best["company_name"],
                     "country": best.get("country", ""),
                     "industry": best.get("industry", ""),
@@ -265,6 +270,7 @@ def _match_memberships_to_universe(universe: pd.DataFrame, members: pd.DataFrame
             "source",
             "signal_type",
             "company_id",
+            "company_qid",
             "company_name",
             "country",
             "industry",
@@ -279,6 +285,7 @@ def _events_from_matches(matched: pd.DataFrame) -> pd.DataFrame:
         return matched
     events = pd.DataFrame({
         "company_id": matched["company_id"],
+        "company_qid": matched.get("company_qid", ""),
         "company_name": matched["company_name"],
         "country": matched.get("country",""),
         "industry": matched.get("industry",""),

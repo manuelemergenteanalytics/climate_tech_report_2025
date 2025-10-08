@@ -20,6 +20,7 @@ requests_cache.install_cache(str(_CACHE_PATH), backend="sqlite", expire_after=36
 
 EVENT_COLUMNS = [
     "company_id",
+    "company_qid",
     "company_name",
     "country",
     "industry",
@@ -175,6 +176,7 @@ def collect_jobs(
             axis=1,
         )
         df["company_id"] = company["company_id"]
+        df["company_qid"] = company.get("company_qid", company.get("qid", ""))
         df["company_name"] = company["company_name"]
         df["country"] = company.get("country", "")
         df["industry"] = company.get("industry", "")

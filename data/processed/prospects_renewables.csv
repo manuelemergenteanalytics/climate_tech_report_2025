@@ -1,18 +1,191 @@
-company_name,country,industry,source
-Ambev S.A.,BR,agro_food,sbti
-Ammper Energía S.A.P.I de C.V,MX,energy_power,sbti
-Chilexpress S.A.,CL,transport_logistics,sbti
-Coca-Cola FEMSA,MX,agro_food,sbti
-ComBio Energia S.A.,BR,energy_power,sbti
-Companhia Energética de Minas Gerais - Cemig,BR,energy_power,sbti
-Companhia Paranaense de Energia - COPEL,BR,energy_power,sbti
-EDP Energias do Brasil S.A.,BR,energy_power,sbti
-Grupo Bimbo SAB de CV,MX,agro_food,sbti
-Inkia Energy Group (Nautilus Energy Holdings LLC),PE,energy_power,sbti
-Lojas Renner S.A.,BR,manufacturing,sbti
-Lojas Riachuelo S/A,BR,manufacturing,sbti
-Marfrig Global Foods S.A.,BR,agro_food,sbti
-CPFL Energia,BR,energy_power,sbti
-Neoenergia S.A,BR,energy_power,sbti
-Centrais Elétricas Brasileiras S.A. - Eletrobras,BR,energy_power,sbti
-CSN Cimentos Brasil,BR,manufacturing,sbti
+company_name,country,industry,sector,justification,source
+AutoCorp S.A,AR,ground_transportation_trucking_transportation,Ground Transportation - Trucking Transportation,Movilidad y logística intensivas en energía; SBTi fuerza electrificación y abastecimiento renovable.,sbti
+Citrusvil S.A.,AR,food_and_beverage_processing,Food and Beverage Processing,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+FAEN S.A.,AR,containers_and_packaging,Containers and Packaging,Fabricante de envases con matrices térmicas; SBTi requiere eficiencia y calor renovable.,sbti
+TRF,AR,ground_transportation_trucking_transportation,Ground Transportation - Trucking Transportation,Movilidad y logística intensivas en energía; SBTi fuerza electrificación y abastecimiento renovable.,sbti
+Vicente Trapani S.A.,AR,food_and_beverage_processing,Food and Beverage Processing,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+ACE SCHMERSAL,BR,electrical_equipment_and_machinery,Electrical Equipment and Machinery,Fabricante industrial electrificado; SBTi requiere suministrar operaciones con energía renovable.,sbti
+AMAGGI,BR,food_production_agricultural_production,Food Production - Agricultural Production,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+Ambev S.A.,BR,food_and_beverage_processing,Food and Beverage Processing,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+Arezzo & Co,BR,textiles_apparel_footwear_and_luxury_goods,"Textiles, Apparel, Footwear and Luxury Goods",Textil con uso intensivo de vapor; SBTi favorece calefacción renovable y eficiencia energética.,sbti
+Ativa Logística,BR,ground_transportation_trucking_transportation,Ground Transportation - Trucking Transportation,Movilidad y logística intensivas en energía; SBTi fuerza electrificación y abastecimiento renovable.,sbti
+Azul Linhas Aéreas SA,BR,air_transportation_airlines,Air Transportation - Airlines,Movilidad y logística intensivas en energía; SBTi fuerza electrificación y abastecimiento renovable.,sbti
+AÇO VERDE DO BRASIL.S.A,BR,mining_iron_aluminum_other_metals,"Mining - Iron, Aluminum, Other Metals",Minería/metales con consumo eléctrico relevante; SBTi impulsa PPAs renovables y electrificación de flota.,sbti
+BRF S.A.,BR,food_and_beverage_processing,Food and Beverage Processing,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+Better Drinks,BR,food_and_beverage_processing,Food and Beverage Processing,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+Brookfield Properties Brazil,BR,real_estate,Real Estate,Gestor inmobiliario con activos intensivos en energía; SBTi exige edificios Net-Zero alimentados por renovables.,sbti
+C&A Modas S.A.,BR,textiles_apparel_footwear_and_luxury_goods,"Textiles, Apparel, Footwear and Luxury Goods",Textil con uso intensivo de vapor; SBTi favorece calefacción renovable y eficiencia energética.,sbti
+CJ SELECTA S.A.,BR,food_production_agricultural_production,Food Production - Agricultural Production,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+CLI - Corredor Logística e Infraestrutura,BR,water_transportation_ports_and_services,Water Transportation - Ports and Services,Movilidad y logística intensivas en energía; SBTi fuerza electrificación y abastecimiento renovable.,sbti
+CPFL Energia,BR,electric_utilities_and_independent_power_producers_and_energy_traders_including_,"Electric Utilities and Independent Power Producers and Energy Traders (including Fossil, Alternative and Nuclear Energy)",Utility/regulador eléctrico; SBTi obliga a expandir capacidad renovable y gestión flexible de la red.,sbti
+CR Bluecast Industria Mecânica do Brasil LtdA,BR,automobiles_and_components,Automobiles and Components,Movilidad y logística intensivas en energía; SBTi fuerza electrificación y abastecimiento renovable.,sbti
+CSN Cimentos Brasil,BR,construction_materials,Construction Materials,Materiales de construcción de alta huella; SBTi demanda combustibles alternativos y PPAs renovables.,sbti
+Capricórnio Têxtil,BR,textiles_apparel_footwear_and_luxury_goods,"Textiles, Apparel, Footwear and Luxury Goods",Textil con uso intensivo de vapor; SBTi favorece calefacción renovable y eficiencia energética.,sbti
+Cargo Brasil,BR,ground_transportation_trucking_transportation,Ground Transportation - Trucking Transportation,Movilidad y logística intensivas en energía; SBTi fuerza electrificación y abastecimiento renovable.,sbti
+Centrais Elétricas Brasileiras S.A. - Eletrobras,BR,electric_utilities_and_independent_power_producers_and_energy_traders_including_,"Electric Utilities and Independent Power Producers and Energy Traders (including Fossil, Alternative and Nuclear Energy)",Utility/regulador eléctrico; SBTi obliga a expandir capacidad renovable y gestión flexible de la red.,sbti
+Citrosuco Agroindustria S.A.,BR,food_and_beverage_processing,Food and Beverage Processing,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+ComBio Energia S.A.,BR,electric_utilities_and_independent_power_producers_and_energy_traders_including_,"Electric Utilities and Independent Power Producers and Energy Traders (including Fossil, Alternative and Nuclear Energy)",Utility/regulador eléctrico; SBTi obliga a expandir capacidad renovable y gestión flexible de la red.,sbti
+Companhia Brasileira de Aluminio,BR,mining_iron_aluminum_other_metals,"Mining - Iron, Aluminum, Other Metals",Minería/metales con consumo eléctrico relevante; SBTi impulsa PPAs renovables y electrificación de flota.,sbti
+Companhia Energética de Minas Gerais - Cemig,BR,electric_utilities_and_independent_power_producers_and_energy_traders_including_,"Electric Utilities and Independent Power Producers and Energy Traders (including Fossil, Alternative and Nuclear Energy)",Utility/regulador eléctrico; SBTi obliga a expandir capacidad renovable y gestión flexible de la red.,sbti
+Companhia Paranaense de Energia - COPEL,BR,electric_utilities_and_independent_power_producers_and_energy_traders_including_,"Electric Utilities and Independent Power Producers and Energy Traders (including Fossil, Alternative and Nuclear Energy)",Utility/regulador eléctrico; SBTi obliga a expandir capacidad renovable y gestión flexible de la red.,sbti
+EDP Energias do Brasil S.A.,BR,electric_utilities_and_independent_power_producers_and_energy_traders_including_,"Electric Utilities and Independent Power Producers and Energy Traders (including Fossil, Alternative and Nuclear Energy)",Utility/regulador eléctrico; SBTi obliga a expandir capacidad renovable y gestión flexible de la red.,sbti
+Electro Aço Altona S.A.,BR,mining_iron_aluminum_other_metals,"Mining - Iron, Aluminum, Other Metals",Minería/metales con consumo eléctrico relevante; SBTi impulsa PPAs renovables y electrificación de flota.,sbti
+Eletroligas Ltda,BR,mining_iron_aluminum_other_metals,"Mining - Iron, Aluminum, Other Metals",Minería/metales con consumo eléctrico relevante; SBTi impulsa PPAs renovables y electrificación de flota.,sbti
+Fundição Moreno Ltda,BR,mining_iron_aluminum_other_metals,"Mining - Iron, Aluminum, Other Metals",Minería/metales con consumo eléctrico relevante; SBTi impulsa PPAs renovables y electrificación de flota.,sbti
+Funfer Fundição de Ferro LTDA,BR,mining_iron_aluminum_other_metals,"Mining - Iron, Aluminum, Other Metals",Minería/metales con consumo eléctrico relevante; SBTi impulsa PPAs renovables y electrificación de flota.,sbti
+Fábrica de Papel e Papelão Nossa Senhora da Penha S/A,BR,forest_and_paper_products_forestry_timber_pulp_and_paper_rubber,"Forest and Paper Products - Forestry, Timber, Pulp and Paper, Rubber",Cadena forestal apta para bioenergía; SBTi orienta hacia suministro renovable y captura de CO2.,sbti
+GLOBALPACK INDUSTRIA E COMERCIO LTDA.,BR,containers_and_packaging,Containers and Packaging,Fabricante de envases con matrices térmicas; SBTi requiere eficiencia y calor renovable.,sbti
+GOL (GOL Linhas Aéreas S.A.),BR,air_transportation_airlines,Air Transportation - Airlines,Movilidad y logística intensivas en energía; SBTi fuerza electrificación y abastecimiento renovable.,sbti
+Gelopar Refrigeração Paranaense Ltda,BR,electrical_equipment_and_machinery,Electrical Equipment and Machinery,Fabricante industrial electrificado; SBTi requiere suministrar operaciones con energía renovable.,sbti
+Grupo CCR,BR,ground_transportation_highways_and_railtracks,Ground Transportation - Highways and Railtracks,Movilidad y logística intensivas en energía; SBTi fuerza electrificación y abastecimiento renovable.,sbti
+Grupo Malwee,BR,textiles_apparel_footwear_and_luxury_goods,"Textiles, Apparel, Footwear and Luxury Goods",Textil con uso intensivo de vapor; SBTi favorece calefacción renovable y eficiencia energética.,sbti
+ITALBRONZE LTDA,BR,mining_iron_aluminum_other_metals,"Mining - Iron, Aluminum, Other Metals",Minería/metales con consumo eléctrico relevante; SBTi impulsa PPAs renovables y electrificación de flota.,sbti
+Iochpe-Maxion S.A.,BR,automobiles_and_components,Automobiles and Components,Movilidad y logística intensivas en energía; SBTi fuerza electrificación y abastecimiento renovable.,sbti
+JBS,BR,food_and_beverage_processing,Food and Beverage Processing,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+Klabin S.A.,BR,forest_and_paper_products_forestry_timber_pulp_and_paper_rubber,"Forest and Paper Products - Forestry, Timber, Pulp and Paper, Rubber",Cadena forestal apta para bioenergía; SBTi orienta hacia suministro renovable y captura de CO2.,sbti
+Lojas Renner S.A.,BR,textiles_apparel_footwear_and_luxury_goods,"Textiles, Apparel, Footwear and Luxury Goods",Textil con uso intensivo de vapor; SBTi favorece calefacción renovable y eficiencia energética.,sbti
+Lojas Riachuelo S/A,BR,textiles_apparel_footwear_and_luxury_goods,"Textiles, Apparel, Footwear and Luxury Goods",Textil con uso intensivo de vapor; SBTi favorece calefacción renovable y eficiencia energética.,sbti
+MARBOW RESINAS,BR,chemicals,Chemicals,Industria química intensiva en calor; SBTi exige electrificación y contratos de energía renovable.,sbti
+Marfrig Global Foods S.A.,BR,food_and_beverage_processing,Food and Beverage Processing,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+Metalfrio Solutions S.A.,BR,electrical_equipment_and_machinery,Electrical Equipment and Machinery,Fabricante industrial electrificado; SBTi requiere suministrar operaciones con energía renovable.,sbti
+Movida Participações S.A,BR,ground_transportation_trucking_transportation,Ground Transportation - Trucking Transportation,Movilidad y logística intensivas en energía; SBTi fuerza electrificación y abastecimiento renovable.,sbti
+Neoenergia S.A,BR,electric_utilities_and_independent_power_producers_and_energy_traders_including_,"Electric Utilities and Independent Power Producers and Energy Traders (including Fossil, Alternative and Nuclear Energy)",Utility/regulador eléctrico; SBTi obliga a expandir capacidad renovable y gestión flexible de la red.,sbti
+OMR COMPONENTES AUTOMOTIVOS LTDA,BR,automobiles_and_components,Automobiles and Components,Movilidad y logística intensivas en energía; SBTi fuerza electrificación y abastecimiento renovable.,sbti
+Odata Brasil S.A.,BR,real_estate,Real Estate,Gestor inmobiliario con activos intensivos en energía; SBTi exige edificios Net-Zero alimentados por renovables.,sbti
+PAMA MECANICA E FUNDIÇÃO LTDA,BR,mining_other_rare_minerals_precious_metals_and_gems,"Mining - Other (Rare Minerals, Precious Metals and Gems)",Minería/metales con consumo eléctrico relevante; SBTi impulsa PPAs renovables y electrificación de flota.,sbti
+PPE   FIOS ESMALTADOS S.A,BR,automobiles_and_components,Automobiles and Components,Movilidad y logística intensivas en energía; SBTi fuerza electrificación y abastecimiento renovable.,sbti
+Polistampo Indústria Metalúrgica Ltda.,BR,automobiles_and_components,Automobiles and Components,Movilidad y logística intensivas en energía; SBTi fuerza electrificación y abastecimiento renovable.,sbti
+Pontes Industria de Cera Ltda,BR,chemicals,Chemicals,Industria química intensiva en calor; SBTi exige electrificación y contratos de energía renovable.,sbti
+RV Soluções Industriais Ltda.,BR,electrical_equipment_and_machinery,Electrical Equipment and Machinery,Fabricante industrial electrificado; SBTi requiere suministrar operaciones con energía renovable.,sbti
+Rudolph Usinados SA,BR,automobiles_and_components,Automobiles and Components,Movilidad y logística intensivas en energía; SBTi fuerza electrificación y abastecimiento renovable.,sbti
+SADA Siderurgia LTDA,BR,automobiles_and_components,Automobiles and Components,Movilidad y logística intensivas en energía; SBTi fuerza electrificación y abastecimiento renovable.,sbti
+SERC Industrial,BR,mining_iron_aluminum_other_metals,"Mining - Iron, Aluminum, Other Metals",Minería/metales con consumo eléctrico relevante; SBTi impulsa PPAs renovables y electrificación de flota.,sbti
+Sabará Participações,BR,chemicals,Chemicals,Industria química intensiva en calor; SBTi exige electrificación y contratos de energía renovable.,sbti
+Sew Eurodrive Brasil,BR,electrical_equipment_and_machinery,Electrical Equipment and Machinery,Fabricante industrial electrificado; SBTi requiere suministrar operaciones con energía renovable.,sbti
+Sucocítrico Cutrale,BR,food_and_beverage_processing,Food and Beverage Processing,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+Suzano S/A,BR,forest_and_paper_products_forestry_timber_pulp_and_paper_rubber,"Forest and Paper Products - Forestry, Timber, Pulp and Paper, Rubber",Cadena forestal apta para bioenergía; SBTi orienta hacia suministro renovable y captura de CO2.,sbti
+TUNKER QUÍMICA IMPORTAÇÃO LTDA,BR,chemicals,Chemicals,Industria química intensiva en calor; SBTi exige electrificación y contratos de energía renovable.,sbti
+Termotécnica Ltda.,BR,chemicals,Chemicals,Industria química intensiva en calor; SBTi exige electrificación y contratos de energía renovable.,sbti
+USIMECA USINAGEM INDUSTRIAL,BR,mining_iron_aluminum_other_metals,"Mining - Iron, Aluminum, Other Metals",Minería/metales con consumo eléctrico relevante; SBTi impulsa PPAs renovables y electrificación de flota.,sbti
+Uisa,BR,food_production_agricultural_production,Food Production - Agricultural Production,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+Vale S.A.,BR,mining_iron_aluminum_other_metals,"Mining - Iron, Aluminum, Other Metals",Minería/metales con consumo eléctrico relevante; SBTi impulsa PPAs renovables y electrificación de flota.,sbti
+Vidroporto S.A.,BR,containers_and_packaging,Containers and Packaging,Fabricante de envases con matrices térmicas; SBTi requiere eficiencia y calor renovable.,sbti
+Votorantim Cimentos,BR,construction_materials,Construction Materials,Materiales de construcción de alta huella; SBTi demanda combustibles alternativos y PPAs renovables.,sbti
+WEG S.A.,BR,electrical_equipment_and_machinery,Electrical Equipment and Machinery,Fabricante industrial electrificado; SBTi requiere suministrar operaciones con energía renovable.,sbti
+"Zanettini, Barossi S/A Indústria e Comércio",BR,automobiles_and_components,Automobiles and Components,Movilidad y logística intensivas en energía; SBTi fuerza electrificación y abastecimiento renovable.,sbti
+ARESTI CHILE WINE S.A.,CL,food_and_beverage_processing,Food and Beverage Processing,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+Aceros AZA S.A.,CL,mining_iron_aluminum_other_metals,"Mining - Iron, Aluminum, Other Metals",Minería/metales con consumo eléctrico relevante; SBTi impulsa PPAs renovables y electrificación de flota.,sbti
+Arauco,CL,forest_and_paper_products_forestry_timber_pulp_and_paper_rubber,"Forest and Paper Products - Forestry, Timber, Pulp and Paper, Rubber",Cadena forestal apta para bioenergía; SBTi orienta hacia suministro renovable y captura de CO2.,sbti
+Asserco SPA,CL,electrical_equipment_and_machinery,Electrical Equipment and Machinery,Fabricante industrial electrificado; SBTi requiere suministrar operaciones con energía renovable.,sbti
+Avícola Coliumo,CL,food_production_animal_source_food_production,Food Production - Animal Source Food Production,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+Blumar S.A.,CL,food_production_animal_source_food_production,Food Production - Animal Source Food Production,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+CAMILO FERRON CHILE SA,CL,food_and_beverage_processing,Food and Beverage Processing,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+CMPC,CL,forest_and_paper_products_forestry_timber_pulp_and_paper_rubber,"Forest and Paper Products - Forestry, Timber, Pulp and Paper, Rubber",Cadena forestal apta para bioenergía; SBTi orienta hacia suministro renovable y captura de CO2.,sbti
+CONCHA Y TORO,CL,food_and_beverage_processing,Food and Beverage Processing,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+Chilexpress S.A.,CL,ground_transportation_trucking_transportation,Ground Transportation - Trucking Transportation,Movilidad y logística intensivas en energía; SBTi fuerza electrificación y abastecimiento renovable.,sbti
+Embotelladora Andina S.A.,CL,food_and_beverage_processing,Food and Beverage Processing,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+IANSA,CL,food_production_agricultural_production,Food Production - Agricultural Production,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+Inamar Vapor,CL,electrical_equipment_and_machinery,Electrical Equipment and Machinery,Fabricante industrial electrificado; SBTi requiere suministrar operaciones con energía renovable.,sbti
+LATAM Airlines Group S.A.,CL,air_transportation_airlines,Air Transportation - Airlines,Movilidad y logística intensivas en energía; SBTi fuerza electrificación y abastecimiento renovable.,sbti
+MASISA,CL,forest_and_paper_products_forestry_timber_pulp_and_paper_rubber,"Forest and Paper Products - Forestry, Timber, Pulp and Paper, Rubber",Cadena forestal apta para bioenergía; SBTi orienta hacia suministro renovable y captura de CO2.,sbti
+Mallplaza,CL,real_estate,Real Estate,Gestor inmobiliario con activos intensivos en energía; SBTi exige edificios Net-Zero alimentados por renovables.,sbti
+Neptuno Pumps,CL,electrical_equipment_and_machinery,Electrical Equipment and Machinery,Fabricante industrial electrificado; SBTi requiere suministrar operaciones con energía renovable.,sbti
+Parque Arauco S.A,CL,real_estate,Real Estate,Gestor inmobiliario con activos intensivos en energía; SBTi exige edificios Net-Zero alimentados por renovables.,sbti
+Polpaico BSA,CL,construction_materials,Construction Materials,Materiales de construcción de alta huella; SBTi demanda combustibles alternativos y PPAs renovables.,sbti
+SIDERVAL S.A.,CL,mining_iron_aluminum_other_metals,"Mining - Iron, Aluminum, Other Metals",Minería/metales con consumo eléctrico relevante; SBTi impulsa PPAs renovables y electrificación de flota.,sbti
+SQM Salar S.A,CL,chemicals,Chemicals,Industria química intensiva en calor; SBTi exige electrificación y contratos de energía renovable.,sbti
+Salmones Austral,CL,food_production_animal_source_food_production,Food Production - Animal Source Food Production,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+Santa Rita Estates,CL,food_and_beverage_processing,Food and Beverage Processing,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+Vina Polkura SA,CL,food_production_agricultural_production,Food Production - Agricultural Production,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+Vitapro Chile S.A.,CL,food_production_animal_source_food_production,Food Production - Animal Source Food Production,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+Viña Casa Silva,CL,food_and_beverage_processing,Food and Beverage Processing,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+Viña Montes,CL,food_and_beverage_processing,Food and Beverage Processing,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+Viña Requingua,CL,food_and_beverage_processing,Food and Beverage Processing,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+Viñedos Emiliana S.A.,CL,food_and_beverage_processing,Food and Beverage Processing,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+CASALUKER S.A,CO,food_and_beverage_processing,Food and Beverage Processing,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+CEMENTOS ARGOS,CO,construction_materials,Construction Materials,Materiales de construcción de alta huella; SBTi demanda combustibles alternativos y PPAs renovables.,sbti
+EQUIRENT VEHICULOS Y MAQUINARIA SAS BIC,CO,ground_transportation_highways_and_railtracks,Ground Transportation - Highways and Railtracks,Movilidad y logística intensivas en energía; SBTi fuerza electrificación y abastecimiento renovable.,sbti
+LITOPLAS S.A.,CO,containers_and_packaging,Containers and Packaging,Fabricante de envases con matrices térmicas; SBTi requiere eficiencia y calor renovable.,sbti
+LUKER AGRÍCOLA,CO,food_production_agricultural_production,Food Production - Agricultural Production,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+Opain S.A,CO,air_transportation_airport_services,Air Transportation - Airport Services,Movilidad y logística intensivas en energía; SBTi fuerza electrificación y abastecimiento renovable.,sbti
+PANAMERICANA FORMAS E IMPRESOS S.A,CO,forest_and_paper_products_forestry_timber_pulp_and_paper_rubber,"Forest and Paper Products - Forestry, Timber, Pulp and Paper, Rubber",Cadena forestal apta para bioenergía; SBTi orienta hacia suministro renovable y captura de CO2.,sbti
+PROCAFECOL S.A.,CO,food_and_beverage_processing,Food and Beverage Processing,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+Quimpac,CO,chemicals,Chemicals,Industria química intensiva en calor; SBTi exige electrificación y contratos de energía renovable.,sbti
+TEAM FOODS COLOMBIA S.A.,CO,food_and_beverage_processing,Food and Beverage Processing,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+Florida Ice & Farm Company- FIFCO,CR,food_and_beverage_processing,Food and Beverage Processing,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+Tinflex SRL,DO,containers_and_packaging,Containers and Packaging,Fabricante de envases con matrices térmicas; SBTi requiere eficiencia y calor renovable.,sbti
+EUROFISH S.A.,EC,food_production_animal_source_food_production,Food Production - Animal Source Food Production,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+Grupo Superior,EC,food_and_beverage_processing,Food and Beverage Processing,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+LA FABRIL,EC,food_and_beverage_processing,Food and Beverage Processing,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+POLIPACK CIA. LTDA.,EC,containers_and_packaging,Containers and Packaging,Fabricante de envases con matrices térmicas; SBTi requiere eficiencia y calor renovable.,sbti
+SIGMAPLAST S.A.,EC,containers_and_packaging,Containers and Packaging,Fabricante de envases con matrices térmicas; SBTi requiere eficiencia y calor renovable.,sbti
+Agroamerica,GT,food_production_agricultural_production,Food Production - Agricultural Production,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+EMPAQUES SAN LUCAS S.A.,GT,containers_and_packaging,Containers and Packaging,Fabricante de envases con matrices térmicas; SBTi requiere eficiencia y calor renovable.,sbti
+"Producción, Industrialización, Comercialización y Asesoría de Hule Natural, S. A.",GT,forest_and_paper_products_forestry_timber_pulp_and_paper_rubber,"Forest and Paper Products - Forestry, Timber, Pulp and Paper, Rubber",Cadena forestal apta para bioenergía; SBTi orienta hacia suministro renovable y captura de CO2.,sbti
+The Central America Bottling Corporation (cbc),GT,food_and_beverage_processing,Food and Beverage Processing,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+ELCATEX S. DE R.L. DE C.V.,HN,textiles_apparel_footwear_and_luxury_goods,"Textiles, Apparel, Footwear and Luxury Goods",Textil con uso intensivo de vapor; SBTi favorece calefacción renovable y eficiencia energética.,sbti
+AMERICAN POLY DEL NORTE S.A. DE C.V.,MX,containers_and_packaging,Containers and Packaging,Fabricante de envases con matrices térmicas; SBTi requiere eficiencia y calor renovable.,sbti
+ARRI de Frontera S.A de C.V.,MX,electrical_equipment_and_machinery,Electrical Equipment and Machinery,Fabricante industrial electrificado; SBTi requiere suministrar operaciones con energía renovable.,sbti
+Alpek S.A.B. de C.V.,MX,chemicals,Chemicals,Industria química intensiva en calor; SBTi exige electrificación y contratos de energía renovable.,sbti
+"Alucaps Mexicana de Occidente, S.A. de C.V",MX,containers_and_packaging,Containers and Packaging,Fabricante de envases con matrices térmicas; SBTi requiere eficiencia y calor renovable.,sbti
+Ammper Energía S.A.P.I de C.V,MX,electric_utilities_and_independent_power_producers_and_energy_traders_including_,"Electric Utilities and Independent Power Producers and Energy Traders (including Fossil, Alternative and Nuclear Energy)",Utility/regulador eléctrico; SBTi obliga a expandir capacidad renovable y gestión flexible de la red.,sbti
+Anvi Mexicana S.A de C.V.,MX,electrical_equipment_and_machinery,Electrical Equipment and Machinery,Fabricante industrial electrificado; SBTi requiere suministrar operaciones con energía renovable.,sbti
+Arbomex S.A. de C.V.,MX,automobiles_and_components,Automobiles and Components,Movilidad y logística intensivas en energía; SBTi fuerza electrificación y abastecimiento renovable.,sbti
+Arca Continental S.A.B. de C.V,MX,food_and_beverage_processing,Food and Beverage Processing,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+Bio Pappel S.A. de C.V.,MX,forest_and_paper_products_forestry_timber_pulp_and_paper_rubber,"Forest and Paper Products - Forestry, Timber, Pulp and Paper, Rubber",Cadena forestal apta para bioenergía; SBTi orienta hacia suministro renovable y captura de CO2.,sbti
+Bocar Group,MX,automobiles_and_components,Automobiles and Components,Movilidad y logística intensivas en energía; SBTi fuerza electrificación y abastecimiento renovable.,sbti
+CARTOLITO S.A. DE C.V.,MX,forest_and_paper_products_forestry_timber_pulp_and_paper_rubber,"Forest and Paper Products - Forestry, Timber, Pulp and Paper, Rubber",Cadena forestal apta para bioenergía; SBTi orienta hacia suministro renovable y captura de CO2.,sbti
+CARTON CAPITAL,MX,containers_and_packaging,Containers and Packaging,Fabricante de envases con matrices térmicas; SBTi requiere eficiencia y calor renovable.,sbti
+"CEMEX, S.A.B de C.V.",MX,construction_materials,Construction Materials,Materiales de construcción de alta huella; SBTi demanda combustibles alternativos y PPAs renovables.,sbti
+CRYOINFRA S.A. DE C.V.,MX,chemicals,Chemicals,Industria química intensiva en calor; SBTi exige electrificación y contratos de energía renovable.,sbti
+Coca-Cola FEMSA,MX,food_and_beverage_processing,Food and Beverage Processing,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+Corvaglia Closures S.A de C.V,MX,containers_and_packaging,Containers and Packaging,Fabricante de envases con matrices térmicas; SBTi requiere eficiencia y calor renovable.,sbti
+Envases Universales de México,MX,containers_and_packaging,Containers and Packaging,Fabricante de envases con matrices térmicas; SBTi requiere eficiencia y calor renovable.,sbti
+Estudio Color,MX,containers_and_packaging,Containers and Packaging,Fabricante de envases con matrices térmicas; SBTi requiere eficiencia y calor renovable.,sbti
+FEVISA,MX,containers_and_packaging,Containers and Packaging,Fabricante de envases con matrices térmicas; SBTi requiere eficiencia y calor renovable.,sbti
+FINSA,MX,real_estate,Real Estate,Gestor inmobiliario con activos intensivos en energía; SBTi exige edificios Net-Zero alimentados por renovables.,sbti
+Fabrica de Harinas Elizondo,MX,food_and_beverage_processing,Food and Beverage Processing,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+Fabricantes de Equipos para Refrigeración SA de CV,MX,electrical_equipment_and_machinery,Electrical Equipment and Machinery,Fabricante industrial electrificado; SBTi requiere suministrar operaciones con energía renovable.,sbti
+Fibra Danhos,MX,real_estate,Real Estate,Gestor inmobiliario con activos intensivos en energía; SBTi exige edificios Net-Zero alimentados por renovables.,sbti
+Fibra Mty F/2157,MX,real_estate,Real Estate,Gestor inmobiliario con activos intensivos en energía; SBTi exige edificios Net-Zero alimentados por renovables.,sbti
+Fibra Uno (FUNO),MX,real_estate,Real Estate,Gestor inmobiliario con activos intensivos en energía; SBTi exige edificios Net-Zero alimentados por renovables.,sbti
+FibraHotel,MX,real_estate,Real Estate,Gestor inmobiliario con activos intensivos en energía; SBTi exige edificios Net-Zero alimentados por renovables.,sbti
+GCC S.A.B de C.V,MX,construction_materials,Construction Materials,Materiales de construcción de alta huella; SBTi demanda combustibles alternativos y PPAs renovables.,sbti
+GEPP,MX,food_and_beverage_processing,Food and Beverage Processing,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+GRUPO AZUCARERO MEXICO GAM SAPI DE CV,MX,food_and_beverage_processing,Food and Beverage Processing,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+"Grupo Aeroportuario del Sureste, S.A.B. de C.V.",MX,air_transportation_airport_services,Air Transportation - Airport Services,Movilidad y logística intensivas en energía; SBTi fuerza electrificación y abastecimiento renovable.,sbti
+Grupo Bimbo SAB de CV,MX,food_and_beverage_processing,Food and Beverage Processing,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+Grupo DEACERO,MX,mining_iron_aluminum_other_metals,"Mining - Iron, Aluminum, Other Metals",Minería/metales con consumo eléctrico relevante; SBTi impulsa PPAs renovables y electrificación de flota.,sbti
+Grupo Trimex S.A. de C.V.,MX,food_and_beverage_processing,Food and Beverage Processing,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+IMBERA S.A DE C.V.,MX,electrical_equipment_and_machinery,Electrical Equipment and Machinery,Fabricante industrial electrificado; SBTi requiere suministrar operaciones con energía renovable.,sbti
+Kekén,MX,food_production_animal_source_food_production,Food Production - Animal Source Food Production,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+MAIZORO S DE RL DE CV,MX,food_and_beverage_processing,Food and Beverage Processing,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+MUNSA MOLINOS,MX,food_production_agricultural_production,Food Production - Agricultural Production,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+Metalsa S.A.P.I. de C.V.,MX,automobiles_and_components,Automobiles and Components,Movilidad y logística intensivas en energía; SBTi fuerza electrificación y abastecimiento renovable.,sbti
+"Nemak, S.A.B. de C.V.",MX,automobiles_and_components,Automobiles and Components,Movilidad y logística intensivas en energía; SBTi fuerza electrificación y abastecimiento renovable.,sbti
+OLEOHIDRAULICA ESPECIALIZADA DE IRAPUATO S.A. DE C.V.,MX,electrical_equipment_and_machinery,Electrical Equipment and Machinery,Fabricante industrial electrificado; SBTi requiere suministrar operaciones con energía renovable.,sbti
+Orbia Advance Corporation S.A.B.,MX,chemicals,Chemicals,Industria química intensiva en calor; SBTi exige electrificación y contratos de energía renovable.,sbti
+PALMEX ALIMENTOS S. DE R.L. DE C.V.,MX,food_and_beverage_processing,Food and Beverage Processing,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+"PROAMBIENTE DELBAJIO, S.A. DE C.V.",MX,chemicals,Chemicals,Industria química intensiva en calor; SBTi exige electrificación y contratos de energía renovable.,sbti
+"Sigma Alimentos, S. A. de C. V.",MX,food_and_beverage_processing,Food and Beverage Processing,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+TRANSPORTES LOGISTICOS ESPECIALIZADOS,MX,ground_transportation_trucking_transportation,Ground Transportation - Trucking Transportation,Movilidad y logística intensivas en energía; SBTi fuerza electrificación y abastecimiento renovable.,sbti
+Vepinsa Ingredientes SAPI de CV,MX,food_and_beverage_processing,Food and Beverage Processing,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+Vertical Knits,MX,textiles_apparel_footwear_and_luxury_goods,"Textiles, Apparel, Footwear and Luxury Goods",Textil con uso intensivo de vapor; SBTi favorece calefacción renovable y eficiencia energética.,sbti
+WALORMEX,MX,automobiles_and_components,Automobiles and Components,Movilidad y logística intensivas en energía; SBTi fuerza electrificación y abastecimiento renovable.,sbti
+ABRATECH INGENIEROS S.A.C.,PE,electrical_equipment_and_machinery,Electrical Equipment and Machinery,Fabricante industrial electrificado; SBTi requiere suministrar operaciones con energía renovable.,sbti
+AJE GROUP,PE,food_and_beverage_processing,Food and Beverage Processing,Procesamiento de alimentos con cadena fría; SBTi impulsa contratos de energía renovable y biogás.,sbti
+COFACO INDUSTRIES S.A.C.,PE,textiles_apparel_footwear_and_luxury_goods,"Textiles, Apparel, Footwear and Luxury Goods",Textil con uso intensivo de vapor; SBTi favorece calefacción renovable y eficiencia energética.,sbti
+CORPORACIÓN ACEROS AREQUIPA S.A.,PE,mining_iron_aluminum_other_metals,"Mining - Iron, Aluminum, Other Metals",Minería/metales con consumo eléctrico relevante; SBTi impulsa PPAs renovables y electrificación de flota.,sbti
+Cotton Knit,PE,textiles_apparel_footwear_and_luxury_goods,"Textiles, Apparel, Footwear and Luxury Goods",Textil con uso intensivo de vapor; SBTi favorece calefacción renovable y eficiencia energética.,sbti
+FUNDICIÓN CHILCA SA,PE,electrical_equipment_and_machinery,Electrical Equipment and Machinery,Fabricante industrial electrificado; SBTi requiere suministrar operaciones con energía renovable.,sbti
+Fundiciones Especiales S.A.,PE,mining_iron_aluminum_other_metals,"Mining - Iron, Aluminum, Other Metals",Minería/metales con consumo eléctrico relevante; SBTi impulsa PPAs renovables y electrificación de flota.,sbti
+Industrias Nettalco S.A.,PE,textiles_apparel_footwear_and_luxury_goods,"Textiles, Apparel, Footwear and Luxury Goods",Textil con uso intensivo de vapor; SBTi favorece calefacción renovable y eficiencia energética.,sbti
+Inkia Energy Group (Nautilus Energy Holdings LLC),PE,electric_utilities_and_independent_power_producers_and_energy_traders_including_,"Electric Utilities and Independent Power Producers and Energy Traders (including Fossil, Alternative and Nuclear Energy)",Utility/regulador eléctrico; SBTi obliga a expandir capacidad renovable y gestión flexible de la red.,sbti
+TAMA INGENIEROS S.A.C.,PE,electrical_equipment_and_machinery,Electrical Equipment and Machinery,Fabricante industrial electrificado; SBTi requiere suministrar operaciones con energía renovable.,sbti
+TOPY TOP S A,PE,textiles_apparel_footwear_and_luxury_goods,"Textiles, Apparel, Footwear and Luxury Goods",Textil con uso intensivo de vapor; SBTi favorece calefacción renovable y eficiencia energética.,sbti
+Textil del Valle S.A. BIC,PE,textiles_apparel_footwear_and_luxury_goods,"Textiles, Apparel, Footwear and Luxury Goods",Textil con uso intensivo de vapor; SBTi favorece calefacción renovable y eficiencia energética.,sbti
+Textile Sourcing Company SAC BIC,PE,textiles_apparel_footwear_and_luxury_goods,"Textiles, Apparel, Footwear and Luxury Goods",Textil con uso intensivo de vapor; SBTi favorece calefacción renovable y eficiencia energética.,sbti
+creditex saa,PE,textiles_apparel_footwear_and_luxury_goods,"Textiles, Apparel, Footwear and Luxury Goods",Textil con uso intensivo de vapor; SBTi favorece calefacción renovable y eficiencia energética.,sbti
+Ravicorp Industria,SV,containers_and_packaging,Containers and Packaging,Fabricante de envases con matrices térmicas; SBTi requiere eficiencia y calor renovable.,sbti
+Fidocar,UY,automobiles_and_components,Automobiles and Components,Movilidad y logística intensivas en energía; SBTi fuerza electrificación y abastecimiento renovable.,sbti
+Lars Partners,UY,textiles_apparel_footwear_and_luxury_goods,"Textiles, Apparel, Footwear and Luxury Goods",Textil con uso intensivo de vapor; SBTi favorece calefacción renovable y eficiencia energética.,sbti

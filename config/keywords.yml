@@ -8,8 +8,31 @@ include:
   - efficiency
   - emissions
   - carbono
-  - digital
-  - blockchain
-  - token
-  - carbono digital
-exclude: []
+  - adaptacion
+  - resiliencia
+  - economia circular
+  - recicl
+  - biodiver
+  - electrico
+  - movilidad electrica
+  - vehiculo electrico
+  - heat pump
+  - geothermal
+  - storage
+exclude:
+  - pronostico
+  - meteorologia
+  - weather
+  - tormenta
+  - lluvia
+  - nevadas
+  - temperatura
+  - show de tv
+  - programa de tv
+  - reality show
+  - futbol
+  - malware
+  - ciberataque
+  - ciberseguridad
+  - gratis
+  - turismo

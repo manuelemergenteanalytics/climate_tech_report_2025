@@ -13,6 +13,7 @@ from ctr25.utils.universe import UniverseFilters, load_universe
 
 EVENT_COLUMNS = [
     "company_id",
+    "company_qid",
     "company_name",
     "country",
     "industry",
@@ -112,6 +113,7 @@ def collect_finance(
         for _, company in rows.iterrows():
             df_rows.append({
                 "company_id": company.get("company_id", ""),
+                "company_qid": company.get("company_qid", company.get("qid", "")),
                 "company_name": company.get("company_name", ""),
                 "country": company.get("country", ""),
                 "industry": company.get("industry", ""),

@@ -1,22 +1,51 @@
-company_name,country,industry,source
-Algar Telecom,BR,ict_telecom,sbti
-"America Movil, S.A.B. de C.V.",MX,ict_telecom,sbti
-Betterfly,CL,ict_telecom,sbti
-"Criotec, S.A. de C.V.",MX,manufacturing,sbti
-Edge Chile,CL,ict_telecom,sbti
-green4T,BR,ict_telecom,sbti
-"Grupo Televisa, S.A.B.",MX,ict_telecom,sbti
-"Mattos Filho, Veiga Filho, Marrey Jr and Quiroga Advogados",BR,ict_telecom,sbti
-Mercado Libre,AR,ict_telecom,sbti
-Uno Salud Dental,CL,ict_telecom,sbti
-AMBIPAR PARTICIPAÇÕES E EMPREENDIMENTOS S.A.,BR,ict_telecom,sbti
-Valores Corporativos Softtek,MX,ict_telecom,sbti
-Tel telecomunicações Ltda,BR,ict_telecom,sbti
-CI&T Software,BR,ict_telecom,sbti
-BELLTECH,CL,ict_telecom,sbti
-ECORE SOLUÇÕES EM TECNOLOGIA DA INFORMAÇÃO LTDA,BR,ict_telecom,sbti
-SIES Salud IPS,CO,ict_telecom,sbti
-ICOMON TECNOLOGIA LTDA.,BR,ict_telecom,sbti
-BDO RCS Auditores Independentes,BR,ict_telecom,sbti
-iFood,BR,ict_telecom,sbti
-Telecom,AR,ict_telecom,sbti
+company_name,country,industry,sector,justification,source
+Agro de Souza S.A.,AR,retailing,Retailing,Minorista omnicanal con fuerte huella logística digital; SBTi requiere trazabilidad y reducción de emisiones.,sbti
+Chayè Hnos SRL,AR,retailing,Retailing,Minorista omnicanal con fuerte huella logística digital; SBTi requiere trazabilidad y reducción de emisiones.,sbti
+Huenei IT Services,AR,software_and_services,Software and Services,Proveedor de software/IT con infraestructura digital; la hoja de ruta SBTi demanda energía limpia para data centers.,sbti
+Leondate S.R.L,AR,software_and_services,Software and Services,Proveedor de software/IT con infraestructura digital; la hoja de ruta SBTi demanda energía limpia para data centers.,sbti
+Mercado Libre,AR,software_and_services,Software and Services,Proveedor de software/IT con infraestructura digital; la hoja de ruta SBTi demanda energía limpia para data centers.,sbti
+Telecom,AR,telecommunication_services,Telecommunication Services,Operador de telecomunicaciones con redes intensivas en datos; SBTi exige eficiencia energética y monitoreo digital.,sbti
+AMBIPAR PARTICIPAÇÕES E EMPREENDIMENTOS S.A.,BR,professional_services,Professional Services,Servicios profesionales enfocados en transformación digital; puede escalar soluciones de activos climáticos a su cartera.,sbti
+Algar Telecom,BR,telecommunication_services,Telecommunication Services,Operador de telecomunicaciones con redes intensivas en datos; SBTi exige eficiencia energética y monitoreo digital.,sbti
+Americanas S.A.,BR,retailing,Retailing,Minorista omnicanal con fuerte huella logística digital; SBTi requiere trazabilidad y reducción de emisiones.,sbti
+BDO RCS Auditores Independentes,BR,professional_services,Professional Services,Servicios profesionales enfocados en transformación digital; puede escalar soluciones de activos climáticos a su cartera.,sbti
+Baluarte Cultura,BR,professional_services,Professional Services,Servicios profesionales enfocados en transformación digital; puede escalar soluciones de activos climáticos a su cartera.,sbti
+Banco do Brasil S.A.,BR,banks_diverse_financials_insurance,"Banks, Diverse Financials, Insurance",Institución financiera con portafolio digitalizable; SBTi habilita estructuración de productos climáticos tokenizados.,sbti
+CI&T Software,BR,software_and_services,Software and Services,Proveedor de software/IT con infraestructura digital; la hoja de ruta SBTi demanda energía limpia para data centers.,sbti
+COREBOX AGENCIA DE COMUNICACAO E DESENVOLVIMENTO TECNICO-CIENTIFICO LTDA,BR,professional_services,Professional Services,Servicios profesionales enfocados en transformación digital; puede escalar soluciones de activos climáticos a su cartera.,sbti
+ECORE SOLUÇÕES EM TECNOLOGIA DA INFORMAÇÃO LTDA,BR,software_and_services,Software and Services,Proveedor de software/IT con infraestructura digital; la hoja de ruta SBTi demanda energía limpia para data centers.,sbti
+GERAÇÃO MAIS CRIATIVA LTDA,BR,media,Media,Grupo de medios con plataformas digitales; SBTi impulsa mediciones de huella y compensaciones basadas en datos.,sbti
+Grupo SOMA,BR,retailing,Retailing,Minorista omnicanal con fuerte huella logística digital; SBTi requiere trazabilidad y reducción de emisiones.,sbti
+ICOMON TECNOLOGIA LTDA.,BR,telecommunication_services,Telecommunication Services,Operador de telecomunicaciones con redes intensivas en datos; SBTi exige eficiencia energética y monitoreo digital.,sbti
+Leroy Merlin Companhia Brasileira de Bricolagem,BR,retailing,Retailing,Minorista omnicanal con fuerte huella logística digital; SBTi requiere trazabilidad y reducción de emisiones.,sbti
+MIROW & CO. DO BRASIL CONSULTORIA LTDA,BR,professional_services,Professional Services,Servicios profesionales enfocados en transformación digital; puede escalar soluciones de activos climáticos a su cartera.,sbti
+"Mattos Filho, Veiga Filho, Marrey Jr and Quiroga Advogados",BR,professional_services,Professional Services,Servicios profesionales enfocados en transformación digital; puede escalar soluciones de activos climáticos a su cartera.,sbti
+Oz Produções Audiovisuais e Comunicação Ltda,BR,media,Media,Grupo de medios con plataformas digitales; SBTi impulsa mediciones de huella y compensaciones basadas en datos.,sbti
+Tel telecomunicações Ltda,BR,telecommunication_services,Telecommunication Services,Operador de telecomunicaciones con redes intensivas en datos; SBTi exige eficiencia energética y monitoreo digital.,sbti
+green4T,BR,professional_services,Professional Services,Servicios profesionales enfocados en transformación digital; puede escalar soluciones de activos climáticos a su cartera.,sbti
+iFood,BR,software_and_services,Software and Services,Proveedor de software/IT con infraestructura digital; la hoja de ruta SBTi demanda energía limpia para data centers.,sbti
+BELLTECH,CL,telecommunication_services,Telecommunication Services,Operador de telecomunicaciones con redes intensivas en datos; SBTi exige eficiencia energética y monitoreo digital.,sbti
+Betterfly,CL,software_and_services,Software and Services,Proveedor de software/IT con infraestructura digital; la hoja de ruta SBTi demanda energía limpia para data centers.,sbti
+Deuman,CL,professional_services,Professional Services,Servicios profesionales enfocados en transformación digital; puede escalar soluciones de activos climáticos a su cartera.,sbti
+Edge Chile,CL,professional_services,Professional Services,Servicios profesionales enfocados en transformación digital; puede escalar soluciones de activos climáticos a su cartera.,sbti
+FEMSA Health,CL,food_and_staples_retailing,Food and Staples Retailing,Minorista omnicanal con fuerte huella logística digital; SBTi requiere trazabilidad y reducción de emisiones.,sbti
+Proyecta Spa,CL,professional_services,Professional Services,Servicios profesionales enfocados en transformación digital; puede escalar soluciones de activos climáticos a su cartera.,sbti
+BanColombia SA,CO,banks_diverse_financials_insurance,"Banks, Diverse Financials, Insurance",Institución financiera con portafolio digitalizable; SBTi habilita estructuración de productos climáticos tokenizados.,sbti
+Banco Davivienda S A.,CO,banks_diverse_financials_insurance,"Banks, Diverse Financials, Insurance",Institución financiera con portafolio digitalizable; SBTi habilita estructuración de productos climáticos tokenizados.,sbti
+CasaToro S.A. BIC,CO,retailing,Retailing,Minorista omnicanal con fuerte huella logística digital; SBTi requiere trazabilidad y reducción de emisiones.,sbti
+Gaia Servicios Ambientales S.A.S. BIC,CO,professional_services,Professional Services,Servicios profesionales enfocados en transformación digital; puede escalar soluciones de activos climáticos a su cartera.,sbti
+Liberty Costa Rica,CR,telecommunication_services,Telecommunication Services,Operador de telecomunicaciones con redes intensivas en datos; SBTi exige eficiencia energética y monitoreo digital.,sbti
+Corporacion Favorita C.A.,EC,retailing,Retailing,Minorista omnicanal con fuerte huella logística digital; SBTi requiere trazabilidad y reducción de emisiones.,sbti
+Afore SURA,MX,banks_diverse_financials_insurance,"Banks, Diverse Financials, Insurance",Institución financiera con portafolio digitalizable; SBTi habilita estructuración de productos climáticos tokenizados.,sbti
+Afore XXI Banorte,MX,banks_diverse_financials_insurance,"Banks, Diverse Financials, Insurance",Institución financiera con portafolio digitalizable; SBTi habilita estructuración de productos climáticos tokenizados.,sbti
+"America Movil, S.A.B. de C.V.",MX,telecommunication_services,Telecommunication Services,Operador de telecomunicaciones con redes intensivas en datos; SBTi exige eficiencia energética y monitoreo digital.,sbti
+Bolsa Mexicana de Valores,MX,specialized_financial_services_consumer_finance_insurance_brokerage_firms,"Specialized Financial Services, Consumer Finance, Insurance Brokerage Firms",Institución financiera con portafolio digitalizable; SBTi habilita estructuración de productos climáticos tokenizados.,sbti
+Grupo Financiero Banorte SAB de CV,MX,banks_diverse_financials_insurance,"Banks, Diverse Financials, Insurance",Institución financiera con portafolio digitalizable; SBTi habilita estructuración de productos climáticos tokenizados.,sbti
+"Grupo Televisa, S.A.B.",MX,media,Media,Grupo de medios con plataformas digitales; SBTi impulsa mediciones de huella y compensaciones basadas en datos.,sbti
+INDUSTRIALIZADORA OLEOFINOS S.A DE C.V.,MX,food_and_staples_retailing,Food and Staples Retailing,Minorista omnicanal con fuerte huella logística digital; SBTi requiere trazabilidad y reducción de emisiones.,sbti
+La Agencia Global S.A. de C.V.,MX,professional_services,Professional Services,Servicios profesionales enfocados en transformación digital; puede escalar soluciones de activos climáticos a su cartera.,sbti
+Quálitas Controladora S.A.B. de C.V.,MX,banks_diverse_financials_insurance,"Banks, Diverse Financials, Insurance",Institución financiera con portafolio digitalizable; SBTi habilita estructuración de productos climáticos tokenizados.,sbti
+Valores Corporativos Softtek,MX,software_and_services,Software and Services,Proveedor de software/IT con infraestructura digital; la hoja de ruta SBTi demanda energía limpia para data centers.,sbti
+CYBS Consulting,PA,professional_services,Professional Services,Servicios profesionales enfocados en transformación digital; puede escalar soluciones de activos climáticos a su cartera.,sbti
+A2G S.A.C B.I.C,PE,professional_services,Professional Services,Servicios profesionales enfocados en transformación digital; puede escalar soluciones de activos climáticos a su cartera.,sbti
+Casa Rica Mercado Gourmet - ALES S.A,PY,food_and_staples_retailing,Food and Staples Retailing,Minorista omnicanal con fuerte huella logística digital; SBTi requiere trazabilidad y reducción de emisiones.,sbti
