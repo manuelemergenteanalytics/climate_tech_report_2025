@@ -5,23 +5,23 @@ Top 25 empresas por intensidad de demanda
 - Bank of the Republic (Colombia) (CO · finance_insurance): score 1.33, promedio 1.00, señales 8, última 2025-05-01
 - Empresa de Pesquisa Agropecuária e Extensão Rural de Santa Catarina (BR · agro_food): score 1.29, promedio 1.00, señales 6, última 2025-06-26
 - Estrada de Ferro Noroeste do Brasil (BR · transport_logistics): score 1.24, promedio 1.00, señales 4, última 2024-01-11
-- Apisa Air Cargo (PE · transport_logistics): score 1.24, promedio 1.00, señales 4, última 2025-10-02
-- Grupo Anderson's (MX · retail_consumer): score 1.24, promedio 1.00, señales 4, última 2025-06-26
-- Corporación Lindley S.A. (PE · agro_food): score 1.21, promedio 1.00, señales 3, última 2024-08-01
-- Estudios Río de la Plata (AR · ict_telecom): score 1.21, promedio 1.00, señales 3, última 2025-07-31
 - BRF S.A. (BR · agro_food): score 1.21, promedio 1.00, señales 3, última 2024-12-19
-- Compañía Peruana de Teléfonos S.A. (PE · ict_telecom): score 1.16, promedio 1.00, señales 2, última 2024-05-09
-- Ferrocarril Mexicano del Sur (MX · transport_logistics): score 1.16, promedio 1.00, señales 2, última 2024-04-11
-- Complejo Manufacturero de Equipos Telefónicos (CL · manufacturing): score 1.16, promedio 1.00, señales 2, última 2024-05-16
-- Mover Participações (BR · oil_gas): score 1.16, promedio 1.00, señales 2, última 2025-01-09
-- Municipal Bank of Rosario (AR · finance_insurance): score 1.16, promedio 1.00, señales 2, última 2024-10-24
-- Servicios Lógisticos Ferroviarios S.A. (UY · transport_logistics): score 1.16, promedio 1.00, señales 2, última 2024-07-11
-- Parque Arauco S.A. (CL · retail_consumer): score 1.16, promedio 1.00, señales 2, última 2025-06-05
-- Edificio del Ministerio de Transporte y Obras Públicas (UY · construction_realestate): score 1.16, promedio 1.00, señales 2, última 2025-05-08
-- Servicio de Comunicación Audiovisual Nacional (UY · ict_telecom): score 1.16, promedio 1.00, señales 2, última 2023-10-26
-- Benedetti's Pizza (MX · agro_food): score 1.16, promedio 1.00, señales 2, última 2024-10-31
+- Corporación Lindley S.A. (PE · agro_food): score 1.21, promedio 1.00, señales 3, última 2024-08-01
 - Ferrocarril Córdoba Central S.A. (AR · transport_logistics): score 1.16, promedio 1.00, señales 2, última 2024-05-16
+- Compañía Peruana de Teléfonos S.A. (PE · ict_telecom): score 1.16, promedio 1.00, señales 2, última 2024-05-09
+- Edificio del Ministerio de Transporte y Obras Públicas (UY · construction_realestate): score 1.16, promedio 1.00, señales 2, última 2025-05-08
+- Ferrocarril Mexicano del Sur (MX · transport_logistics): score 1.16, promedio 1.00, señales 2, última 2024-04-11
+- Mover Participações (BR · oil_gas): score 1.16, promedio 1.00, señales 2, última 2025-01-09
+- Servicios Lógisticos Ferroviarios S.A. (UY · transport_logistics): score 1.16, promedio 1.00, señales 2, última 2024-07-11
+- Servicio de Comunicación Audiovisual Nacional (UY · ict_telecom): score 1.16, promedio 1.00, señales 2, última 2023-10-26
+- Complejo Manufacturero de Equipos Telefónicos (CL · manufacturing): score 1.16, promedio 1.00, señales 2, última 2024-05-16
+- Parque Arauco S.A. (CL · retail_consumer): score 1.16, promedio 1.00, señales 2, última 2025-06-05
+- Municipal Bank of Rosario (AR · finance_insurance): score 1.16, promedio 1.00, señales 2, última 2024-10-24
+- Benedetti's Pizza (MX · agro_food): score 1.16, promedio 1.00, señales 2, última 2024-10-31
 - Barranquilla Railway and Pier Company Ltd (CO · construction_realestate): score 1.13, promedio 0.70, señales 57, última 2025-08-21
-- Ferrovia Interna do Porto de Santos (BR · transport_logistics): score 1.10, promedio 1.00, señales 1, última —
-- Companhia do Metropolitano de São Paulo (BR · transport_logistics): score 1.10, promedio 1.00, señales 1, última 2022-03-31
+- Confitería Lion d'Or (UY · agro_food): score 1.10, promedio 1.00, señales 1, última 2024-06-06
+- Buses Vule S.A. (CL · transport_logistics): score 1.10, promedio 1.00, señales 1, última 2024-10-10
 - Ferrocarril del Norte de Buenos Aires (AR · transport_logistics): score 1.10, promedio 1.00, señales 1, última 2024-06-20
+- Farmacias Cruz Verde (CL · retail_consumer): score 1.10, promedio 1.00, señales 1, última —
+- ARCO Aerolíneas Colonia S.A. (UY · transport_logistics): score 1.10, promedio 1.00, señales 1, última 2024-10-10
+- Lucha Libre AAA World Wide (MX · retail_consumer): score 1.10, promedio 1.00, señales 1, última 2024-08-22

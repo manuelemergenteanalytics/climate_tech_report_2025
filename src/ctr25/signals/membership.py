@@ -24,6 +24,53 @@ def _norm(s: str) -> str:
     s = re.sub(r"\s+", " ", s).strip()
     return s
 
+
+STOPWORDS = {
+    "de",
+    "del",
+    "la",
+    "las",
+    "los",
+    "el",
+    "y",
+    "the",
+    "grupo",
+    "group",
+    "holding",
+    "company",
+    "companies",
+    "corp",
+    "corporation",
+    "inc",
+    "sa",
+    "saa",
+    "sae",
+    "srl",
+    "plc",
+    "ltd",
+    "ltda",
+    "co",
+    "cv",
+    "s",
+    "sac",
+    "saic",
+    "spa",
+    "air",
+    "cargo",
+}
+
+
+def _tokenize_name(norm_name: str) -> List[str]:
+    tokens: List[str] = []
+    for raw in norm_name.split():
+        tok = raw.strip()
+        if not tok or len(tok) == 1:
+            continue
+        if tok in STOPWORDS:
+            continue
+        tokens.append(tok)
+    return tokens
+
 def _now_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
 
@@ -158,6 +205,7 @@ def _match_memberships_to_universe(universe: pd.DataFrame, members: pd.DataFrame
     universe = universe.copy()
     if "company_name_norm" not in universe.columns:
         universe["company_name_norm"] = universe["company_name"].apply(_norm)
+    universe["company_name_norm"] = universe["company_name_norm"].fillna("")
 
     universe_lookup: Dict[str, pd.Series] = {}
     for _, row in universe.iterrows():
@@ -230,19 +278,27 @@ def _match_memberships_to_universe(universe: pd.DataFrame, members: pd.DataFrame
             rows: List[dict] = []
             for _, row in fuzzy_candidates.iterrows():
                 q = row["member_name_norm"]
-                q_tokens = set(q.split())
-                if not q_tokens:
+                q_tokens = _tokenize_name(q)
+                if len(q_tokens) < 2:
                     continue
-                first = next(iter(q_tokens))
-                candidates = universe[universe["company_name_norm"].str.contains(first, regex=False)]
+                q_tokens_set = set(q_tokens)
+                first_token = q_tokens[0]
 
-                def shared_tokens(x: str) -> int:
-                    return len(q_tokens.intersection(set(x.split())))
+                candidates = universe[universe["company_name_norm"].str.contains(first_token, regex=False, na=False)].copy()
+                if candidates.empty:
+                    continue
 
-                candidates = candidates.assign(shared=candidates["company_name_norm"].apply(shared_tokens))
+                def shared_tokens(name_norm: str) -> int:
+                    cand_tokens = set(_tokenize_name(name_norm))
+                    return len(q_tokens_set.intersection(cand_tokens))
+
+                candidates = candidates.assign(
+                    shared=candidates["company_name_norm"].apply(shared_tokens)
+                )
                 candidates = candidates[candidates["shared"] >= 2].sort_values("shared", ascending=False)
                 if candidates.empty:
                     continue
+
                 best = candidates.iloc[0]
                 rows.append({
                     "member_name": row["member_name"],
