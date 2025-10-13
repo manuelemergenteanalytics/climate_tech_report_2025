@@ -3,13 +3,16 @@ from __future__ import annotations
 
 import math
 from pathlib import Path
-from typing import Dict, Iterable, List, Tuple
+from typing import Any, Dict, Iterable, List, Tuple
 
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
+from plotly.utils import PlotlyJSONEncoder
 import yaml
 import numpy as np
+import json
+from uuid import uuid4
 
 try:
     import networkx as nx  # type: ignore
@@ -23,6 +26,11 @@ KEYWORDS_PATH = Path("config/keywords.yml")
 OUTPUT_DIR = Path("docs/market_radar/html")
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 TOP25_PATH = OUTPUT_DIR.parent / "top25_companies.txt"
+
+PLOTLYJS_SCRIPT = (
+    '<script charset="utf-8" src="https://cdn.plot.ly/plotly-3.1.0.min.js" '
+    'integrity="sha256-Ei4740bWZhaUTQuD6q9yQlgVCMPBz6CZWhevDYPv93A=" crossorigin="anonymous"></script>'
+)
 
 ISO2_TO_ISO3 = {
     "AR": "ARG",
@@ -83,6 +91,7 @@ def _prep_events() -> pd.DataFrame:
     events["sentiment_score"] = pd.to_numeric(events.get("sentiment_score"), errors="coerce")
     events["signal_strength"] = pd.to_numeric(events.get("signal_strength"), errors="coerce")
     events["climate_score"] = pd.to_numeric(events.get("climate_score"), errors="coerce")
+    events["company_id"] = pd.to_numeric(events.get("company_id"), errors="coerce")
     events["country"] = events["country"].fillna("")
     events["industry"] = events["industry"].fillna("")
     events["signal_type"] = events["signal_type"].fillna("unknown")
@@ -146,8 +155,7 @@ def heatmap_country_industry(companies: pd.DataFrame) -> Path:
     fig.update_layout(width=900, height=600, yaxis=dict(categoryorder="total ascending"))
 
     path = OUTPUT_DIR / "heatmap_country_industry.html"
-    fig.write_html(path, include_plotlyjs="cdn")
-    return path
+    return _write_plotly_html(fig, path)
 
 
 def timeline_signals(events: pd.DataFrame) -> Path:
@@ -176,8 +184,7 @@ def timeline_signals(events: pd.DataFrame) -> Path:
     fig.update_layout(width=1000, height=500, bargap=0.15)
 
     path = OUTPUT_DIR / "timeline_signals.html"
-    fig.write_html(path, include_plotlyjs="cdn")
-    return path
+    return _write_plotly_html(fig, path)
 
 
 def map_intensity(companies: pd.DataFrame) -> Path:
@@ -196,9 +203,15 @@ def map_intensity(companies: pd.DataFrame) -> Path:
         color_continuous_scale="Viridis",
     )
     fig.update_layout(width=900, height=550)
+    fig.update_geos(
+        projection_type="mercator",
+        center=dict(lat=-15, lon=-70),
+        lataxis=dict(range=[-60, 30]),
+        lonaxis=dict(range=[-120, -30]),
+        showcountries=True,
+    )
     path = OUTPUT_DIR / "map_intensity.html"
-    fig.write_html(path, include_plotlyjs="cdn")
-    return path
+    return _write_plotly_html(fig, path)
 
 
 def _extract_keywords(text: str, keywords: Iterable[str]) -> List[str]:
@@ -322,8 +335,61 @@ def network_themes(events: pd.DataFrame, keywords: List[str]) -> List[Path]:
     return paths
 
 
+def _json_to_tabs(obj: Any) -> str:
+    text = json.dumps(obj, indent=2, ensure_ascii=False, cls=PlotlyJSONEncoder)
+    lines: List[str] = []
+    for line in text.splitlines():
+        stripped = line.lstrip(" ")
+        spaces = len(line) - len(stripped)
+        tabs = "\t" * (spaces // 2)
+        lines.append(f"{tabs}{stripped}")
+    return "\n".join(lines)
+
+
+def _write_plotly_html(fig: go.Figure, path: Path, config: Dict[str, Any] | None = None) -> Path:
+    cfg: Dict[str, Any] = {"responsive": True}
+    if config:
+        cfg.update(config)
+
+    plotly_json = fig.to_plotly_json()
+    div_id = f"plotly-{uuid4().hex}"
+    height = fig.layout.height or 600
+    width = fig.layout.width or 900
+    data_json = _json_to_tabs(plotly_json.get("data", []))
+    layout_json = _json_to_tabs(plotly_json.get("layout", {}))
+    config_json = _json_to_tabs(cfg)
+
+    html_lines = [
+        "<html>",
+        "<head>",
+        "\t<meta charset=\"utf-8\" />",
+        "\t<script type=\"text/javascript\">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>",
+        f"\t{PLOTLYJS_SCRIPT}",
+        "</head>",
+        "<body>",
+        f"\t<div id=\"{div_id}\" class=\"plotly-graph-div\" style=\"height:{height}px; width:{width}px;\"></div>",
+        "\t<script type=\"text/javascript\">",
+        "\t\twindow.PLOTLYENV=window.PLOTLYENV || {};",
+        f"\t\tif (document.getElementById(\"{div_id}\")) {{",
+        "\t\t\tPlotly.newPlot(",
+        f"\t\t\t\t\"{div_id}\",",
+        "\t\t\t\t" + data_json.replace("\n", "\n\t\t\t\t") + ",",
+        "\t\t\t\t" + layout_json.replace("\n", "\n\t\t\t\t") + ",",
+        "\t\t\t\t" + config_json.replace("\n", "\n\t\t\t\t"),
+        "\t\t\t);",
+        "\t\t}",
+        "\t</script>",
+        "</body>",
+        "</html>",
+    ]
+
+    path.write_text("\n".join(html_lines) + "\n", encoding="utf-8")
+    return path
+
+
 def ranking_companies(companies: pd.DataFrame) -> Path:
     ranking = companies.sort_values("demand_score", ascending=False).head(25).copy()
+    ranking = ranking[ranking["total_events"] > 1]
     ranking["last_ts_fmt"] = ranking["last_ts"].dt.strftime("%Y-%m-%d").fillna("—")
 
     fig = px.bar(
@@ -334,13 +400,13 @@ def ranking_companies(companies: pd.DataFrame) -> Path:
         color="country",
         text="total_events",
         hover_data={"last_ts_fmt": True, "industry": True, "avg_strength": ":.2f"},
-        title="Top 25 empresas por intensidad de demanda",
+        title="Top Empresas por intensidad de demanda",
         labels={"demand_score": "Score ponderado", "total_events": "# señales", "last_ts_fmt": "Última señal"},
     )
     fig.update_layout(height=800, width=950, yaxis=dict(automargin=True))
 
     # Export plain text summary
-    lines = ["Top 25 empresas por intensidad de demanda\n"]
+    lines = ["Top Empresas por intensidad de demanda\n"]
     for idx, row in ranking.iterrows():
         score = f"{row['demand_score']:.2f}"
         avg = f"{row['avg_strength']:.2f}"
@@ -350,8 +416,7 @@ def ranking_companies(companies: pd.DataFrame) -> Path:
     TOP25_PATH.write_text("\n".join(lines), encoding="utf-8")
 
     path = OUTPUT_DIR / "ranking_companies.html"
-    fig.write_html(path, include_plotlyjs="cdn")
-    return path
+    return _write_plotly_html(fig, path)
 
 
 def sentiment_distribution(companies: pd.DataFrame) -> Path:
@@ -382,8 +447,7 @@ def sentiment_distribution(companies: pd.DataFrame) -> Path:
     fig.update_layout(width=950, height=500, xaxis=dict(automargin=True))
 
     path = OUTPUT_DIR / "sentiment_distribution.html"
-    fig.write_html(path, include_plotlyjs="cdn")
-    return path
+    return _write_plotly_html(fig, path)
 
 
 def coverage_indicators(companies: pd.DataFrame, universe: pd.DataFrame) -> Path:
@@ -410,8 +474,195 @@ def coverage_indicators(companies: pd.DataFrame, universe: pd.DataFrame) -> Path
     fig.update_layout(width=950, height=500, xaxis=dict(automargin=True))
 
     path = OUTPUT_DIR / "coverage_indicators.html"
-    fig.write_html(path, include_plotlyjs="cdn")
-    return path
+    return _write_plotly_html(fig, path)
+
+
+def coverage_country_industry(companies: pd.DataFrame, universe: pd.DataFrame) -> Path:
+    universe = universe.copy()
+    universe["company_id"] = pd.to_numeric(universe["company_id"], errors="coerce")
+    universe = universe.dropna(subset=["company_id"])
+    active_ids = set(companies["company_id"].dropna())
+    universe["active"] = universe["company_id"].isin(active_ids)
+
+    coverage = (
+        universe.groupby(["country", "industry"], as_index=False)
+        .agg(total=("company_id", "count"), active=("active", "sum"))
+    )
+    coverage["inactive"] = coverage["total"] - coverage["active"]
+    coverage["coverage_pct"] = np.where(
+        coverage["total"] > 0, coverage["active"] / coverage["total"] * 100, 0.0
+    )
+
+    if coverage.empty:
+        coverage = pd.DataFrame({"country": [], "industry": [], "coverage_pct": []})
+
+    fig = px.density_heatmap(
+        coverage,
+        x="industry",
+        y="country",
+        z="coverage_pct",
+        color_continuous_scale="Greens",
+        title="Cobertura del universo por país e industria",
+        labels={"coverage_pct": "% empresas con señales"},
+    )
+
+    if not coverage.empty:
+        custom = coverage[["active", "inactive", "total"]].to_numpy()
+        fig.update_traces(
+            customdata=custom,
+            hovertemplate=(
+                "industria=%{x}<br>país=%{y}<br>% con señales=%{z:.1f}%<br>"
+                "activos=%{customdata[0]}<br>sin señales=%{customdata[1]}<br>total=%{customdata[2]}<extra></extra>"
+            ),
+        )
+
+    fig.update_layout(width=950, height=600, xaxis=dict(automargin=True))
+    fig.update_coloraxes(colorbar=dict(title="% cobertura"))
+
+    path = OUTPUT_DIR / "coverage_country_industry.html"
+    return _write_plotly_html(fig, path)
+
+
+def signal_type_distribution(events: pd.DataFrame) -> Path:
+    counts = (
+        events.groupby("signal_type", dropna=False)
+        .size()
+        .reset_index(name="total_signals")
+    )
+    counts["signal_type"] = counts["signal_type"].fillna("sin dato").astype(str)
+    counts = counts.sort_values("total_signals", ascending=False)
+
+    fig = px.bar(
+        counts,
+        x="signal_type",
+        y="total_signals",
+        text="total_signals",
+        title="Distribución de señales por tipo",
+        labels={"signal_type": "Tipo de señal", "total_signals": "Cantidad"},
+    )
+    fig.update_layout(width=750, height=450, xaxis=dict(categoryorder="total descending"))
+
+    path = OUTPUT_DIR / "signal_type_distribution.html"
+    return _write_plotly_html(fig, path)
+
+
+def coverage_summary(companies: pd.DataFrame, universe: pd.DataFrame) -> Path:
+    universe_ids = pd.to_numeric(universe["company_id"], errors="coerce")
+    total_universe = int(universe_ids.dropna().nunique())
+
+    events_per_company = companies["total_events"].dropna().to_numpy()
+    active_count = int(companies["company_id"].dropna().nunique())
+    inactive_count = max(total_universe - active_count, 0)
+    coverage_pct = (active_count / total_universe * 100) if total_universe else 0.0
+
+    if events_per_company.size:
+        mean_signals = float(events_per_company.mean())
+        median_signals = float(np.median(events_per_company))
+        std_signals = float(events_per_company.std(ddof=0))
+        q1 = float(np.percentile(events_per_company, 25))
+        q3 = float(np.percentile(events_per_company, 75))
+        max_signals = int(events_per_company.max())
+        min_signals = int(events_per_company.min())
+    else:
+        mean_signals = median_signals = std_signals = q1 = q3 = 0.0
+        max_signals = min_signals = 0
+
+    metrics = [
+        "Empresas en el universo",
+        "Empresas con señales",
+        "Empresas sin señales",
+        "% universo cubierto",
+        "Total de señales registradas",
+        "Señales por empresa (media)",
+        "Señales por empresa (mediana)",
+        "Señales por empresa (desvío estándar)",
+        "Señales por empresa (Q1)",
+        "Señales por empresa (Q3)",
+        "Señales por empresa (mínimo)",
+        "Señales por empresa (máximo)",
+    ]
+
+    total_signals = int(events_per_company.sum()) if events_per_company.size else 0
+    values = [
+        f"{total_universe:,}",
+        f"{active_count:,}",
+        f"{inactive_count:,}",
+        f"{coverage_pct:.1f}%",
+        f"{total_signals:,}",
+        f"{mean_signals:.2f}",
+        f"{median_signals:.2f}",
+        f"{std_signals:.2f}",
+        f"{q1:.2f}",
+        f"{q3:.2f}",
+        f"{min_signals:,}",
+        f"{max_signals:,}",
+    ]
+
+    fig = go.Figure(
+        data=[
+            go.Table(
+                header=dict(values=["Métrica", "Valor"], align="left"),
+                cells=dict(values=[metrics, values], align="left"),
+            )
+        ]
+    )
+    fig.update_layout(title="Resumen estadístico de cobertura", width=700, height=480)
+
+    path = OUTPUT_DIR / "coverage_summary.html"
+    return _write_plotly_html(fig, path)
+
+
+def signal_mix_sankey(events: pd.DataFrame, universe: pd.DataFrame) -> Path:
+    universe_ids = pd.to_numeric(universe["company_id"], errors="coerce").dropna()
+    universe_set = set(universe_ids)
+
+    events_subset = events[events["company_id"].isin(universe_set)].copy()
+    events_subset["signal_type"] = events_subset["signal_type"].fillna("unknown").astype(str)
+
+    active_ids = events_subset["company_id"].dropna().unique()
+    active_count = int(active_ids.size)
+    total_universe = int(len(universe_set))
+    inactive_count = max(total_universe - active_count, 0)
+
+    def _label_combo(series: pd.Series) -> str:
+        unique = sorted({str(item) for item in series if pd.notna(item)})
+        if not unique:
+            return "sin tipo"
+        return " + ".join(unique)
+
+    combo_counts = (
+        events_subset.groupby("company_id")["signal_type"].apply(_label_combo).value_counts()
+    )
+
+    if combo_counts.empty:
+        combo_counts = pd.Series({"sin datos": 0})
+
+    labels = ["Universo total", "Con señales", "Sin señales"] + combo_counts.index.tolist()
+    sources = [0, 0]
+    targets = [1, 2]
+    values = [active_count, inactive_count]
+
+    offset = 3
+    for idx, (_, value) in enumerate(combo_counts.items()):
+        sources.append(1)
+        targets.append(offset + idx)
+        values.append(int(value))
+
+    sankey = go.Sankey(
+        node=dict(label=labels, pad=18, thickness=18),
+        link=dict(source=sources, target=targets, value=values),
+        arrangement="snap",
+    )
+
+    fig = go.Figure(data=[sankey])
+    fig.update_layout(
+        title="Flujo de cobertura y mezcla de señales",
+        width=900,
+        height=600,
+    )
+
+    path = OUTPUT_DIR / "signal_mix_sankey.html"
+    return _write_plotly_html(fig, path)
 
 
 def country_fact_sheet(companies: pd.DataFrame) -> Path:
@@ -436,26 +687,25 @@ def country_fact_sheet(companies: pd.DataFrame) -> Path:
     fig.update_layout(width=950, height=600)
 
     path = OUTPUT_DIR / "country_fact_sheet.html"
-    fig.write_html(path, include_plotlyjs="cdn")
-    return path
+    return _write_plotly_html(fig, path)
 
 
 def main() -> None:
     events = _prep_events()
     universe = _prep_universe()
-    keywords = _load_keywords(KEYWORDS_PATH)
     companies = _company_rollup(events)
 
     outputs = [
+        coverage_summary(companies, universe),
         heatmap_country_industry(companies),
-        timeline_signals(events),
         map_intensity(companies),
         ranking_companies(companies),
-        sentiment_distribution(companies),
         coverage_indicators(companies, universe),
+        coverage_country_industry(companies, universe),
         country_fact_sheet(companies),
+        signal_type_distribution(events),
+        signal_mix_sankey(events, universe),
     ]
-    outputs.extend(network_themes(events, keywords))
 
     print("Visualizaciones generadas:")
     for path in outputs:

@@ -1,4 +1,4 @@
-Top 25 empresas por intensidad de demanda
+Top Empresas por intensidad de demanda
 
 - Compañía de Minas Buenaventura S.A.A. (PE · mining_metals): score 1.80, promedio 1.00, señales 206, última 2025-10-02
 - Estrada de Ferro Porto Murtinho a São Roque (BR · transport_logistics): score 1.47, promedio 1.00, señales 22, última 2025-09-04
@@ -19,9 +19,3 @@ Top 25 empresas por intensidad de demanda
 - Municipal Bank of Rosario (AR · finance_insurance): score 1.16, promedio 1.00, señales 2, última 2024-10-24
 - Benedetti's Pizza (MX · agro_food): score 1.16, promedio 1.00, señales 2, última 2024-10-31
 - Barranquilla Railway and Pier Company Ltd (CO · construction_realestate): score 1.13, promedio 0.70, señales 57, última 2025-08-21
-- Confitería Lion d'Or (UY · agro_food): score 1.10, promedio 1.00, señales 1, última 2024-06-06
-- Buses Vule S.A. (CL · transport_logistics): score 1.10, promedio 1.00, señales 1, última 2024-10-10
-- Ferrocarril del Norte de Buenos Aires (AR · transport_logistics): score 1.10, promedio 1.00, señales 1, última 2024-06-20
-- Farmacias Cruz Verde (CL · retail_consumer): score 1.10, promedio 1.00, señales 1, última —
-- ARCO Aerolíneas Colonia S.A. (UY · transport_logistics): score 1.10, promedio 1.00, señales 1, última 2024-10-10
-- Lucha Libre AAA World Wide (MX · retail_consumer): score 1.10, promedio 1.00, señales 1, última 2024-08-22
