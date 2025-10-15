@@ -1,21 +1,27 @@
-Top Empresas por intensidad de demanda
+Top 25 Empresas por Intensidad de Demanda
 
-- Compañía de Minas Buenaventura S.A.A. (PE · mining_metals): score 1.80, promedio 1.00, señales 206, última 2025-10-02
-- Estrada de Ferro Porto Murtinho a São Roque (BR · transport_logistics): score 1.47, promedio 1.00, señales 22, última 2025-09-04
-- Bank of the Republic (Colombia) (CO · finance_insurance): score 1.33, promedio 1.00, señales 8, última 2025-05-01
-- Empresa de Pesquisa Agropecuária e Extensão Rural de Santa Catarina (BR · agro_food): score 1.29, promedio 1.00, señales 6, última 2025-06-26
-- Estrada de Ferro Noroeste do Brasil (BR · transport_logistics): score 1.24, promedio 1.00, señales 4, última 2024-01-11
-- BRF S.A. (BR · agro_food): score 1.21, promedio 1.00, señales 3, última 2024-12-19
-- Corporación Lindley S.A. (PE · agro_food): score 1.21, promedio 1.00, señales 3, última 2024-08-01
-- Ferrocarril Córdoba Central S.A. (AR · transport_logistics): score 1.16, promedio 1.00, señales 2, última 2024-05-16
-- Compañía Peruana de Teléfonos S.A. (PE · ict_telecom): score 1.16, promedio 1.00, señales 2, última 2024-05-09
-- Edificio del Ministerio de Transporte y Obras Públicas (UY · construction_realestate): score 1.16, promedio 1.00, señales 2, última 2025-05-08
-- Ferrocarril Mexicano del Sur (MX · transport_logistics): score 1.16, promedio 1.00, señales 2, última 2024-04-11
-- Mover Participações (BR · oil_gas): score 1.16, promedio 1.00, señales 2, última 2025-01-09
-- Servicios Lógisticos Ferroviarios S.A. (UY · transport_logistics): score 1.16, promedio 1.00, señales 2, última 2024-07-11
-- Servicio de Comunicación Audiovisual Nacional (UY · ict_telecom): score 1.16, promedio 1.00, señales 2, última 2023-10-26
-- Complejo Manufacturero de Equipos Telefónicos (CL · manufacturing): score 1.16, promedio 1.00, señales 2, última 2024-05-16
-- Parque Arauco S.A. (CL · retail_consumer): score 1.16, promedio 1.00, señales 2, última 2025-06-05
-- Municipal Bank of Rosario (AR · finance_insurance): score 1.16, promedio 1.00, señales 2, última 2024-10-24
-- Benedetti's Pizza (MX · agro_food): score 1.16, promedio 1.00, señales 2, última 2024-10-31
-- Barranquilla Railway and Pier Company Ltd (CO · construction_realestate): score 1.13, promedio 0.70, señales 57, última 2025-08-21
+- Estrada de Ferro Noroeste do Brasil (BR · transport_logistics): score 1.60, promedio 1.00, señales 52, última 2025-10-09
+- Mover Participações (BR · oil_gas): score 1.49, promedio 1.00, señales 25, última 2025-04-03
+- Companhia do Metropolitano de São Paulo (BR · transport_logistics): score 1.37, promedio 1.00, señales 11, última 2022-12-16
+- Rio de Janeiro Metro (BR · retail_consumer): score 1.36, promedio 1.00, señales 10, última 2025-08-20
+- Companhia de Água e Esgoto do Ceará (BR · water_waste_circularity): score 1.35, promedio 1.00, señales 9, última 2024-07-03
+- Agência Senado (BR · ict_telecom): score 1.35, promedio 1.00, señales 9, última 2025-07-31
+- Empresa Provincial de la Energía de Santa Fe (AR · energy_power): score 1.31, promedio 1.00, señales 7, última 2025-02-20
+- Instituto Nacional de Radio y Televisión del Perú (PE · ict_telecom): score 1.31, promedio 1.00, señales 7, última 2025-07-25
+- Cooperativa Agrícola y Lechera de La Unión Limitada (CL · agro_food): score 1.29, promedio 1.00, señales 6, última 2025-08-15
+- Companhia Brasileira de Trens Urbanos (BR · transport_logistics): score 1.29, promedio 1.00, señales 6, última 2022-12-12
+- TriCiclos (CL · manufacturing): score 1.27, promedio 1.00, señales 5, última 2016-10-09
+- ECHALE (MX · construction_realestate): score 1.27, promedio 1.00, señales 5, última 2018-07-24
+- Banco de la Ciudad de Buenos Aires (AR · finance_insurance): score 1.27, promedio 1.00, señales 5, última 2019-11-20
+- Transportadora de Gas del Sur (AR · oil_gas): score 1.27, promedio 1.00, señales 5, última 2017-10-24
+- LUMNI CHILE (CL · finance_insurance): score 1.27, promedio 1.00, señales 5, última 2017-07-11
+- PlanoCDE (BR · ict_telecom): score 1.27, promedio 1.00, señales 5, última 2017-04-14
+- Terrium (CL · manufacturing): score 1.24, promedio 1.00, señales 4, última 2016-11-04
+- Hybrytec Solar (CO · energy_power): score 1.24, promedio 1.00, señales 4, última 2017-10-05
+- LATE! (CL · manufacturing): score 1.24, promedio 1.00, señales 4, última 2017-03-17
+- Portafolio Verde (CO · ict_telecom): score 1.24, promedio 1.00, señales 4, última 2017-06-26
+- Cumplo (CL · finance_insurance): score 1.24, promedio 1.00, señales 4, última 2019-02-15
+- Conexia (AR · manufacturing): score 1.24, promedio 1.00, señales 4, última 2017-07-27
+- Banco de Seguros del Estado (UY · finance_insurance): score 1.24, promedio 1.00, señales 4, última 2025-06-30
+- Estudios y Consultorias Focus (CL · manufacturing): score 1.24, promedio 1.00, señales 4, última 2017-08-04
+- Estrada de Ferro São Paulo-Rio Grande (BR · transport_logistics): score 1.24, promedio 1.00, señales 4, última 2023-01-16

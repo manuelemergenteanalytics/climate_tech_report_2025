@@ -5,15 +5,20 @@
 	<script charset="utf-8" src="https://cdn.plot.ly/plotly-3.1.0.min.js" integrity="sha256-Ei4740bWZhaUTQuD6q9yQlgVCMPBz6CZWhevDYPv93A=" crossorigin="anonymous"></script>
 </head>
 <body>
-	<div id="plotly-a5b26596642d4ca0af3d9c5f5c8dcb15" class="plotly-graph-div" style="height:500px; width:950px;"></div>
+	<div id="plotly-198a9fa464fb417583d98b53b51f3e0d" class="plotly-graph-div" style="height:550px; width:950px;"></div>
 	<script type="text/javascript">
 		window.PLOTLYENV=window.PLOTLYENV || {};
-		if (document.getElementById("plotly-a5b26596642d4ca0af3d9c5f5c8dcb15")) {
+		if (document.getElementById("plotly-198a9fa464fb417583d98b53b51f3e0d")) {
 			Plotly.newPlot(
-				"plotly-a5b26596642d4ca0af3d9c5f5c8dcb15",
+				"plotly-198a9fa464fb417583d98b53b51f3e0d",
 				[
 					{
-						"hovertemplate": "industry=%{x}<br>% empresas activas=%{y}<br>active=%{text}<extra></extra>",
+						"customdata": {
+							"dtype": "f8",
+							"bdata": "AAAAAAAKqkDyXeyf3qnxP3E9CtejcPE/AAAAAACQjkDyXeyf3qnxP3sUrkfhevQ/AAAAAADAfEDyXeyf3qnxP+F6FK5H4fI/AAAAAAAgeUDyXeyf3qnxP+F6FK5H4fI/AAAAAAAQcUDyXeyf3qnxPwAAAAAAAPA/AAAAAABgc0DyXeyf3qnxP/YoXI/C9fQ/AAAAAABAZkDyXeyf3qnxPzMzMzMzM/M/AAAAAACgZEDyXeyf3qnxPz0K16NwPfI/AAAAAABAYkDyXeyf3qnxPwAAAAAAAPQ/AAAAAAAAVUDyXeyf3qnxPwAAAAAAAPA/AAAAAADgYkDyXeyf3qnxPzMzMzMzMwNAAAAAAAAAUUDyXeyf3qnxP9ejcD0K1/s/AAAAAAAAKkDyXeyf3qnxPwAAAAAAAPA/",
+							"shape": "13, 3"
+						},
+						"hovertemplate": "Σ score ponderado=%{x}<br>Industria=%{y}<br>Empresas=%{text}<br>total_events=%{customdata[0]}<br>median_intensity=%{customdata[1]:.2f}<br>avg_events_per_company=%{customdata[2]}<extra></extra>",
 						"legendgroup": "",
 						"marker": {
 							"color": "#636efa",
@@ -22,33 +27,33 @@
 							}
 						},
 						"name": "",
-						"orientation": "v",
+						"orientation": "h",
 						"showlegend": false,
 						"text": {
 							"dtype": "f8",
-							"bdata": "AAAAAAAAAEAAAAAAAAAcQAAAAAAAACZAAAAAAAAACEAAAAAAAAAUQAAAAAAAgEJAAAAAAAAAIkAAAAAAAADwPwAAAAAAACpAAAAAAAAAHEAAAAAAAAAAQAAAAAAAAAhAAAAAAAAAAAA="
+							"bdata": "AAAAAADwp0AAAAAAAPiHQAAAAAAAYHhAAAAAAABgdUAAAAAAAABxQAAAAAAAgG1AAAAAAACAYkAAAAAAACBiQAAAAAAAQF1AAAAAAAAAVUAAAAAAAIBPQAAAAAAAgENAAAAAAAAAKkA="
 						},
 						"textposition": "auto",
-						"x": [
-							"water_waste_circularity",
-							"construction_realestate",
-							"agro_food",
-							"mining_metals",
-							"oil_gas",
-							"transport_logistics",
+						"x": {
+							"dtype": "f8",
+							"bdata": "s+sij2VrqkBMJXERpa2KQNY02RcDGHtAGFabcym/d0DD7x3xx7xyQCNZmklaYHBATGr8m182ZEAEIfehphRkQIXBcU8oEWBAoMlp0dIBV0D/OzxwGOBQQIUZPwSssUVAqRjgwwm0LEA="
+						},
+						"xaxis": "x",
+						"y": [
 							"manufacturing",
+							"ict_telecom",
+							"agro_food",
+							"finance_insurance",
 							"chemicals_materials",
 							"retail_consumer",
-							"ict_telecom",
+							"oil_gas",
+							"construction_realestate",
 							"energy_power",
-							"finance_insurance",
+							"mining_metals",
+							"transport_logistics",
+							"water_waste_circularity",
 							""
 						],
-						"xaxis": "x",
-						"y": {
-							"dtype": "f8",
-							"bdata": "qqqqqqqqQEDQXkJ7Ce05QAAAAAAAACZA27Zt27ZtJUCcm5ubm5sjQP9Mz0HsBSNAAAAAAAAAIkCrqqqqqqoaQLjXkkNcZRpAX42J9EDlFEDE5ApicgURQB8a60NjfQhAAAAAAAAAAAA="
-						},
 						"yaxis": "y",
 						"type": "bar"
 					}
@@ -837,9 +842,8 @@
 							1.0
 						],
 						"title": {
-							"text": "industry"
-						},
-						"automargin": true
+							"text": "Σ score ponderado"
+						}
 					},
 					"yaxis": {
 						"anchor": "x",
@@ -848,18 +852,19 @@
 							1.0
 						],
 						"title": {
-							"text": "% empresas activas"
-						}
+							"text": "Industria"
+						},
+						"automargin": true
 					},
 					"legend": {
 						"tracegroupgap": 0
 					},
 					"title": {
-						"text": "Cobertura (%) de empresas con señales por industria"
+						"text": "Industrias con mayor intensidad de señales"
 					},
 					"barmode": "relative",
 					"width": 950,
-					"height": 500
+					"height": 550
 				},
 				{
 					"responsive": true

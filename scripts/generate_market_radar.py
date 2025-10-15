@@ -91,7 +91,20 @@ def _prep_events() -> pd.DataFrame:
     events["sentiment_score"] = pd.to_numeric(events.get("sentiment_score"), errors="coerce")
     events["signal_strength"] = pd.to_numeric(events.get("signal_strength"), errors="coerce")
     events["climate_score"] = pd.to_numeric(events.get("climate_score"), errors="coerce")
-    events["company_id"] = pd.to_numeric(events.get("company_id"), errors="coerce")
+    raw_ids = events.get("company_id")
+    events["company_id"] = raw_ids.astype(str) if raw_ids is not None else ""
+    events["company_id"] = events["company_id"].replace({"nan": pd.NA, "None": pd.NA, "": pd.NA})
+    events["company_numeric_id"] = pd.to_numeric(raw_ids, errors="coerce")
+    events["company_key"] = events["company_id"].copy()
+    missing_key = events["company_key"].isna()
+    if missing_key.any():
+        fallback_qid = events.loc[missing_key, "company_qid"].astype(str).replace({"nan": pd.NA, "None": pd.NA})
+        events.loc[missing_key, "company_key"] = fallback_qid
+    still_missing = events["company_key"].isna()
+    if still_missing.any():
+        fallback_name = events.loc[still_missing, "company_name"].fillna("")
+        events.loc[still_missing, "company_key"] = fallback_name.str.lower().str.replace(r"\s+", "_", regex=True)
+    events["company_key"] = events["company_key"].fillna("unknown_company")
     events["country"] = events["country"].fillna("")
     events["industry"] = events["industry"].fillna("")
     events["signal_type"] = events["signal_type"].fillna("unknown")
@@ -103,8 +116,7 @@ def _company_rollup(events: pd.DataFrame) -> pd.DataFrame:
     grouped = (
         events.groupby(
             [
-                "company_id",
-                "company_qid",
+                "company_key",
                 "company_name",
                 "country",
                 "industry",
@@ -117,6 +129,9 @@ def _company_rollup(events: pd.DataFrame) -> pd.DataFrame:
             total_events=("weighted_strength", "count"),
             last_ts=("ts", "max"),
             avg_sentiment=("sentiment_score", "mean"),
+            company_id=("company_id", "first"),
+            company_numeric_id=("company_numeric_id", "first"),
+            company_qid=("company_qid", "first"),
         )
     )
     grouped["total_events"] = grouped["total_events"].astype(int)
@@ -388,8 +403,11 @@ def _write_plotly_html(fig: go.Figure, path: Path, config: Dict[str, Any] | None
 
 
 def ranking_companies(companies: pd.DataFrame) -> Path:
-    ranking = companies.sort_values("demand_score", ascending=False).head(25).copy()
-    ranking = ranking[ranking["total_events"] > 1]
+    ranking = (
+        companies.sort_values("demand_score", ascending=False)
+        .head(25)
+        .copy()
+    )
     ranking["last_ts_fmt"] = ranking["last_ts"].dt.strftime("%Y-%m-%d").fillna("—")
 
     fig = px.bar(
@@ -400,13 +418,13 @@ def ranking_companies(companies: pd.DataFrame) -> Path:
         color="country",
         text="total_events",
         hover_data={"last_ts_fmt": True, "industry": True, "avg_strength": ":.2f"},
-        title="Top Empresas por intensidad de demanda",
+        title="Top 25 Empresas por Intensidad de Demanda",
         labels={"demand_score": "Score ponderado", "total_events": "# señales", "last_ts_fmt": "Última señal"},
     )
     fig.update_layout(height=800, width=950, yaxis=dict(automargin=True))
 
     # Export plain text summary
-    lines = ["Top Empresas por intensidad de demanda\n"]
+    lines = ["Top 25 Empresas por Intensidad de Demanda\n"]
     for idx, row in ranking.iterrows():
         score = f"{row['demand_score']:.2f}"
         avg = f"{row['avg_strength']:.2f}"
@@ -450,74 +468,80 @@ def sentiment_distribution(companies: pd.DataFrame) -> Path:
     return _write_plotly_html(fig, path)
 
 
-def coverage_indicators(companies: pd.DataFrame, universe: pd.DataFrame) -> Path:
-    active_companies = companies["company_id"].dropna().unique().tolist()
-    universe = universe.copy()
-    universe["company_id"] = pd.to_numeric(universe["company_id"], errors="coerce")
-    universe["active"] = universe["company_id"].isin(active_companies)
-
-    by_industry = (
-        universe.groupby("industry", as_index=False)
-        .agg(total=("company_id", "count"), active=("active", "sum"))
+def coverage_indicators(companies: pd.DataFrame) -> Path:
+    rollup = (
+        companies.groupby("industry", as_index=False)
+        .agg(
+            total_companies=("company_key", "nunique"),
+            total_events=("total_events", "sum"),
+            total_demand=("demand_score", "sum"),
+            median_intensity=("intensity_score", "median"),
+        )
     )
-    by_industry["coverage_pct"] = (by_industry["active"] / by_industry["total"]).fillna(0) * 100
-    by_industry = by_industry.sort_values("coverage_pct", ascending=False)
+    rollup = rollup[rollup["total_companies"] > 0]
+    rollup = rollup.sort_values("total_demand", ascending=False).head(20)
+    rollup["avg_events_per_company"] = (rollup["total_events"] / rollup["total_companies"]).round(2)
 
     fig = px.bar(
-        by_industry,
-        x="industry",
-        y="coverage_pct",
-        text="active",
-        title="Cobertura (%) de empresas con señales por industria",
-        labels={"coverage_pct": "% empresas activas"},
+        rollup,
+        x="total_demand",
+        y="industry",
+        orientation="h",
+        text="total_companies",
+        title="Industrias con mayor intensidad de señales",
+        labels={
+            "total_demand": "Σ score ponderado",
+            "industry": "Industria",
+            "total_companies": "Empresas",
+        },
+        hover_data={
+            "total_events": True,
+            "median_intensity": ":.2f",
+            "avg_events_per_company": True,
+        },
     )
-    fig.update_layout(width=950, height=500, xaxis=dict(automargin=True))
+    fig.update_layout(width=950, height=550, yaxis=dict(automargin=True))
 
     path = OUTPUT_DIR / "coverage_indicators.html"
     return _write_plotly_html(fig, path)
 
 
-def coverage_country_industry(companies: pd.DataFrame, universe: pd.DataFrame) -> Path:
-    universe = universe.copy()
-    universe["company_id"] = pd.to_numeric(universe["company_id"], errors="coerce")
-    universe = universe.dropna(subset=["company_id"])
-    active_ids = set(companies["company_id"].dropna())
-    universe["active"] = universe["company_id"].isin(active_ids)
-
+def coverage_country_industry(events: pd.DataFrame) -> Path:
     coverage = (
-        universe.groupby(["country", "industry"], as_index=False)
-        .agg(total=("company_id", "count"), active=("active", "sum"))
+        events.groupby(["country", "industry"], as_index=False)
+        .agg(
+            total_events=("company_key", "count"),
+            companies=("company_key", "nunique"),
+            total_demand=("weighted_strength", "sum"),
+        )
     )
-    coverage["inactive"] = coverage["total"] - coverage["active"]
-    coverage["coverage_pct"] = np.where(
-        coverage["total"] > 0, coverage["active"] / coverage["total"] * 100, 0.0
-    )
+    coverage = coverage[coverage["total_events"] > 0]
 
     if coverage.empty:
-        coverage = pd.DataFrame({"country": [], "industry": [], "coverage_pct": []})
+        coverage = pd.DataFrame({"country": [], "industry": [], "total_events": []})
 
     fig = px.density_heatmap(
         coverage,
         x="industry",
         y="country",
-        z="coverage_pct",
-        color_continuous_scale="Greens",
-        title="Cobertura del universo por país e industria",
-        labels={"coverage_pct": "% empresas con señales"},
+        z="total_events",
+        color_continuous_scale="Tealgrn",
+        title="Señales por país e industria",
+        labels={"total_events": "# señales"},
     )
 
     if not coverage.empty:
-        custom = coverage[["active", "inactive", "total"]].to_numpy()
+        custom = coverage[["companies", "total_demand"]].to_numpy()
         fig.update_traces(
             customdata=custom,
             hovertemplate=(
-                "industria=%{x}<br>país=%{y}<br>% con señales=%{z:.1f}%<br>"
-                "activos=%{customdata[0]}<br>sin señales=%{customdata[1]}<br>total=%{customdata[2]}<extra></extra>"
+                "industria=%{x}<br>país=%{y}<br>señales=%{z:.0f}<br>"
+                "empresas únicas=%{customdata[0]:.0f}<br>Σ score=%{customdata[1]:.2f}<extra></extra>"
             ),
         )
 
     fig.update_layout(width=950, height=600, xaxis=dict(automargin=True))
-    fig.update_coloraxes(colorbar=dict(title="% cobertura"))
+    fig.update_coloraxes(colorbar=dict(title="# señales"))
 
     path = OUTPUT_DIR / "coverage_country_industry.html"
     return _write_plotly_html(fig, path)
@@ -551,7 +575,8 @@ def coverage_summary(companies: pd.DataFrame, universe: pd.DataFrame) -> Path:
     total_universe = int(universe_ids.dropna().nunique())
 
     events_per_company = companies["total_events"].dropna().to_numpy()
-    active_count = int(companies["company_id"].dropna().nunique())
+    active_ids = pd.to_numeric(companies["company_numeric_id"], errors="coerce")
+    active_count = int(active_ids.dropna().nunique())
     inactive_count = max(total_universe - active_count, 0)
     coverage_pct = (active_count / total_universe * 100) if total_universe else 0.0
 
@@ -616,10 +641,14 @@ def signal_mix_sankey(events: pd.DataFrame, universe: pd.DataFrame) -> Path:
     universe_ids = pd.to_numeric(universe["company_id"], errors="coerce").dropna()
     universe_set = set(universe_ids)
 
-    events_subset = events[events["company_id"].isin(universe_set)].copy()
+    events_subset = events[events["company_numeric_id"].isin(universe_set)].copy()
     events_subset["signal_type"] = events_subset["signal_type"].fillna("unknown").astype(str)
+    events_subset["company_numeric_id"] = pd.to_numeric(
+        events_subset["company_numeric_id"], errors="coerce"
+    )
+    events_subset = events_subset.dropna(subset=["company_numeric_id"])
 
-    active_ids = events_subset["company_id"].dropna().unique()
+    active_ids = events_subset["company_numeric_id"].dropna().unique()
     active_count = int(active_ids.size)
     total_universe = int(len(universe_set))
     inactive_count = max(total_universe - active_count, 0)
@@ -631,7 +660,7 @@ def signal_mix_sankey(events: pd.DataFrame, universe: pd.DataFrame) -> Path:
         return " + ".join(unique)
 
     combo_counts = (
-        events_subset.groupby("company_id")["signal_type"].apply(_label_combo).value_counts()
+        events_subset.groupby("company_numeric_id")["signal_type"].apply(_label_combo).value_counts()
     )
 
     if combo_counts.empty:
@@ -700,8 +729,8 @@ def main() -> None:
         heatmap_country_industry(companies),
         map_intensity(companies),
         ranking_companies(companies),
-        coverage_indicators(companies, universe),
-        coverage_country_industry(companies, universe),
+        coverage_indicators(companies),
+        coverage_country_industry(events),
         country_fact_sheet(companies),
         signal_type_distribution(events),
         signal_mix_sankey(events, universe),
