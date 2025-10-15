@@ -1,0 +1,537 @@
+#!/usr/bin/env python3
+"""Combine membership datasets into events_normalized.csv."""
+from __future__ import annotations
+
+import re
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Dict, List, Optional
+
+import pandas as pd
+
+from ctr25.signals.news import _load_keywords, _enrich_events
+
+DATA_DIR = Path("data")
+PROCESSED_DIR = DATA_DIR / "processed"
+RAW_DIR = DATA_DIR / "raw"
+EVENTS_PATH = PROCESSED_DIR / "events_normalized.csv"
+UNIVERSE_PATH = PROCESSED_DIR / "universe_sample.csv"
+KEYWORDS_PATH = Path("config/keywords.yml")
+
+EVENT_COLUMNS = [
+    "company_id",
+    "company_qid",
+    "company_name",
+    "country",
+    "industry",
+    "size_bin",
+    "source",
+    "signal_type",
+    "signal_strength",
+    "ts",
+    "url",
+    "title",
+    "text_snippet",
+    "climate_score",
+    "sentiment_label",
+    "sentiment_score",
+]
+
+# Mapping of country names present in source datasets -> ISO2 codes used internally.
+_COUNTRY_MAP: Dict[str, str] = {
+    "argentina": "AR",
+    "bolivia": "BO",
+    "bolivia (plurinational state of)": "BO",
+    "brazil": "BR",
+    "brasil": "BR",
+    "chile": "CL",
+    "colombia": "CO",
+    "costa rica": "CR",
+    "dominican republic": "DO",
+    "ecuador": "EC",
+    "el salvador": "SV",
+    "guatemala": "GT",
+    "honduras": "HN",
+    "mexico": "MX",
+    "méxico": "MX",
+    "nicaragua": "NI",
+    "panama": "PA",
+    "panamá": "PA",
+    "paraguay": "PY",
+    "peru": "PE",
+    "perú": "PE",
+    "uruguay": "UY",
+    "venezuela": "VE",
+}
+_LATAM_CODES = {
+    "AR",
+    "BO",
+    "BR",
+    "CL",
+    "CO",
+    "CR",
+    "DO",
+    "EC",
+    "GT",
+    "HN",
+    "MX",
+    "NI",
+    "PA",
+    "PE",
+    "PY",
+    "SV",
+    "UY",
+    "VE",
+}
+
+_TITLE_MAP = {
+    "bcorp": "Certificación B Corp",
+    "sbti": "Compromiso SBTi",
+    "ungc": "Participación Pacto Global",
+}
+
+
+# --- text helpers (copy of membership normalization utilities) ---
+def _norm(s: str) -> str:
+    if not isinstance(s, str):
+        return ""
+    s = s.lower()
+    s = re.sub(r"[^a-z0-9áéíóúüñ ]+", " ", s)
+    return re.sub(r"\s+", " ", s).strip()
+
+
+def _tokenize_name(norm_name: str) -> List[str]:
+    tokens: List[str] = []
+    for raw in norm_name.split():
+        tok = raw.strip()
+        if not tok or len(tok) == 1:
+            continue
+        if tok in {
+            "de",
+            "del",
+            "la",
+            "las",
+            "los",
+            "el",
+            "y",
+            "the",
+            "grupo",
+            "group",
+            "holding",
+            "company",
+            "companies",
+            "corp",
+            "corporation",
+            "inc",
+            "sa",
+            "saa",
+            "sae",
+            "srl",
+            "plc",
+            "ltd",
+            "ltda",
+            "co",
+            "cv",
+            "s",
+            "sac",
+            "saic",
+            "spa",
+            "air",
+            "cargo",
+        }:
+            continue
+        tokens.append(tok)
+    return tokens
+
+
+def _slugify(value: str, *, max_len: int = 60) -> str:
+    if not value:
+        return "unknown"
+    slug = re.sub(r"[^a-z0-9]+", "-", value.lower())
+    slug = slug.strip("-") or "unknown"
+    return slug[:max_len]
+
+
+def _clean_text(value: str) -> str:
+    if not isinstance(value, str):
+        return ""
+    return re.sub(r"\s+", " ", value).strip()
+
+
+def _map_country(value: str) -> str:
+    if not isinstance(value, str):
+        return ""
+    key = value.strip().lower()
+    return _COUNTRY_MAP.get(key, "")
+
+
+def _parse_ts(*values: object) -> str:
+    for val in values:
+        if val is None:
+            continue
+        if isinstance(val, float) and pd.isna(val):
+            continue
+        s = str(val).strip()
+        if not s:
+            continue
+        if s.isdigit() and len(s) == 4:
+            return f"{s}-01-01T00:00:00Z"
+        ts = pd.to_datetime(s, errors="coerce", utc=True)
+        if pd.isna(ts):
+            continue
+        return ts.isoformat()
+    # fallback to today UTC to avoid empty timestamps
+    return pd.Timestamp.utcnow().strftime("%Y-%m-%dT00:00:00Z")
+
+
+def _size_from_bcorp(raw: str) -> str:
+    mapping = {
+        "0": "s",
+        "1-9": "s",
+        "10-49": "s",
+        "50-249": "m",
+        "250-999": "m",
+        "250+": "l",
+        "1000+": "l",
+    }
+    if not isinstance(raw, str):
+        return ""
+    return mapping.get(raw.strip(), "")
+
+
+@dataclass
+class UniverseRecord:
+    company_id: object
+    company_qid: str
+    company_name: str
+    country: str
+    industry: str
+    size_bin: str
+    norm: str
+    tokens: List[str]
+
+
+class UniverseIndex:
+    def __init__(self, universe: pd.DataFrame) -> None:
+        self.records: List[UniverseRecord] = []
+        self.by_norm: Dict[str, UniverseRecord] = {}
+        self.by_token: Dict[str, List[UniverseRecord]] = {}
+        for _, row in universe.iterrows():
+            norm = _norm(row.get("company_name", ""))
+            tokens = _tokenize_name(norm)
+            record = UniverseRecord(
+                company_id=row.get("company_id"),
+                company_qid=str(row.get("company_qid", "") or ""),
+                company_name=str(row.get("company_name", "") or ""),
+                country=str(row.get("country", "") or ""),
+                industry=str(row.get("industry", "") or ""),
+                size_bin=str(row.get("size_bin", "") or ""),
+                norm=norm,
+                tokens=tokens,
+            )
+            self.records.append(record)
+            if norm and norm not in self.by_norm:
+                self.by_norm[norm] = record
+            for token in tokens:
+                self.by_token.setdefault(token, []).append(record)
+
+    def match(self, name: str) -> Optional[UniverseRecord]:
+        if not name:
+            return None
+        direct = self.by_norm.get(name)
+        if direct is not None:
+            return direct
+        tokens = _tokenize_name(name)
+        if len(tokens) < 2:
+            return None
+        candidates: Dict[int, UniverseRecord] = {}
+        for token in tokens:
+            for rec in self.by_token.get(token, []):
+                candidates[id(rec)] = rec
+        if not candidates:
+            return None
+        best: Optional[UniverseRecord] = None
+        best_score = 0
+        query_tokens = set(tokens)
+        for rec in candidates.values():
+            shared = len(query_tokens.intersection(rec.tokens))
+            if shared > best_score:
+                best = rec
+                best_score = shared
+        if best_score >= 2:
+            return best
+        return None
+
+
+def _load_universe() -> UniverseIndex:
+    if not UNIVERSE_PATH.exists():
+        raise FileNotFoundError(
+            "No se encontró universe_sample.csv. Corré `ctr25 sample` antes de reconstruir eventos."
+        )
+    universe = pd.read_csv(UNIVERSE_PATH)
+    return UniverseIndex(universe)
+
+
+def _guess_industry(raw: str) -> str:
+    if not isinstance(raw, str):
+        return ""
+    s = raw.strip().lower()
+    if not s:
+        return ""
+    patterns = [
+        ("energy_power", ["energy", "energía", "energia", "power", "solar", "wind", "eolic", "eólico", "hidro", "renew"]),
+        ("oil_gas", ["oil", "gas", "petro", "hidrocarb"]),
+        ("mining_metals", ["mining", "miner", "minería", "minera", "metal"]),
+        ("chemicals_materials", ["chem", "quim", "quím", "material", "sider", "plast", "poly", "fertil"]),
+        ("manufacturing", ["manufact", "fabric", "industrial", "automotive", "textil", "maquil"]),
+        ("construction_realestate", ["construct", "real estate", "inmobili", "infra", "obra", "desarroll", "vivienda"]),
+        ("transport_logistics", ["transport", "logist", "ferro", "aero", "aviac", "metro", "shipping", "portu", "marit", "aerol"]),
+        ("agro_food", ["agro", "agri", "food", "alimento", "bev", "cervec", "brew", "cafe", "cacao", "ganad", "harin", "azucar"]),
+        ("retail_consumer", ["retail", "consumer", "consumo", "comerc", "tienda", "super", "farmac", "cosmet", "hogar", "e-commerce", "commerce"]),
+        ("water_waste_circularity", ["water", "waste", "residu", "circular", "hidric", "saneam", "sanit", "alcantar"]),
+        ("finance_insurance", ["financ", "bank", "banca", "insur", "segur", "fond", "inversion", "burs", "microfin"]),
+        ("ict_telecom", ["ict", "telecom", "telefon", "software", "internet", "tech", "tecnolog", "digital", "media", "televis", "notic", "rad"]),
+    ]
+    for slug, keywords in patterns:
+        for kw in keywords:
+            if kw in s:
+                return slug
+    return "manufacturing"
+
+
+def _common_event_fields(row: pd.Series, *, signal_type: str) -> Dict[str, object]:
+    title = _TITLE_MAP.get(signal_type, f"Membership: {signal_type}")
+    text = _clean_text(str(row.get("text_snippet", "") or row.get("member_name", "")))
+    return {
+        "source": "memberships",
+        "signal_type": signal_type,
+        "signal_strength": 1.0,
+        "ts": row.get("ts"),
+        "url": row.get("url", ""),
+        "title": title,
+        "text_snippet": text,
+        "climate_score": 1.0,
+        "sentiment_label": "positive",
+        "sentiment_score": 0.6,
+    }
+
+
+def _build_event(row: pd.Series, match: Optional[UniverseRecord], *, signal_type: str) -> Dict[str, object]:
+    base = _common_event_fields(row, signal_type=signal_type)
+    if match is not None:
+        base.update(
+            {
+                "company_id": match.company_id,
+                "company_qid": match.company_qid,
+                "company_name": match.company_name,
+                "country": match.country or row.get("country", ""),
+                "industry": match.industry or row.get("industry", ""),
+                "size_bin": match.size_bin or row.get("size_bin", ""),
+            }
+        )
+    else:
+        slug = _slugify(str(row.get("member_name", "")))
+        country = str(row.get("country", ""))
+        if country:
+            slug = f"{slug}-{country.lower()}"
+        base.update(
+            {
+                "company_id": f"ext::{signal_type}::{slug}",
+                "company_qid": "",
+                "company_name": row.get("member_name", ""),
+                "country": country,
+                "industry": row.get("industry", ""),
+                "size_bin": row.get("size_bin", ""),
+            }
+        )
+    return base
+
+
+def _prepare_members(df: pd.DataFrame, *, signal_type: str) -> pd.DataFrame:
+    out = df.copy()
+    out["member_name"] = out["member_name"].fillna("").astype(str)
+    out = out[out["member_name"].str.strip() != ""]
+    out["member_name_norm"] = out["member_name"].apply(_norm)
+    out["industry"] = out["industry"].apply(_guess_industry)
+    out["ts"] = out["ts"].apply(lambda x: _parse_ts(x))
+    out["url"] = out["url"].fillna("")
+    out["country"] = out["country"].fillna("")
+    out["size_bin"] = out["size_bin"].fillna("")
+    out["text_snippet"] = out.get("text_snippet", "").apply(_clean_text)
+    out["signal_type"] = signal_type
+    return out
+
+
+def _match_events(df: pd.DataFrame, index: UniverseIndex, *, signal_type: str) -> pd.DataFrame:
+    events: List[Dict[str, object]] = []
+    for _, row in df.iterrows():
+        match = index.match(row.get("member_name_norm", ""))
+        event = _build_event(row, match, signal_type=signal_type)
+        events.append(event)
+    return pd.DataFrame(events)
+
+
+def _load_bcorp() -> pd.DataFrame:
+    path = RAW_DIR / "memberships" / "b_corp" / "b_corp_data.csv"
+    if not path.exists():
+        return pd.DataFrame(columns=["member_name"])
+    df = pd.read_csv(path)
+    df["country"] = df["country"].apply(_map_country)
+    df = df[df["country"].isin(_LATAM_CODES)].copy()
+    df["member_name"] = df["company_name"].fillna("").astype(str)
+    df = df[df["member_name"].str.strip() != ""]
+    df["ts"] = df.apply(
+        lambda row: _parse_ts(
+            row.get("date_certified"),
+            row.get("date_first_certified"),
+            row.get("assessment_year"),
+        ),
+        axis=1,
+    )
+    df["url"] = df[["b_corp_profile", "website"]].fillna("").agg(
+        lambda s: next((x for x in s if isinstance(x, str) and x.strip()), ""),
+        axis=1,
+    )
+    df["industry"] = df["industry_category"].fillna(df.get("industry", ""))
+    df["size_bin"] = df["size"].apply(_size_from_bcorp)
+    df["text_snippet"] = df[["description", "products_and_services"]].fillna("").agg(
+        lambda s: next((x for x in s if isinstance(x, str) and x.strip()), ""),
+        axis=1,
+    )
+    df = df[["member_name", "ts", "url", "country", "industry", "size_bin", "text_snippet"]]
+    return _prepare_members(df, signal_type="bcorp")
+
+
+def _load_ungc() -> pd.DataFrame:
+    path = PROCESSED_DIR / "ungc_participants_latam.csv"
+    if not path.exists():
+        return pd.DataFrame(columns=["member_name"])
+    df = pd.read_csv(path)
+    df["country"] = df["country"].apply(_map_country)
+    df = df[df["country"].isin(_LATAM_CODES)].copy()
+    df["member_name"] = df["name"].fillna("").astype(str)
+    df = df[df["member_name"].str.strip() != ""]
+    df["ts"] = df["joined_on"].apply(lambda x: _parse_ts(x))
+    df["industry"] = df["sector"].fillna("")
+    size_map = {
+        "small or medium-sized enterprise": "m",
+        "company": "l",
+    }
+    df["size_bin"] = df["type"].str.lower().map(size_map).fillna("")
+    df["url"] = df["participant_url"].fillna("")
+    df["text_snippet"] = df[["status", "ownership"]].fillna("").agg(lambda s: " | ".join([x for x in s if x]), axis=1)
+    df = df[["member_name", "ts", "url", "country", "industry", "size_bin", "text_snippet"]]
+    return _prepare_members(df, signal_type="ungc")
+
+
+def _load_sbti() -> pd.DataFrame:
+    path_candidates = [
+        RAW_DIR / "memberships" / "sbti" / "sbti_data.csv",
+        RAW_DIR / "memberships" / "sbti.csv",
+    ]
+    path = next((p for p in path_candidates if p.exists()), None)
+    if path is None:
+        return pd.DataFrame(columns=["member_name"])
+    df = pd.read_csv(path)
+    df["country"] = df["country"].apply(_map_country)
+    df = df[df["country"].isin(_LATAM_CODES)].copy()
+    df["member_name"] = df["member_name"].fillna("").astype(str)
+    df = df[df["member_name"].str.strip() != ""]
+    df["ts"] = df["ts"].apply(lambda x: _parse_ts(x))
+    df["industry"] = df["sector"].fillna("")
+    df["size_bin"] = ""
+    df["url"] = df["url"].fillna("")
+    df["text_snippet"] = "Compromiso con objetivos basados en ciencia"
+    df = df[["member_name", "ts", "url", "country", "industry", "size_bin", "text_snippet"]]
+    return _prepare_members(df, signal_type="sbti")
+
+
+def _load_news(keywords_path: Path = KEYWORDS_PATH) -> pd.DataFrame:
+    news_dir = RAW_DIR / "news"
+    if not news_dir.exists():
+        return pd.DataFrame(columns=EVENT_COLUMNS)
+
+    files = sorted(news_dir.rglob("*.csv"))
+    frames: List[pd.DataFrame] = []
+    for path in files:
+        try:
+            df = pd.read_csv(path)
+        except Exception as exc:  # pragma: no cover - defensive
+            print(f"[rebuild-events] no se pudo leer {path}: {exc}")
+            continue
+        if df.empty:
+            continue
+        for col in EVENT_COLUMNS:
+            if col not in df.columns:
+                default: object = ""
+                if col in {"signal_strength", "climate_score", "sentiment_score"}:
+                    default = 0.0
+                df[col] = default
+        frames.append(df[EVENT_COLUMNS])
+
+    if not frames:
+        return pd.DataFrame(columns=EVENT_COLUMNS)
+
+    news = pd.concat(frames, ignore_index=True)
+    keywords = _load_keywords(str(keywords_path))
+    news = _enrich_events(news, keywords)
+    news = news[news["signal_strength"] > 0]
+    if news.empty:
+        return news
+
+    news = news.copy()
+    news["source"] = "news"
+    news["signal_type"] = "news"
+    news["title"] = news["title"].apply(_clean_text)
+    news["text_snippet"] = news["text_snippet"].apply(_clean_text)
+    news["country"] = news["country"].fillna("").astype(str).str.upper()
+    news = news[news["country"].isin(_LATAM_CODES)]
+    news["ts"] = pd.to_datetime(news["ts"], errors="coerce", utc=True)
+    news = news.dropna(subset=["ts"])
+    if news.empty:
+        return news
+
+    news = news.sort_values("ts")
+    news["ts"] = news["ts"].dt.strftime("%Y-%m-%dT%H:%M:%SZ")
+    news = news.drop_duplicates(subset=["company_id", "url", "ts"], keep="last")
+    return news
+
+
+def main() -> None:
+    universe_index = _load_universe()
+
+    sources = [
+        _load_bcorp(),
+        _load_ungc(),
+        _load_sbti(),
+        _load_news(),
+    ]
+    sources = [df for df in sources if not df.empty]
+    if not sources:
+        raise RuntimeError("No se encontraron datasets de memberships para procesar.")
+
+    frames: List[pd.DataFrame] = []
+    for df in sources:
+        signal_type = df["signal_type"].iloc[0]
+        if signal_type == "news":
+            events = df[EVENT_COLUMNS].copy()
+        else:
+            events = _match_events(df, universe_index, signal_type=signal_type)
+        frames.append(events)
+
+    combined = pd.concat(frames, ignore_index=True)
+    if combined.empty:
+        raise RuntimeError("No se generaron eventos normalizados.")
+
+    # Ordenar columnas según esquema esperado
+    combined = combined[EVENT_COLUMNS]
+    combined = combined.drop_duplicates(subset=["company_id", "signal_type", "url", "ts"], keep="last")
+    combined = combined.sort_values("ts").reset_index(drop=True)
+
+    EVENTS_PATH.parent.mkdir(parents=True, exist_ok=True)
+    combined.to_csv(EVENTS_PATH, index=False)
+    print(f"Eventos normalizados escritos en {EVENTS_PATH} ({len(combined)} filas)")
+
+
+if __name__ == "__main__":
+    main()
