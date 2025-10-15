@@ -10,6 +10,7 @@ from typing import Dict, List, Optional
 import pandas as pd
 
 from ctr25.signals.news import _load_keywords, _enrich_events
+from ctr25.industry import IndustryResolver
 
 DATA_DIR = Path("data")
 PROCESSED_DIR = DATA_DIR / "processed"
@@ -32,9 +33,17 @@ EVENT_COLUMNS = [
     "url",
     "title",
     "text_snippet",
+    "description",
     "climate_score",
     "sentiment_label",
     "sentiment_score",
+]
+
+CONTEXT_COLS = [
+    "context_sector",
+    "context_type",
+    "context_description",
+    "context_extra",
 ]
 
 # Mapping of country names present in source datasets -> ISO2 codes used internally.
@@ -389,17 +398,84 @@ def _prepare_members(df: pd.DataFrame, *, signal_type: str) -> pd.DataFrame:
     out["country"] = out["country"].fillna("")
     out["size_bin"] = out["size_bin"].fillna("")
     out["text_snippet"] = out.get("text_snippet", "").apply(_clean_text)
+    for col in CONTEXT_COLS:
+        if col not in out.columns:
+            out[col] = ""
+        out[col] = out[col].fillna("")
     out["signal_type"] = signal_type
     return out
 
 
-def _match_events(df: pd.DataFrame, index: UniverseIndex, *, signal_type: str) -> pd.DataFrame:
+def _match_events(
+    df: pd.DataFrame,
+    index: UniverseIndex,
+    *,
+    signal_type: str,
+    resolver: IndustryResolver,
+) -> pd.DataFrame:
     events: List[Dict[str, object]] = []
     for _, row in df.iterrows():
         match = index.match(row.get("member_name_norm", ""))
         event = _build_event(row, match, signal_type=signal_type)
+        event = _classify_event(event, row=row, match=match, signal_type=signal_type, resolver=resolver)
         events.append(event)
     return pd.DataFrame(events)
+
+
+def _build_context_fields(row: pd.Series) -> Dict[str, object]:
+    context: Dict[str, object] = {}
+    for col in CONTEXT_COLS:
+        value = row.get(col)
+        if isinstance(value, str) and value.strip():
+            context[col] = value.strip()
+    # Ensure key aliases for prompt compatibility
+    if "context_sector" in context and "sector" not in context:
+        context["sector"] = context["context_sector"]
+    if "context_type" in context and "type" not in context:
+        context["type"] = context["context_type"]
+    if "context_description" in context and "description" not in context:
+        context["description"] = context["context_description"]
+    if "context_extra" in context and "text_snippet" not in context:
+        context["text_snippet"] = context["context_extra"]
+    return context
+
+
+def _classify_event(
+    event: Dict[str, object],
+    *,
+    row: pd.Series,
+    match: Optional[UniverseRecord],
+    signal_type: str,
+    resolver: IndustryResolver,
+) -> Dict[str, object]:
+    hints: List[str] = []
+    existing = [
+        row.get("industry"),
+        event.get("industry"),
+        row.get("context_sector"),
+    ]
+    if match and match.industry:
+        existing.append(match.industry)
+    hints = [h for h in existing if isinstance(h, str) and h]
+    fields = _build_context_fields(row)
+    # always include the canonical snippet sent to the event
+    fields.setdefault("text_snippet", event.get("text_snippet", ""))
+    classification = resolver.classify_event(
+        company_name=str(event.get("company_name", "")),
+        source=signal_type,
+        country=str(event.get("country", "")),
+        fields=fields,
+        hints=hints,
+    )
+    if classification.industry_slug:
+        event["industry"] = classification.industry_slug
+    description = classification.description.strip()
+    if not description:
+        description = fields.get("description") or fields.get("text_snippet") or ""
+    event["description"] = _clean_text(description)[:400]
+    event["_industry_confidence"] = classification.confidence
+    event["_industry_provider"] = classification.provider
+    return event
 
 
 def _load_bcorp() -> pd.DataFrame:
@@ -429,7 +505,27 @@ def _load_bcorp() -> pd.DataFrame:
         lambda s: next((x for x in s if isinstance(x, str) and x.strip()), ""),
         axis=1,
     )
-    df = df[["member_name", "ts", "url", "country", "industry", "size_bin", "text_snippet"]]
+    df["context_sector"] = df["industry_category"].fillna("")
+    df["context_description"] = (
+        df["description"] if "description" in df.columns else pd.Series(["" for _ in range(len(df))])
+    ).fillna("")
+    df["context_extra"] = (
+        df["products_and_services"] if "products_and_services" in df.columns else pd.Series(["" for _ in range(len(df))])
+    ).fillna("")
+    df = df[
+        [
+            "member_name",
+            "ts",
+            "url",
+            "country",
+            "industry",
+            "size_bin",
+            "text_snippet",
+            "context_sector",
+            "context_description",
+            "context_extra",
+        ]
+    ]
     return _prepare_members(df, signal_type="bcorp")
 
 
@@ -451,7 +547,25 @@ def _load_ungc() -> pd.DataFrame:
     df["size_bin"] = df["type"].str.lower().map(size_map).fillna("")
     df["url"] = df["participant_url"].fillna("")
     df["text_snippet"] = df[["status", "ownership"]].fillna("").agg(lambda s: " | ".join([x for x in s if x]), axis=1)
-    df = df[["member_name", "ts", "url", "country", "industry", "size_bin", "text_snippet"]]
+    df["context_sector"] = df["sector"].fillna("")
+    df["context_type"] = df["type"].fillna("")
+    df["context_description"] = df["status"].fillna("")
+    df["context_extra"] = df["ownership"].fillna("")
+    df = df[
+        [
+            "member_name",
+            "ts",
+            "url",
+            "country",
+            "industry",
+            "size_bin",
+            "text_snippet",
+            "context_sector",
+            "context_type",
+            "context_description",
+            "context_extra",
+        ]
+    ]
     return _prepare_members(df, signal_type="ungc")
 
 
@@ -473,11 +587,35 @@ def _load_sbti() -> pd.DataFrame:
     df["size_bin"] = ""
     df["url"] = df["url"].fillna("")
     df["text_snippet"] = "Compromiso con objetivos basados en ciencia"
-    df = df[["member_name", "ts", "url", "country", "industry", "size_bin", "text_snippet"]]
+    df["context_sector"] = df["sector"].fillna("")
+    df["context_type"] = (
+        df["type"] if "type" in df.columns else pd.Series(["" for _ in range(len(df))])
+    ).fillna("")
+    df["context_description"] = (
+        df["target_type"] if "target_type" in df.columns else pd.Series(["" for _ in range(len(df))])
+    ).fillna("")
+    df["context_extra"] = (
+        df["source"] if "source" in df.columns else pd.Series(["" for _ in range(len(df))])
+    ).fillna("")
+    df = df[
+        [
+            "member_name",
+            "ts",
+            "url",
+            "country",
+            "industry",
+            "size_bin",
+            "text_snippet",
+            "context_sector",
+            "context_type",
+            "context_description",
+            "context_extra",
+        ]
+    ]
     return _prepare_members(df, signal_type="sbti")
 
 
-def _load_news(keywords_path: Path = KEYWORDS_PATH) -> pd.DataFrame:
+def _load_news(keywords_path: Path = KEYWORDS_PATH, resolver: Optional[IndustryResolver] = None) -> pd.DataFrame:
     news_dir = RAW_DIR / "news"
     if not news_dir.exists():
         return pd.DataFrame(columns=EVENT_COLUMNS)
@@ -525,17 +663,46 @@ def _load_news(keywords_path: Path = KEYWORDS_PATH) -> pd.DataFrame:
     news = news.sort_values("ts")
     news["ts"] = news["ts"].dt.strftime("%Y-%m-%dT%H:%M:%SZ")
     news = news.drop_duplicates(subset=["company_id", "url", "ts"], keep="last")
+    if resolver is not None and not news.empty:
+        enriched_rows: List[pd.Series] = []
+        for _, row in news.iterrows():
+            fields = {
+                "title": row.get("title", ""),
+                "text_snippet": row.get("text_snippet", ""),
+                "industry": row.get("industry", ""),
+            }
+            hints = [row.get("industry", "")]
+            classification = resolver.classify_event(
+                company_name=str(row.get("company_name", "")),
+                source="news",
+                country=str(row.get("country", "")),
+                fields=fields,
+                hints=hints,
+            )
+            if classification.industry_slug:
+                row["industry"] = classification.industry_slug
+            description = classification.description.strip()
+            if not description:
+                description = f"News: {row.get('title', '')}".strip()
+            row["description"] = _clean_text(description)[:400]
+            row["_industry_confidence"] = classification.confidence
+            row["_industry_provider"] = classification.provider
+            enriched_rows.append(row)
+        news = pd.DataFrame(enriched_rows)
+    else:
+        news["description"] = news["text_snippet"]
     return news
 
 
 def main() -> None:
+    resolver = IndustryResolver()
     universe_index = _load_universe()
 
     sources = [
         _load_bcorp(),
         _load_ungc(),
         _load_sbti(),
-        _load_news(),
+        _load_news(resolver=resolver),
     ]
     sources = [df for df in sources if not df.empty]
     if not sources:
@@ -547,7 +714,7 @@ def main() -> None:
         if signal_type == "news":
             events = df[EVENT_COLUMNS].copy()
         else:
-            events = _match_events(df, universe_index, signal_type=signal_type)
+            events = _match_events(df, universe_index, signal_type=signal_type, resolver=resolver)
         frames.append(events)
 
     combined = pd.concat(frames, ignore_index=True)

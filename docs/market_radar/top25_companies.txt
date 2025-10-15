@@ -1,27 +1,27 @@
 Top 25 Empresas por Intensidad de Demanda
 
-- Estrada de Ferro Noroeste do Brasil (BR · transport_logistics): score 1.60, promedio 1.00, señales 52, última 2025-10-09
-- Mover Participações (BR · oil_gas): score 1.49, promedio 1.00, señales 25, última 2025-04-03
-- Companhia do Metropolitano de São Paulo (BR · transport_logistics): score 1.37, promedio 1.00, señales 11, última 2022-12-16
-- Rio de Janeiro Metro (BR · retail_consumer): score 1.36, promedio 1.00, señales 10, última 2025-08-20
-- Companhia de Água e Esgoto do Ceará (BR · water_waste_circularity): score 1.35, promedio 1.00, señales 9, última 2024-07-03
-- Agência Senado (BR · ict_telecom): score 1.35, promedio 1.00, señales 9, última 2025-07-31
-- Empresa Provincial de la Energía de Santa Fe (AR · energy_power): score 1.31, promedio 1.00, señales 7, última 2025-02-20
-- Instituto Nacional de Radio y Televisión del Perú (PE · ict_telecom): score 1.31, promedio 1.00, señales 7, última 2025-07-25
-- Companhia Brasileira de Trens Urbanos (BR · transport_logistics): score 1.29, promedio 1.00, señales 6, última 2022-12-12
-- Cooperativa Agrícola y Lechera de La Unión Limitada (CL · agro_food): score 1.29, promedio 1.00, señales 6, última 2025-08-15
-- PlanoCDE (BR · ict_telecom): score 1.27, promedio 1.00, señales 5, última 2017-04-14
-- TriCiclos (CL · professional_services): score 1.27, promedio 1.00, señales 5, última 2016-10-09
-- LUMNI CHILE (CL · finance_insurance): score 1.27, promedio 1.00, señales 5, última 2017-07-11
-- Transportadora de Gas del Sur (AR · oil_gas): score 1.27, promedio 1.00, señales 5, última 2017-10-24
-- Banco de la Ciudad de Buenos Aires (AR · finance_insurance): score 1.27, promedio 1.00, señales 5, última 2019-11-20
-- ECHALE (MX · other_services): score 1.27, promedio 1.00, señales 5, última 2018-07-24
-- Maria Farinha Filmes (BR · media_entertainment): score 1.24, promedio 1.00, señales 4, última 2016-12-26
-- STRONG (CL · professional_services): score 1.24, promedio 1.00, señales 4, última 2016-09-21
-- Veomás (CL · professional_services): score 1.24, promedio 1.00, señales 4, última 2019-04-29
-- Green Libros (CL · retail_consumer): score 1.24, promedio 1.00, señales 4, última 2016-12-22
-- Ferrovia Interna do Porto de Santos (BR · transport_logistics): score 1.24, promedio 1.00, señales 4, última 2025-08-26
-- Dvigi (AR · manufacturing): score 1.24, promedio 1.00, señales 4, última 2018-05-31
-- Banco de Seguros del Estado (UY · finance_insurance): score 1.24, promedio 1.00, señales 4, última 2025-06-30
-- Cámara de Comercio de Bogotá (CO · retail_consumer): score 1.24, promedio 1.00, señales 4, última 2023-08-29
-- Ematris (CL · professional_services): score 1.24, promedio 1.00, señales 4, última 2018-04-25
+- Estrada de Ferro Noroeste do Brasil (BR · transport_mobility_logistics): score 1.58, promedio 1.00, señales 48, última 2025-07-30
+- Companhia do Metropolitano de São Paulo (BR · transport_mobility_logistics): score 1.37, promedio 1.00, señales 11, última 2022-12-16
+- Mover Participações (BR · oil_gas): score 1.36, promedio 1.00, señales 10, última 2025-04-03
+- Rio de Janeiro Metro (BR · retail_consumer_services): score 1.33, promedio 1.00, señales 8, última 2025-08-20
+- Cooperativa Agrícola y Lechera de La Unión Limitada (CL · agro_food_beverage): score 1.29, promedio 1.00, señales 6, última 2025-08-15
+- Companhia Brasileira de Trens Urbanos (BR · transport_mobility_logistics): score 1.29, promedio 1.00, señales 6, última 2022-12-12
+- Instituto Nacional de Radio y Televisión del Perú (PE · ict_digital_media): score 1.29, promedio 1.00, señales 6, última 2022-06-09
+- Banco de la Ciudad de Buenos Aires (AR · finance_insurance_capital): score 1.27, promedio 1.00, señales 5, última 2019-11-20
+- LUMNI CHILE (CL · finance_insurance_capital): score 1.27, promedio 1.00, señales 5, última 2017-07-11
+- Mover Participações (BR · ict_digital_media): score 1.27, promedio 1.00, señales 5, última 2024-11-11
+- PlanoCDE (BR · ict_digital_media): score 1.27, promedio 1.00, señales 5, última 2017-04-14
+- Transportadora de Gas del Sur (AR · transport_mobility_logistics): score 1.27, promedio 1.00, señales 5, última 2017-10-24
+- ECHALE (MX · construction_infrastructure_realestate): score 1.27, promedio 1.00, señales 5, última 2018-07-24
+- TriCiclos (CL · environmental_circular_services): score 1.27, promedio 1.00, señales 5, última 2016-10-09
+- Terrium (CL · industrial_manufacturing): score 1.24, promedio 1.00, señales 4, última 2016-11-04
+- Degraf (CL · environmental_circular_services): score 1.24, promedio 1.00, señales 4, última 2019-01-07
+- Estudios y Consultorias Focus (CL · public_social_education): score 1.24, promedio 1.00, señales 4, última 2017-08-04
+- La Tercera Mirada (CO · mining_materials): score 1.24, promedio 1.00, señales 4, última 2019-02-25
+- FINAE (MX · finance_insurance_capital): score 1.24, promedio 1.00, señales 4, última 2015-12-22
+- Maria Farinha Filmes (BR · ict_digital_media): score 1.24, promedio 1.00, señales 4, última 2016-12-26
+- Needo (CL · professional_services_consulting): score 1.24, promedio 1.00, señales 4, última 2017-03-31
+- Empresa Provincial de la Energía de Santa Fe (AR · energy_power_utilities): score 1.24, promedio 1.00, señales 4, última 2025-02-20
+- Cumplo (CL · retail_consumer_services): score 1.24, promedio 1.00, señales 4, última 2019-02-15
+- Portafolio Verde (CO · professional_services_consulting): score 1.24, promedio 1.00, señales 4, última 2017-06-26
+- Parque del Recuerdo (CL · environmental_circular_services): score 1.24, promedio 1.00, señales 4, última 2018-08-14

@@ -1,25 +1,162 @@
 mappings:
-  - pattern: "(?i)oil|petro|gas|hidrocarb|upstream|downstream"
+  # Energy & Utilities
+  - pattern: "(?i)power generation|electric utility|grid operator|distribution company"
+    to: "energy_power_utilities"
+    weight: 3
+  - pattern: "(?i)energy|energia|renewable|solar|wind|hydro|geothermal|utility"
+    to: "energy_power_utilities"
+    weight: 2
+  - pattern: "(?i)battery storage|transmission line|photovoltaic"
+    to: "energy_power_utilities"
+    weight: 1.5
+
+  # Oil & Gas
+  - pattern: "(?i)oil|petro|gas|hidrocarb|hydrocarbon"
     to: "oil_gas"
-  - pattern: "(?i)energy|energ[ií]a|eléctr|electric|power|solar|fotovoltaic|e[oó]lic|wind|hidroel[eé]ctric|geoterm|renew|bioenerg|biofuel"
-    to: "energy_power"
-  - pattern: "(?i)mining|min[ií]er|minería|minera"
-    to: "mining_metals"
-  - pattern: "(?i)chem|qu[ií]m|material|siderurg|metalúrg|fertiliz|plástic|petroqu[ií]m|pol[ií]mer"
-    to: "chemicals_materials"
-  - pattern: "(?i)manufact|fábric|industrial|automotriz|automotive|textil|maquil|ensambl"
-    to: "manufacturing"
-  - pattern: "(?i)construct|construcci[oó]n|real estate|inmobili|infraestruct|desarroll|viviend|obra"
-    to: "construction_realestate"
-  - pattern: "(?i)transport|logist|ferro|a[eé]re|aero|aviaci|metro|naval|shipping|turism|turíst|portu|mar[ií]t|aerol[ií]n"
-    to: "transport_logistics"
-  - pattern: "(?i)agri|agro|food|alimento|lácteo|bev|cervec|brew|helad|c[aá]fe|cacao|ganad|harin|az[ií]car"
-    to: "agro_food"
-  - pattern: "(?i)retail|consumer|consumo|comercio|minoris|tienda|supermerc|farmac|ferreter|cosm[eé]t|perfume|hogar|departamental|e-?commerce"
-    to: "retail_consumer"
-  - pattern: "(?i)water|waste|residu|circular|h[ií]dric|saneam|sanit|alcantarill|tratamiento"
-    to: "water_waste_circularity"
-  - pattern: "(?i)finance|bank|banca|financ|insur|seguro|holding|banco|fond[oa]|inversion|burs[aá]til|cooperativ|microfin"
-    to: "finance_insurance"
-  - pattern: "(?i)ict|telecom|telefon|software|internet|tech|tecnolog|medios|cine|animaci|televis|notici|audiovisual|videojueg|stream|rad[ií]o|digital|m[oó]vil"
-    to: "ict_telecom"
+    weight: 3
+  - pattern: "(?i)refinery|upstream|downstream|pipeline|lng|exploration"
+    to: "oil_gas"
+    weight: 2.5
+
+  # Mining & Basic Materials
+  - pattern: "(?i)mining|mineral|mineria|minera|mine"
+    to: "mining_materials"
+    weight: 3
+  - pattern: "(?i)metal|steel|smelter|copper|aluminum|zinc"
+    to: "mining_materials"
+    weight: 2
+  - pattern: "(?i)pulp|paper|forest product"
+    to: "mining_materials"
+    weight: 1.5
+
+  # Industrial Manufacturing
+  - pattern: "(?i)manufactur|factory|industrial plant|maquiladora"
+    to: "industrial_manufacturing"
+    weight: 3
+  - pattern: "(?i)machinery|equipment|component|assembly|automation"
+    to: "industrial_manufacturing"
+    weight: 2
+  - pattern: "(?i)automotive|auto parts|electronics manufacturing"
+    to: "industrial_manufacturing"
+    weight: 2
+
+  # Construction, Infrastructure & Real Estate
+  - pattern: "(?i)construction|infraestructura|infrastructure|civil works"
+    to: "construction_infrastructure_realestate"
+    weight: 3
+  - pattern: "(?i)real estate|property developer|inmobiliaria"
+    to: "construction_infrastructure_realestate"
+    weight: 2.5
+  - pattern: "(?i)engineering firm|builder|contractor"
+    to: "construction_infrastructure_realestate"
+    weight: 2
+
+  # Transport, Mobility & Logistics
+  - pattern: "(?i)logistic|transporte|transport|supply chain|freight"
+    to: "transport_mobility_logistics"
+    weight: 3
+  - pattern: "(?i)shipping|maritime|port|aerolinea|airline|aviation"
+    to: "transport_mobility_logistics"
+    weight: 2.5
+  - pattern: "(?i)rail|metro|bus|mobility|fleet management"
+    to: "transport_mobility_logistics"
+    weight: 2
+
+  # Agriculture & Food
+  - pattern: "(?i)agro|agri|agricultur|farmer|farm|cattle|livestock"
+    to: "agro_food_beverage"
+    weight: 3
+  - pattern: "(?i)food processing|beverage|dairy|grains|sugar"
+    to: "agro_food_beverage"
+    weight: 2.5
+  - pattern: "(?i)fishing|aquaculture|coffee|cacao"
+    to: "agro_food_beverage"
+    weight: 2
+
+  # Retail & Consumer Services
+  - pattern: "(?i)retail|commerce|minoris|tienda|store|mall"
+    to: "retail_consumer_services"
+    weight: 3
+  - pattern: "(?i)consumer goods|brand|apparel|fashion|cosmetics"
+    to: "retail_consumer_services"
+    weight: 2.5
+  - pattern: "(?i)e-?commerce|marketplace|wholesale|distribution"
+    to: "retail_consumer_services"
+    weight: 2
+
+  # Finance, Insurance & Capital
+  - pattern: "(?i)bank|banking|banco|financiera|financial institution"
+    to: "finance_insurance_capital"
+    weight: 3
+  - pattern: "(?i)insurance|aseguradora|insurtech|risk"
+    to: "finance_insurance_capital"
+    weight: 2.5
+  - pattern: "(?i)investment|asset management|capital markets|private equity|venture"
+    to: "finance_insurance_capital"
+    weight: 2
+
+  # ICT, Digital & Media
+  - pattern: "(?i)software|technology company|it services|digital platform"
+    to: "ict_digital_media"
+    weight: 3
+  - pattern: "(?i)telecom|telecommunications|telefonia|data center"
+    to: "ict_digital_media"
+    weight: 2.5
+  - pattern: "(?i)media|broadcast|streaming|content platform"
+    to: "ict_digital_media"
+    weight: 2
+
+  # Healthcare, Pharma & Biotech
+  - pattern: "(?i)healthcare|hospital|clinic|medical center"
+    to: "healthcare_pharma_biotech"
+    weight: 3
+  - pattern: "(?i)pharma|biotech|laboratorio|medical device"
+    to: "healthcare_pharma_biotech"
+    weight: 2.5
+  - pattern: "(?i)health services|care provider|telehealth"
+    to: "healthcare_pharma_biotech"
+    weight: 2
+
+  # Professional & Technical Services
+  - pattern: "(?i)consulting|consultora|asesoria|advisory"
+    to: "professional_services_consulting"
+    weight: 3
+  - pattern: "(?i)legal services|law firm|accounting|audit"
+    to: "professional_services_consulting"
+    weight: 2.5
+  - pattern: "(?i)professional services|design studio|architecture services"
+    to: "professional_services_consulting"
+    weight: 2
+
+  # Hospitality, Tourism & Leisure
+  - pattern: "(?i)hotel|hospitality|resort|lodging"
+    to: "hospitality_tourism_leisure"
+    weight: 3
+  - pattern: "(?i)tourism|travel agency|tour operator"
+    to: "hospitality_tourism_leisure"
+    weight: 2.5
+  - pattern: "(?i)restaurant|food service|leisure|entertainment venue"
+    to: "hospitality_tourism_leisure"
+    weight: 2
+
+  # Environmental & Circular Services
+  - pattern: "(?i)waste management|recycling|circular economy"
+    to: "environmental_circular_services"
+    weight: 3
+  - pattern: "(?i)environmental service|carbon market|carbon credit"
+    to: "environmental_circular_services"
+    weight: 2.5
+  - pattern: "(?i)remediation|environmental consulting|sustainability service"
+    to: "environmental_circular_services"
+    weight: 2
+
+  # Public, Social & Education
+  - pattern: "(?i)government|ministry|municipal|public sector"
+    to: "public_social_education"
+    weight: 3
+  - pattern: "(?i)ngo|non-?profit|foundation|cooperative"
+    to: "public_social_education"
+    weight: 2.5
+  - pattern: "(?i)education|university|school|research institute"
+    to: "public_social_education"
+    weight: 2

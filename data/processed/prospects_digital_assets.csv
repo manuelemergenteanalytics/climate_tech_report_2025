@@ -1,20 +1,26 @@
-company_name,country,industry,source
-Estrada de Ferro Noroeste do Brasil,BR,transport_logistics,bcorp|sbti|ungc
-Mover Participações,BR,oil_gas,sbti|ungc
-Companhia Brasileira de Trens Urbanos,BR,transport_logistics,sbti|ungc
-Parque Arauco S.A.,CL,retail_consumer,sbti|ungc
-Arca Continental,MX,retail_consumer,sbti|ungc
-Concha y Toro,CL,retail_consumer,bcorp|sbti|ungc
-Banco do Brasil,BR,finance_insurance,news|sbti|ungc
-MRV Engenharia,BR,manufacturing,sbti|ungc
-Grupo Aeroportuario del Sureste,MX,manufacturing,sbti|ungc
-LATAM Airlines Group,CL,transport_logistics,sbti|ungc
-Iochpe-Maxion,BR,retail_consumer,sbti|ungc
-Lojas Renner,BR,retail_consumer,sbti|ungc
-BRF S.A.,BR,agro_food,sbti|ungc
-Fazenda da Toca Orgânicos,BR,agro_food,bcorp
-Banco de Inversión y Comercio Exterior,AR,retail_consumer,news|ungc
-Grupo L,AR,agro_food,news|ungc
-Cementos Pacasmayo,PE,manufacturing,news|ungc
-Grupo Aval Acciones y Valores,CO,construction_realestate,news|ungc
-Vista Energy,AR,oil_gas,news|ungc
+company_name,country,industry,source,justification
+Mercado Libre,AR,ict_digital_media,news|sbti,"signals: news, sbti | last_update: 2025-05-24 | Source=news | industry: ict_telecom | text_snippet: <a href=""https://news.google.com/rss/articles/CBMi_wFBVV95cUxNY19OaEtWUE9NV0dSRm5RZm44Y1pranhjaVBqNnJoODROT1I0bWUySEpMVUdDVy1FazdXRmExLXlaUGxtQTBDeVBkWmhXZEhPZlhGM3MxdG"
+Grupo San Cristobal,AR,finance_insurance_capital,news|ungc,"signals: news, ungc | last_update: 2025-05-16 | Source=news | industry: finance_insurance | text_snippet: <a href=""https://news.google.com/rss/articles/CBMi1AFBVV95cUxQdUpXU3Q5OTV6dk1Gd2RMckRLRlM3Z0V5UTJQWm1oZmd2TW13MzFHVU1yWXQ5U3BFT05YZnlSM3VXSXNwenNoc3lhdDhhVllyRzkz"
+BancoEstado Microempresas,CL,finance_insurance_capital,bcorp|ungc,"signals: bcorp, ungc | last_update: 2024-06-19 | Source=ungc | sector: Banks | text_snippet: BancoEstado Microempresas"
+Ecomunica,BR,ict_digital_media,bcorp|ungc,"signals: bcorp, ungc | last_update: 2024-06-13 | Source=ungc | sector: Media | text_snippet: Ecomunica"
+Baluarte Cultura,BR,professional_services_consulting,bcorp|sbti,"signals: bcorp, sbti | last_update: 2024-02-15 | Source=sbti | sector: Professional Services | text_snippet: memberships"
+Afore SURA,MX,finance_insurance_capital,sbti|ungc,"signals: sbti, ungc | last_update: 2023-12-07 | Source=sbti | sector: Banks, Diverse Financials, Insurance | text_snippet: memberships"
+Algar Telecom,BR,ict_digital_media,sbti|ungc,"signals: sbti, ungc | last_update: 2023-03-30 | Source=sbti | sector: Telecommunication Services | text_snippet: memberships"
+Betterfly,CL,finance_insurance_capital,bcorp|sbti,"signals: bcorp, sbti | last_update: 2022-09-29 | Source=sbti | sector: Software and Services | text_snippet: memberships"
+99jobs,BR,ict_digital_media,bcorp|ungc,"signals: bcorp, ungc | last_update: 2022-09-23 | Source=ungc | sector: Software & Computer Services | text_snippet: 99jobs"
+Vox Capital,BR,finance_insurance_capital,bcorp|ungc,"signals: bcorp, ungc | last_update: 2022-06-13 | Source=ungc | sector: Investment banking and brokerage services | text_snippet: Vox Capital"
+RM Consulting,BR,professional_services_consulting,bcorp|ungc,"signals: bcorp, ungc | last_update: 2022-03-22 | Source=ungc | sector: Diversified | text_snippet: RM Consulting"
+IG4 Capital,BR,finance_insurance_capital,bcorp|ungc,"signals: bcorp, ungc | last_update: 2021-07-28 | Source=ungc | sector: Investment banking and brokerage services | text_snippet: IG4 Capital"
+"Grupo Televisa, S.A.B.",MX,ict_digital_media,sbti|ungc,"signals: sbti, ungc | last_update: 2021-01-14 | Source=sbti | sector: Media | text_snippet: memberships"
+"America Movil, S.A.B. de C.V.",MX,ict_digital_media,sbti|ungc,"signals: sbti, ungc | last_update: 2020-08-27 | Source=sbti | sector: Telecommunication Services | text_snippet: memberships"
+Los Goodfellas,CO,ict_digital_media,bcorp|ungc,"signals: bcorp, ungc | last_update: 2020-06-10 | Source=ungc | sector: Media | text_snippet: Los Goodfellas"
+CAUSE,BR,professional_services_consulting,bcorp|ungc,"signals: bcorp, ungc | last_update: 2019-05-07 | Source=ungc | sector: Media | text_snippet: CAUSE"
+Donadora,MX,retail_consumer_services,bcorp|ungc,"signals: bcorp, ungc | last_update: 2017-01-19 | Source=ungc | sector: Software & Computer Services | text_snippet: Donadora"
+Automatizaciones Industriales y de Oficina de Tlaxcala,MX,ict_digital_media,ungc,signals: ungc | last_update: 2025-09-25 | Source=ungc | sector: Software & Computer Services | text_snippet: Automatizaciones Industriales y de Oficina de Tlaxcala
+Metalúrgica Formigari Ltda,BR,ict_digital_media,ungc,signals: ungc | last_update: 2025-09-22 | Source=ungc | sector: Automobiles & Parts | text_snippet: Metalúrgica Formigari Ltda
+SP VENTURES GESTORA DE RECURSOS LTDA,BR,finance_insurance_capital,ungc,signals: ungc | last_update: 2025-09-22 | Source=ungc | sector: Finance and credit services | text_snippet: SP VENTURES GESTORA DE RECURSOS LTDA
+Tokio Marine Seguradora S.A.,BR,finance_insurance_capital,ungc,signals: ungc | last_update: 2025-09-22 | Source=ungc | sector: Nonlife Insurance | text_snippet: Tokio Marine Seguradora S.A.
+Medical International Laboratories Corporation S A,CL,healthcare_pharma_biotech,ungc,signals: ungc | last_update: 2025-09-10 | Source=ungc | sector: Pharmaceuticals & Biotechnology | text_snippet: Medical International Laboratories Corporation S A
+"PLAY9 SERVIÇOS DE MIDIA, COMUNICACAO e PRODUCOES LTDA",BR,ict_digital_media,ungc,"signals: ungc | last_update: 2025-09-08 | Source=ungc | sector: Media | text_snippet: PLAY9 SERVIÇOS DE MIDIA, COMUNICACAO e PRODUCOES LTDA"
+Telecom,AR,ict_digital_media,sbti,signals: sbti | last_update: 2025-08-28 | Source=sbti | sector: Telecommunication Services | text_snippet: memberships
+TRANSCENDEMOS CONSULTORIA EM GESTAO EMPRESARIAL LTDA,BR,ict_digital_media,ungc,signals: ungc | last_update: 2025-08-28 | Source=ungc | sector: Media | text_snippet: TRANSCENDEMOS CONSULTORIA EM GESTAO EMPRESARIAL LTDA

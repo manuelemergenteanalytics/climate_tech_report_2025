@@ -1,23 +1,26 @@
-company_name,country,industry,source
-Banco do Brasil,BR,finance_insurance,news|sbti|ungc
-Hotel el Ganzo,MX,agro_food,bcorp
-Banco de Inversión y Comercio Exterior,AR,retail_consumer,news|ungc
-Grupo L,AR,agro_food,news|ungc
-Cementos Pacasmayo,PE,manufacturing,news|ungc
-Estudio Beccar Varela,AR,manufacturing,news|ungc
-Grupo Aval Acciones y Valores,CO,construction_realestate,news|ungc
-GEA Logistics,AR,transport_logistics,news|ungc
-Grupo San Cristobal,AR,finance_insurance,news|ungc
-La Rural S.A.,AR,hospitality_tourism,news|ungc
-Sheraton Mendoza Hotel,AR,hospitality_tourism,news|ungc
-Cerdo de los Llanos S.A.U.,AR,agro_food,news|ungc
-Aeropuertos Argentina,AR,transport_logistics,news|ungc
-Caracol Televisión,CO,retail_consumer,news
-LATAM,CL,transport_logistics,news
-Nuevo Continente,PE,transport_logistics,news
-Grupo Reforma,MX,retail_consumer,news
-Sociedad Anónima,UY,transport_logistics,news
-Correos de México,MX,manufacturing,news
-VLI,BR,transport_logistics,news
-Ecocitex,CL,manufacturing,news
-Sabesp,BR,water_waste_circularity,news
+company_name,country,industry,source,justification
+Órigo Energia,BR,agro_food_beverage,bcorp|ungc,"signals: bcorp, ungc | last_update: 2022-07-11 | Source=ungc | sector: Alternative Energy | text_snippet: Órigo Energia"
+TECNOVIA INOVACAO E SUSTENTABILIDADE LTDA,BR,retail_consumer_services,ungc,signals: ungc | last_update: 2025-10-07 | Source=ungc | sector: Alternative Energy | text_snippet: TECNOVIA INOVACAO E SUSTENTABILIDADE LTDA
+Holcim (Argentina),AR,agro_food_beverage,news,signals: news | last_update: 2025-10-06 | Source=news | industry: chemicals_materials | text_snippet:  Holcim su
+Cerdo de los Llanos S.A.U.,AR,agro_food_beverage,news,signals: news | last_update: 2025-10-01 | Source=news | industry: agro_food | text_snippet:  Novedades en Solar Llanos de La Rioja: asume
+VOLTXS ENERGIA S/A,BR,retail_consumer_services,ungc,signals: ungc | last_update: 2025-09-22 | Source=ungc | sector: Alternative Energy | text_snippet: VOLTXS ENERGIA S/A
+CPFL Energia,BR,energy_power_utilities,sbti,"signals: sbti | last_update: 2025-09-18 | Source=sbti | sector: Electric Utilities and Independent Power Producers and Energy Traders (including Fossil, Alternative and Nuclear Energy) | text_snippet: memberships"
+WEG S.A.,BR,energy_power_utilities,sbti,signals: sbti | last_update: 2025-09-18 | Source=sbti | sector: Electrical Equipment and Machinery | text_snippet: memberships
+Grupo L,AR,agro_food_beverage,news,"signals: news | last_update: 2025-09-09 | Source=news | industry: agro_food | text_snippet: <a href=""https://news.google.com/rss/articles/CBMi0wFBVV95cUxPMUk0bXJPcmZSb1JvRkdZVmJ2djBNRkR4T2UzVS1fU2pCNnh3R2pqdTUzbHdiY2YtaWF4RU5jdDBwZlBwOW5uNS1sTzJ6cEQwRVFOT3FFOFZs"
+La Primera,AR,industrial_manufacturing,news,"signals: news | last_update: 2025-09-09 | Source=news | industry: manufacturing | text_snippet: <a href=""https://news.google.com/rss/articles/CBMizwFBVV95cUxOQzB0WFVQYjZtZ2dSWVpJSWNKQUlTUlZIMWo2ajdPMTJFMWlaSXdnUlV2dFNpdFlRU3FrQWtaNlU2cWFPbWt1YVJtS2pPX1lXenI4LVMx"
+NOVA LOGÍSTICA REVERSA LIMITADA,BR,energy_power_utilities,ungc,signals: ungc | last_update: 2025-09-02 | Source=ungc | sector: Electronic & Electrical Equipment | text_snippet: NOVA LOGÍSTICA REVERSA LIMITADA
+Fontes Verdes S.A.,BR,retail_consumer_services,ungc,signals: ungc | last_update: 2025-08-28 | Source=ungc | sector: Alternative Energy | text_snippet: Fontes Verdes S.A.
+GRUEN BIOGAS LTDA,BR,oil_gas,ungc,signals: ungc | last_update: 2025-08-28 | Source=ungc | sector: Alternative Energy | text_snippet: GRUEN BIOGAS LTDA
+Quanta Geração S.A.,BR,retail_consumer_services,ungc,signals: ungc | last_update: 2025-07-15 | Source=ungc | sector: Alternative Energy | text_snippet: Quanta Geração S.A.
+ACE SCHMERSAL,BR,energy_power_utilities,sbti,signals: sbti | last_update: 2025-07-03 | Source=sbti | sector: Electrical Equipment and Machinery | text_snippet: memberships
+Maday Participacao LTDA,BR,retail_consumer_services,ungc,signals: ungc | last_update: 2025-06-23 | Source=ungc | sector: Alternative Energy | text_snippet: Maday Participacao LTDA
+Sew Eurodrive Brasil,BR,energy_power_utilities,sbti,signals: sbti | last_update: 2025-06-12 | Source=sbti | sector: Electrical Equipment and Machinery | text_snippet: memberships
+"RED DE ENERGIA E INFRAESTRUCTURA ROCA, S.A. DE C.V.",MX,construction_infrastructure_realestate,ungc,"signals: ungc | last_update: 2025-05-29 | Source=ungc | sector: Gas, Water & Multiutilities | text_snippet: RED DE ENERGIA E INFRAESTRUCTURA ROCA, S.A. DE C.V."
+BBCE - Balcão Brasileiro de Comercialização de Energia S.A.,BR,retail_consumer_services,ungc,signals: ungc | last_update: 2025-05-14 | Source=ungc | sector: Alternative Energy | text_snippet: BBCE - Balcão Brasileiro de Comercialização de Energia S.A.
+Imelsa Energía SpA,CL,energy_power_utilities,ungc,signals: ungc | last_update: 2025-05-07 | Source=ungc | sector: Electricity | text_snippet: Imelsa Energía SpA
+Noticias Positivas,AR,industrial_manufacturing,news,signals: news | last_update: 2025-05-05 | Source=news | industry: manufacturing | text_snippet:  Las Empresas B lideran el camino hacia el Net Zero con un nuevo enfoque en la acción climática &nbsp;&nbsp;<fon
+Inamar Vapor,CL,energy_power_utilities,sbti,signals: sbti | last_update: 2025-04-03 | Source=sbti | sector: Electrical Equipment and Machinery | text_snippet: memberships
+Play Recycling Cia Ltda,BR,environmental_circular_services,ungc,signals: ungc | last_update: 2025-03-28 | Source=ungc | sector: Diversified | text_snippet: Play Recycling Cia Ltda
+Asserco SPA,CL,energy_power_utilities,sbti,signals: sbti | last_update: 2025-03-27 | Source=sbti | sector: Electrical Equipment and Machinery | text_snippet: memberships
+Anvi Mexicana S.A de C.V.,MX,energy_power_utilities,sbti,signals: sbti | last_update: 2025-03-20 | Source=sbti | sector: Electrical Equipment and Machinery | text_snippet: memberships
+Centrais Elétricas Brasileiras S.A. - Eletrobras,BR,energy_power_utilities,sbti,"signals: sbti | last_update: 2025-03-13 | Source=sbti | sector: Electric Utilities and Independent Power Producers and Energy Traders (including Fossil, Alternative and Nuclear Energy) | text_snippet: memberships"

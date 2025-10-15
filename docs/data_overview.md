@@ -24,25 +24,26 @@ Marco muestral estratificado actualizado (Wikidata + Wikipedia) con umbral ≥10
 Señales normalizadas disponibles tras la ingesta más reciente (news + memberships).
 
 - Ruta: `data/processed/events_normalized.csv`
-- Filas: 838
-- Columnas: 12
-- Columnas numéricas: company_id, signal_strength
-- Columnas categóricas/texto: company_name, country, industry, size_bin, source, signal_type, ts, url, title, text_snippet
+- Filas: 6,561
+- Columnas: 17
+- Columnas numéricas: signal_strength, climate_score, sentiment_score
+- Columnas categóricas/texto: company_id, company_name, country, industry, size_bin, source, signal_type, ts, url, title, text_snippet, description, sentiment_label
 
 | columna | tipo | no nulos | % nulos | únicos | ejemplos |
 |---|---|---:|---:|---:|---|
-| company_id | int64 | 838 | 0.00 | 266 | 6, 211, 32 |
-| company_name | object | 838 | 0.00 | 268 | Ferrocarril de Bahía a São Francisco, Transporte Automotor La Plata S.A., Librerías de Cristal S. A. De C. V. |
-| country | object | 838 | 0.00 | 7 | BR, AR, MX |
-| industry | object | 838 | 0.00 | 12 | transport_logistics, retail_consumer, construction_realestate |
-| size_bin | object | 838 | 0.00 | 2 | m, l |
-| source | object | 838 | 0.00 | 2 | memberships, news |
-| signal_type | object | 838 | 0.00 | 2 | sbti, news |
-| signal_strength | float64 | 838 | 0.00 | 4 | 1.0, 0.5, 0.6 |
-| ts | object | 838 | 0.00 | 528 | 2023-06-15 01:00:00, 2023-06-01 01:00:00, 2020-03-26 01:00:00 |
-| url | object | 838 | 0.00 | 526 | https://files.sciencebasedtargets.org/production/files/companies-excel.xlsx, https://arstechnica.com/security/2025/09/supermicro-server-motherboards-can-b..., https://news.google.com/rss/articles/CBMisgFBVV95cUxNQmRZZ0l0RElsLWVySF9tbmpW... |
-| title | object | 838 | 0.00 | 523 | Membership: sbti, Supermicro server motherboards can be infected with unremovable malware, Subte gratis para jubilados: cuáles son los requisitos y cómo hacer el trámit... |
-| text_snippet | object | 838 | 0.00 | 838 | Citrosuco Agroindustria S.A., Topsoe A/S, A2A S.p.A. |
+| company_id | object | 6,561 | 0.00 | 5,680 | ext::ungc::natura-co-br, ext::sbti::acbel-polytech-tw, 102 |
+| company_name | object | 6,561 | 0.00 | 5,612 | Natura & Co, COPEL- Companhia Paranaense de Energia, Samarco Mineracao S.A. |
+| country | object | 6,561 | 0.00 | 18 | BR, CL, CO |
+| industry | object | 6,561 | 0.00 | 15 | agro_food_beverage, energy_power_utilities, mining_materials |
+| size_bin | object | 5,569 | 15.12 | 3 | l, m, s |
+| source | object | 6,561 | 0.00 | 2 | memberships, news |
+| signal_type | object | 6,561 | 0.00 | 4 | ungc, bcorp, sbti |
+| signal_strength | float64 | 6,561 | 0.00 | 11 | 1.0, 0.18, -0.25 |
+| ts | object | 6,561 | 0.00 | 3,387 | 2000-07-26T00:00:00+00:00, 2016-02-16T00:00:00+00:00, 2025-09-24T16:06:03+00:00 |
+| url | object | 6,561 | 0.00 | 5,650 | https://unglobalcompact.org/…, https://files.sciencebasedtargets.org/…, https://news.google.com/… |
+| title | object | 6,561 | 0.00 | 70 | Participación Pacto Global, Certificación B Corp, Compromiso SBTi |
+| text_snippet | object | 6,561 | 0.00 | 5,649 | Natura & Co, COPEL- Companhia Paranaense de Energia, Topsoe A/S |
+| description | object | 6,561 | 0.00 | 5,687 | Source=ungc | sector: Chemicals…, Source=ungc | sector: Electricity…, News: Ferrocarril reanuda operación |
 
 ## interest_scores.csv
 Interés corporativo calculado (IIC) sobre la muestra representativa.
@@ -66,31 +67,34 @@ Interés corporativo calculado (IIC) sobre la muestra representativa.
 | score_0_100 | float64 | 1200 | 0.00 | 8 | 50.0, 27.75, 21.16 |
 
 ## prospects_renewables.csv
-Listado preliminar de prospectos enfocados en renovables (fuentes climáticas, excluyendo la muestra base).
+Listado preliminar de prospectos enfocados en renovables (señales externas a la muestra base, posterior a reclasificación LLM).
 
 - Ruta: `data/processed/prospects_renewables.csv`
-- Filas: 17
-- Columnas: 4
-- Columnas categóricas/texto: company_name, country, industry, source
+- Filas: 25
+- Columnas: 5
+- Columnas categóricas/texto: company_name, country, industry, source, justification
 
 | columna | tipo | no nulos | % nulos | únicos | ejemplos |
 |---|---|---:|---:|---:|---|
-| company_name | object | 17 | 0.00 | 17 | Ambev S.A., Ammper Energía S.A.P.I de C.V, Chilexpress S.A. |
-| country | object | 17 | 0.00 | 4 | BR, MX, CL |
-| industry | object | 17 | 0.00 | 4 | agro_food, energy_power, transport_logistics |
-| source | object | 17 | 0.00 | 1 | sbti |
+| company_name | object | 25 | 0.00 | 25 | Órigo Energia, TECNOVIA Inovacao e Sustentabilidade LTDA, Holcim (Argentina) |
+| country | object | 25 | 0.00 | 4 | BR, AR, MX |
+| industry | object | 25 | 0.00 | 7 | agro_food_beverage, energy_power_utilities, environmental_circular_services |
+| source | object | 25 | 0.00 | 4 | bcorp|ungc, ungc, news |
+| justification | object | 25 | 0.00 | 25 | signals: bcorp, ungc | last_update: 2022-07-11 | …, signals: news | last_update: 2025-10-06 | … |
 
 ## prospects_digital_assets.csv
-Listado preliminar de prospectos enfocados en activos digitales/clima-tech (fuentes climáticas, excluyendo la muestra base).
+Listado preliminar de prospectos enfocados en activos digitales/clima-tech (señales externas a la muestra base, posterior a reclasificación LLM).
 
 - Ruta: `data/processed/prospects_digital_assets.csv`
-- Filas: 21
-- Columnas: 4
-- Columnas categóricas/texto: company_name, country, industry, source
+- Filas: 25
+- Columnas: 5
+- Columnas categóricas/texto: company_name, country, industry, source, justification
 
 | columna | tipo | no nulos | % nulos | únicos | ejemplos |
 |---|---|---:|---:|---:|---|
-| company_name | object | 21 | 0.00 | 21 | Algar Telecom, America Movil, S.A.B. de C.V., Betterfly |
-| country | object | 21 | 0.00 | 5 | BR, MX, CL |
-| industry | object | 21 | 0.00 | 2 | ict_telecom, manufacturing |
-| source | object | 21 | 0.00 | 1 | sbti |
+| company_name | object | 25 | 0.00 | 25 | Mercado Libre, Grupo San Cristobal, BancoEstado Microempresas |
+| country | object | 25 | 0.00 | 5 | AR, CL, BR |
+| industry | object | 25 | 0.00 | 5 | ict_digital_media, finance_insurance_capital, professional_services_consulting |
+| source | object | 25 | 0.00 | 7 | news|sbti, news|ungc, bcorp|ungc |
+| justification | object | 25 | 0.00 | 25 | signals: news, sbti | last_update: 2025-05-24 | …, signals: bcorp, ungc | last_update: 2024-06-19 | … |
+

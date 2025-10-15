@@ -8,6 +8,7 @@
 - signal_strength (float)
 - ts (UTC ISO)
 - url, title, text_snippet
+- description (resumen generado por LLM/regex con evidencias del evento)
 
 
 ## company_scores.csv (nivel: empresa)
