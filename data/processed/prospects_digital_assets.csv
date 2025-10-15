@@ -1,8 +1,20 @@
 company_name,country,industry,source
-Karün,CL,retail_consumer,memberships
-Agro de Souza S.A.,AR,retail_consumer,news
-ALLCOT AG,CO,energy_power,memberships
-Blockforce,BR,ict_telecom,memberships
-Carbonext,BR,ict_telecom,memberships
-Gestión B,CL,manufacturing,memberships
-Moss Earth,BR,ict_telecom,memberships
+Estrada de Ferro Noroeste do Brasil,BR,transport_logistics,bcorp|sbti|ungc
+Mover Participações,BR,oil_gas,sbti|ungc
+Companhia Brasileira de Trens Urbanos,BR,transport_logistics,sbti|ungc
+Parque Arauco S.A.,CL,retail_consumer,sbti|ungc
+Arca Continental,MX,retail_consumer,sbti|ungc
+Concha y Toro,CL,retail_consumer,bcorp|sbti|ungc
+Banco do Brasil,BR,finance_insurance,news|sbti|ungc
+MRV Engenharia,BR,manufacturing,sbti|ungc
+Grupo Aeroportuario del Sureste,MX,manufacturing,sbti|ungc
+LATAM Airlines Group,CL,transport_logistics,sbti|ungc
+Iochpe-Maxion,BR,retail_consumer,sbti|ungc
+Lojas Renner,BR,retail_consumer,sbti|ungc
+BRF S.A.,BR,agro_food,sbti|ungc
+Fazenda da Toca Orgânicos,BR,agro_food,bcorp
+Banco de Inversión y Comercio Exterior,AR,retail_consumer,news|ungc
+Grupo L,AR,agro_food,news|ungc
+Cementos Pacasmayo,PE,manufacturing,news|ungc
+Grupo Aval Acciones y Valores,CO,construction_realestate,news|ungc
+Vista Energy,AR,oil_gas,news|ungc

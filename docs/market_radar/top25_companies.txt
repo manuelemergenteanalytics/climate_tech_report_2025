@@ -8,20 +8,20 @@ Top 25 Empresas por Intensidad de Demanda
 - Agência Senado (BR · ict_telecom): score 1.35, promedio 1.00, señales 9, última 2025-07-31
 - Empresa Provincial de la Energía de Santa Fe (AR · energy_power): score 1.31, promedio 1.00, señales 7, última 2025-02-20
 - Instituto Nacional de Radio y Televisión del Perú (PE · ict_telecom): score 1.31, promedio 1.00, señales 7, última 2025-07-25
-- Cooperativa Agrícola y Lechera de La Unión Limitada (CL · agro_food): score 1.29, promedio 1.00, señales 6, última 2025-08-15
 - Companhia Brasileira de Trens Urbanos (BR · transport_logistics): score 1.29, promedio 1.00, señales 6, última 2022-12-12
-- TriCiclos (CL · manufacturing): score 1.27, promedio 1.00, señales 5, última 2016-10-09
-- ECHALE (MX · construction_realestate): score 1.27, promedio 1.00, señales 5, última 2018-07-24
-- Banco de la Ciudad de Buenos Aires (AR · finance_insurance): score 1.27, promedio 1.00, señales 5, última 2019-11-20
-- Transportadora de Gas del Sur (AR · oil_gas): score 1.27, promedio 1.00, señales 5, última 2017-10-24
-- LUMNI CHILE (CL · finance_insurance): score 1.27, promedio 1.00, señales 5, última 2017-07-11
+- Cooperativa Agrícola y Lechera de La Unión Limitada (CL · agro_food): score 1.29, promedio 1.00, señales 6, última 2025-08-15
 - PlanoCDE (BR · ict_telecom): score 1.27, promedio 1.00, señales 5, última 2017-04-14
-- Terrium (CL · manufacturing): score 1.24, promedio 1.00, señales 4, última 2016-11-04
-- Hybrytec Solar (CO · energy_power): score 1.24, promedio 1.00, señales 4, última 2017-10-05
-- LATE! (CL · manufacturing): score 1.24, promedio 1.00, señales 4, última 2017-03-17
-- Portafolio Verde (CO · ict_telecom): score 1.24, promedio 1.00, señales 4, última 2017-06-26
-- Cumplo (CL · finance_insurance): score 1.24, promedio 1.00, señales 4, última 2019-02-15
-- Conexia (AR · manufacturing): score 1.24, promedio 1.00, señales 4, última 2017-07-27
+- TriCiclos (CL · professional_services): score 1.27, promedio 1.00, señales 5, última 2016-10-09
+- LUMNI CHILE (CL · finance_insurance): score 1.27, promedio 1.00, señales 5, última 2017-07-11
+- Transportadora de Gas del Sur (AR · oil_gas): score 1.27, promedio 1.00, señales 5, última 2017-10-24
+- Banco de la Ciudad de Buenos Aires (AR · finance_insurance): score 1.27, promedio 1.00, señales 5, última 2019-11-20
+- ECHALE (MX · other_services): score 1.27, promedio 1.00, señales 5, última 2018-07-24
+- Maria Farinha Filmes (BR · media_entertainment): score 1.24, promedio 1.00, señales 4, última 2016-12-26
+- STRONG (CL · professional_services): score 1.24, promedio 1.00, señales 4, última 2016-09-21
+- Veomás (CL · professional_services): score 1.24, promedio 1.00, señales 4, última 2019-04-29
+- Green Libros (CL · retail_consumer): score 1.24, promedio 1.00, señales 4, última 2016-12-22
+- Ferrovia Interna do Porto de Santos (BR · transport_logistics): score 1.24, promedio 1.00, señales 4, última 2025-08-26
+- Dvigi (AR · manufacturing): score 1.24, promedio 1.00, señales 4, última 2018-05-31
 - Banco de Seguros del Estado (UY · finance_insurance): score 1.24, promedio 1.00, señales 4, última 2025-06-30
-- Estudios y Consultorias Focus (CL · manufacturing): score 1.24, promedio 1.00, señales 4, última 2017-08-04
-- Estrada de Ferro São Paulo-Rio Grande (BR · transport_logistics): score 1.24, promedio 1.00, señales 4, última 2023-01-16
+- Cámara de Comercio de Bogotá (CO · retail_consumer): score 1.24, promedio 1.00, señales 4, última 2023-08-29
+- Ematris (CL · professional_services): score 1.24, promedio 1.00, señales 4, última 2018-04-25

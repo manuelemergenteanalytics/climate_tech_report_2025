@@ -1,21 +1,23 @@
 company_name,country,industry,source
-Hybrytec Solar,CO,energy_power,memberships
-Electrotecnia ELSUS SRL,AR,energy_power,memberships
-Rise Ventures,BR,finance_insurance,memberships
-Rising Sun Chile,CL,energy_power,memberships
-Te Quiero Verde,CL,manufacturing,memberships
-Organicos Brita,CL,manufacturing,memberships
-Soleventus,AR,manufacturing,memberships
-Energe SA,AR,energy_power,memberships
-EFESA,AR,energy_power,memberships
-Terpel,CO,oil_gas,news
-Ciudad Luz,CL,energy_power,memberships
-Insolar Assessoria Empresarial e Social Ltda.,BR,energy_power,memberships
-Ecoservice,BR,retail_consumer,memberships
-ECO CUYUM,AR,manufacturing,memberships
-EDMOND TECH,BR,ict_telecom,memberships
-greenenergy,CR,energy_power,memberships
-GRUPO ENTREGAS,EC,transport_logistics,memberships
-Heliotec s.r.l.,PY,energy_power,memberships
-PKT1,MX,transport_logistics,memberships
-Solardec,MX,energy_power,memberships
+Banco do Brasil,BR,finance_insurance,news|sbti|ungc
+Hotel el Ganzo,MX,agro_food,bcorp
+Banco de Inversión y Comercio Exterior,AR,retail_consumer,news|ungc
+Grupo L,AR,agro_food,news|ungc
+Cementos Pacasmayo,PE,manufacturing,news|ungc
+Estudio Beccar Varela,AR,manufacturing,news|ungc
+Grupo Aval Acciones y Valores,CO,construction_realestate,news|ungc
+GEA Logistics,AR,transport_logistics,news|ungc
+Grupo San Cristobal,AR,finance_insurance,news|ungc
+La Rural S.A.,AR,hospitality_tourism,news|ungc
+Sheraton Mendoza Hotel,AR,hospitality_tourism,news|ungc
+Cerdo de los Llanos S.A.U.,AR,agro_food,news|ungc
+Aeropuertos Argentina,AR,transport_logistics,news|ungc
+Caracol Televisión,CO,retail_consumer,news
+LATAM,CL,transport_logistics,news
+Nuevo Continente,PE,transport_logistics,news
+Grupo Reforma,MX,retail_consumer,news
+Sociedad Anónima,UY,transport_logistics,news
+Correos de México,MX,manufacturing,news
+VLI,BR,transport_logistics,news
+Ecocitex,CL,manufacturing,news
+Sabesp,BR,water_waste_circularity,news

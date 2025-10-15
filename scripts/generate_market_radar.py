@@ -53,6 +53,8 @@ ISO2_TO_ISO3 = {
     "VE": "VEN",
 }
 
+FOCUS_COUNTRIES = {"AR", "BR", "CL", "CO", "PE", "UY", "MX"}
+
 
 def _load_keywords(path: Path) -> List[str]:
     if not path.exists():
@@ -105,8 +107,8 @@ def _prep_events() -> pd.DataFrame:
         fallback_name = events.loc[still_missing, "company_name"].fillna("")
         events.loc[still_missing, "company_key"] = fallback_name.str.lower().str.replace(r"\s+", "_", regex=True)
     events["company_key"] = events["company_key"].fillna("unknown_company")
-    events["country"] = events["country"].fillna("")
-    events["industry"] = events["industry"].fillna("")
+    events["country"] = events["country"].fillna("").astype(str).str.upper()
+    events["industry"] = events["industry"].fillna("").astype(str)
     events["signal_type"] = events["signal_type"].fillna("unknown")
     events["source"] = events["source"].fillna("unknown")
     return events
@@ -722,18 +724,22 @@ def country_fact_sheet(companies: pd.DataFrame) -> Path:
 def main() -> None:
     events = _prep_events()
     universe = _prep_universe()
-    companies = _company_rollup(events)
+    focus_events = events[events["country"].isin(FOCUS_COUNTRIES)].copy()
+    focus_universe = universe[universe["country"].isin(FOCUS_COUNTRIES)].copy()
+
+    companies_all = _company_rollup(events)
+    companies_focus = _company_rollup(focus_events)
 
     outputs = [
-        coverage_summary(companies, universe),
-        heatmap_country_industry(companies),
-        map_intensity(companies),
-        ranking_companies(companies),
-        coverage_indicators(companies),
-        coverage_country_industry(events),
-        country_fact_sheet(companies),
-        signal_type_distribution(events),
-        signal_mix_sankey(events, universe),
+        coverage_summary(companies_focus, focus_universe),
+        heatmap_country_industry(companies_focus),
+        map_intensity(companies_all),
+        ranking_companies(companies_focus),
+        coverage_indicators(companies_focus),
+        coverage_country_industry(focus_events),
+        country_fact_sheet(companies_focus),
+        signal_type_distribution(focus_events),
+        signal_mix_sankey(focus_events, focus_universe),
     ]
 
     print("Visualizaciones generadas:")

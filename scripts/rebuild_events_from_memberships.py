@@ -90,6 +90,52 @@ _TITLE_MAP = {
     "ungc": "Participación Pacto Global",
 }
 
+# Canonicalización industrial extendida para reducir falsos positivos en "manufacturing".
+_INDUSTRY_PATTERNS: List[tuple[str, str]] = [
+    (r"oil|petro|gas|hidrocarb", "oil_gas"),
+    (
+        r"energy|energ[ií]a|eléctric|electric|power|solar|fotovoltaic|e[oó]lic|wind|hidro|renew|utilities?",
+        "energy_power",
+    ),
+    (r"mining|miner|minería|minera|metal|sider", "mining_metals"),
+    (r"chem|qu[ií]m|material|plast|poly|fertil|forest and paper products|rubber", "chemicals_materials"),
+    (
+        r"construction materials|real estate|inmobili|infraestruct|building|arquitect|engineering|obra",
+        "construction_realestate",
+    ),
+    (r"transport|log[ií]st|storage|shipping|ferro|a[eé]re|aviaci|metro|rail|trucking|mar[ií]t|portu", "transport_logistics"),
+    (
+        r"agri|agro|food|alimento|bev|cervec|brew|café|cafe|cacao|ganad|harin|az[uú]car|fish|forestry",
+        "agro_food",
+    ),
+    (
+        r"retail|consumer|wholesal|commerce|tienda|supermerc|department|distribu|e-?commerce",
+        "retail_consumer",
+    ),
+    (r"water|sewer|waste|residu|circular|recicl|sanit|hidric|hydric", "water_waste_circularity"),
+    (r"finance|bank|banca|insur|segur|investment|capital|bursatil|microfin|fintech", "finance_insurance"),
+    (
+        r"telecom|ict|telefon|software|internet|technolog|digital|comunicaci|media|televis|notic|radio",
+        "ict_telecom",
+    ),
+    (r"other services", "professional_services"),
+    (
+        r"professional|consult|advisory|services? support|technical services|legal|account|auditor|marketing",
+        "professional_services",
+    ),
+    (r"educat|school|universit|academ|training|learning", "education_research"),
+    (r"health|hospital|cl[ií]nic|medical|pharma|biotech|salud", "healthcare"),
+    (r"hotel|hospitality|restaurant|leisure|tourism|alojam|lodg|food service", "hospitality_tourism"),
+    (r"media|entertainment|publishing|press|television|news|radio|cultural|art", "media_entertainment"),
+    (r"government|public policy|publica|municip|minister|state-owned|sector p[uú]blico", "public_sector"),
+    (r"non[- ]?profit|ngo|fundaci[oó]n|impacto social", "social_impact"),
+    (r"environmental service|sustainability service|carbon market|carbon credit", "environmental_services"),
+    (
+        r"manufactured goods|manufactur|industrial|factory|production|automotive|machinery|equipment|textil|apparel|packaging",
+        "manufacturing",
+    ),
+]
+
 
 # --- text helpers (copy of membership normalization utilities) ---
 def _norm(s: str) -> str:
@@ -274,29 +320,14 @@ def _load_universe() -> UniverseIndex:
 
 def _guess_industry(raw: str) -> str:
     if not isinstance(raw, str):
-        return ""
+        return "other_services"
     s = raw.strip().lower()
     if not s:
-        return ""
-    patterns = [
-        ("energy_power", ["energy", "energía", "energia", "power", "solar", "wind", "eolic", "eólico", "hidro", "renew"]),
-        ("oil_gas", ["oil", "gas", "petro", "hidrocarb"]),
-        ("mining_metals", ["mining", "miner", "minería", "minera", "metal"]),
-        ("chemicals_materials", ["chem", "quim", "quím", "material", "sider", "plast", "poly", "fertil"]),
-        ("manufacturing", ["manufact", "fabric", "industrial", "automotive", "textil", "maquil"]),
-        ("construction_realestate", ["construct", "real estate", "inmobili", "infra", "obra", "desarroll", "vivienda"]),
-        ("transport_logistics", ["transport", "logist", "ferro", "aero", "aviac", "metro", "shipping", "portu", "marit", "aerol"]),
-        ("agro_food", ["agro", "agri", "food", "alimento", "bev", "cervec", "brew", "cafe", "cacao", "ganad", "harin", "azucar"]),
-        ("retail_consumer", ["retail", "consumer", "consumo", "comerc", "tienda", "super", "farmac", "cosmet", "hogar", "e-commerce", "commerce"]),
-        ("water_waste_circularity", ["water", "waste", "residu", "circular", "hidric", "saneam", "sanit", "alcantar"]),
-        ("finance_insurance", ["financ", "bank", "banca", "insur", "segur", "fond", "inversion", "burs", "microfin"]),
-        ("ict_telecom", ["ict", "telecom", "telefon", "software", "internet", "tech", "tecnolog", "digital", "media", "televis", "notic", "rad"]),
-    ]
-    for slug, keywords in patterns:
-        for kw in keywords:
-            if kw in s:
-                return slug
-    return "manufacturing"
+        return "other_services"
+    for pattern, slug in _INDUSTRY_PATTERNS:
+        if re.search(pattern, s):
+            return slug
+    return "other_services"
 
 
 def _common_event_fields(row: pd.Series, *, signal_type: str) -> Dict[str, object]:
