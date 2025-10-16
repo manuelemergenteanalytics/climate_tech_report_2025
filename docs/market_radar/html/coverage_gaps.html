@@ -5,59 +5,62 @@
 	<script charset="utf-8" src="https://cdn.plot.ly/plotly-3.1.0.min.js" integrity="sha256-Ei4740bWZhaUTQuD6q9yQlgVCMPBz6CZWhevDYPv93A=" crossorigin="anonymous"></script>
 </head>
 <body>
-	<div id="plotly-b473f010327044f7bbab07cd2f8ab70c" class="plotly-graph-div" style="height:550px; width:950px;"></div>
+	<div id="plotly-c3c96b75c8b14029b780b726763dbddd" class="plotly-graph-div" style="height:600px; width:950px;"></div>
 	<script type="text/javascript">
 		window.PLOTLYENV=window.PLOTLYENV || {};
-		if (document.getElementById("plotly-b473f010327044f7bbab07cd2f8ab70c")) {
+		if (document.getElementById("plotly-c3c96b75c8b14029b780b726763dbddd")) {
 			Plotly.newPlot(
-				"plotly-b473f010327044f7bbab07cd2f8ab70c",
+				"plotly-c3c96b75c8b14029b780b726763dbddd",
 				[
 					{
-						"customdata": {
-							"dtype": "f8",
-							"bdata": "AAAAAABUlkDyXeyf3qnxP0jhehSuR/E/AAAAAACokkDyXeyf3qnxP3E9CtejcPE/AAAAAACIhEDyXeyf3qnxP3E9CtejcPE/AAAAAADgg0DyXeyf3qnxP3E9CtejcPE/AAAAAAAwhEDyXeyf3qnxP3E9CtejcPU/AAAAAADweEDyXeyf3qnxP5qZmZmZmfE/AAAAAACwckDyXeyf3qnxPylcj8L1KPQ/AAAAAACAaEDyXeyf3qnxPz0K16NwPfI/AAAAAACAZEDyXeyf3qnxP0jhehSuR/E/AAAAAABgZEDyXeyf3qnxP5qZmZmZmfE/AAAAAADgYEDyXeyf3qnxP+xRuB6F6/E/AAAAAACAXUDyXeyf3qnxP0jhehSuR/E/AAAAAADAYkDyXeyf3qnxP0jhehSuR/k/AAAAAABAXEDyXeyf3qnxP4/C9Shcj/Y/AAAAAACAV0Co85nF/KLyP/YoXI/C9fw/",
-							"shape": "15, 3"
-						},
-						"hovertemplate": "Σ score ponderado=%{x}<br>Industria=%{y}<br>Empresas=%{text}<br>total_events=%{customdata[0]}<br>median_intensity=%{customdata[1]:.2f}<br>avg_events_per_company=%{customdata[2]}<extra></extra>",
+						"hovertemplate": "<b>%{hovertext}</b><br><br>% de universo con señales=%{x}<br>Σ score ponderado=%{y}<br>Señales promedio por empresa=%{marker.size}<br>Intensidad mediana=%{marker.color}<extra></extra>",
+						"hovertext": [
+							"agro_food",
+							"construction_realestate",
+							"energy_power",
+							"finance_insurance",
+							"ict_telecom",
+							"manufacturing",
+							"mining_metals",
+							"oil_gas",
+							"retail_consumer",
+							"transport_logistics"
+						],
 						"legendgroup": "",
 						"marker": {
-							"color": "#636efa",
-							"pattern": {
-								"shape": ""
-							}
+							"color": {
+								"dtype": "f8",
+								"bdata": "8l3sn96p8T/yXeyf3qnxP/Jd7J/eqfE/8l3sn96p8T/yXeyf3qnxPzsPjFUdZeU/8l3sn96p8T/yXeyf3qnxP/Jd7J/eqfE/8l3sn96p8T8="
+							},
+							"coloraxis": "coloraxis",
+							"size": {
+								"dtype": "f8",
+								"bdata": "zczMzMzM/D8vuuiiiy76P5qZmZmZmfk/AAAAAACA+T+O4ziO4zj+P6uqqqqqqvI/AAAAAAAA8D+amZmZmZkFQHqe53me5/k/rRtMkc+6CUA="
+							},
+							"sizemode": "area",
+							"sizeref": 0.00804054054054054,
+							"symbol": "circle",
+							"line": {
+								"color": "#333",
+								"width": 1
+							},
+							"opacity": 0.8
 						},
+						"mode": "markers",
 						"name": "",
-						"orientation": "h",
+						"orientation": "v",
 						"showlegend": false,
-						"text": {
-							"dtype": "f8",
-							"bdata": "AAAAAACslEAAAAAAAByRQAAAAAAAyIJAAAAAAAAwgkAAAAAAADB+QAAAAAAAsHZAAAAAAACgbUAAAAAAAIBlQAAAAAAAAGNAAAAAAACAYkAAAAAAAABeQAAAAAAAQFtAAAAAAADAV0AAAAAAAABUQAAAAAAAAEpA"
-						},
-						"textposition": "auto",
 						"x": {
 							"dtype": "f8",
-							"bdata": "w0tvP9DflkCghBKB8/KSQE6HDdjKDIRA/tXpooAFhEAN2OrSk7uAQNqHLPMiI3lAD8O+E4d9cEDoA37qpHJnQGjAE5B6ymRAydY+cZmHZEAhccRZ9ZlgQDF2qRfwBF5ADQxMzaT4WkDgDbGOLEpWQHjY/+VX001A"
+							"bdata": "AAAAAAAANEDtJbSX0F5EQPWdjfrORiVAFbycgpdTQEAykR6onN0qQAAAAAAAABhASZIkSZKkQ0Ccm5ubm5szQGMklDbeUSVA/0zPQewFI0A="
 						},
 						"xaxis": "x",
-						"y": [
-							"agro_food_beverage",
-							"retail_consumer_services",
-							"industrial_manufacturing",
-							"ict_digital_media",
-							"transport_mobility_logistics",
-							"construction_infrastructure_realestate",
-							"finance_insurance_capital",
-							"oil_gas",
-							"energy_power_utilities",
-							"healthcare_pharma_biotech",
-							"hospitality_tourism_leisure",
-							"mining_materials",
-							"professional_services_consulting",
-							"public_social_education",
-							"environmental_circular_services"
-						],
+						"y": {
+							"dtype": "f8",
+							"bdata": "AuzmmiTiNkDEY6SldwAoQMnMdByPQAxA4JyzNsnVQUAfThSy/JQxQOuSEkOodQ9AwXMBGIfgJkCO6VRshLcgQE+8NYgrJzZAgX/bdk9NQ0A="
+						},
 						"yaxis": "y",
-						"type": "bar"
+						"type": "scatter"
 					}
 				],
 				{
@@ -844,8 +847,13 @@
 							1.0
 						],
 						"title": {
-							"text": "Σ score ponderado"
-						}
+							"text": "% de universo con señales"
+						},
+						"range": [
+							0,
+							44.81481481481482
+						],
+						"zeroline": false
 					},
 					"yaxis": {
 						"anchor": "x",
@@ -854,19 +862,68 @@
 							1.0
 						],
 						"title": {
-							"text": "Industria"
+							"text": "Σ score ponderado"
 						},
-						"automargin": true
+						"zeroline": false
+					},
+					"coloraxis": {
+						"colorbar": {
+							"title": {
+								"text": "Intensidad mediana"
+							}
+						},
+						"colorscale": [
+							[
+								0.0,
+								"#0d0887"
+							],
+							[
+								0.1111111111111111,
+								"#46039f"
+							],
+							[
+								0.2222222222222222,
+								"#7201a8"
+							],
+							[
+								0.3333333333333333,
+								"#9c179e"
+							],
+							[
+								0.4444444444444444,
+								"#bd3786"
+							],
+							[
+								0.5555555555555556,
+								"#d8576b"
+							],
+							[
+								0.6666666666666666,
+								"#ed7953"
+							],
+							[
+								0.7777777777777778,
+								"#fb9f3a"
+							],
+							[
+								0.8888888888888888,
+								"#fdca26"
+							],
+							[
+								1.0,
+								"#f0f921"
+							]
+						]
 					},
 					"legend": {
-						"tracegroupgap": 0
+						"tracegroupgap": 0,
+						"itemsizing": "constant"
 					},
 					"title": {
-						"text": "Industrias con mayor intensidad de señales"
+						"text": "Brechas de cobertura por industria"
 					},
-					"barmode": "relative",
 					"width": 950,
-					"height": 550
+					"height": 600
 				},
 				{
 					"responsive": true

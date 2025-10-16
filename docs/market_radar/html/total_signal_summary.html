@@ -5,59 +5,49 @@
 	<script charset="utf-8" src="https://cdn.plot.ly/plotly-3.1.0.min.js" integrity="sha256-Ei4740bWZhaUTQuD6q9yQlgVCMPBz6CZWhevDYPv93A=" crossorigin="anonymous"></script>
 </head>
 <body>
-	<div id="plotly-b473f010327044f7bbab07cd2f8ab70c" class="plotly-graph-div" style="height:550px; width:950px;"></div>
+	<div id="plotly-bf0cccbc96b04fe48b190ff5126bee17" class="plotly-graph-div" style="height:520px; width:750px;"></div>
 	<script type="text/javascript">
 		window.PLOTLYENV=window.PLOTLYENV || {};
-		if (document.getElementById("plotly-b473f010327044f7bbab07cd2f8ab70c")) {
+		if (document.getElementById("plotly-bf0cccbc96b04fe48b190ff5126bee17")) {
 			Plotly.newPlot(
-				"plotly-b473f010327044f7bbab07cd2f8ab70c",
+				"plotly-bf0cccbc96b04fe48b190ff5126bee17",
 				[
 					{
-						"customdata": {
-							"dtype": "f8",
-							"bdata": "AAAAAABUlkDyXeyf3qnxP0jhehSuR/E/AAAAAACokkDyXeyf3qnxP3E9CtejcPE/AAAAAACIhEDyXeyf3qnxP3E9CtejcPE/AAAAAADgg0DyXeyf3qnxP3E9CtejcPE/AAAAAAAwhEDyXeyf3qnxP3E9CtejcPU/AAAAAADweEDyXeyf3qnxP5qZmZmZmfE/AAAAAACwckDyXeyf3qnxPylcj8L1KPQ/AAAAAACAaEDyXeyf3qnxPz0K16NwPfI/AAAAAACAZEDyXeyf3qnxP0jhehSuR/E/AAAAAABgZEDyXeyf3qnxP5qZmZmZmfE/AAAAAADgYEDyXeyf3qnxP+xRuB6F6/E/AAAAAACAXUDyXeyf3qnxP0jhehSuR/E/AAAAAADAYkDyXeyf3qnxP0jhehSuR/k/AAAAAABAXEDyXeyf3qnxP4/C9Shcj/Y/AAAAAACAV0Co85nF/KLyP/YoXI/C9fw/",
-							"shape": "15, 3"
+						"cells": {
+							"align": "left",
+							"values": [
+								[
+									"Empresas únicas en la muestra",
+									"Total de señales registradas",
+									"Señales por empresa (media)",
+									"Señales por empresa (mediana)",
+									"Señales por empresa (desvío estándar)",
+									"Señales por empresa (Q1)",
+									"Señales por empresa (Q3)",
+									"Señales por empresa (mínimo)",
+									"Señales por empresa (máximo)"
+								],
+								[
+									"5,680",
+									"6,561",
+									"1.16",
+									"1.00",
+									"0.92",
+									"1.00",
+									"1.00",
+									"1",
+									"52"
+								]
+							]
 						},
-						"hovertemplate": "Σ score ponderado=%{x}<br>Industria=%{y}<br>Empresas=%{text}<br>total_events=%{customdata[0]}<br>median_intensity=%{customdata[1]:.2f}<br>avg_events_per_company=%{customdata[2]}<extra></extra>",
-						"legendgroup": "",
-						"marker": {
-							"color": "#636efa",
-							"pattern": {
-								"shape": ""
-							}
+						"header": {
+							"align": "left",
+							"values": [
+								"Métrica",
+								"Valor"
+							]
 						},
-						"name": "",
-						"orientation": "h",
-						"showlegend": false,
-						"text": {
-							"dtype": "f8",
-							"bdata": "AAAAAACslEAAAAAAAByRQAAAAAAAyIJAAAAAAAAwgkAAAAAAADB+QAAAAAAAsHZAAAAAAACgbUAAAAAAAIBlQAAAAAAAAGNAAAAAAACAYkAAAAAAAABeQAAAAAAAQFtAAAAAAADAV0AAAAAAAABUQAAAAAAAAEpA"
-						},
-						"textposition": "auto",
-						"x": {
-							"dtype": "f8",
-							"bdata": "w0tvP9DflkCghBKB8/KSQE6HDdjKDIRA/tXpooAFhEAN2OrSk7uAQNqHLPMiI3lAD8O+E4d9cEDoA37qpHJnQGjAE5B6ymRAydY+cZmHZEAhccRZ9ZlgQDF2qRfwBF5ADQxMzaT4WkDgDbGOLEpWQHjY/+VX001A"
-						},
-						"xaxis": "x",
-						"y": [
-							"agro_food_beverage",
-							"retail_consumer_services",
-							"industrial_manufacturing",
-							"ict_digital_media",
-							"transport_mobility_logistics",
-							"construction_infrastructure_realestate",
-							"finance_insurance_capital",
-							"oil_gas",
-							"energy_power_utilities",
-							"healthcare_pharma_biotech",
-							"hospitality_tourism_leisure",
-							"mining_materials",
-							"professional_services_consulting",
-							"public_social_education",
-							"environmental_circular_services"
-						],
-						"yaxis": "y",
-						"type": "bar"
+						"type": "table"
 					}
 				],
 				{
@@ -837,36 +827,11 @@
 							}
 						}
 					},
-					"xaxis": {
-						"anchor": "y",
-						"domain": [
-							0.0,
-							1.0
-						],
-						"title": {
-							"text": "Σ score ponderado"
-						}
-					},
-					"yaxis": {
-						"anchor": "x",
-						"domain": [
-							0.0,
-							1.0
-						],
-						"title": {
-							"text": "Industria"
-						},
-						"automargin": true
-					},
-					"legend": {
-						"tracegroupgap": 0
-					},
 					"title": {
-						"text": "Industrias con mayor intensidad de señales"
+						"text": "Resumen estadístico de señales (total)"
 					},
-					"barmode": "relative",
-					"width": 950,
-					"height": 550
+					"width": 750,
+					"height": 520
 				},
 				{
 					"responsive": true
