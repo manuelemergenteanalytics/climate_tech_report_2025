@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Emergente Analytics: Interés Corporativo en Climate Tech - LATAM 2025</title>
+    <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+    <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.1.0.min.js" integrity="sha256-Ei4740bWZhaUTQuD6q9yQlgVCMPBz6CZWhevDYPv93A=" crossorigin="anonymous"></script>
+    <style>
+@font-face {
+    font-family: 'Josefin Sans';
+    src: url('../JosefinSans-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+:root {
+    color-scheme: light;
+    --clr-bg: #f6fbf8;
+    --clr-panel: #edf7f0;
+    --clr-border: #c3e1d1;
+    --clr-accent: #1f6d4a;
+    --clr-accent-light: #5fbf82;
+    --clr-text: #164233;
+    --clr-text-muted: #3d6150;
+    --clr-shadow: 0 10px 30px rgba(16, 81, 52, 0.12);
+}
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    font-family: 'Josefin Sans', 'Helvetica Neue', Arial, sans-serif;
+    background-color: var(--clr-bg);
+    color: var(--clr-text);
+    line-height: 1.55;
+}
+header {
+    padding: 2.5rem clamp(1.5rem, 4vw, 3.5rem) 1.5rem;
+    background: linear-gradient(135deg, rgba(20, 88, 64, 0.9), rgba(32, 101, 73, 0.75)), url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=70') center/cover fixed;
+    color: #f5fbf3;
+    position: relative;
+    overflow: hidden;
+}
+header::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(13, 70, 50, 0.40), rgba(24, 91, 66, 0.32));
+    z-index: 0;
+}
+header .hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 980px;
+}
+header .hero-header {
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding-right: clamp(140px, 20vw, 240px);
+}
+.hero-brand {
+    margin: 0;
+    font-size: clamp(2.6rem, 5vw, 3.2rem);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+}
+.hero-title {
+    margin: 0.2rem 0 0;
+    font-size: clamp(1.5rem, 3.2vw, 2.05rem);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+}
+.hero-summary {
+    margin: 1.2rem 0 0;
+    font-size: clamp(1rem, 2.1vw, 1.18rem);
+    max-width: clamp(620px, 60vw, 780px);
+}
+.hero-logo {
+    /* CAMBIO CLAVE: Usar 'absolute' para que se mueva con el scroll */
+    position: absolute; 
+    
+    top: clamp(1rem, 3vw, 2.5rem); 
+    right: clamp(1rem, 3vw, 2.5rem);
+    display: block;
+    z-index: 1000;
+}
+.hero-logo img {
+    /* Se mantienen los estilos de la imagen */
+    width: clamp(120px, 18vw, 160px);
+    height: auto;
+    filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.35));
+}
+main {
+    display: grid;
+    grid-template-columns: minmax(210px, 240px) minmax(0, 1fr);
+    gap: 1.25rem;
+    padding: 1.75rem clamp(1rem, 3vw, 2.75rem) 3rem;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+nav {
+    background: linear-gradient(180deg, rgba(236, 247, 240, 0.96), rgba(225, 241, 233, 0.95));
+    border: 1px solid var(--clr-border);
+    border-radius: 18px;
+    padding: 1.2rem 1rem;
+    box-shadow: var(--clr-shadow);
+    position: sticky;
+    top: 1.5rem;
+    align-self: start;
+}
+nav h2 {
+    font-size: 1.1rem;
+    margin: 0 0 1rem;
+    color: var(--clr-accent);
+}
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.4rem;
+}
+nav button {
+    width: 100%;
+    border: 1px solid transparent;
+    background: rgba(49, 137, 107, 0.12);
+    color: var(--clr-text);
+    font: inherit;
+    text-align: left;
+    padding: 0.6rem 0.8rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease, border 0.2s ease, box-shadow 0.2s ease;
+}
+nav button:hover,
+nav button:focus-visible {
+    outline: none;
+    background: rgba(49, 137, 107, 0.28);
+    border-color: rgba(31, 109, 74, 0.35);
+    transform: translateX(2px);
+    box-shadow: 0 8px 16px rgba(20, 96, 88, 0.15);
+}
+nav button.active {
+    background: linear-gradient(135deg, rgba(41, 121, 85, 0.95), rgba(28, 98, 68, 0.92));
+    color: #f5fbf3;
+    border-color: transparent;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+}
+nav .cluster-title {
+    margin-top: 1.2rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: rgba(31, 109, 74, 0.75);
+    letter-spacing: 0.015em;
+}
+#chart-meta {
+    background: linear-gradient(135deg, rgba(230, 243, 236, 0.82), rgba(223, 239, 230, 0.78));
+    border-radius: 14px;
+    padding: 1rem 1.2rem;
+}
+#chart-panel {
+    background: linear-gradient(180deg, rgba(236, 248, 240, 0.96), rgba(232, 246, 236, 0.96));
+    border: 1px solid var(--clr-border);
+    border-radius: 18px;
+    padding: 1rem clamp(1rem, 3vw, 1.8rem) 1.6rem;
+    box-shadow: var(--clr-shadow);
+    min-height: 540px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+}
+#chart-meta h2 {
+    margin: 0;
+    font-size: clamp(1.3rem, 2.2vw, 1.6rem);
+    color: rgba(31, 109, 74, 0.95);
+}
+#chart-meta p {
+    margin: 0.35rem 0 0;
+    color: rgba(52, 102, 79, 0.82);
+    font-size: 0.98rem;
+}
+#chart-viewer {
+    flex: 1;
+    position: relative;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(242, 249, 243, 0.92), rgba(234, 247, 239, 0.92));
+    border: 1px solid rgba(31, 109, 74, 0.18);
+    overflow: auto;
+    padding: 0.25rem 0.35rem 0.4rem;
+    backdrop-filter: blur(2px);
+}
+#chart-viewer .plotly-graph-div {
+    margin: 0 auto;
+    border-radius: 10px;
+    background: #ffffff;
+    box-shadow: 0 10px 24px rgba(31, 109, 74, 0.08);
+}
+.loading-state,
+.error-state {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg, rgba(236, 247, 240, 0.9), rgba(217, 239, 226, 0.9));
+    color: var(--clr-text);
+    text-align: center;
+    padding: 2rem;
+    gap: 0.5rem;
+}
+.loading-state span {
+    display: inline-block;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 4px solid rgba(15, 81, 52, 0.15);
+    border-top-color: var(--clr-accent);
+    animation: spin 0.85s linear infinite;
+}
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+footer {
+    padding: 1.5rem clamp(1.5rem, 4vw, 3.5rem) 2rem;
+    text-align: center;
+    color: var(--clr-text-muted);
+    font-size: 0.9rem;
+    background: linear-gradient(135deg, rgba(19, 91, 65, 0.12), rgba(33, 120, 92, 0.1));
+    position: relative;
+}
+footer .footer-logo {
+    position: absolute;
+    right: clamp(1rem, 3vw, 2.5rem);
+    bottom: clamp(0.05rem, 0.25vw, 0.15rem);
+}
+footer .footer-logo img {
+    width: clamp(90px, 12vw, 120px);
+    height: auto;
+    opacity: 0.9;
+    display: block;
+}
+@media (max-width: 960px) {
+    main {
+        grid-template-columns: 1fr;
+    }
+    nav {
+        position: static;
+    }
+}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="hero-inner">
+            <div class="hero-header">
+                <div class="hero-text">
+                    <h1 class="hero-brand">Emergente Analytics</h1>
+                    <h2 class="hero-title">Interés Corporativo en Climate Tech - LATAM 2025</h2>
+                </div>
+                <div class="hero-logo">
+                    <img src="../Emergente%20Sin%20Logo%20Alta%20Calidad.png" alt="Logo Emergente Analytics" />
+                </div>
+            </div>
+            <p class="hero-summary">Explorá la actividad, cobertura y brechas del ecosistema corporativo latinoamericano en torno a tecnologías climáticas. Este informe integra datos de señales públicas y certificaciones para dimensionar dónde se concentra el interés corporativo en la región.</p>
+        </div>
+    </header>
+    <main>
+        <nav aria-label="Exploración de gráficos">
+            <h2>Tablero interactivo</h2>
+            <div id="chart-nav"></div>
+        </nav>
+        <section id="chart-panel" aria-live="polite">
+            <div id="chart-meta">
+                <h2 id="chart-title"></h2>
+                <p id="chart-description"></p>
+            </div>
+            <div id="chart-viewer" role="region" aria-label="Visualización seleccionada"></div>
+        </section>
+    </main>
+    <footer>
+        © 2025 Emergente Analytics · Visualizaciones interactivas con Plotly
+        <div class="footer-logo">
+            <img src="../Emergente%20Sin%20Logo%20Alta%20Calidad.png" alt="Logo Emergente Analytics" />
+        </div>
+    </footer>
+    <script>
+const charts = [
+    {
+        id: 'coverage-summary',
+        label: 'Resumen general',
+        description: 'Instantánea de cobertura y volumen de señales dentro del universo de compañías analizadas.',
+        file: 'html/coverage_summary.html',
+    },
+    {
+        id: 'total-signal-summary',
+        label: 'Indicadores globales',
+        description: 'Indicadores agregados sobre intensidad y distribución de señales climáticas en LATAM.',
+        file: 'html/total_signal_summary.html',
+    },
+    {
+        id: 'signal-mix-sankey',
+        label: 'Mix de señales',
+        description: 'Flujo entre el universo de compañías y combinaciones de certificaciones o noticias climáticas.',
+        file: 'html/signal_mix_sankey.html',
+    },
+    {
+        cluster: 'Cobertura sectorial'
+    },
+    {
+        id: 'coverage-indicators',
+        label: 'Ranking por industria',
+        description: 'Volumen ponderado de señales y recuento de compañías por vertical industrial.',
+        file: 'html/coverage_indicators.html',
+    },
+    {
+        id: 'coverage-country-industry',
+        label: 'Heatmap país-industria',
+        description: 'Cruce entre industrias y países para identificar focos de actividad climática.',
+        file: 'html/coverage_country_industry.html',
+    },
+    {
+        id: 'coverage-timeline',
+        label: 'Evolución temporal',
+        description: 'Tendencias mensuales de señales por industria para detectar aceleraciones o desaceleraciones.',
+        file: 'html/coverage_timeline.html',
+    },
+    {
+        id: 'coverage-gaps',
+        label: 'Brechas de cobertura',
+        description: 'Comparativa de intensidad y cobertura para priorizar industrias con potencial latente.',
+        file: 'html/coverage_gaps.html',
+    },
+    {
+        id: 'country-fact-sheet',
+        label: 'Ficha por país',
+        description: 'Detalle de indicadores y cobertura por país para contextualizar oportunidades.',
+        file: 'html/country_fact_sheet.html',
+    },
+    {
+        cluster: 'Enfoque geográfico'
+    },
+    {
+        id: 'map-intensity',
+        label: 'Intensidad por país',
+        description: 'Mapa temático que sintetiza la intensidad de señales y compañías detectadas en cada país.',
+        file: 'html/map_intensity.html',
+    },
+    {
+        cluster: 'Profundización en señales'
+    },
+    {
+        id: 'ranking-companies',
+        label: 'Ranking de compañías',
+        description: 'Listado ponderado de empresas líderes por país, con detalle de señales y sectores.',
+        file: 'html/ranking_companies.html',
+    },
+    {
+        id: 'signal-type-distribution',
+        label: 'Tipos de señales',
+        description: 'Distribución de señales por fuente (UNGC, B Corp, SBTi, prensa especializada).',
+        file: 'html/signal_type_distribution.html',
+    }
+];
+
+const navContainer = document.getElementById('chart-nav');
+const viewer = document.getElementById('chart-viewer');
+const chartTitle = document.getElementById('chart-title');
+const chartDescription = document.getElementById('chart-description');
+let activeButton = null;
+let currentChartId = null;
+
+function createNav() {
+    const list = document.createElement('ul');
+    charts.forEach(item => {
+        if (item.cluster) {
+            const clusterLabel = document.createElement('div');
+            clusterLabel.className = 'cluster-title';
+            clusterLabel.textContent = item.cluster;
+            list.appendChild(clusterLabel);
+            return;
+        }
+        const li = document.createElement('li');
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.textContent = item.label;
+        button.dataset.chartId = item.id;
+        button.addEventListener('click', () => loadChart(item, button));
+        li.appendChild(button);
+        list.appendChild(li);
+    });
+    navContainer.appendChild(list);
+}
+
+function showLoading(message = 'Preparando visualización…') {
+    viewer.innerHTML = '';
+    const loading = document.createElement('div');
+    loading.className = 'loading-state';
+    loading.innerHTML = `<span></span><p>${message}</p>`;
+    viewer.appendChild(loading);
+}
+
+function showError(error) {
+    viewer.innerHTML = '';
+    const wrapper = document.createElement('div');
+    wrapper.className = 'error-state';
+    wrapper.innerHTML = `
+        <strong>No pudimos cargar el gráfico.</strong>
+        <p>${error}</p>
+        <p>Reintentá nuevamente o verificá que el archivo siga disponible.</p>
+    `;
+    viewer.appendChild(wrapper);
+}
+
+function executeScripts(container, scripts) {
+    scripts.forEach(script => {
+        const newScript = document.createElement('script');
+        if (script.src) {
+            newScript.src = script.src;
+            newScript.async = false;
+        } else {
+            newScript.textContent = script.textContent;
+        }
+        container.appendChild(newScript);
+    });
+}
+
+function fitPlots() {
+    if (!window.Plotly) return;
+    const nodes = viewer.querySelectorAll('.plotly-graph-div');
+    nodes.forEach(node => {
+        try {
+            Plotly.Plots.resize(node);
+        } catch (err) {
+            console.warn('No se pudo reajustar el gráfico', err);
+        }
+    });
+}
+
+async function loadChart(chart, button) {
+    if (chart.id === currentChartId) {
+        return;
+    }
+    currentChartId = chart.id;
+    chartTitle.textContent = chart.label;
+    chartDescription.textContent = chart.description;
+
+    if (activeButton) {
+        activeButton.classList.remove('active');
+    }
+    if (button) {
+        button.classList.add('active');
+        activeButton = button;
+    }
+
+    showLoading();
+
+    try {
+        const response = await fetch(chart.file, { cache: 'no-store' });
+        if (!response.ok) {
+            throw new Error(`(${response.status}) ${response.statusText}`);
+        }
+        const htmlText = await response.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlText, 'text/html');
+        const plotDiv = doc.querySelector('.plotly-graph-div');
+        const scripts = Array.from(doc.querySelectorAll('script[type="text/javascript"], script:not([type])'))
+            .filter(s => s.textContent && s.textContent.includes('Plotly.newPlot'));
+
+        viewer.innerHTML = '';
+        if (plotDiv) {
+            const clonedDiv = plotDiv.cloneNode(true);
+            viewer.appendChild(clonedDiv);
+        }
+        executeScripts(viewer, scripts);
+
+        requestAnimationFrame(() => {
+            fitPlots();
+            requestAnimationFrame(() => fitPlots());
+        });
+    } catch (error) {
+        console.error('Error cargando gráfico', error);
+        showError(error.message || 'Error desconocido');
+    }
+}
+
+createNav();
+const firstInteractiveButton = navContainer.querySelector('button[data-chart-id]');
+if (firstInteractiveButton) {
+    const firstChart = charts.find(item => item.id === firstInteractiveButton.dataset.chartId);
+    if (firstChart) {
+        loadChart(firstChart, firstInteractiveButton);
+    }
+}
+
+window.addEventListener('resize', () => {
+    window.requestAnimationFrame(fitPlots);
+});
+    </script>
+</body>
+</html>
