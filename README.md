@@ -100,6 +100,53 @@ Copiar código
 # 5) visualizar y exportar
 .\.venv\Scripts\ctr25 viz
 .\.venv\Scripts\ctr25 export --out reports/collaborators/prospects.csv
+## Discovery de News LATAM
+
+El comando `ctr25 collect-news-discovery` integra un buscador abierto (GDELT + opcional MediaCloud) que no depende del universo previo. Genera filas compatibles con `events_normalized.csv` en `data/processed/events_normalized_news_discovery.csv` para la ventana 2024-10-01 → 2025-10-13 (configurable).
+
+Requisitos adicionales (post `pip install -e .`):
+
+```powershell
+.\.venv\Scripts\python.exe -m spacy download es_core_news_lg
+.\.venv\Scripts\python.exe -m spacy download pt_core_news_lg
+.\.venv\Scripts\python.exe -m spacy download en_core_web_lg
+```
+
+Dependiendo del entorno podés elegir los modelos `md` o `sm`. Cuando dispongas de un token gratuito, definí `MEDIACLOUD_API_KEY` (Windows `setx`, Unix `export`) para habilitar esa fuente.
+
+Ejemplo de corrida completa:
+
+```powershell
+.\.venv\Scripts\ctr25 collect-news-discovery `
+  --keywords config/keywords.yml `
+  --industry-map config/industry_map.yml `
+  --out data/processed/events_normalized_news_discovery.csv `
+  --since 2024-10-01 `
+  --until 2025-10-13 `
+  --batch-size 500 `
+  --gdelt-max 250 `
+  --fetch-content-ratio 0.25
+```
+
+Usa `--append-events` para sumar los hallazgos directo a `events_normalized.csv`. Luego podés cruzar el archivo de descubrimiento con `events_normalized.csv` y tu `universe_sample.csv` para consolidar compañías nuevas.
+
+Modo dirigido (sólo compañías existentes):
+
+```powershell
+.\.venv\Scripts\ctr25 collect-news-discovery `
+  --mode known `
+  --keywords config/keywords.yml `
+  --industry-map config/industry_map.yml `
+  --universe data/processed/universe_sample.csv `
+  --events data/processed/events_normalized.csv `
+  --out data/processed/events_normalized_news_known.csv `
+  --known-max-companies 200 `
+  --since 2024-10-01 `
+  --until 2025-10-13
+```
+
+Este modo consulta GDELT/MediaCloud sólo para compañías LATAM ya presentes en el universo, fuerza idioma ES/PT y guarda las señales en un CSV separado para la revisión previa.
+
 Buenas prácticas técnicas
 Caching: data/interim/cache/<fuente>/
 

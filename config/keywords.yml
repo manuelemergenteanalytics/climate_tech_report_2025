@@ -1,35 +1,73 @@
 include:
-  - climate
   - climate action
   - climate initiative
+  - corporate climate
+  - acción climática
+  - accion climatica
   - net zero
   - cero neto
   - carbono neutral
   - science based targets
-  - renewable
-  - solar
-  - wind
+  - transición energética
+  - transicion energetica
+  - transición climática
+  - transicion climatica
+  - renewable energy
+  - energía renovable
+  - energia renovable
+  - energía solar
+  - energia solar
+  - parque solar
+  - solar farm
+  - energía eólica
+  - energia eolica
+  - parque eolico
+  - wind farm
   - hidrogeno verde
-  - hydrogen
-  - battery
-  - eficiencia energetica
-  - efficiency
-  - emissions reduction
-  - reducción de emisiones
-  - carbono
+  - hidrógeno verde
+  - hydrogen hub
+  - hydrogen project
   - captura de carbono
-  - adaptacion
-  - resiliencia climatica
-  - economia circular
-  - reciclar
-  - biodiver
-  - electrificacion
-  - electrico
+  - carbon capture
+  - emisiones netas
+  - reducción de emisiones
+  - carbon reduction
   - movilidad electrica
   - vehiculo electrico
-  - heat pump
-  - geothermal
-  - storage
+  - corredores verdes
+  - electrificacion industrial
+  - infraestructura verde
+  - economia circular
+  - gestión de residuos
+  - gestion de residuos
+  - residuos cero
+  - climate finance
+  - financiamiento climático
+  - financiamiento climatico
+  - climate investment
+  - resiliencia climatica
+  - adaptacion climatica
+  - transporte sostenible
+  - sostenibilidad corporativa
+  - compromiso climatico
+  - compromiso climático
+  - estrategia climatica
+  - estrategia climática
+  - inversión climática
+  - inversion climatica
+  - agenda climática
+  - agenda climatica
+  - por el clima
+  - clima
+  - sostenibilidad
+  - sustentable
+  - ação climática
+  - acao climatica
+  - sustentabilidade
+  - transição energética
+  - transicao energetica
+  - climatico
+  - climática
 exclude:
   - pronostico
   - meteorologia
@@ -45,5 +83,14 @@ exclude:
   - malware
   - ciberataque
   - ciberseguridad
-  - gratis
   - turismo
+  - turistico
+  - viajes
+  - business travel
+  - activistas
+  - protesta
+  - arte
+  - pintura
+  - museo
+  - historia
+  - colon

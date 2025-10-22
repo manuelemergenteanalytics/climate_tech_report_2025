@@ -60,39 +60,43 @@ header .hero-header {
     justify-content: flex-start;
     align-items: flex-start;
     gap: 1.5rem;
-    padding-right: clamp(140px, 20vw, 240px);
-}
-.hero-brand {
-    margin: 0;
-    font-size: clamp(2.6rem, 5vw, 3.2rem);
-    font-weight: 400;
-    letter-spacing: 0.04em;
+    padding-right: 20px;
 }
 .hero-title {
-    margin: 0.2rem 0 0;
-    font-size: clamp(1.5rem, 3.2vw, 2.05rem);
-    font-weight: 500;
-    letter-spacing: 0.02em;
+    /* ANTES: era más pequeño, ahora le damos el tamaño del título principal (h1) */
+    margin: 0 0 0.5rem 0; /* Ajustamos margen superior a 0, y le damos un pequeño margen inferior */
+    font-size: clamp(2.6rem, 5vw, 3.2rem); /* Usamos el tamaño grande */
+    font-weight: 500; /* Mantenemos el peso que tenías */
+    letter-spacing: 0.04em; /* Usamos el espaciado grande */
 }
 .hero-summary {
-    margin: 1.2rem 0 0;
+    /* ANTES: tenía margin-top, ahora lo eliminamos porque ya está inmediatamente debajo del título */
+    margin: 1.2rem 0 0; /* O ajusta este margin-top si el espacio es demasiado */
     font-size: clamp(1rem, 2.1vw, 1.18rem);
     max-width: clamp(620px, 60vw, 780px);
 }
 .hero-logo {
-    /* CAMBIO CLAVE: Usar 'absolute' para que se mueva con el scroll */
+    /* CAMBIO CLAVE: Volver a 'absolute' para que se mueva con el scroll del header */
     position: absolute; 
     
-    top: clamp(1rem, 3vw, 2.5rem); 
-    right: clamp(1rem, 3vw, 2.5rem);
+    /* AJUSTE: El 'top' es 0, pero necesitamos compensar el padding superior (2.5rem) */
+    /* Lo establecemos en 2.5rem o un valor fijo en píxeles que compense ese padding. */
+    top: 40px; /* ~2.5rem, ajusta este valor */
+    
+    /* AJUSTE: El 'right' es 0, pero necesitamos compensar el padding lateral (clamp(1.5rem, 4vw, 3.5rem)) */
+    /* Dado que el padding es responsivo, es mejor usar un valor fijo generoso (ej. 50px)
+       y que el logo ignore el padding de `.hero-header`. */
+    right: 0px; /* Ajusta este valor para el margen deseado */
+    
     display: block;
     z-index: 1000;
 }
+
 .hero-logo img {
-    /* Se mantienen los estilos de la imagen */
-    width: clamp(120px, 18vw, 160px);
+    /* Mantenemos */
+    width: 370px; 
     height: auto;
-    filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.35));
+    filter: invert(100%) brightness(90%) drop-shadow(0 12px 24px rgba(0, 0, 0, 0.35));
 }
 main {
     display: grid;
@@ -233,13 +237,14 @@ footer {
 }
 footer .footer-logo {
     position: absolute;
-    right: clamp(1rem, 3vw, 2.5rem);
-    bottom: clamp(0.05rem, 0.25vw, 0.15rem);
+    right: 50px;
+    bottom: 0px;
+    z-index:200px;
 }
 footer .footer-logo img {
-    width: clamp(90px, 12vw, 120px);
+    width: 75px;
     height: auto;
-    opacity: 0.9;
+    opacity: 0.7;
     display: block;
 }
 @media (max-width: 960px) {
@@ -257,14 +262,13 @@ footer .footer-logo img {
         <div class="hero-inner">
             <div class="hero-header">
                 <div class="hero-text">
-                    <h1 class="hero-brand">Emergente Analytics</h1>
-                    <h2 class="hero-title">Interés Corporativo en Climate Tech - LATAM 2025</h2>
+                    <h2 class="hero-title">Interés Corporativo en Climate Tech<br>LATAM 2025</h2>
                 </div>
-                <div class="hero-logo">
-                    <img src="../Emergente%20Sin%20Logo%20Alta%20Calidad.png" alt="Logo Emergente Analytics" />
                 </div>
-            </div>
             <p class="hero-summary">Explorá la actividad, cobertura y brechas del ecosistema corporativo latinoamericano en torno a tecnologías climáticas. Este informe integra datos de señales públicas y certificaciones para dimensionar dónde se concentra el interés corporativo en la región.</p>
+        </div>
+        <div class="hero-logo">
+            <img src="../Emergente%20Sin%20Logo%20Alta%20Calidad.png" alt="Logo Emergente Analytics" />
         </div>
     </header>
     <main>

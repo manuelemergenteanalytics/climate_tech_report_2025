@@ -78,6 +78,72 @@ def collect_news(
     typer.echo(f"[collect-news] eventos agregados: {n}")
 
 
+@app.command("collect-news-discovery")
+def collect_news_discovery(
+    keywords: str = typer.Option("config/keywords.yml", help="Ruta keywords.yml"),
+    industry_map: str = typer.Option("config/industry_map.yml", help="Ruta industry_map.yml"),
+    out: str = typer.Option(
+        "data/processed/events_normalized_news_discovery.csv",
+        help="CSV de salida",
+    ),
+    since: str = typer.Option("2024-10-01", help="Fecha inicial ISO"),
+    until: str = typer.Option("2025-10-13", help="Fecha final ISO"),
+    batch_size: int = typer.Option(500, help="Tamaño de lote para procesamiento"),
+    gdelt_max: int = typer.Option(250, help="Máximo de artículos GDELT"),
+    fetch_content_ratio: float = typer.Option(0.25, help="Fracción de URLs con snippet completo"),
+    append_events_csv: bool = typer.Option(
+        False,
+        "--append-events/--no-append-events",
+        help="Agrega los eventos descubiertos a events_normalized.csv",
+    ),
+    mode: str = typer.Option(
+        "general",
+        "--mode",
+        help="Modo de recolección: general (descubrimiento abierto) o known (empresas del universo)",
+    ),
+    universe_path: str = typer.Option(
+        "data/processed/universe_sample.csv",
+        "--universe",
+        help="CSV con universe_sample.csv",
+    ),
+    events_path: str = typer.Option(
+        "data/processed/events_normalized.csv",
+        "--events",
+        help="CSV con events_normalized.csv",
+    ),
+    known_max_companies: int = typer.Option(
+        200,
+        "--known-max-companies",
+        help="Máximo de compañías conocidas a consultar (0 = todas)",
+    ),
+):
+    from ctr25.signals.news_discovery import run_collect_news_discovery
+
+    mode_value = (mode or "general").lower()
+    out_path = out
+    if mode_value == "known" and out_path == "data/processed/events_normalized_news_discovery.csv":
+        out_path = "data/processed/events_normalized_news_known.csv"
+
+    df, appended = run_collect_news_discovery(
+        keywords_path=keywords,
+        industry_map_path=industry_map,
+        out_csv=out_path,
+        since=since,
+        until=until,
+        batch_size=batch_size,
+        gdelt_max=gdelt_max,
+        fetch_content_ratio=fetch_content_ratio,
+        append_events_csv=append_events_csv,
+        mode=mode_value,
+        universe_path=universe_path,
+        events_path=events_path,
+        known_max_companies=known_max_companies,
+    )
+    typer.echo(f"[collect-news-discovery] filas nuevas: {len(df)}")
+    if append_events_csv:
+        typer.echo(f"[collect-news-discovery] eventos agregados a normalized: {appended}")
+
+
 @app.command("collect-jobs")
 def collect_jobs(
     universe: str = "data/processed/universe_sample.csv",
