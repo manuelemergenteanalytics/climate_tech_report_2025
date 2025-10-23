@@ -249,6 +249,8 @@ footer .footer-logo img {
 }
 @media (max-width: 960px) {
     main {
+        /* Fuerza a que el contenido no exceda el viewport, evitando el scroll horizontal */
+        overflow-x: hidden; 
         grid-template-columns: 1fr;
     }
     nav {
@@ -265,27 +267,28 @@ footer .footer-logo img {
         padding: 2.5rem 1.2rem 2.5rem; 
     }
     
-    header .hero-header {
-        /* Hacemos que el encabezado ocupe todo el ancho disponible */
-        flex-direction: column;
-    }
-
+    /* Regla crucial para que el logo fluya con el contenido */
     .hero-logo {
-        /* Ya no lo ponemos absoluto para que fluya con el contenido */
-        position: static; 
-        order: -1; /* Lo ponemos antes del título */
+        position: static; /* Esto quita la posición absoluta que causa la superposición */
+        order: -1; /* Lo mueve arriba del título */
         margin-bottom: 1.5rem;
-        /* Centramos el logo */
         width: 100%; 
         text-align: center;
     }
 
+    /* Ajuste para que el texto ocupe su propio espacio */
+    header .hero-header {
+        /* Hacemos que el encabezado ocupe todo el ancho disponible */
+        flex-direction: column;
+        gap: 0; /* Eliminamos el gap si no es necesario */
+    }
+
+    /* La imagen del logo debe tener un ancho máximo razonable */
     .hero-logo img {
-        /* Reducimos el ancho máximo del logo para que quepa */
-        width: clamp(180px, 60vw, 280px); /* Un ancho más razonable para móvil */
+        width: clamp(180px, 60vw, 280px); 
         height: auto;
-        /* Quitamos el filtro invertido para que se vea bien en fondos claros si el header cambia */
-        filter: invert(100%) brightness(90%) drop-shadow(0 8px 16px rgba(0, 0, 0, 0.25));
+        /* Esto permite que el logo no sea más ancho que la pantalla */
+        max-width: 100%; 
     }
     
     .hero-title {
@@ -343,6 +346,49 @@ footer .footer-logo img {
         /* Ajustamos el tamaño del título de la visualización */
         font-size: 1.2rem;
     }
+
+    /* Regla crucial para la sección del medio */
+    main {
+        /* Bloquea cualquier scroll horizontal no deseado en el layout */
+        overflow-x: hidden; 
+        grid-template-columns: 1fr; /* Mantenemos el apilamiento */
+    }
+
+    /* Panel de Gráficos (Padre de #chart-viewer) */
+    #chart-panel {
+        /* Permite que el contenedor se encoja dentro del 'main' */
+        min-width: 0; 
+        width: 100%; 
+    }
+    
+    /* Visor del Gráfico (Contenedor que carga Plotly) */
+    #chart-viewer {
+        flex: 1;
+        position: relative;
+        /* Permite scroll horizontal *dentro* de este contenedor si el gráfico es muy ancho */
+        overflow-x: auto; 
+        min-width: 0; /* CRUCIAL: Permite que el contenedor se encoja */
+        width: 100%; /* Ocupa el 100% del espacio permitido por el padre */
+        flex-shrink: 1; 
+    }
+
+    /* El DIV generado por Plotly */
+    #chart-viewer .plotly-graph-div {
+        /* CRÍTICO: Sobrescribe cualquier ancho fijo que Plotly haya definido en el archivo HTML */
+        width: 100% !important; 
+        min-width: 100% !important; 
+        height: auto !important; 
+        margin: 0 auto; 
+    }
+    
+    /* Ajustes menores del pie de página */
+    footer {
+        padding: 1.5rem 1.2rem 2rem; 
+    }
+    
+    footer .footer-logo {
+        right: 15px; 
+    }
 }
     </style>
 </head>
@@ -374,7 +420,7 @@ footer .footer-logo img {
         </section>
     </main>
     <footer>
-        © 2025 Emergente Analytics · Visualizaciones interactivas con Plotly
+        © 2025 Emergente Analytics
         <div class="footer-logo">
             <img src="../Emergente%20Sin%20Logo%20Alta%20Calidad.png" alt="Logo Emergente Analytics" />
         </div>
