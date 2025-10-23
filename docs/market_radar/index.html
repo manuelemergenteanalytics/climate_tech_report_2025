@@ -255,6 +255,95 @@ footer .footer-logo img {
         position: static;
     }
 }
+@media (max-width: 600px) {
+    /* ------------------------------------------------------------- */
+    /* 1. Ajustes del Encabezado y Logo para Celulares */
+    /* ------------------------------------------------------------- */
+    
+    header {
+        /* Aumentamos un poco el padding superior/inferior para darle aire */
+        padding: 2.5rem 1.2rem 2.5rem; 
+    }
+    
+    header .hero-header {
+        /* Hacemos que el encabezado ocupe todo el ancho disponible */
+        flex-direction: column;
+    }
+
+    .hero-logo {
+        /* Ya no lo ponemos absoluto para que fluya con el contenido */
+        position: static; 
+        order: -1; /* Lo ponemos antes del título */
+        margin-bottom: 1.5rem;
+        /* Centramos el logo */
+        width: 100%; 
+        text-align: center;
+    }
+
+    .hero-logo img {
+        /* Reducimos el ancho máximo del logo para que quepa */
+        width: clamp(180px, 60vw, 280px); /* Un ancho más razonable para móvil */
+        height: auto;
+        /* Quitamos el filtro invertido para que se vea bien en fondos claros si el header cambia */
+        filter: invert(100%) brightness(90%) drop-shadow(0 8px 16px rgba(0, 0, 0, 0.25));
+    }
+    
+    .hero-title {
+        /* Damos más espacio vertical al título en el celular */
+        font-size: clamp(2rem, 8vw, 2.5rem);
+    }
+    
+    .hero-summary {
+        /* Aseguramos que el resumen use todo el ancho */
+        max-width: 100%;
+        font-size: 1rem;
+    }
+    
+    /* ------------------------------------------------------------- */
+    /* 2. Ajustes de la Navegación y Gráficos */
+    /* ------------------------------------------------------------- */
+    
+    nav {
+        /* Damos al menú menos margen superior y lateral */
+        margin-top: 0.5rem;
+        padding: 0.8rem 0.6rem;
+    }
+    
+    nav ul {
+        /* En lugar de una lista vertical, hacemos un scroll horizontal para más opciones */
+        display: flex;
+        overflow-x: auto;
+        padding-bottom: 5px; /* Para que el scroll sea visible */
+        gap: 0.6rem;
+    }
+    
+    nav li {
+        /* Aseguramos que los botones no se achiquen */
+        flex-shrink: 0;
+    }
+    
+    nav button {
+        /* Hacemos los botones más compactos para el scroll horizontal */
+        padding: 0.5rem 0.8rem;
+        font-size: 0.9rem;
+    }
+    
+    nav h2, nav .cluster-title {
+        /* Quitamos estos elementos del flujo si usamos un scroll horizontal para simplificar */
+        display: none;
+    }
+    
+    #chart-panel {
+        /* Reducimos el padding general del panel del gráfico */
+        padding: 0.8rem;
+        gap: 1rem;
+    }
+    
+    #chart-meta h2 {
+        /* Ajustamos el tamaño del título de la visualización */
+        font-size: 1.2rem;
+    }
+}
     </style>
 </head>
 <body>
