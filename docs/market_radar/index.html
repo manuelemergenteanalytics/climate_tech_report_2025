@@ -103,8 +103,10 @@ main {
     grid-template-columns: minmax(210px, 240px) minmax(0, 1fr);
     gap: 1.25rem;
     padding: 1.75rem clamp(1rem, 3vw, 2.75rem) 3rem;
-    max-width: 1440px;
-    margin: 0 auto;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    overflow-x: auto;
 }
 nav {
     background: linear-gradient(180deg, rgba(236, 247, 240, 0.96), rgba(225, 241, 233, 0.95));
@@ -197,8 +199,15 @@ nav .cluster-title {
     padding: 0.25rem 0.35rem 0.4rem;
     backdrop-filter: blur(2px);
 }
+#chart-viewer iframe {
+    display: block;
+    width: 100%;
+    min-height: 620px;
+    border: 0;
+    background: transparent;
+}
 #chart-viewer .plotly-graph-div {
-    margin: 0 auto;
+    /* margin: 0 auto; <-- ELIMINAR ESTA LÍNEA */
     border-radius: 10px;
     background: #ffffff;
     box-shadow: 0 10px 24px rgba(31, 109, 74, 0.08);
@@ -248,144 +257,134 @@ footer .footer-logo img {
     display: block;
 }
 @media (max-width: 960px) {
+    /* 1. Estructura Principal: Apilamiento Vertical */
     main {
-        /* Fuerza a que el contenido no exceda el viewport, evitando el scroll horizontal */
-        overflow-x: hidden; 
-        grid-template-columns: 1fr;
+        display: block !important;
+        width: 100vw !important;
+        max-width: 100vw !important;
+        margin: 0 !important;
+        padding: 1.25rem 1rem 2rem !important;
     }
+
+    /* 2. Navegación: Posición Estática */
     nav {
-        position: static;
+        /* Aseguramos que el menú se ajuste al 100% de la columna principal */
+        width: 100% !important;
+        /* Quitamos el ancho mínimo que tenía en escritorio */
+        min-width: 0; 
+        /* Si el contenido interno (la lista de botones) se desborda, usa scroll interno */
+        overflow-x: auto !important; 
+        position: static !important;
+        margin: 0 0 1.25rem !important;
     }
-}
-@media (max-width: 600px) {
-    /* ------------------------------------------------------------- */
-    /* 1. Ajustes del Encabezado y Logo para Celulares */
-    /* ------------------------------------------------------------- */
     
+    /* 3. Corrección Agresiva de Ancho para el Contenedor de Gráficos */
+    
+    /* Panel de Gráficos (#chart-panel) */
+    #chart-panel {
+        min-width: 0; /* Permite que el panel se encoja sin límite */
+        width: 100% !important; 
+        max-width: 100vw !important;
+        margin: 0 !important;
+        overflow-x: auto;
+    }
+
+    /* Visor del Gráfico (#chart-viewer) */
+    #chart-viewer {
+        min-width: 0; 
+        width: 100% !important; 
+        /* CRÍTICO: Permitimos el scroll interno */
+        overflow-x: auto !important; 
+        overflow-y: auto !important;
+        max-width: 100vw !important;
+    }
+
+    #chart-viewer iframe {
+        min-height: 520px;
+    }
+
+}
+
+/* ------------------------------------------------------------- */
+/* MEDIA QUERY: Celulares (max-width: 600px) */
+/* ESTAS REGLAS SON SOLO PARA AJUSTES ESTÉTICOS Y DE USABILIDAD */
+/* ------------------------------------------------------------- */
+@media (max-width: 600px) {
+    /* Encabezado y Logo */
     header {
-        /* Aumentamos un poco el padding superior/inferior para darle aire */
         padding: 2.5rem 1.2rem 2.5rem; 
     }
-    
-    /* Regla crucial para que el logo fluya con el contenido */
+
+    header .hero-header {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    /* Logo (Corrige la superposición) */
     .hero-logo {
-        position: static; /* Esto quita la posición absoluta que causa la superposición */
-        order: -1; /* Lo mueve arriba del título */
+        position: static; 
+        order: -1; 
         margin-bottom: 1.5rem;
         width: 100%; 
         text-align: center;
     }
 
-    /* Ajuste para que el texto ocupe su propio espacio */
-    header .hero-header {
-        /* Hacemos que el encabezado ocupe todo el ancho disponible */
-        flex-direction: column;
-        gap: 0; /* Eliminamos el gap si no es necesario */
-    }
-
-    /* La imagen del logo debe tener un ancho máximo razonable */
     .hero-logo img {
         width: clamp(180px, 60vw, 280px); 
-        height: auto;
-        /* Esto permite que el logo no sea más ancho que la pantalla */
         max-width: 100%; 
     }
-    
+
+    /* Títulos y Resumen */
     .hero-title {
-        /* Damos más espacio vertical al título en el celular */
         font-size: clamp(2rem, 8vw, 2.5rem);
     }
-    
+
     .hero-summary {
-        /* Aseguramos que el resumen use todo el ancho */
         max-width: 100%;
         font-size: 1rem;
     }
     
-    /* ------------------------------------------------------------- */
-    /* 2. Ajustes de la Navegación y Gráficos */
-    /* ------------------------------------------------------------- */
-    
+    /* Navegación (Menú Horizontal Deslizable) */
     nav {
-        /* Damos al menú menos margen superior y lateral */
         margin-top: 0.5rem;
         padding: 0.8rem 0.6rem;
     }
-    
+
     nav ul {
-        /* En lugar de una lista vertical, hacemos un scroll horizontal para más opciones */
         display: flex;
         overflow-x: auto;
-        padding-bottom: 5px; /* Para que el scroll sea visible */
+        padding-bottom: 5px; 
         gap: 0.6rem;
     }
-    
+
     nav li {
-        /* Aseguramos que los botones no se achiquen */
         flex-shrink: 0;
     }
     
     nav button {
-        /* Hacemos los botones más compactos para el scroll horizontal */
         padding: 0.5rem 0.8rem;
         font-size: 0.9rem;
     }
-    
+
     nav h2, nav .cluster-title {
-        /* Quitamos estos elementos del flujo si usamos un scroll horizontal para simplificar */
-        display: none;
+        display: none; /* Oculta títulos para ahorrar espacio */
     }
     
+    /* Panel y Meta */
     #chart-panel {
-        /* Reducimos el padding general del panel del gráfico */
         padding: 0.8rem;
         gap: 1rem;
     }
     
     #chart-meta h2 {
-        /* Ajustamos el tamaño del título de la visualización */
         font-size: 1.2rem;
     }
 
-    /* Regla crucial para la sección del medio */
-    main {
-        /* Bloquea cualquier scroll horizontal no deseado en el layout */
-        overflow-x: hidden; 
-        grid-template-columns: 1fr; /* Mantenemos el apilamiento */
-    }
-
-    /* Panel de Gráficos (Padre de #chart-viewer) */
-    #chart-panel {
-        /* Permite que el contenedor se encoja dentro del 'main' */
-        min-width: 0; 
-        width: 100%; 
-    }
-    
-    /* Visor del Gráfico (Contenedor que carga Plotly) */
-    #chart-viewer {
-        flex: 1;
-        position: relative;
-        /* Permite scroll horizontal *dentro* de este contenedor si el gráfico es muy ancho */
-        overflow-x: auto; 
-        min-width: 0; /* CRUCIAL: Permite que el contenedor se encoja */
-        width: 100%; /* Ocupa el 100% del espacio permitido por el padre */
-        flex-shrink: 1; 
-    }
-
-    /* El DIV generado por Plotly */
-    #chart-viewer .plotly-graph-div {
-        /* CRÍTICO: Sobrescribe cualquier ancho fijo que Plotly haya definido en el archivo HTML */
-        width: 100% !important; 
-        min-width: 100% !important; 
-        height: auto !important; 
-        margin: 0 auto; 
-    }
-    
-    /* Ajustes menores del pie de página */
+    /* Pie de Página */
     footer {
         padding: 1.5rem 1.2rem 2rem; 
     }
-    
+
     footer .footer-logo {
         right: 15px; 
     }
@@ -553,31 +552,6 @@ function showError(error) {
     viewer.appendChild(wrapper);
 }
 
-function executeScripts(container, scripts) {
-    scripts.forEach(script => {
-        const newScript = document.createElement('script');
-        if (script.src) {
-            newScript.src = script.src;
-            newScript.async = false;
-        } else {
-            newScript.textContent = script.textContent;
-        }
-        container.appendChild(newScript);
-    });
-}
-
-function fitPlots() {
-    if (!window.Plotly) return;
-    const nodes = viewer.querySelectorAll('.plotly-graph-div');
-    nodes.forEach(node => {
-        try {
-            Plotly.Plots.resize(node);
-        } catch (err) {
-            console.warn('No se pudo reajustar el gráfico', err);
-        }
-    });
-}
-
 async function loadChart(chart, button) {
     if (chart.id === currentChartId) {
         return;
@@ -603,22 +577,38 @@ async function loadChart(chart, button) {
         }
         const htmlText = await response.text();
         const parser = new DOMParser();
-        const doc = parser.parseFromString(htmlText, 'text/html');
-        const plotDiv = doc.querySelector('.plotly-graph-div');
-        const scripts = Array.from(doc.querySelectorAll('script[type="text/javascript"], script:not([type])'))
-            .filter(s => s.textContent && s.textContent.includes('Plotly.newPlot'));
-
         viewer.innerHTML = '';
-        if (plotDiv) {
-            const clonedDiv = plotDiv.cloneNode(true);
-            viewer.appendChild(clonedDiv);
-        }
-        executeScripts(viewer, scripts);
 
-        requestAnimationFrame(() => {
-            fitPlots();
-            requestAnimationFrame(() => fitPlots());
+        const iframe = document.createElement('iframe');
+        iframe.title = `Visualización: ${chart.label}`;
+        iframe.src = chart.file;
+        iframe.loading = 'lazy';
+        iframe.setAttribute('role', 'presentation');
+        iframe.style.width = '100%';
+        iframe.style.minHeight = '620px';
+        iframe.style.border = '0';
+        iframe.style.background = 'transparent';
+        iframe.addEventListener('load', () => {
+            try {
+                const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
+                if (!iframeDoc) return;
+                const observer = new ResizeObserver(entries => {
+                    for (const entry of entries) {
+                        if (entry.target === iframeDoc.body) {
+                            const newHeight = Math.ceil(entry.contentRect.height);
+                            if (Number.isFinite(newHeight) && newHeight > 0) {
+                                iframe.style.height = `${newHeight + 40}px`;
+                            }
+                        }
+                    }
+                });
+                observer.observe(iframeDoc.body);
+            } catch (err) {
+                console.warn('No se pudo ajustar el iframe', err);
+            }
         });
+
+        viewer.appendChild(iframe);
     } catch (error) {
         console.error('Error cargando gráfico', error);
         showError(error.message || 'Error desconocido');
@@ -635,7 +625,9 @@ if (firstInteractiveButton) {
 }
 
 window.addEventListener('resize', () => {
-    window.requestAnimationFrame(fitPlots);
+    const iframe = viewer.querySelector('iframe');
+    if (!iframe) return;
+    iframe.style.height = 'auto';
 });
     </script>
 </body>
