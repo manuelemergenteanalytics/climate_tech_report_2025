@@ -195,7 +195,7 @@ nav .cluster-title {
     border-radius: 14px;
     background: linear-gradient(135deg, rgba(242, 249, 243, 0.92), rgba(234, 247, 239, 0.92));
     border: 1px solid rgba(31, 109, 74, 0.18);
-    overflow: auto;
+    overflow: hidden;
     padding: 0.25rem 0.35rem 0.4rem;
     backdrop-filter: blur(2px);
 }
@@ -286,16 +286,14 @@ footer .footer-logo img {
         width: 100% !important; 
         max-width: 100vw !important;
         margin: 0 !important;
-        overflow-x: auto;
+        overflow: visible;
     }
 
     /* Visor del Gráfico (#chart-viewer) */
     #chart-viewer {
         min-width: 0; 
         width: 100% !important; 
-        /* CRÍTICO: Permitimos el scroll interno */
-        overflow-x: auto !important; 
-        overflow-y: auto !important;
+        overflow: visible !important;
         max-width: 100vw !important;
     }
 
@@ -312,7 +310,7 @@ footer .footer-logo img {
 @media (max-width: 600px) {
     /* Encabezado y Logo */
     header {
-        padding: 2.5rem 1.2rem 2.5rem; 
+        padding: 2rem 1.2rem 1.75rem; 
     }
 
     header .hero-header {
@@ -324,7 +322,7 @@ footer .footer-logo img {
     .hero-logo {
         position: static; 
         order: -1; 
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
         width: 100%; 
         text-align: center;
     }
@@ -342,6 +340,7 @@ footer .footer-logo img {
     .hero-summary {
         max-width: 100%;
         font-size: 1rem;
+        margin-bottom: 0.5rem;
     }
     
     /* Navegación (Menú Horizontal Deslizable) */
@@ -552,6 +551,107 @@ function showError(error) {
     viewer.appendChild(wrapper);
 }
 
+function injectResponsiveStyles(doc) {
+    if (!doc) {
+        return;
+    }
+    if (doc.getElementById('embedded-plotly-responsive')) {
+        return;
+    }
+    const style = doc.createElement('style');
+    style.id = 'embedded-plotly-responsive';
+    style.textContent = `
+        html, body { margin: 0; padding: 0; overflow: visible !important; }
+        .plotly-graph-div {
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: 0 !important;
+        }
+    `;
+    (doc.head || doc.documentElement).appendChild(style);
+}
+
+function enhancePlotlyContent(doc) {
+    const plotly = doc.defaultView?.Plotly;
+    if (!plotly) {
+        return;
+    }
+    const enhanceDiv = div => {
+        div.style.width = '100%';
+        div.style.maxWidth = '100%';
+        div.style.minWidth = '0';
+        div.style.margin = '0 auto';
+        if (div.data && div.layout) {
+            const baseConfig = div._context ? { ...div._context } : {};
+            baseConfig.scrollZoom = true;
+            baseConfig.responsive = true;
+            baseConfig.displayModeBar = true;
+            if (!baseConfig.doubleClick) {
+                baseConfig.doubleClick = 'reset+autosize';
+            }
+            plotly.react(div, div.data, div.layout, baseConfig)
+                .then(() => plotly.Plots.resize(div))
+                .catch(() => plotly.Plots.resize(div));
+        } else if (div._fullLayout) {
+            plotly.Plots.resize(div);
+        }
+    };
+    const plotDivs = doc.querySelectorAll('.plotly-graph-div');
+    plotDivs.forEach(div => {
+        const ready = () => enhanceDiv(div);
+        if (div.data && div.layout && div._fullLayout) {
+            ready();
+        } else {
+            div.addEventListener('plotly_afterplot', ready, { once: true });
+        }
+    });
+    if (!doc.defaultView.__plotlyResizeListenerAttached) {
+        doc.defaultView.__plotlyResizeListenerAttached = true;
+        doc.defaultView.addEventListener('resize', () => {
+            doc.querySelectorAll('.plotly-graph-div').forEach(div => {
+                if (div && div.data) {
+                    plotly.Plots.resize(div);
+                }
+            });
+        });
+    }
+}
+
+function syncIframeHeight(iframe, doc) {
+    if (!doc) {
+        return;
+    }
+    let lastHeight = 0;
+    const computeHeight = () => {
+        const body = doc.body;
+        const html = doc.documentElement;
+        return Math.max(
+            body?.scrollHeight || 0,
+            body?.offsetHeight || 0,
+            html?.scrollHeight || 0,
+            html?.offsetHeight || 0
+        );
+    };
+    const resize = () => {
+        const nextHeight = computeHeight();
+        if (nextHeight && Math.abs(nextHeight - lastHeight) > 1) {
+            lastHeight = nextHeight;
+            iframe.style.height = `${nextHeight}px`;
+        }
+    };
+    resize();
+    setTimeout(resize, 150);
+    if (typeof ResizeObserver !== 'undefined') {
+        const observer = new ResizeObserver(resize);
+        if (doc.documentElement) {
+            observer.observe(doc.documentElement);
+        }
+        if (doc.body) {
+            observer.observe(doc.body);
+        }
+    }
+}
+
 async function loadChart(chart, button) {
     if (chart.id === currentChartId) {
         return;
@@ -575,8 +675,9 @@ async function loadChart(chart, button) {
         if (!response.ok) {
             throw new Error(`(${response.status}) ${response.statusText}`);
         }
-        const htmlText = await response.text();
-        const parser = new DOMParser();
+        if (response.body && typeof response.body.cancel === 'function') {
+            response.body.cancel();
+        }
         viewer.innerHTML = '';
 
         const iframe = document.createElement('iframe');
@@ -592,17 +693,17 @@ async function loadChart(chart, button) {
             try {
                 const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
                 if (!iframeDoc) return;
-                const observer = new ResizeObserver(entries => {
-                    for (const entry of entries) {
-                        if (entry.target === iframeDoc.body) {
-                            const newHeight = Math.ceil(entry.contentRect.height);
-                            if (Number.isFinite(newHeight) && newHeight > 0) {
-                                iframe.style.height = `${newHeight + 40}px`;
-                            }
-                        }
+                injectResponsiveStyles(iframeDoc);
+                const enhance = () => {
+                    const hasPlot = iframeDoc.querySelector('.plotly-graph-div');
+                    if (!hasPlot) {
+                        setTimeout(enhance, 50);
+                        return;
                     }
-                });
-                observer.observe(iframeDoc.body);
+                    enhancePlotlyContent(iframeDoc);
+                };
+                enhance();
+                syncIframeHeight(iframe, iframeDoc);
             } catch (err) {
                 console.warn('No se pudo ajustar el iframe', err);
             }
