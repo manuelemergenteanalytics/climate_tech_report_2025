@@ -1,16 +1,17 @@
 <html>
 <head>
 	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
 	<script charset="utf-8" src="https://cdn.plot.ly/plotly-3.1.0.min.js" integrity="sha256-Ei4740bWZhaUTQuD6q9yQlgVCMPBz6CZWhevDYPv93A=" crossorigin="anonymous"></script>
 	<style>
 @font-face { font-family: 'Josefin Sans'; src: url('../../JosefinSans-Medium.ttf') format('truetype'); font-weight: 500; font-style: normal; font-display: swap; }
-body { font-family: 'Josefin Sans', 'Helvetica Neue', Arial, sans-serif; background-color: #f6fbf8; color: #164233; }
-.plotly-graph-div { background-color: #ecf7f0; }
+body { font-family: 'Josefin Sans', 'Helvetica Neue', Arial, sans-serif; background-color: #f6fbf8; color: #164233; margin: 0; }
+.plotly-graph-div { background-color: #ecf7f0; width: 100% !important; max-width: 100% !important; margin: 0 auto; }
 </style>
 </head>
 <body>
-	<div id="plotly-b473f010327044f7bbab07cd2f8ab70c" class="plotly-graph-div" style="height:550px; width:950px;"></div>
+	<div id="plotly-b473f010327044f7bbab07cd2f8ab70c" class="plotly-graph-div" style="height:550px; width:100%;"></div>
 	<script type="text/javascript">
 		window.PLOTLYENV=window.PLOTLYENV || {};
 		if (document.getElementById("plotly-b473f010327044f7bbab07cd2f8ab70c")) {
@@ -49,21 +50,21 @@ body { font-family: 'Josefin Sans', 'Helvetica Neue', Arial, sans-serif; backgro
 				        },
 				        "xaxis": "x",
 				        "y": [
-				            "agro_food_beverage",
-				            "retail_consumer_services",
-				            "industrial_manufacturing",
-				            "ict_digital_media",
-				            "transport_mobility_logistics",
-				            "construction_infrastructure_realestate",
-				            "finance_insurance_capital",
-				            "oil_gas",
-				            "energy_power_utilities",
-				            "healthcare_pharma_biotech",
-				            "hospitality_tourism_leisure",
-				            "mining_materials",
-				            "professional_services_consulting",
-				            "public_social_education",
-				            "environmental_circular_services"
+				            "Agro & alimentos",
+				            "Retail",
+				            "Manufactura",
+				            "ICT & telecom",
+				            "Transporte",
+				            "Construcción",
+				            "Finanzas",
+				            "Oil & gas",
+				            "Energía",
+				            "Salud & biotecnología",
+				            "Hospitalidad & turismo",
+				            "Minería",
+				            "Servicios profesionales",
+				            "Sector público & educación",
+				            "Servicios ambientales"
 				        ],
 				        "yaxis": "y",
 				        "type": "bar"
@@ -899,7 +900,10 @@ body { font-family: 'Josefin Sans', 'Helvetica Neue', Arial, sans-serif; backgro
 				    }
 				},
 				{
-				    "responsive": true
+				    "responsive": true,
+				    "scrollZoom": true,
+				    "displayModeBar": true,
+				    "doubleClick": "reset+autosize"
 				}
 			);
 		}

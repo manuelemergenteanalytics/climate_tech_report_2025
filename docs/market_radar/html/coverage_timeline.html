@@ -1,16 +1,17 @@
 <html>
 <head>
 	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
 	<script charset="utf-8" src="https://cdn.plot.ly/plotly-3.1.0.min.js" integrity="sha256-Ei4740bWZhaUTQuD6q9yQlgVCMPBz6CZWhevDYPv93A=" crossorigin="anonymous"></script>
 	<style>
 @font-face { font-family: 'Josefin Sans'; src: url('../../JosefinSans-Medium.ttf') format('truetype'); font-weight: 500; font-style: normal; font-display: swap; }
-body { font-family: 'Josefin Sans', 'Helvetica Neue', Arial, sans-serif; background-color: #f6fbf8; color: #164233; }
-.plotly-graph-div { background-color: #ecf7f0; }
+body { font-family: 'Josefin Sans', 'Helvetica Neue', Arial, sans-serif; background-color: #f6fbf8; color: #164233; margin: 0; }
+.plotly-graph-div { background-color: #ecf7f0; width: 100% !important; max-width: 100% !important; margin: 0 auto; }
 </style>
 </head>
 <body>
-	<div id="plotly-e9ce1d0a34c648c992d186135b7339f5" class="plotly-graph-div" style="height:520px; width:1000px;"></div>
+	<div id="plotly-e9ce1d0a34c648c992d186135b7339f5" class="plotly-graph-div" style="height:520px; width:100%;"></div>
 	<script type="text/javascript">
 		window.PLOTLYENV=window.PLOTLYENV || {};
 		if (document.getElementById("plotly-e9ce1d0a34c648c992d186135b7339f5")) {
@@ -23,8 +24,8 @@ body { font-family: 'Josefin Sans', 'Helvetica Neue', Arial, sans-serif; backgro
 				            "bdata": "AAAAAAAAMEAAAAAAAAAYQAAAAAAAACJAAAAAAAAAHEAAAAAAAAAoQAAAAAAAABhAAAAAAAAAJkAAAAAAAAAUQAAAAAAAACRAAAAAAAAAIEAAAAAAAAAgQAAAAAAAABxAAAAAAAAAIEAAAAAAAAAIQAAAAAAAADNA8KfGSzedGEAAAAAAAAAiQAAAAAAAACxAAAAAAAAAFEAAAAAAAAAYQAAAAAAAAPA/AAAAAAAAJEAAAAAAAAAdQFtCPujZxABA",
 				            "shape": "24, 1"
 				        },
-				        "hovertemplate": "Industria=agro_food_beverage<br>Mes=%{x}<br># de señales=%{y}<br>total_strength=%{customdata[0]:.2f}<extra></extra>",
-				        "legendgroup": "agro_food_beverage",
+				        "hovertemplate": "Industria=Agro & alimentos<br>Mes=%{x}<br># de señales=%{y}<br>total_strength=%{customdata[0]:.2f}<extra></extra>",
+				        "legendgroup": "Agro & alimentos",
 				        "line": {
 				            "color": "#0b6a39",
 				            "dash": "solid",
@@ -40,7 +41,7 @@ body { font-family: 'Josefin Sans', 'Helvetica Neue', Arial, sans-serif; backgro
 				            }
 				        },
 				        "mode": "lines+markers",
-				        "name": "agro_food_beverage",
+				        "name": "Agro & alimentos",
 				        "orientation": "v",
 				        "showlegend": true,
 				        "x": [
@@ -83,8 +84,8 @@ body { font-family: 'Josefin Sans', 'Helvetica Neue', Arial, sans-serif; backgro
 				            "bdata": "AAAAAAAAEEAAAAAAAAAQQAAAAAAAABxAAAAAAAAAEEAAAAAAAAAgQAAAAAAAABhAAAAAAAAACEAAAAAAAAAAQAAAAAAAABhAAAAAAAAAHEAAAAAAAAAkQAAAAAAAABRAAAAAAAAAAEAAAAAAAADwPwAAAAAAABxAAAAAAAAACEAAAAAAAAAUQAAAAAAAAAhAAAAAAAAAFEAAAAAAAAAQQAAAAAAAABRAAAAAAAAAFECTGARWDq0IQAAAAAAAABRA",
 				            "shape": "24, 1"
 				        },
-				        "hovertemplate": "Industria=construction_infrastructure_realestate<br>Mes=%{x}<br># de señales=%{y}<br>total_strength=%{customdata[0]:.2f}<extra></extra>",
-				        "legendgroup": "construction_infrastructure_realestate",
+				        "hovertemplate": "Industria=Construcción<br>Mes=%{x}<br># de señales=%{y}<br>total_strength=%{customdata[0]:.2f}<extra></extra>",
+				        "legendgroup": "Construcción",
 				        "line": {
 				            "color": "#1b8a6b",
 				            "dash": "solid",
@@ -100,7 +101,7 @@ body { font-family: 'Josefin Sans', 'Helvetica Neue', Arial, sans-serif; backgro
 				            }
 				        },
 				        "mode": "lines+markers",
-				        "name": "construction_infrastructure_realestate",
+				        "name": "Construcción",
 				        "orientation": "v",
 				        "showlegend": true,
 				        "x": [
@@ -143,8 +144,8 @@ body { font-family: 'Josefin Sans', 'Helvetica Neue', Arial, sans-serif; backgro
 				            "bdata": "AAAAAAAAAEAAAAAAAAAAQAAAAAAAAPA/AAAAAAAACEAAAAAAAAAAQAAAAAAAAABAAAAAAAAA8D8AAAAAAAAYQAAAAAAAAPA/AAAAAAAA8D/4U+Olm4wIQAAAAAAAAPA/AAAAAAAAAEAAAAAAAADwPwAAAAAAAABAAAAAAAAA8D/6fmq8dJOxP/hT46WbjAhAAAAAAAAAEEAAAAAAAAAAQAAAAAAAAPA/",
 				            "shape": "21, 1"
 				        },
-				        "hovertemplate": "Industria=finance_insurance_capital<br>Mes=%{x}<br># de señales=%{y}<br>total_strength=%{customdata[0]:.2f}<extra></extra>",
-				        "legendgroup": "finance_insurance_capital",
+				        "hovertemplate": "Industria=Finanzas<br>Mes=%{x}<br># de señales=%{y}<br>total_strength=%{customdata[0]:.2f}<extra></extra>",
+				        "legendgroup": "Finanzas",
 				        "line": {
 				            "color": "#2f9d8f",
 				            "dash": "solid",
@@ -160,7 +161,7 @@ body { font-family: 'Josefin Sans', 'Helvetica Neue', Arial, sans-serif; backgro
 				            }
 				        },
 				        "mode": "lines+markers",
-				        "name": "finance_insurance_capital",
+				        "name": "Finanzas",
 				        "orientation": "v",
 				        "showlegend": true,
 				        "x": [
@@ -200,8 +201,8 @@ body { font-family: 'Josefin Sans', 'Helvetica Neue', Arial, sans-serif; backgro
 				            "bdata": "AAAAAAAAJkAAAAAAAAAIQAAAAAAAABhAAAAAAAAAJEAAAAAAAAAiQAAAAAAAACpAAAAAAAAAIkAAAAAAAAAkQAAAAAAAAChAAAAAAAAALkAAAAAAAAAsQAAAAAAAACpAAAAAAAAAJEAAAAAAAAAUQAAAAAAAABxAmbuWkA8OIEAAAAAAAAAqQAAAAAAAABxA/tR46SYjIkAAAAAAAAAuQG4Sg8DKgRBAAAAAAAAAEEAUrkfhepQMQOtRuB6FqwBA",
 				            "shape": "24, 1"
 				        },
-				        "hovertemplate": "Industria=ict_digital_media<br>Mes=%{x}<br># de señales=%{y}<br>total_strength=%{customdata[0]:.2f}<extra></extra>",
-				        "legendgroup": "ict_digital_media",
+				        "hovertemplate": "Industria=ICT & telecom<br>Mes=%{x}<br># de señales=%{y}<br>total_strength=%{customdata[0]:.2f}<extra></extra>",
+				        "legendgroup": "ICT & telecom",
 				        "line": {
 				            "color": "#48b597",
 				            "dash": "solid",
@@ -217,7 +218,7 @@ body { font-family: 'Josefin Sans', 'Helvetica Neue', Arial, sans-serif; backgro
 				            }
 				        },
 				        "mode": "lines+markers",
-				        "name": "ict_digital_media",
+				        "name": "ICT & telecom",
 				        "orientation": "v",
 				        "showlegend": true,
 				        "x": [
@@ -260,8 +261,8 @@ body { font-family: 'Josefin Sans', 'Helvetica Neue', Arial, sans-serif; backgro
 				            "bdata": "AAAAAAAACEAAAAAAAAAAQAAAAAAAAPA/AAAAAAAAFEAAAAAAAAAmQAAAAAAAABhAAAAAAAAAKEAAAAAAAAAcQAAAAAAAACJAAAAAAAAALkAAAAAAAAAUQAAAAAAAABhAAAAAAAAAJkD4U+Olm4wQQPyp8dJNRhRAAAAAAAAAGEAuIR/0bGIUQP7UeOkmIyRA9ihcj8JxIEDrUbgeheMQQFK4HoXr3SJASOF6FK5PIUCQoPgx5v4aQGzn+6nxAg5A",
 				            "shape": "24, 1"
 				        },
-				        "hovertemplate": "Industria=industrial_manufacturing<br>Mes=%{x}<br># de señales=%{y}<br>total_strength=%{customdata[0]:.2f}<extra></extra>",
-				        "legendgroup": "industrial_manufacturing",
+				        "hovertemplate": "Industria=Manufactura<br>Mes=%{x}<br># de señales=%{y}<br>total_strength=%{customdata[0]:.2f}<extra></extra>",
+				        "legendgroup": "Manufactura",
 				        "line": {
 				            "color": "#70c1b3",
 				            "dash": "solid",
@@ -277,7 +278,7 @@ body { font-family: 'Josefin Sans', 'Helvetica Neue', Arial, sans-serif; backgro
 				            }
 				        },
 				        "mode": "lines+markers",
-				        "name": "industrial_manufacturing",
+				        "name": "Manufactura",
 				        "orientation": "v",
 				        "showlegend": true,
 				        "x": [
@@ -320,8 +321,8 @@ body { font-family: 'Josefin Sans', 'Helvetica Neue', Arial, sans-serif; backgro
 				            "bdata": "AAAAAAAACEAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAEAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAEAAAAAAAAAAQAAAAAAAAPA/AAAAAAAAGEAAAAAAAAAQQAAAAAAAABBAAAAAAAAAAEAAAAAAAAAAQAAAAAAAAAhAAAAAAAAACEAAAAAAAADwPx1aZDvfT/I/AAAAAAAAAEDgT42XblLXPx6F61G4Htc/",
 				            "shape": "21, 1"
 				        },
-				        "hovertemplate": "Industria=oil_gas<br>Mes=%{x}<br># de señales=%{y}<br>total_strength=%{customdata[0]:.2f}<extra></extra>",
-				        "legendgroup": "oil_gas",
+				        "hovertemplate": "Industria=Oil & gas<br>Mes=%{x}<br># de señales=%{y}<br>total_strength=%{customdata[0]:.2f}<extra></extra>",
+				        "legendgroup": "Oil & gas",
 				        "line": {
 				            "color": "#8ddbb0",
 				            "dash": "solid",
@@ -337,7 +338,7 @@ body { font-family: 'Josefin Sans', 'Helvetica Neue', Arial, sans-serif; backgro
 				            }
 				        },
 				        "mode": "lines+markers",
-				        "name": "oil_gas",
+				        "name": "Oil & gas",
 				        "orientation": "v",
 				        "showlegend": true,
 				        "x": [
@@ -377,8 +378,8 @@ body { font-family: 'Josefin Sans', 'Helvetica Neue', Arial, sans-serif; backgro
 				            "bdata": "AAAAAAAAJEAAAAAAAAAyQAAAAAAAADtAAAAAAAAANEAAAAAAAAAuQAAAAAAAADVAAAAAAAAAOEAAAAAAAAA1QAAAAAAAADhAAAAAAAAAO0AAAAAAAAAuQAAAAAAAADRAAAAAAAAAM0AAAAAAAAAuQAAAAAAAADNAAAAAAAAALkAAAAAAAAAqQAAAAAAAADZAAAAAAAAAM0Bcj8L1KGwmQAAAAAAAADRAAAAAAAAAIEApXI/C9bgkQAAAAAAAABBA",
 				            "shape": "24, 1"
 				        },
-				        "hovertemplate": "Industria=retail_consumer_services<br>Mes=%{x}<br># de señales=%{y}<br>total_strength=%{customdata[0]:.2f}<extra></extra>",
-				        "legendgroup": "retail_consumer_services",
+				        "hovertemplate": "Industria=Retail<br>Mes=%{x}<br># de señales=%{y}<br>total_strength=%{customdata[0]:.2f}<extra></extra>",
+				        "legendgroup": "Retail",
 				        "line": {
 				            "color": "#acd39b",
 				            "dash": "solid",
@@ -394,7 +395,7 @@ body { font-family: 'Josefin Sans', 'Helvetica Neue', Arial, sans-serif; backgro
 				            }
 				        },
 				        "mode": "lines+markers",
-				        "name": "retail_consumer_services",
+				        "name": "Retail",
 				        "orientation": "v",
 				        "showlegend": true,
 				        "x": [
@@ -437,8 +438,8 @@ body { font-family: 'Josefin Sans', 'Helvetica Neue', Arial, sans-serif; backgro
 				            "bdata": "AAAAAAAAFEAAAAAAAAAQQAAAAAAAACRAAAAAAAAAGEAAAAAAAAAIQAAAAAAAABBAAAAAAAAAEEAAAAAAAAAQQAAAAAAAAABAAAAAAAAAGEAAAAAAAAAYQAAAAAAAAAhAAAAAAAAA8D8AAAAAAAAUQPyp8dJNRhBAAAAAAAAAEEAAAAAAAAAcQAAAAAAAABBAAAAAAAAA8D+kcD0K1+MCQAAAAAAAACBAfT81XrrRBkCfGi/dJNb1Pw==",
 				            "shape": "23, 1"
 				        },
-				        "hovertemplate": "Industria=transport_mobility_logistics<br>Mes=%{x}<br># de señales=%{y}<br>total_strength=%{customdata[0]:.2f}<extra></extra>",
-				        "legendgroup": "transport_mobility_logistics",
+				        "hovertemplate": "Industria=Transporte<br>Mes=%{x}<br># de señales=%{y}<br>total_strength=%{customdata[0]:.2f}<extra></extra>",
+				        "legendgroup": "Transporte",
 				        "line": {
 				            "color": "#6c9f4c",
 				            "dash": "solid",
@@ -454,7 +455,7 @@ body { font-family: 'Josefin Sans', 'Helvetica Neue', Arial, sans-serif; backgro
 				            }
 				        },
 				        "mode": "lines+markers",
-				        "name": "transport_mobility_logistics",
+				        "name": "Transporte",
 				        "orientation": "v",
 				        "showlegend": true,
 				        "x": [
@@ -1324,7 +1325,10 @@ body { font-family: 'Josefin Sans', 'Helvetica Neue', Arial, sans-serif; backgro
 				    }
 				},
 				{
-				    "responsive": true
+				    "responsive": true,
+				    "scrollZoom": true,
+				    "displayModeBar": true,
+				    "doubleClick": "reset+autosize"
 				}
 			);
 		}

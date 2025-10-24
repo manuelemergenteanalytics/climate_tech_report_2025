@@ -202,7 +202,7 @@ nav .cluster-title {
 #chart-viewer iframe {
     display: block;
     width: 100%;
-    min-height: 620px;
+    min-height: 420px;
     border: 0;
     background: transparent;
 }
@@ -298,7 +298,7 @@ footer .footer-logo img {
     }
 
     #chart-viewer iframe {
-        min-height: 520px;
+        min-height: 460px;
     }
 
 }
@@ -310,7 +310,7 @@ footer .footer-logo img {
 @media (max-width: 600px) {
     /* Encabezado y Logo */
     header {
-        padding: 2rem 1.2rem 1.75rem; 
+        padding: 1.6rem 1.1rem 1.3rem; 
     }
 
     header .hero-header {
@@ -322,13 +322,13 @@ footer .footer-logo img {
     .hero-logo {
         position: static; 
         order: -1; 
-        margin-bottom: 1rem;
+        margin-bottom: 0.75rem;
         width: 100%; 
         text-align: center;
     }
 
     .hero-logo img {
-        width: clamp(180px, 60vw, 280px); 
+        width: clamp(170px, 52vw, 240px); 
         max-width: 100%; 
     }
 
@@ -340,7 +340,7 @@ footer .footer-logo img {
     .hero-summary {
         max-width: 100%;
         font-size: 1rem;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.3rem;
     }
     
     /* Navegación (Menú Horizontal Deslizable) */
@@ -430,18 +430,21 @@ const charts = [
         label: 'Resumen general',
         description: 'Instantánea de cobertura y volumen de señales dentro del universo de compañías analizadas.',
         file: 'html/coverage_summary.html',
+        height: 520,
     },
     {
         id: 'total-signal-summary',
         label: 'Indicadores globales',
         description: 'Indicadores agregados sobre intensidad y distribución de señales climáticas en LATAM.',
         file: 'html/total_signal_summary.html',
+        height: 520,
     },
     {
         id: 'signal-mix-sankey',
         label: 'Mix de señales',
         description: 'Flujo entre el universo de compañías y combinaciones de certificaciones o noticias climáticas.',
         file: 'html/signal_mix_sankey.html',
+        height: 600,
     },
     {
         cluster: 'Cobertura sectorial'
@@ -451,30 +454,35 @@ const charts = [
         label: 'Ranking por industria',
         description: 'Volumen ponderado de señales y recuento de compañías por vertical industrial.',
         file: 'html/coverage_indicators.html',
+        height: 550,
     },
     {
         id: 'coverage-country-industry',
         label: 'Heatmap país-industria',
         description: 'Cruce entre industrias y países para identificar focos de actividad climática.',
         file: 'html/coverage_country_industry.html',
+        height: 600,
     },
     {
         id: 'coverage-timeline',
         label: 'Evolución temporal',
         description: 'Tendencias mensuales de señales por industria para detectar aceleraciones o desaceleraciones.',
         file: 'html/coverage_timeline.html',
+        height: 520,
     },
     {
         id: 'coverage-gaps',
         label: 'Brechas de cobertura',
         description: 'Comparativa de intensidad y cobertura para priorizar industrias con potencial latente.',
         file: 'html/coverage_gaps.html',
+        height: 600,
     },
     {
         id: 'country-fact-sheet',
         label: 'Ficha por país',
         description: 'Detalle de indicadores y cobertura por país para contextualizar oportunidades.',
         file: 'html/country_fact_sheet.html',
+        height: 750,
     },
     {
         cluster: 'Enfoque geográfico'
@@ -484,6 +492,7 @@ const charts = [
         label: 'Intensidad por país',
         description: 'Mapa temático que sintetiza la intensidad de señales y compañías detectadas en cada país.',
         file: 'html/map_intensity.html',
+        height: 720,
     },
     {
         cluster: 'Profundización en señales'
@@ -493,12 +502,14 @@ const charts = [
         label: 'Ranking de compañías',
         description: 'Listado ponderado de empresas líderes por país, con detalle de señales y sectores.',
         file: 'html/ranking_companies.html',
+        height: 800,
     },
     {
         id: 'signal-type-distribution',
         label: 'Tipos de señales',
         description: 'Distribución de señales por fuente (UNGC, B Corp, SBTi, prensa especializada).',
         file: 'html/signal_type_distribution.html',
+        height: 450,
     }
 ];
 
@@ -551,98 +562,61 @@ function showError(error) {
     viewer.appendChild(wrapper);
 }
 
-function injectResponsiveStyles(doc) {
-    if (!doc) {
-        return;
+function clearLoadingState() {
+    const loader = viewer.querySelector('.loading-state');
+    if (loader) {
+        loader.remove();
     }
-    if (doc.getElementById('embedded-plotly-responsive')) {
-        return;
-    }
-    const style = doc.createElement('style');
-    style.id = 'embedded-plotly-responsive';
-    style.textContent = `
-        html, body { margin: 0; padding: 0; overflow: visible !important; }
-        .plotly-graph-div {
-            width: 100% !important;
-            max-width: 100% !important;
-            min-width: 0 !important;
-        }
-    `;
-    (doc.head || doc.documentElement).appendChild(style);
 }
 
-function enhancePlotlyContent(doc) {
+function resizePlots(doc) {
     const plotly = doc.defaultView?.Plotly;
     if (!plotly) {
         return;
     }
-    const enhanceDiv = div => {
-        div.style.width = '100%';
-        div.style.maxWidth = '100%';
-        div.style.minWidth = '0';
-        div.style.margin = '0 auto';
-        if (div.data && div.layout) {
-            const baseConfig = div._context ? { ...div._context } : {};
-            baseConfig.scrollZoom = true;
-            baseConfig.responsive = true;
-            baseConfig.displayModeBar = true;
-            if (!baseConfig.doubleClick) {
-                baseConfig.doubleClick = 'reset+autosize';
-            }
-            plotly.react(div, div.data, div.layout, baseConfig)
-                .then(() => plotly.Plots.resize(div))
-                .catch(() => plotly.Plots.resize(div));
-        } else if (div._fullLayout) {
-            plotly.Plots.resize(div);
-        }
-    };
     const plotDivs = doc.querySelectorAll('.plotly-graph-div');
     plotDivs.forEach(div => {
-        const ready = () => enhanceDiv(div);
-        if (div.data && div.layout && div._fullLayout) {
-            ready();
-        } else {
-            div.addEventListener('plotly_afterplot', ready, { once: true });
+        try {
+            plotly.Plots.resize(div);
+        } catch (err) {
+            console.warn('No se pudo redimensionar el gráfico', err);
         }
     });
-    if (!doc.defaultView.__plotlyResizeListenerAttached) {
-        doc.defaultView.__plotlyResizeListenerAttached = true;
-        doc.defaultView.addEventListener('resize', () => {
-            doc.querySelectorAll('.plotly-graph-div').forEach(div => {
-                if (div && div.data) {
-                    plotly.Plots.resize(div);
-                }
-            });
-        });
-    }
 }
 
-function syncIframeHeight(iframe, doc) {
+function syncIframeHeight(iframe, doc, baseline) {
     if (!doc) {
         return;
     }
+    const base = Math.max(baseline || 560, 360);
+    const buffer = 32;
+    const max = Math.max(base + 320, Math.round(base * 1.6));
     let lastHeight = 0;
-    const computeHeight = () => {
+
+    const measure = () => {
         const body = doc.body;
         const html = doc.documentElement;
-        return Math.max(
+        const raw = Math.max(
             body?.scrollHeight || 0,
             body?.offsetHeight || 0,
             html?.scrollHeight || 0,
             html?.offsetHeight || 0
         );
-    };
-    const resize = () => {
-        const nextHeight = computeHeight();
-        if (nextHeight && Math.abs(nextHeight - lastHeight) > 1) {
-            lastHeight = nextHeight;
-            iframe.style.height = `${nextHeight}px`;
+        const target = Math.min(Math.max(raw + buffer, base), max);
+        if (Math.abs(target - lastHeight) > 2) {
+            lastHeight = target;
+            iframe.style.height = `${target}px`;
         }
     };
-    resize();
-    setTimeout(resize, 150);
+
+    iframe._baselineHeight = base;
+    iframe._measureHeight = measure;
+    measure();
+    setTimeout(measure, 220);
+
     if (typeof ResizeObserver !== 'undefined') {
-        const observer = new ResizeObserver(resize);
+        const observer = new ResizeObserver(measure);
+        iframe._heightObserver = observer;
         if (doc.documentElement) {
             observer.observe(doc.documentElement);
         }
@@ -652,7 +626,7 @@ function syncIframeHeight(iframe, doc) {
     }
 }
 
-async function loadChart(chart, button) {
+function loadChart(chart, button) {
     if (chart.id === currentChartId) {
         return;
     }
@@ -670,50 +644,45 @@ async function loadChart(chart, button) {
 
     showLoading();
 
-    try {
-        const response = await fetch(chart.file, { cache: 'no-store' });
-        if (!response.ok) {
-            throw new Error(`(${response.status}) ${response.statusText}`);
-        }
-        if (response.body && typeof response.body.cancel === 'function') {
-            response.body.cancel();
-        }
-        viewer.innerHTML = '';
+    const iframe = document.createElement('iframe');
+    iframe.title = `Visualización: ${chart.label}`;
+    iframe.loading = 'lazy';
+    iframe.setAttribute('role', 'presentation');
+    iframe.style.width = '100%';
+    iframe.style.minHeight = '420px';
+    iframe.style.border = '0';
+    iframe.style.background = 'transparent';
+    iframe.style.visibility = 'hidden';
 
-        const iframe = document.createElement('iframe');
-        iframe.title = `Visualización: ${chart.label}`;
-        iframe.src = chart.file;
-        iframe.loading = 'lazy';
-        iframe.setAttribute('role', 'presentation');
-        iframe.style.width = '100%';
-        iframe.style.minHeight = '620px';
-        iframe.style.border = '0';
-        iframe.style.background = 'transparent';
-        iframe.addEventListener('load', () => {
-            try {
-                const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
-                if (!iframeDoc) return;
-                injectResponsiveStyles(iframeDoc);
-                const enhance = () => {
-                    const hasPlot = iframeDoc.querySelector('.plotly-graph-div');
-                    if (!hasPlot) {
-                        setTimeout(enhance, 50);
-                        return;
-                    }
-                    enhancePlotlyContent(iframeDoc);
-                };
-                enhance();
-                syncIframeHeight(iframe, iframeDoc);
-            } catch (err) {
-                console.warn('No se pudo ajustar el iframe', err);
+    const baseline = chart.height;
+
+    iframe.addEventListener('load', () => {
+        try {
+            const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
+            clearLoadingState();
+            iframe.style.visibility = 'visible';
+            if (!iframeDoc) {
+                iframe.style.height = `${Math.max(baseline || 560, 420)}px`;
+                return;
             }
-        });
+            requestAnimationFrame(() => {
+                resizePlots(iframeDoc);
+                syncIframeHeight(iframe, iframeDoc, baseline);
+            });
+        } catch (err) {
+            console.warn('No se pudo preparar la visualización', err);
+            iframe.style.visibility = 'visible';
+            iframe.style.height = `${Math.max(baseline || 560, 420)}px`;
+        }
+    });
 
-        viewer.appendChild(iframe);
-    } catch (error) {
-        console.error('Error cargando gráfico', error);
-        showError(error.message || 'Error desconocido');
-    }
+    iframe.addEventListener('error', () => {
+        console.error('Fallo al cargar el iframe', chart.file);
+        showError('No se pudo cargar el archivo del gráfico.');
+    });
+
+    iframe.src = chart.file;
+    viewer.appendChild(iframe);
 }
 
 createNav();
@@ -727,8 +696,17 @@ if (firstInteractiveButton) {
 
 window.addEventListener('resize', () => {
     const iframe = viewer.querySelector('iframe');
-    if (!iframe) return;
-    iframe.style.height = 'auto';
+    if (!iframe) {
+        return;
+    }
+    const doc = iframe.contentDocument || iframe.contentWindow?.document;
+    if (!doc) {
+        return;
+    }
+    resizePlots(doc);
+    if (typeof iframe._measureHeight === 'function') {
+        requestAnimationFrame(() => iframe._measureHeight());
+    }
 });
     </script>
 </body>
