@@ -1,17 +1,16 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
 	<script charset="utf-8" src="https://cdn.plot.ly/plotly-3.1.0.min.js" integrity="sha256-Ei4740bWZhaUTQuD6q9yQlgVCMPBz6CZWhevDYPv93A=" crossorigin="anonymous"></script>
 	<style>
 @font-face { font-family: 'Josefin Sans'; src: url('../../JosefinSans-Medium.ttf') format('truetype'); font-weight: 500; font-style: normal; font-display: swap; }
-body { font-family: 'Josefin Sans', 'Helvetica Neue', Arial, sans-serif; background-color: #f6fbf8; color: #164233; margin: 0; }
-.plotly-graph-div { background-color: #ecf7f0; width: 100% !important; max-width: 100% !important; margin: 0 auto; }
+body { font-family: 'Josefin Sans', 'Helvetica Neue', Arial, sans-serif; background-color: #f6fbf8; color: #164233; }
+.plotly-graph-div { background-color: #ecf7f0; }
 </style>
 </head>
 <body>
-	<div id="plotly-6c1bb3539cf94db19d70879f1a47760c" class="plotly-graph-div" style="height:600px; width:100%;"></div>
+	<div id="plotly-6c1bb3539cf94db19d70879f1a47760c" class="plotly-graph-div" style="height:600px; width:950px;"></div>
 	<script type="text/javascript">
 		window.PLOTLYENV=window.PLOTLYENV || {};
 		if (document.getElementById("plotly-6c1bb3539cf94db19d70879f1a47760c")) {
@@ -59,23 +58,23 @@ body { font-family: 'Josefin Sans', 'Helvetica Neue', Arial, sans-serif; backgro
 				            "bdata": "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",
 				            "shape": "7, 15, 2"
 				        },
-				        "hovertemplate": "industria=%{x}<br>país=%{y}<br>señales=%{z:.0f}<br>empresas únicas=%{customdata[0]:.0f}<br>Σ score=%{customdata[1]:.2f}<extra></extra>",
+				        "hovertemplate": "industria=%{x}<br>país=%{y}<br>señales=%{z:.0f}<br>empresas únicas=%{customdata[0]:.0f}<br>score ponderado=%{customdata[1]:.2f}<extra></extra>",
 				        "x": [
 				            "Agro & alimentos",
-				            "Construcción",
-				            "Energía",
-				            "Servicios ambientales",
-				            "Finanzas",
-				            "Salud & biotecnología",
-				            "Hospitalidad & turismo",
-				            "ICT & telecom",
-				            "Manufactura",
-				            "Minería",
-				            "Oil & gas",
-				            "Servicios profesionales",
-				            "Sector público & educación",
-				            "Retail",
-				            "Transporte"
+				            "Construcción, Infraestructura<br>& Bienes Raíces",
+				            "Energía & Servicios Públicos",
+				            "Servicios ambientales & circulares",
+				            "Finanzas, Seguros & Capital",
+				            "Salud, Pharma & Biotech",
+				            "Hospitalidad, Turismo & Ocio",
+				            "TIC, Digital & Medios",
+				            "Manufactura industrial",
+				            "Minería & materiales básicos",
+				            "Petróleo & gas",
+				            "Servicios profesionales & técnicos",
+				            "Sector público, social & educación",
+				            "Retail & servicios al consumidor",
+				            "Transporte, Movilidad & Logística"
 				        ],
 				        "xgap": 1,
 				        "y": [
@@ -896,10 +895,7 @@ body { font-family: 'Josefin Sans', 'Helvetica Neue', Arial, sans-serif; backgro
 				    }
 				},
 				{
-				    "responsive": true,
-				    "scrollZoom": true,
-				    "displayModeBar": true,
-				    "doubleClick": "reset+autosize"
+				    "responsive": true
 				}
 			);
 		}
