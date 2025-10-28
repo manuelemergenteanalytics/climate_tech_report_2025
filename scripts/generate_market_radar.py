@@ -14,6 +14,35 @@ import numpy as np
 import json
 from uuid import uuid4
 
+from market_radar_theme import (
+    apply_market_radar_theme,
+    MARKET_RADAR_INLINE_STYLE,
+    MARKET_RADAR_SEQUENTIAL,
+    MARKER_BORDER_COLOR,
+    BAR_LINE_COLOR,
+    COVERAGE_INDICATORS_BAR_COLOR,
+    SIGNAL_TYPE_BAR_COLOR,
+    COUNTRY_CATEGORY_ORDER,
+    INDUSTRY_CATEGORY_ORDER,
+    SIGNAL_TYPE_ORDER,
+    build_country_color_map,
+    build_industry_color_map,
+    build_signal_type_color_map,
+    ordered_categories,
+    sankey_node_colors,
+    sankey_link_colors,
+    SANKEY_NODE_PAD,
+    SANKEY_NODE_THICKNESS,
+    SANKEY_NODE_LINE_COLOR,
+    SANKEY_NODE_LINE_WIDTH,
+    colorbar_defaults,
+    PRIMARY_FONT,
+    PRIMARY_TEXT_COLOR,
+    friendly_industry_label,
+    apply_industry_labels,
+    wrap_label,
+)
+
 try:
     import networkx as nx  # type: ignore
 except ModuleNotFoundError:  # pragma: no cover - optional dependency
@@ -70,6 +99,9 @@ INDUSTRY_SIMPLIFY = {
     "water_waste_circularity": "water_waste_circularity",
     "chemicals_materials": "chemicals_materials",
 }
+
+
+apply_market_radar_theme()
 
 
 def _load_keywords(path: Path) -> List[str]:
@@ -203,16 +235,21 @@ def heatmap_country_industry(companies: pd.DataFrame) -> Path:
     if pivot.empty:
         pivot = pd.DataFrame({"country": [], "industry": [], "total_score": []})
 
+    pivot["industry_display"] = apply_industry_labels(pivot["industry"])
+
     fig = px.density_heatmap(
         pivot,
-        x="industry",
+        x="industry_display",
         y="country",
         z="total_score",
-        color_continuous_scale="Tealrose",
+        color_continuous_scale=[step[1] for step in MARKET_RADAR_SEQUENTIAL],
         title="Intensidad de señales por país e industria",
-        labels={"total_score": "Σ score empresas"},
+        labels={"total_score": "Σ score empresas", "industry_display": "Industria"},
     )
-    fig.update_layout(width=900, height=600, yaxis=dict(categoryorder="total ascending"))
+    fig.update_coloraxes(
+        colorscale=MARKET_RADAR_SEQUENTIAL, colorbar=colorbar_defaults("Σ score empresas")
+    )
+    fig.update_layout(title=None, width=860, height=580, yaxis=dict(categoryorder="total ascending"))
 
     path = OUTPUT_DIR / "heatmap_country_industry.html"
     return _write_plotly_html(fig, path)
@@ -232,6 +269,9 @@ def timeline_signals(events: pd.DataFrame) -> Path:
     if timeline.empty:
         timeline = pd.DataFrame({"month": [], "signal_type": [], "companies": [], "strength": []})
 
+    color_map = build_signal_type_color_map(timeline["signal_type"].unique())
+    order = ordered_categories(timeline["signal_type"], SIGNAL_TYPE_ORDER)
+
     fig = px.bar(
         timeline,
         x="month",
@@ -240,8 +280,10 @@ def timeline_signals(events: pd.DataFrame) -> Path:
         barmode="group",
         title="Cronología de señales por tipo",
         labels={"strength": "Σ score empresas", "month": "Mes"},
+        color_discrete_map=color_map,
+        category_orders={"signal_type": order},
     )
-    fig.update_layout(width=1000, height=500, bargap=0.15)
+    fig.update_layout(title=None, width=880, height=500, bargap=0.15)
 
     path = OUTPUT_DIR / "timeline_signals.html"
     return _write_plotly_html(fig, path)
@@ -300,22 +342,38 @@ def coverage_timeline(events: pd.DataFrame) -> Path:
         filtered = monthly.copy()
 
     filtered.sort_values("month", inplace=True)
+    filtered["industry_display"] = apply_industry_labels(filtered["industry_clean"])
+
+    industry_color_map = build_industry_color_map(filtered["industry_display"].unique())
+    legend_order = ordered_categories(filtered["industry_display"], INDUSTRY_CATEGORY_ORDER)
 
     fig = px.line(
         filtered,
         x="month",
         y="total_signals",
-        color="industry_clean",
+        color="industry_display",
         markers=True,
         title="Evolución mensual de señales por industria (Top 8)",
         labels={
             "month": "Mes",
             "total_signals": "# de señales",
-            "industry_clean": "Industria",
+            "industry_display": "Industria",
         },
         hover_data={"total_strength": ":.2f"},
+        color_discrete_map=industry_color_map,
+        category_orders={"industry_display": legend_order},
     )
-    fig.update_layout(width=1000, height=520, legend=dict(title="Industria", orientation="h", y=-0.2))
+    fig.update_layout(
+        title=None,
+        width=880,
+        height=520,
+        legend=dict(
+            title=dict(text="Industria", font=dict(color=PRIMARY_TEXT_COLOR, family=PRIMARY_FONT, size=14)),
+            orientation="h",
+            y=-0.18,
+            font=dict(color=PRIMARY_TEXT_COLOR, family=PRIMARY_FONT, size=12),
+        ),
+    )
 
     path = OUTPUT_DIR / "coverage_timeline.html"
     return _write_plotly_html(fig, path)
@@ -334,19 +392,22 @@ def map_intensity(companies: pd.DataFrame) -> Path:
         color="total_score",
         hover_data={"companies": True, "total_score": ":.2f"},
         title="Intensidad de señales climáticas/digitales por país",
-        color_continuous_scale=["#f7fbff", "#c6dbef", "#6baed6", "#08306b"],
+        color_continuous_scale=[step[1] for step in MARKET_RADAR_SEQUENTIAL],
     )
-    fig.update_layout(width=1100, height=720, margin=dict(l=20, r=20, t=80, b=20))
+    fig.update_layout(title=None, width=880, height=640, margin=dict(l=20, r=20, t=40, b=20))
+    fig.update_coloraxes(colorscale=MARKET_RADAR_SEQUENTIAL, colorbar=colorbar_defaults("total_score"))
     fig.update_geos(
         projection_type="mercator",
-        center=dict(lat=-15, lon=-70),
-        lataxis=dict(range=[-60, 30]),
-        lonaxis=dict(range=[-120, -30]),
+        center=dict(lat=-18, lon=-70),
+        projection_scale=1.2,
+        lataxis=dict(range=[-58, 33]),
+        lonaxis=dict(range=[-125, -32]),
         showcountries=True,
         countrycolor="#3b3b3b",
         showsubunits=True,
-        subunitcolor="#3b3b3b",
-        projection_scale=2.8,
+        subunitcolor="#ffffff",
+        landcolor="#d4f0e0",
+        lakecolor="#f3f9f4",
     )
     path = OUTPUT_DIR / "map_intensity.html"
     return _write_plotly_html(fig, path)
@@ -497,12 +558,19 @@ def _write_plotly_html(fig: go.Figure, path: Path, config: Dict[str, Any] | None
     layout_json = _json_to_tabs(plotly_json.get("layout", {}))
     config_json = _json_to_tabs(cfg)
 
+    style_lines = [line for line in MARKET_RADAR_INLINE_STYLE.strip().splitlines() if line]
+
     html_lines = [
         "<html>",
         "<head>",
         "\t<meta charset=\"utf-8\" />",
         "\t<script type=\"text/javascript\">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>",
         f"\t{PLOTLYJS_SCRIPT}",
+        "\t<style>",
+    ]
+    html_lines.extend(f"\t{line}" for line in style_lines)
+    html_lines.extend([
+        "\t</style>",
         "</head>",
         "<body>",
         f"\t<div id=\"{div_id}\" class=\"plotly-graph-div\" style=\"height:{height}px; width:{width}px;\"></div>",
@@ -519,7 +587,7 @@ def _write_plotly_html(fig: go.Figure, path: Path, config: Dict[str, Any] | None
         "\t</script>",
         "</body>",
         "</html>",
-    ]
+    ])
 
     path.write_text("\n".join(html_lines) + "\n", encoding="utf-8")
     return path
@@ -532,6 +600,11 @@ def ranking_companies(companies: pd.DataFrame) -> Path:
         .copy()
     )
     ranking["last_ts_fmt"] = ranking["last_ts"].dt.strftime("%Y-%m-%d").fillna("—")
+    ranking["industry_display"] = apply_industry_labels(ranking["industry"])
+
+    country_values = ranking["country"].dropna().astype(str)
+    color_map = build_country_color_map(country_values)
+    country_order = ordered_categories(country_values, COUNTRY_CATEGORY_ORDER)
 
     fig = px.bar(
         ranking,
@@ -543,8 +616,27 @@ def ranking_companies(companies: pd.DataFrame) -> Path:
         hover_data={"last_ts_fmt": True, "industry": True, "avg_strength": ":.2f"},
         title="Top 25 Empresas por Intensidad de Demanda",
         labels={"demand_score": "Score ponderado", "total_events": "# señales", "last_ts_fmt": "Última señal"},
+        color_discrete_map=color_map,
+        category_orders={"country": country_order},
     )
-    fig.update_layout(height=800, width=950, yaxis=dict(automargin=True))
+    fig.update_traces(marker=dict(line=dict(color=MARKER_BORDER_COLOR, width=0.8)))
+    fig.update_traces(textfont=dict(color=PRIMARY_TEXT_COLOR, family=PRIMARY_FONT, size=12))
+    min_score = float(ranking["demand_score"].min()) if not ranking.empty else 0.0
+    max_score = float(ranking["demand_score"].max()) if not ranking.empty else 0.0
+    lower_bound = 0.0 if min_score <= 0 else min_score * 0.85
+    upper_bound = max_score * 1.05 if max_score else 1.0
+
+    fig.update_layout(
+        title=None,
+        height=720,
+        width=860,
+        yaxis=dict(automargin=True),
+        legend=dict(
+            title=dict(text="País", font=dict(color=PRIMARY_TEXT_COLOR, family=PRIMARY_FONT, size=14)),
+            font=dict(color=PRIMARY_TEXT_COLOR, family=PRIMARY_FONT, size=14),
+        ),
+    )
+    fig.update_xaxes(range=[lower_bound, upper_bound])
 
     # Export plain text summary
     lines = ["Top 25 Empresas por Intensidad de Demanda\n"]
@@ -604,17 +696,24 @@ def coverage_indicators(companies: pd.DataFrame) -> Path:
     rollup = rollup[rollup["total_companies"] > 0]
     rollup = rollup.sort_values("total_demand", ascending=False).head(20)
     rollup["avg_events_per_company"] = (rollup["total_events"] / rollup["total_companies"]).round(2)
+    rollup["industry_friendly"] = apply_industry_labels(rollup["industry"])
+
+    ordered_by_demand = rollup.sort_values("total_demand", ascending=False)[
+        "industry_friendly"
+    ].tolist()
+    industry_order = ordered_categories(rollup["industry_friendly"], INDUSTRY_CATEGORY_ORDER)
+    category_array = [item for item in ordered_by_demand if item in industry_order]
 
     fig = px.bar(
         rollup,
         x="total_demand",
-        y="industry",
+        y="industry_friendly",
         orientation="h",
         text="total_companies",
         title="Industrias con mayor intensidad de señales",
         labels={
             "total_demand": "Σ score ponderado",
-            "industry": "Industria",
+            "industry_friendly": "Industria",
             "total_companies": "Empresas",
         },
         hover_data={
@@ -622,8 +721,22 @@ def coverage_indicators(companies: pd.DataFrame) -> Path:
             "median_intensity": ":.2f",
             "avg_events_per_company": True,
         },
+        color_discrete_sequence=[COVERAGE_INDICATORS_BAR_COLOR],
+        category_orders={"industry_friendly": industry_order},
     )
-    fig.update_layout(width=950, height=550, yaxis=dict(automargin=True))
+    fig.update_traces(
+        marker=dict(color=COVERAGE_INDICATORS_BAR_COLOR, line=dict(color=BAR_LINE_COLOR, width=0.6))
+    )
+    fig.update_layout(
+        title=None,
+        width=860,
+        height=540,
+        yaxis=dict(
+            automargin=True,
+            categoryorder="array",
+            categoryarray=category_array,
+        ),
+    )
 
     path = OUTPUT_DIR / "coverage_indicators.html"
     return _write_plotly_html(fig, path)
@@ -643,9 +756,9 @@ def coverage_country_industry(events: pd.DataFrame) -> Path:
     if coverage.empty:
         fig = go.Figure()
         fig.update_layout(
-            title="Señales por país e industria",
-            width=950,
-            height=600,
+            title=None,
+            width=860,
+            height=580,
             annotations=[
                 dict(
                     text="Sin datos disponibles",
@@ -663,10 +776,23 @@ def coverage_country_industry(events: pd.DataFrame) -> Path:
     matrix_events = coverage.pivot(index="country", columns="industry", values="total_events").fillna(0)
     countries = matrix_events.index.tolist()
     industries = matrix_events.columns.tolist()
+    industry_map = {name: friendly_industry_label(name) for name in industries}
+    matrix_events = matrix_events.rename(columns=industry_map)
+    industries = matrix_events.columns.tolist()
     z_values = matrix_events.to_numpy()
 
-    companies_matrix = coverage.pivot(index="country", columns="industry", values="companies").reindex(index=countries, columns=industries).fillna(0)
-    demand_matrix = coverage.pivot(index="country", columns="industry", values="total_demand").reindex(index=countries, columns=industries).fillna(0.0)
+    companies_matrix = (
+        coverage.pivot(index="country", columns="industry", values="companies")
+        .reindex(index=countries, columns=industry_map.keys())
+        .rename(columns=industry_map)
+        .fillna(0)
+    )
+    demand_matrix = (
+        coverage.pivot(index="country", columns="industry", values="total_demand")
+        .reindex(index=countries, columns=industry_map.keys())
+        .rename(columns=industry_map)
+        .fillna(0.0)
+    )
 
     custom = np.stack([companies_matrix.to_numpy(), demand_matrix.to_numpy()], axis=-1)
 
@@ -674,8 +800,8 @@ def coverage_country_industry(events: pd.DataFrame) -> Path:
         z=z_values,
         x=industries,
         y=countries,
-        colorscale="Tealgrn",
-        colorbar=dict(title="# señales"),
+        colorscale=MARKET_RADAR_SEQUENTIAL,
+        colorbar=colorbar_defaults("# señales"),
         customdata=custom,
         hovertemplate=(
             "industria=%{x}<br>país=%{y}<br>señales=%{z:.0f}<br>"
@@ -687,13 +813,11 @@ def coverage_country_industry(events: pd.DataFrame) -> Path:
 
     fig = go.Figure(data=[heatmap])
     fig.update_layout(
-        title="Señales por país e industria",
-        width=950,
-        height=600,
+        title=None,
+        width=860,
+        height=580,
         xaxis=dict(automargin=True, showgrid=False, zeroline=False),
         yaxis=dict(automargin=True, showgrid=False, zeroline=False),
-        plot_bgcolor="black",
-        paper_bgcolor="white",
     )
 
     return _write_plotly_html(fig, path)
@@ -708,6 +832,8 @@ def signal_type_distribution(events: pd.DataFrame) -> Path:
     counts["signal_type"] = counts["signal_type"].fillna("sin dato").astype(str)
     counts = counts.sort_values("total_signals", ascending=False)
 
+    signal_order = counts.sort_values("total_signals", ascending=False)["signal_type"].tolist()
+
     fig = px.bar(
         counts,
         x="signal_type",
@@ -715,8 +841,13 @@ def signal_type_distribution(events: pd.DataFrame) -> Path:
         text="total_signals",
         title="Distribución de señales por tipo",
         labels={"signal_type": "Tipo de señal", "total_signals": "Cantidad"},
+        category_orders={"signal_type": signal_order},
+        color_discrete_sequence=[SIGNAL_TYPE_BAR_COLOR],
     )
-    fig.update_layout(width=750, height=450, xaxis=dict(categoryorder="total descending"))
+    fig.update_traces(
+        marker=dict(color=SIGNAL_TYPE_BAR_COLOR, line=dict(color=BAR_LINE_COLOR, width=0.6))
+    )
+    fig.update_layout(title=None, width=780, height=450, xaxis=dict(categoryorder="array", categoryarray=signal_order))
 
     path = OUTPUT_DIR / "signal_type_distribution.html"
     return _write_plotly_html(fig, path)
@@ -740,9 +871,9 @@ def coverage_gaps(companies: pd.DataFrame, universe: pd.DataFrame) -> Path:
     if companies.empty or universe_counts.empty:
         fig = go.Figure()
         fig.update_layout(
-            title="Cobertura vs. intensidad por industria",
-            width=900,
-            height=600,
+            title=None,
+            width=860,
+            height=560,
             annotations=[
                 dict(
                     text="Sin datos suficientes para calcular brechas",
@@ -786,9 +917,9 @@ def coverage_gaps(companies: pd.DataFrame, universe: pd.DataFrame) -> Path:
     if merged.empty:
         fig = go.Figure()
         fig.update_layout(
-            title="Cobertura vs. intensidad por industria",
-            width=900,
-            height=600,
+            title=None,
+            width=860,
+            height=560,
             annotations=[
                 dict(
                     text="Sin datos suficientes para calcular brechas",
@@ -804,28 +935,46 @@ def coverage_gaps(companies: pd.DataFrame, universe: pd.DataFrame) -> Path:
         path = OUTPUT_DIR / "coverage_gaps.html"
         return _write_plotly_html(fig, path)
 
+    merged["industry_display"] = apply_industry_labels(merged["industry_clean"])
+    merged["industry_text"] = merged["industry_display"].apply(lambda val: wrap_label(val, width=18))
+    text_positions = merged["industry_display"].apply(
+        lambda name: "bottom center" if name == "TIC, Digital & Medios" else "top center"
+    )
+
     fig = px.scatter(
         merged,
         x="coverage_pct",
         y="total_demand",
         size="avg_signals_per_company",
-        color="median_intensity",
-        hover_name="industry_clean",
+        hover_name="industry_display",
         labels={
             "coverage_pct": "% de universo con señales",
             "total_demand": "Σ score ponderado",
             "avg_signals_per_company": "Señales promedio por empresa",
-            "median_intensity": "Intensidad mediana",
+        },
+        hover_data={
+            "median_intensity": ":.2f",
+            "active_companies": True,
+            "universe_companies": True,
         },
         title="Brechas de cobertura por industria",
     )
-    fig.update_traces(marker=dict(opacity=0.8, line=dict(width=1, color="#333")))
+    fig.update_traces(
+        mode="markers+text",
+        marker=dict(color="#6ccfa0", opacity=0.85, line=dict(width=1, color=MARKER_BORDER_COLOR)),
+        text=merged["industry_text"],
+        textposition=text_positions,
+        textfont=dict(color=PRIMARY_TEXT_COLOR, family=PRIMARY_FONT, size=10),
+        cliponaxis=False,
+    )
     fig.update_layout(
-        width=950,
-        height=600,
-        coloraxis_colorbar=dict(title="Intensidad mediana"),
+        title=None,
+        width=860,
+        height=560,
         xaxis=dict(range=[0, max(merged["coverage_pct"].max() * 1.1, 5)], zeroline=False),
         yaxis=dict(zeroline=False),
+        showlegend=False,
+        margin=dict(b=80, t=40, l=60, r=40),
     )
 
     path = OUTPUT_DIR / "coverage_gaps.html"
@@ -925,7 +1074,7 @@ def coverage_summary(
             )
         ]
     )
-    fig.update_layout(title=title, width=750, height=520)
+    fig.update_layout(title=None, width=760, height=520)
 
     path = OUTPUT_DIR / filename
     return _write_plotly_html(fig, path)
@@ -980,18 +1129,23 @@ def signal_mix_sankey(events: pd.DataFrame, universe: pd.DataFrame) -> Path:
         targets.append(offset + idx)
         values.append(int(value))
 
+    node_colors = sankey_node_colors(len(labels))
+    link_colors = sankey_link_colors(len(values))
+
     sankey = go.Sankey(
-        node=dict(label=labels, pad=18, thickness=18),
-        link=dict(source=sources, target=targets, value=values),
+        node=dict(
+            label=labels,
+            pad=SANKEY_NODE_PAD,
+            thickness=SANKEY_NODE_THICKNESS,
+            color=node_colors,
+            line=dict(color=SANKEY_NODE_LINE_COLOR, width=SANKEY_NODE_LINE_WIDTH),
+        ),
+        link=dict(source=sources, target=targets, value=values, color=link_colors),
         arrangement="snap",
     )
 
     fig = go.Figure(data=[sankey])
-    fig.update_layout(
-        title="Flujo de cobertura y mezcla de señales",
-        width=900,
-        height=600,
-    )
+    fig.update_layout(title=None, width=860, height=560)
 
     path = OUTPUT_DIR / "signal_mix_sankey.html"
     return _write_plotly_html(fig, path)
@@ -1008,15 +1162,23 @@ def country_fact_sheet(companies: pd.DataFrame) -> Path:
     )
     agg = agg[agg["intensity"] > 0].copy()
     agg = agg.sort_values(["country", "intensity"], ascending=[True, False])
+    agg["industry_display"] = apply_industry_labels(agg["industry"])
+    agg["industry_wrapped"] = agg["industry_display"].apply(lambda val: wrap_label(val, width=14))
     fig = px.treemap(
         agg,
-        path=["country", "industry"],
+        path=["country", "industry_wrapped"],
         values="intensity",
         color="total_strength",
-        color_continuous_scale="Bluered",
+        color_continuous_scale=[step[1] for step in MARKET_RADAR_SEQUENTIAL],
         title="Fichas por país: industrias destacadas por intensidad",
     )
-    fig.update_layout(width=1100, height=750)
+    fig.update_coloraxes(colorscale=MARKET_RADAR_SEQUENTIAL, colorbar=colorbar_defaults("total_strength"))
+    fig.update_traces(
+        texttemplate="%{label}",
+        textfont=dict(size=12, family=PRIMARY_FONT, color=PRIMARY_TEXT_COLOR),
+        insidetextfont=dict(size=10, family=PRIMARY_FONT, color=PRIMARY_TEXT_COLOR),
+    )
+    fig.update_layout(title=None, width=880, height=680)
 
     path = OUTPUT_DIR / "country_fact_sheet.html"
     return _write_plotly_html(fig, path)

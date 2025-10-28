@@ -4,1250 +4,845 @@
 	<script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
 	<script charset="utf-8" src="https://cdn.plot.ly/plotly-3.1.0.min.js" integrity="sha256-Ei4740bWZhaUTQuD6q9yQlgVCMPBz6CZWhevDYPv93A=" crossorigin="anonymous"></script>
 	<style>
-@font-face { font-family: 'Josefin Sans'; src: url('../../JosefinSans-Medium.ttf') format('truetype'); font-weight: 500; font-style: normal; font-display: swap; }
-body { font-family: 'Josefin Sans', 'Helvetica Neue', Arial, sans-serif; background-color: #f6fbf8; color: #164233; }
-.plotly-graph-div { background-color: #ecf7f0; }
-</style>
+	@font-face { font-family: 'Josefin Sans'; src: url('../../JosefinSans-Medium.ttf') format('truetype'); font-weight: 500; font-style: normal; font-display: swap; }
+	body { font-family: 'Josefin Sans', 'Helvetica Neue', Arial, sans-serif; background-color: #f6fbf8; color: #164233; }
+	.plotly-graph-div { background-color: #ecf7f0; }
+	</style>
 </head>
 <body>
-	<div id="plotly-dc44821f9a47402888f49c4216ec3637" class="plotly-graph-div" style="height:800px; width:950px;"></div>
+	<div id="plotly-79f1f6aff2ee438db1f49ba85c4b27d7" class="plotly-graph-div" style="height:720px; width:860px;"></div>
 	<script type="text/javascript">
 		window.PLOTLYENV=window.PLOTLYENV || {};
-		if (document.getElementById("plotly-dc44821f9a47402888f49c4216ec3637")) {
+		if (document.getElementById("plotly-79f1f6aff2ee438db1f49ba85c4b27d7")) {
 			Plotly.newPlot(
-				"plotly-dc44821f9a47402888f49c4216ec3637",
+				"plotly-79f1f6aff2ee438db1f49ba85c4b27d7",
 				[
-				    {
-				        "customdata": [
-				            [
-				                "2025-07-30",
-				                "transport_mobility_logistics",
-				                1.0
-				            ],
-				            [
-				                "2022-12-16",
-				                "transport_mobility_logistics",
-				                1.0
-				            ],
-				            [
-				                "2025-04-03",
-				                "construction_infrastructure_realestate",
-				                1.0
-				            ],
-				            [
-				                "2025-08-20",
-				                "retail_consumer_services",
-				                1.0
-				            ],
-				            [
-				                "2022-12-12",
-				                "transport_mobility_logistics",
-				                1.0
-				            ],
-				            [
-				                "2017-04-14",
-				                "ict_digital_media",
-				                1.0
-				            ],
-				            [
-				                "2016-12-26",
-				                "ict_digital_media",
-				                1.0
-				            ]
-				        ],
-				        "hovertemplate": "country=BR<br>Score ponderado=%{x}<br>company_name=%{y}<br># señales=%{text}<br>Última señal=%{customdata[0]}<br>industry=%{customdata[1]}<br>avg_strength=%{customdata[2]:.2f}<extra></extra>",
-				        "legendgroup": "BR",
-				        "marker": {
-				            "color": "#0b6a39",
-				            "pattern": {
-				                "shape": ""
-				            },
-				            "line": {
-				                "color": "#0a3c28",
-				                "width": 0.8
-				            }
-				        },
-				        "name": "BR",
-				        "orientation": "h",
-				        "showlegend": true,
-				        "text": [
-				            48.0,
-				            11.0,
-				            15.0,
-				            8.0,
-				            6.0,
-				            5.0,
-				            4.0
-				        ],
-				        "textposition": "auto",
-				        "x": [
-				            1.5837730447165939,
-				            1.3727359974682,
-				            2.6284482113039638,
-				            1.329583686600433,
-				            1.291886522358297,
-				            1.2687639203842083,
-				            1.241415686865115
-				        ],
-				        "xaxis": "x",
-				        "y": [
-				            "Estrada de Ferro Noroeste do Brasil",
-				            "Companhia do Metropolitano de São Paulo",
-				            "Mover Participações",
-				            "Rio de Janeiro Metro",
-				            "Companhia Brasileira de Trens Urbanos",
-				            "PlanoCDE",
-				            "Maria Farinha Filmes"
-				        ],
-				        "yaxis": "y",
-				        "type": "bar",
-				        "textfont": {
-				            "color": "#164233",
-				            "family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
-				            "size": 12
-				        }
-				    },
-				    {
-				        "customdata": [
-				            [
-				                "2025-08-15",
-				                "agro_food_beverage",
-				                1.0
-				            ],
-				            [
-				                "2017-07-11",
-				                "finance_insurance_capital",
-				                1.0
-				            ],
-				            [
-				                "2016-10-09",
-				                "environmental_circular_services",
-				                1.0
-				            ],
-				            [
-				                "2016-11-04",
-				                "industrial_manufacturing",
-				                1.0
-				            ],
-				            [
-				                "2019-01-07",
-				                "environmental_circular_services",
-				                1.0
-				            ],
-				            [
-				                "2017-08-04",
-				                "public_social_education",
-				                1.0
-				            ],
-				            [
-				                "2017-03-31",
-				                "professional_services_consulting",
-				                1.0
-				            ],
-				            [
-				                "2019-02-15",
-				                "retail_consumer_services",
-				                1.0
-				            ],
-				            [
-				                "2018-08-14",
-				                "environmental_circular_services",
-				                1.0
-				            ]
-				        ],
-				        "hovertemplate": "country=CL<br>Score ponderado=%{x}<br>company_name=%{y}<br># señales=%{text}<br>Última señal=%{customdata[0]}<br>industry=%{customdata[1]}<br>avg_strength=%{customdata[2]:.2f}<extra></extra>",
-				        "legendgroup": "CL",
-				        "marker": {
-				            "color": "#76b041",
-				            "pattern": {
-				                "shape": ""
-				            },
-				            "line": {
-				                "color": "#0a3c28",
-				                "width": 0.8
-				            }
-				        },
-				        "name": "CL",
-				        "orientation": "h",
-				        "showlegend": true,
-				        "text": [
-				            6.0,
-				            5.0,
-				            5.0,
-				            4.0,
-				            4.0,
-				            4.0,
-				            4.0,
-				            4.0,
-				            4.0
-				        ],
-				        "textposition": "auto",
-				        "x": [
-				            1.291886522358297,
-				            1.2687639203842083,
-				            1.2687639203842083,
-				            1.241415686865115,
-				            1.241415686865115,
-				            1.241415686865115,
-				            1.241415686865115,
-				            1.241415686865115,
-				            1.241415686865115
-				        ],
-				        "xaxis": "x",
-				        "y": [
-				            "Cooperativa Agrícola y Lechera de La Unión Limitada",
-				            "LUMNI CHILE",
-				            "TriCiclos",
-				            "Terrium",
-				            "Degraf",
-				            "Estudios y Consultorias Focus",
-				            "Needo",
-				            "Cumplo",
-				            "Parque del Recuerdo"
-				        ],
-				        "yaxis": "y",
-				        "type": "bar",
-				        "textfont": {
-				            "color": "#164233",
-				            "family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
-				            "size": 12
-				        }
-				    },
-				    {
-				        "customdata": [
-				            [
-				                "2022-06-09",
-				                "ict_digital_media",
-				                1.0
-				            ]
-				        ],
-				        "hovertemplate": "country=PE<br>Score ponderado=%{x}<br>company_name=%{y}<br># señales=%{text}<br>Última señal=%{customdata[0]}<br>industry=%{customdata[1]}<br>avg_strength=%{customdata[2]:.2f}<extra></extra>",
-				        "legendgroup": "PE",
-				        "marker": {
-				            "color": "#58a4b0",
-				            "pattern": {
-				                "shape": ""
-				            },
-				            "line": {
-				                "color": "#0a3c28",
-				                "width": 0.8
-				            }
-				        },
-				        "name": "PE",
-				        "orientation": "h",
-				        "showlegend": true,
-				        "text": [
-				            6.0
-				        ],
-				        "textposition": "auto",
-				        "x": [
-				            1.291886522358297
-				        ],
-				        "xaxis": "x",
-				        "y": [
-				            "Instituto Nacional de Radio y Televisión del Perú"
-				        ],
-				        "yaxis": "y",
-				        "type": "bar",
-				        "textfont": {
-				            "color": "#164233",
-				            "family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
-				            "size": 12
-				        }
-				    },
-				    {
-				        "customdata": [
-				            [
-				                "2019-11-20",
-				                "finance_insurance_capital",
-				                1.0
-				            ],
-				            [
-				                "2017-10-24",
-				                "transport_mobility_logistics",
-				                1.0
-				            ],
-				            [
-				                "2025-02-20",
-				                "energy_power_utilities",
-				                1.0
-				            ]
-				        ],
-				        "hovertemplate": "country=AR<br>Score ponderado=%{x}<br>company_name=%{y}<br># señales=%{text}<br>Última señal=%{customdata[0]}<br>industry=%{customdata[1]}<br>avg_strength=%{customdata[2]:.2f}<extra></extra>",
-				        "legendgroup": "AR",
-				        "marker": {
-				            "color": "#1b9aaa",
-				            "pattern": {
-				                "shape": ""
-				            },
-				            "line": {
-				                "color": "#0a3c28",
-				                "width": 0.8
-				            }
-				        },
-				        "name": "AR",
-				        "orientation": "h",
-				        "showlegend": true,
-				        "text": [
-				            5.0,
-				            5.0,
-				            4.0
-				        ],
-				        "textposition": "auto",
-				        "x": [
-				            1.2687639203842083,
-				            1.2687639203842083,
-				            1.241415686865115
-				        ],
-				        "xaxis": "x",
-				        "y": [
-				            "Banco de la Ciudad de Buenos Aires",
-				            "Transportadora de Gas del Sur",
-				            "Empresa Provincial de la Energía de Santa Fe"
-				        ],
-				        "yaxis": "y",
-				        "type": "bar",
-				        "textfont": {
-				            "color": "#164233",
-				            "family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
-				            "size": 12
-				        }
-				    },
-				    {
-				        "customdata": [
-				            [
-				                "2018-07-24",
-				                "construction_infrastructure_realestate",
-				                1.0
-				            ],
-				            [
-				                "2015-12-22",
-				                "finance_insurance_capital",
-				                1.0
-				            ]
-				        ],
-				        "hovertemplate": "country=MX<br>Score ponderado=%{x}<br>company_name=%{y}<br># señales=%{text}<br>Última señal=%{customdata[0]}<br>industry=%{customdata[1]}<br>avg_strength=%{customdata[2]:.2f}<extra></extra>",
-				        "legendgroup": "MX",
-				        "marker": {
-				            "color": "#94c11f",
-				            "pattern": {
-				                "shape": ""
-				            },
-				            "line": {
-				                "color": "#0a3c28",
-				                "width": 0.8
-				            }
-				        },
-				        "name": "MX",
-				        "orientation": "h",
-				        "showlegend": true,
-				        "text": [
-				            5.0,
-				            4.0
-				        ],
-				        "textposition": "auto",
-				        "x": [
-				            1.2687639203842083,
-				            1.241415686865115
-				        ],
-				        "xaxis": "x",
-				        "y": [
-				            "ECHALE",
-				            "FINAE"
-				        ],
-				        "yaxis": "y",
-				        "type": "bar",
-				        "textfont": {
-				            "color": "#164233",
-				            "family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
-				            "size": 12
-				        }
-				    },
-				    {
-				        "customdata": [
-				            [
-				                "2019-02-25",
-				                "mining_materials",
-				                1.0
-				            ],
-				            [
-				                "2017-06-26",
-				                "professional_services_consulting",
-				                1.0
-				            ]
-				        ],
-				        "hovertemplate": "country=CO<br>Score ponderado=%{x}<br>company_name=%{y}<br># señales=%{text}<br>Última señal=%{customdata[0]}<br>industry=%{customdata[1]}<br>avg_strength=%{customdata[2]:.2f}<extra></extra>",
-				        "legendgroup": "CO",
-				        "marker": {
-				            "color": "#2f9d8f",
-				            "pattern": {
-				                "shape": ""
-				            },
-				            "line": {
-				                "color": "#0a3c28",
-				                "width": 0.8
-				            }
-				        },
-				        "name": "CO",
-				        "orientation": "h",
-				        "showlegend": true,
-				        "text": [
-				            4.0,
-				            4.0
-				        ],
-				        "textposition": "auto",
-				        "x": [
-				            1.241415686865115,
-				            1.241415686865115
-				        ],
-				        "xaxis": "x",
-				        "y": [
-				            "La Tercera Mirada",
-				            "Portafolio Verde"
-				        ],
-				        "yaxis": "y",
-				        "type": "bar",
-				        "textfont": {
-				            "color": "#164233",
-				            "family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
-				            "size": 12
-				        }
-				    }
+					{
+						"customdata": [
+							[
+								"2019-11-20",
+								"finance_insurance_capital",
+								1.0
+							],
+							[
+								"2017-10-24",
+								"oil_gas",
+								1.0
+							],
+							[
+								"2016-12-20",
+								"public_social_education",
+								1.0
+							]
+						],
+						"hovertemplate": "country=AR<br>Score ponderado=%{x}<br>company_name=%{y}<br># señales=%{text}<br>Última señal=%{customdata[0]}<br>industry=%{customdata[1]}<br>avg_strength=%{customdata[2]:.2f}<extra></extra>",
+						"legendgroup": "AR",
+						"marker": {
+							"color": "#a4c8f0",
+							"pattern": {
+								"shape": ""
+							},
+							"line": {
+								"color": "#0a3c28",
+								"width": 0.8
+							}
+						},
+						"name": "AR",
+						"orientation": "h",
+						"showlegend": true,
+						"text": {
+							"dtype": "f8",
+							"bdata": "AAAAAAAAFEAAAAAAAAAUQAAAAAAAABBA"
+						},
+						"textposition": "auto",
+						"x": {
+							"dtype": "f8",
+							"bdata": "mlGGZdtM9D+aUYZl20z0P5Q7/bHW3PM/"
+						},
+						"xaxis": "x",
+						"y": [
+							"Banco de la Ciudad de Buenos Aires",
+							"Transportadora de Gas del Sur",
+							"Emprendia"
+						],
+						"yaxis": "y",
+						"type": "bar",
+						"textfont": {
+							"color": "#164233",
+							"family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
+							"size": 12
+						}
+					},
+					{
+						"customdata": [
+							[
+								"2025-10-09",
+								"finance_insurance_capital",
+								1.0
+							],
+							[
+								"2025-02-19",
+								"transport_mobility_logistics",
+								1.0
+							],
+							[
+								"2025-04-03",
+								"oil_gas",
+								1.0
+							],
+							[
+								"2025-08-20",
+								"retail_consumer_services",
+								1.0
+							],
+							[
+								"2017-04-14",
+								"transport_mobility_logistics",
+								1.0
+							],
+							[
+								"2022-12-02",
+								"oil_gas",
+								1.0
+							],
+							[
+								"2016-12-26",
+								"ict_digital_media",
+								1.0
+							]
+						],
+						"hovertemplate": "country=BR<br>Score ponderado=%{x}<br>company_name=%{y}<br># señales=%{text}<br>Última señal=%{customdata[0]}<br>industry=%{customdata[1]}<br>avg_strength=%{customdata[2]:.2f}<extra></extra>",
+						"legendgroup": "BR",
+						"marker": {
+							"color": "#81c784",
+							"pattern": {
+								"shape": ""
+							},
+							"line": {
+								"color": "#0a3c28",
+								"width": 0.8
+							}
+						},
+						"name": "BR",
+						"orientation": "h",
+						"showlegend": true,
+						"text": {
+							"dtype": "f8",
+							"bdata": "AAAAAAAAP0AAAAAAAAAgQAAAAAAAABxAAAAAAAAAHEAAAAAAAAAUQAAAAAAAABBAAAAAAAAAEEA="
+						},
+						"textposition": "auto",
+						"x": {
+							"dtype": "f8",
+							"bdata": "utWdH1lR+D9Q5zOL+UX1P9YZxd+b/fQ/1hnF35v99D+aUYZl20z0P5Q7/bHW3PM/lDv9sdbc8z8="
+						},
+						"xaxis": "x",
+						"y": [
+							"Banco do Brasil",
+							"Estrada de Ferro Noroeste do Brasil",
+							"Mover Participações",
+							"Rio de Janeiro Metro",
+							"PlanoCDE",
+							"Companhia Pernambucana de Saneamento",
+							"Maria Farinha Filmes"
+						],
+						"yaxis": "y",
+						"type": "bar",
+						"textfont": {
+							"color": "#164233",
+							"family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
+							"size": 12
+						}
+					},
+					{
+						"customdata": [
+							[
+								"2016-10-09",
+								"public_social_education",
+								1.0
+							],
+							[
+								"2017-07-11",
+								"finance_insurance_capital",
+								1.0
+							],
+							[
+								"2019-04-29",
+								"public_social_education",
+								1.0
+							],
+							[
+								"2016-12-22",
+								"retail_consumer_services",
+								1.0
+							],
+							[
+								"2017-03-17",
+								"agro_food_beverage",
+								1.0
+							],
+							[
+								"2017-03-31",
+								"professional_services_consulting",
+								1.0
+							],
+							[
+								"2016-11-04",
+								"agro_food_beverage",
+								1.0
+							],
+							[
+								"2018-08-14",
+								"environmental_circular_services",
+								1.0
+							]
+						],
+						"hovertemplate": "country=CL<br>Score ponderado=%{x}<br>company_name=%{y}<br># señales=%{text}<br>Última señal=%{customdata[0]}<br>industry=%{customdata[1]}<br>avg_strength=%{customdata[2]:.2f}<extra></extra>",
+						"legendgroup": "CL",
+						"marker": {
+							"color": "#ffe0a3",
+							"pattern": {
+								"shape": ""
+							},
+							"line": {
+								"color": "#0a3c28",
+								"width": 0.8
+							}
+						},
+						"name": "CL",
+						"orientation": "h",
+						"showlegend": true,
+						"text": {
+							"dtype": "f8",
+							"bdata": "AAAAAAAAFEAAAAAAAAAUQAAAAAAAABBAAAAAAAAAEEAAAAAAAAAQQAAAAAAAABBAAAAAAAAAEEAAAAAAAAAQQA=="
+						},
+						"textposition": "auto",
+						"x": {
+							"dtype": "f8",
+							"bdata": "mlGGZdtM9D+aUYZl20z0P5Q7/bHW3PM/lDv9sdbc8z+UO/2x1tzzP5Q7/bHW3PM/lDv9sdbc8z+UO/2x1tzzPw=="
+						},
+						"xaxis": "x",
+						"y": [
+							"TriCiclos",
+							"LUMNI CHILE",
+							"Veomás",
+							"Green Libros",
+							"LATE!",
+							"Needo",
+							"Terrium",
+							"Parque del Recuerdo"
+						],
+						"yaxis": "y",
+						"type": "bar",
+						"textfont": {
+							"color": "#164233",
+							"family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
+							"size": 12
+						}
+					},
+					{
+						"customdata": [
+							[
+								"2019-02-25",
+								"environmental_circular_services",
+								1.0
+							],
+							[
+								"2023-08-29",
+								"retail_consumer_services",
+								1.0
+							],
+							[
+								"2017-06-26",
+								"professional_services_consulting",
+								1.0
+							],
+							[
+								"2017-10-05",
+								"energy_power_utilities",
+								1.0
+							]
+						],
+						"hovertemplate": "country=CO<br>Score ponderado=%{x}<br>company_name=%{y}<br># señales=%{text}<br>Última señal=%{customdata[0]}<br>industry=%{customdata[1]}<br>avg_strength=%{customdata[2]:.2f}<extra></extra>",
+						"legendgroup": "CO",
+						"marker": {
+							"color": "#9fd6d9",
+							"pattern": {
+								"shape": ""
+							},
+							"line": {
+								"color": "#0a3c28",
+								"width": 0.8
+							}
+						},
+						"name": "CO",
+						"orientation": "h",
+						"showlegend": true,
+						"text": {
+							"dtype": "f8",
+							"bdata": "AAAAAAAAEEAAAAAAAAAQQAAAAAAAABBAAAAAAAAAEEA="
+						},
+						"textposition": "auto",
+						"x": {
+							"dtype": "f8",
+							"bdata": "lDv9sdbc8z+UO/2x1tzzP5Q7/bHW3PM/lDv9sdbc8z8="
+						},
+						"xaxis": "x",
+						"y": [
+							"La Tercera Mirada",
+							"Cámara de Comercio de Bogotá",
+							"Portafolio Verde",
+							"Hybrytec Solar"
+						],
+						"yaxis": "y",
+						"type": "bar",
+						"textfont": {
+							"color": "#164233",
+							"family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
+							"size": 12
+						}
+					},
+					{
+						"customdata": [
+							[
+								"2018-07-24",
+								"public_social_education",
+								1.0
+							],
+							[
+								"2015-12-22",
+								"finance_insurance_capital",
+								1.0
+							]
+						],
+						"hovertemplate": "country=MX<br>Score ponderado=%{x}<br>company_name=%{y}<br># señales=%{text}<br>Última señal=%{customdata[0]}<br>industry=%{customdata[1]}<br>avg_strength=%{customdata[2]:.2f}<extra></extra>",
+						"legendgroup": "MX",
+						"marker": {
+							"color": "#ffb4a2",
+							"pattern": {
+								"shape": ""
+							},
+							"line": {
+								"color": "#0a3c28",
+								"width": 0.8
+							}
+						},
+						"name": "MX",
+						"orientation": "h",
+						"showlegend": true,
+						"text": {
+							"dtype": "f8",
+							"bdata": "AAAAAAAAFEAAAAAAAAAQQA=="
+						},
+						"textposition": "auto",
+						"x": {
+							"dtype": "f8",
+							"bdata": "mlGGZdtM9D+UO/2x1tzzPw=="
+						},
+						"xaxis": "x",
+						"y": [
+							"ECHALE",
+							"FINAE"
+						],
+						"yaxis": "y",
+						"type": "bar",
+						"textfont": {
+							"color": "#164233",
+							"family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
+							"size": 12
+						}
+					},
+					{
+						"customdata": [
+							[
+								"2025-06-30",
+								"finance_insurance_capital",
+								1.0
+							]
+						],
+						"hovertemplate": "country=UY<br>Score ponderado=%{x}<br>company_name=%{y}<br># señales=%{text}<br>Última señal=%{customdata[0]}<br>industry=%{customdata[1]}<br>avg_strength=%{customdata[2]:.2f}<extra></extra>",
+						"legendgroup": "UY",
+						"marker": {
+							"color": "#cbb7e8",
+							"pattern": {
+								"shape": ""
+							},
+							"line": {
+								"color": "#0a3c28",
+								"width": 0.8
+							}
+						},
+						"name": "UY",
+						"orientation": "h",
+						"showlegend": true,
+						"text": {
+							"dtype": "f8",
+							"bdata": "AAAAAAAAEEA="
+						},
+						"textposition": "auto",
+						"x": {
+							"dtype": "f8",
+							"bdata": "lDv9sdbc8z8="
+						},
+						"xaxis": "x",
+						"y": [
+							"Banco de Seguros del Estado"
+						],
+						"yaxis": "y",
+						"type": "bar",
+						"textfont": {
+							"color": "#164233",
+							"family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
+							"size": 12
+						}
+					}
 				],
 				{
-				    "template": {
-				        "data": {
-				            "histogram2dcontour": [
-				                {
-				                    "type": "histogram2dcontour",
-				                    "colorbar": {
-				                        "outlinewidth": 0,
-				                        "ticks": ""
-				                    },
-				                    "colorscale": [
-				                        [
-				                            0.0,
-				                            "#f2fbf5"
-				                        ],
-				                        [
-				                            0.2,
-				                            "#d5f1dd"
-				                        ],
-				                        [
-				                            0.4,
-				                            "#a8e0bf"
-				                        ],
-				                        [
-				                            0.6,
-				                            "#74cf9f"
-				                        ],
-				                        [
-				                            0.8,
-				                            "#3bbd79"
-				                        ],
-				                        [
-				                            1.0,
-				                            "#138f4c"
-				                        ]
-				                    ]
-				                }
-				            ],
-				            "choropleth": [
-				                {
-				                    "type": "choropleth",
-				                    "colorbar": {
-				                        "outlinewidth": 0,
-				                        "ticks": ""
-				                    }
-				                }
-				            ],
-				            "histogram2d": [
-				                {
-				                    "type": "histogram2d",
-				                    "colorbar": {
-				                        "outlinewidth": 0,
-				                        "ticks": ""
-				                    },
-				                    "colorscale": [
-				                        [
-				                            0.0,
-				                            "#f2fbf5"
-				                        ],
-				                        [
-				                            0.2,
-				                            "#d5f1dd"
-				                        ],
-				                        [
-				                            0.4,
-				                            "#a8e0bf"
-				                        ],
-				                        [
-				                            0.6,
-				                            "#74cf9f"
-				                        ],
-				                        [
-				                            0.8,
-				                            "#3bbd79"
-				                        ],
-				                        [
-				                            1.0,
-				                            "#138f4c"
-				                        ]
-				                    ]
-				                }
-				            ],
-				            "heatmap": [
-				                {
-				                    "type": "heatmap",
-				                    "colorbar": {
-				                        "outlinewidth": 0,
-				                        "ticks": ""
-				                    },
-				                    "colorscale": [
-				                        [
-				                            0.0,
-				                            "#f2fbf5"
-				                        ],
-				                        [
-				                            0.2,
-				                            "#d5f1dd"
-				                        ],
-				                        [
-				                            0.4,
-				                            "#a8e0bf"
-				                        ],
-				                        [
-				                            0.6,
-				                            "#74cf9f"
-				                        ],
-				                        [
-				                            0.8,
-				                            "#3bbd79"
-				                        ],
-				                        [
-				                            1.0,
-				                            "#138f4c"
-				                        ]
-				                    ]
-				                }
-				            ],
-				            "contourcarpet": [
-				                {
-				                    "type": "contourcarpet",
-				                    "colorbar": {
-				                        "outlinewidth": 0,
-				                        "ticks": ""
-				                    }
-				                }
-				            ],
-				            "contour": [
-				                {
-				                    "type": "contour",
-				                    "colorbar": {
-				                        "outlinewidth": 0,
-				                        "ticks": ""
-				                    },
-				                    "colorscale": [
-				                        [
-				                            0.0,
-				                            "#f2fbf5"
-				                        ],
-				                        [
-				                            0.2,
-				                            "#d5f1dd"
-				                        ],
-				                        [
-				                            0.4,
-				                            "#a8e0bf"
-				                        ],
-				                        [
-				                            0.6,
-				                            "#74cf9f"
-				                        ],
-				                        [
-				                            0.8,
-				                            "#3bbd79"
-				                        ],
-				                        [
-				                            1.0,
-				                            "#138f4c"
-				                        ]
-				                    ]
-				                }
-				            ],
-				            "surface": [
-				                {
-				                    "type": "surface",
-				                    "colorbar": {
-				                        "outlinewidth": 0,
-				                        "ticks": ""
-				                    },
-				                    "colorscale": [
-				                        [
-				                            0.0,
-				                            "#f2fbf5"
-				                        ],
-				                        [
-				                            0.2,
-				                            "#d5f1dd"
-				                        ],
-				                        [
-				                            0.4,
-				                            "#a8e0bf"
-				                        ],
-				                        [
-				                            0.6,
-				                            "#74cf9f"
-				                        ],
-				                        [
-				                            0.8,
-				                            "#3bbd79"
-				                        ],
-				                        [
-				                            1.0,
-				                            "#138f4c"
-				                        ]
-				                    ]
-				                }
-				            ],
-				            "mesh3d": [
-				                {
-				                    "type": "mesh3d",
-				                    "colorbar": {
-				                        "outlinewidth": 0,
-				                        "ticks": ""
-				                    }
-				                }
-				            ],
-				            "scatter": [
-				                {
-				                    "fillpattern": {
-				                        "fillmode": "overlay",
-				                        "size": 10,
-				                        "solidity": 0.2
-				                    },
-				                    "type": "scatter"
-				                }
-				            ],
-				            "parcoords": [
-				                {
-				                    "type": "parcoords",
-				                    "line": {
-				                        "colorbar": {
-				                            "outlinewidth": 0,
-				                            "ticks": ""
-				                        }
-				                    }
-				                }
-				            ],
-				            "scatterpolargl": [
-				                {
-				                    "type": "scatterpolargl",
-				                    "marker": {
-				                        "colorbar": {
-				                            "outlinewidth": 0,
-				                            "ticks": ""
-				                        }
-				                    }
-				                }
-				            ],
-				            "bar": [
-				                {
-				                    "error_x": {
-				                        "color": "#2a3f5f"
-				                    },
-				                    "error_y": {
-				                        "color": "#2a3f5f"
-				                    },
-				                    "marker": {
-				                        "line": {
-				                            "color": "#E5ECF6",
-				                            "width": 0.5
-				                        },
-				                        "pattern": {
-				                            "fillmode": "overlay",
-				                            "size": 10,
-				                            "solidity": 0.2
-				                        }
-				                    },
-				                    "type": "bar"
-				                }
-				            ],
-				            "scattergeo": [
-				                {
-				                    "type": "scattergeo",
-				                    "marker": {
-				                        "colorbar": {
-				                            "outlinewidth": 0,
-				                            "ticks": ""
-				                        }
-				                    }
-				                }
-				            ],
-				            "scatterpolar": [
-				                {
-				                    "type": "scatterpolar",
-				                    "marker": {
-				                        "colorbar": {
-				                            "outlinewidth": 0,
-				                            "ticks": ""
-				                        }
-				                    }
-				                }
-				            ],
-				            "histogram": [
-				                {
-				                    "marker": {
-				                        "pattern": {
-				                            "fillmode": "overlay",
-				                            "size": 10,
-				                            "solidity": 0.2
-				                        }
-				                    },
-				                    "type": "histogram"
-				                }
-				            ],
-				            "scattergl": [
-				                {
-				                    "type": "scattergl",
-				                    "marker": {
-				                        "colorbar": {
-				                            "outlinewidth": 0,
-				                            "ticks": ""
-				                        }
-				                    }
-				                }
-				            ],
-				            "scatter3d": [
-				                {
-				                    "type": "scatter3d",
-				                    "line": {
-				                        "colorbar": {
-				                            "outlinewidth": 0,
-				                            "ticks": ""
-				                        }
-				                    },
-				                    "marker": {
-				                        "colorbar": {
-				                            "outlinewidth": 0,
-				                            "ticks": ""
-				                        }
-				                    }
-				                }
-				            ],
-				            "scattermap": [
-				                {
-				                    "type": "scattermap",
-				                    "marker": {
-				                        "colorbar": {
-				                            "outlinewidth": 0,
-				                            "ticks": ""
-				                        }
-				                    }
-				                }
-				            ],
-				            "scattermapbox": [
-				                {
-				                    "type": "scattermapbox",
-				                    "marker": {
-				                        "colorbar": {
-				                            "outlinewidth": 0,
-				                            "ticks": ""
-				                        }
-				                    }
-				                }
-				            ],
-				            "scatterternary": [
-				                {
-				                    "type": "scatterternary",
-				                    "marker": {
-				                        "colorbar": {
-				                            "outlinewidth": 0,
-				                            "ticks": ""
-				                        }
-				                    }
-				                }
-				            ],
-				            "scattercarpet": [
-				                {
-				                    "type": "scattercarpet",
-				                    "marker": {
-				                        "colorbar": {
-				                            "outlinewidth": 0,
-				                            "ticks": ""
-				                        }
-				                    }
-				                }
-				            ],
-				            "carpet": [
-				                {
-				                    "aaxis": {
-				                        "endlinecolor": "#2a3f5f",
-				                        "gridcolor": "white",
-				                        "linecolor": "white",
-				                        "minorgridcolor": "white",
-				                        "startlinecolor": "#2a3f5f"
-				                    },
-				                    "baxis": {
-				                        "endlinecolor": "#2a3f5f",
-				                        "gridcolor": "white",
-				                        "linecolor": "white",
-				                        "minorgridcolor": "white",
-				                        "startlinecolor": "#2a3f5f"
-				                    },
-				                    "type": "carpet"
-				                }
-				            ],
-				            "table": [
-				                {
-				                    "cells": {
-				                        "fill": {
-				                            "color": "#e6f6ec"
-				                        },
-				                        "line": {
-				                            "color": "#cfe8d7"
-				                        },
-				                        "font": {
-				                            "color": "#164233",
-				                            "family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
-				                            "size": 13
-				                        }
-				                    },
-				                    "header": {
-				                        "fill": {
-				                            "color": "#b8e3c6"
-				                        },
-				                        "line": {
-				                            "color": "#cfe8d7"
-				                        },
-				                        "font": {
-				                            "color": "#164233",
-				                            "family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
-				                            "size": 14
-				                        }
-				                    },
-				                    "type": "table"
-				                }
-				            ],
-				            "barpolar": [
-				                {
-				                    "marker": {
-				                        "line": {
-				                            "color": "#ecf7f0",
-				                            "width": 0.5
-				                        },
-				                        "pattern": {
-				                            "fillmode": "overlay",
-				                            "size": 10,
-				                            "solidity": 0.2
-				                        }
-				                    },
-				                    "type": "barpolar"
-				                }
-				            ],
-				            "pie": [
-				                {
-				                    "automargin": true,
-				                    "type": "pie"
-				                }
-				            ]
-				        },
-				        "layout": {
-				            "autotypenumbers": "strict",
-				            "colorway": [
-				                "#0b5d1e",
-				                "#1e7633",
-				                "#2f9147",
-				                "#41aa5f",
-				                "#55c278",
-				                "#6fce8f",
-				                "#8bd9a6",
-				                "#a8e3bd",
-				                "#c8edd5",
-				                "#e4f7e9"
-				            ],
-				            "font": {
-				                "color": "#164233",
-				                "family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
-				                "size": 14
-				            },
-				            "hovermode": "closest",
-				            "hoverlabel": {
-				                "align": "left",
-				                "bgcolor": "#123b2a",
-				                "bordercolor": "#0a251a",
-				                "font": {
-				                    "color": "#f2fbf5",
-				                    "family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
-				                    "size": 12
-				                }
-				            },
-				            "paper_bgcolor": "#f6fbf8",
-				            "plot_bgcolor": "#ecf7f0",
-				            "polar": {
-				                "bgcolor": "#ecf7f0",
-				                "angularaxis": {
-				                    "gridcolor": "#ffffff",
-				                    "linecolor": "#ffffff",
-				                    "ticks": ""
-				                },
-				                "radialaxis": {
-				                    "gridcolor": "#ffffff",
-				                    "linecolor": "#ffffff",
-				                    "ticks": ""
-				                }
-				            },
-				            "ternary": {
-				                "bgcolor": "#ecf7f0",
-				                "aaxis": {
-				                    "gridcolor": "white",
-				                    "linecolor": "white",
-				                    "ticks": ""
-				                },
-				                "baxis": {
-				                    "gridcolor": "white",
-				                    "linecolor": "white",
-				                    "ticks": ""
-				                },
-				                "caxis": {
-				                    "gridcolor": "white",
-				                    "linecolor": "white",
-				                    "ticks": ""
-				                }
-				            },
-				            "coloraxis": {
-				                "colorbar": {
-				                    "outlinewidth": 0,
-				                    "ticks": "",
-				                    "tickfont": {
-				                        "color": "#164233",
-				                        "family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
-				                        "size": 12
-				                    }
-				                },
-				                "colorscale": [
-				                    [
-				                        0.0,
-				                        "#f2fbf5"
-				                    ],
-				                    [
-				                        0.2,
-				                        "#d5f1dd"
-				                    ],
-				                    [
-				                        0.4,
-				                        "#a8e0bf"
-				                    ],
-				                    [
-				                        0.6,
-				                        "#74cf9f"
-				                    ],
-				                    [
-				                        0.8,
-				                        "#3bbd79"
-				                    ],
-				                    [
-				                        1.0,
-				                        "#138f4c"
-				                    ]
-				                ]
-				            },
-				            "colorscale": {
-				                "sequential": [
-				                    [
-				                        0.0,
-				                        "#f2fbf5"
-				                    ],
-				                    [
-				                        0.2,
-				                        "#d5f1dd"
-				                    ],
-				                    [
-				                        0.4,
-				                        "#a8e0bf"
-				                    ],
-				                    [
-				                        0.6,
-				                        "#74cf9f"
-				                    ],
-				                    [
-				                        0.8,
-				                        "#3bbd79"
-				                    ],
-				                    [
-				                        1.0,
-				                        "#138f4c"
-				                    ]
-				                ],
-				                "sequentialminus": [
-				                    [
-				                        0.0,
-				                        "#f2fbf5"
-				                    ],
-				                    [
-				                        0.2,
-				                        "#d5f1dd"
-				                    ],
-				                    [
-				                        0.4,
-				                        "#a8e0bf"
-				                    ],
-				                    [
-				                        0.6,
-				                        "#74cf9f"
-				                    ],
-				                    [
-				                        0.8,
-				                        "#3bbd79"
-				                    ],
-				                    [
-				                        1.0,
-				                        "#138f4c"
-				                    ]
-				                ],
-				                "diverging": [
-				                    [
-				                        0.0,
-				                        "#0b442a"
-				                    ],
-				                    [
-				                        0.1,
-				                        "#0f5631"
-				                    ],
-				                    [
-				                        0.2,
-				                        "#14683a"
-				                    ],
-				                    [
-				                        0.3,
-				                        "#1d7d45"
-				                    ],
-				                    [
-				                        0.4,
-				                        "#2e9355"
-				                    ],
-				                    [
-				                        0.5,
-				                        "#47ab6a"
-				                    ],
-				                    [
-				                        0.6,
-				                        "#6bc487"
-				                    ],
-				                    [
-				                        0.7,
-				                        "#9edbb0"
-				                    ],
-				                    [
-				                        0.8,
-				                        "#c8ead0"
-				                    ],
-				                    [
-				                        0.9,
-				                        "#e6f5e6"
-				                    ],
-				                    [
-				                        1.0,
-				                        "#f5fbf3"
-				                    ]
-				                ]
-				            },
-				            "xaxis": {
-				                "gridcolor": "white",
-				                "linecolor": "white",
-				                "ticks": "",
-				                "title": {
-				                    "standoff": 15,
-				                    "font": {
-				                        "color": "#0d3b29",
-				                        "family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
-				                        "size": 16
-				                    }
-				                },
-				                "zerolinecolor": "white",
-				                "automargin": true,
-				                "zerolinewidth": 2,
-				                "tickfont": {
-				                    "color": "#164233",
-				                    "family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
-				                    "size": 12
-				                }
-				            },
-				            "yaxis": {
-				                "gridcolor": "white",
-				                "linecolor": "white",
-				                "ticks": "",
-				                "title": {
-				                    "standoff": 15,
-				                    "font": {
-				                        "color": "#0d3b29",
-				                        "family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
-				                        "size": 16
-				                    }
-				                },
-				                "zerolinecolor": "white",
-				                "automargin": true,
-				                "zerolinewidth": 2,
-				                "tickfont": {
-				                    "color": "#164233",
-				                    "family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
-				                    "size": 12
-				                }
-				            },
-				            "scene": {
-				                "xaxis": {
-				                    "backgroundcolor": "#ecf7f0",
-				                    "gridcolor": "#ffffff",
-				                    "linecolor": "#ffffff",
-				                    "showbackground": true,
-				                    "ticks": "",
-				                    "zerolinecolor": "#ffffff",
-				                    "gridwidth": 1
-				                },
-				                "yaxis": {
-				                    "backgroundcolor": "#ecf7f0",
-				                    "gridcolor": "#ffffff",
-				                    "linecolor": "#ffffff",
-				                    "showbackground": true,
-				                    "ticks": "",
-				                    "zerolinecolor": "#ffffff",
-				                    "gridwidth": 1
-				                },
-				                "zaxis": {
-				                    "backgroundcolor": "#ecf7f0",
-				                    "gridcolor": "#ffffff",
-				                    "linecolor": "#ffffff",
-				                    "showbackground": true,
-				                    "ticks": "",
-				                    "zerolinecolor": "#ffffff",
-				                    "gridwidth": 1
-				                }
-				            },
-				            "shapedefaults": {
-				                "line": {
-				                    "color": "#1f5139"
-				                }
-				            },
-				            "annotationdefaults": {
-				                "arrowcolor": "#1f5139",
-				                "arrowhead": 0,
-				                "arrowwidth": 1
-				            },
-				            "geo": {
-				                "bgcolor": "#f6fbf8",
-				                "landcolor": "#d4f0e0",
-				                "subunitcolor": "#ffffff",
-				                "showland": true,
-				                "showlakes": true,
-				                "lakecolor": "#f3f9f4"
-				            },
-				            "title": {
-				                "x": 0.05,
-				                "font": {
-				                    "color": "#0d3b29",
-				                    "family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
-				                    "size": 24
-				                }
-				            },
-				            "mapbox": {
-				                "style": "light"
-				            }
-				        }
-				    },
-				    "xaxis": {
-				        "anchor": "y",
-				        "domain": [
-				            0.0,
-				            1.0
-				        ],
-				        "title": {
-				            "text": "Score ponderado",
-				            "font": {
-				                "color": "#0d3b29",
-				                "family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
-				                "size": 16
-				            }
-				        },
-				        "tickfont": {
-				            "color": "#164233",
-				            "family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
-				            "size": 12
-				        }
-				    },
-				    "yaxis": {
-				        "anchor": "x",
-				        "domain": [
-				            0.0,
-				            1.0
-				        ],
-				        "title": {
-				            "text": "company_name",
-				            "font": {
-				                "color": "#0d3b29",
-				                "family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
-				                "size": 16
-				            }
-				        },
-				        "automargin": true,
-				        "tickfont": {
-				            "color": "#164233",
-				            "family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
-				            "size": 12
-				        }
-				    },
-				    "legend": {
-				        "title": {
-				            "text": "country"
-				        },
-				        "tracegroupgap": 0,
-				        "font": {
-				            "color": "#164233",
-				            "family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
-				            "size": 14
-				        }
-				    },
-				    "title": {
-				        "text": "Top 25 Empresas por Intensidad de Demanda",
-				        "font": {
-				            "color": "#0d3b29",
-				            "family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
-				            "size": 24
-				        }
-				    },
-				    "barmode": "relative",
-				    "height": 800,
-				    "autosize": true,
-				    "colorway": [
-				        "#0b5d1e",
-				        "#1e7633",
-				        "#2f9147",
-				        "#41aa5f",
-				        "#55c278",
-				        "#6fce8f",
-				        "#8bd9a6",
-				        "#a8e3bd",
-				        "#c8edd5",
-				        "#e4f7e9"
-				    ],
-				    "paper_bgcolor": "#f6fbf8",
-				    "plot_bgcolor": "#ecf7f0",
-				    "font": {
-				        "color": "#164233",
-				        "family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
-				        "size": 14
-				    },
-				    "hoverlabel": {
-				        "bgcolor": "#123b2a",
-				        "bordercolor": "#0a251a",
-				        "font": {
-				            "color": "#f2fbf5",
-				            "family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
-				            "size": 12
-				        }
-				    }
+					"template": {
+						"data": {
+							"bar": [
+								{
+									"error_x": {
+										"color": "#2a3f5f"
+									},
+									"error_y": {
+										"color": "#2a3f5f"
+									},
+									"marker": {
+										"line": {
+											"color": "#E5ECF6",
+											"width": 0.5
+										},
+										"pattern": {
+											"fillmode": "overlay",
+											"size": 10,
+											"solidity": 0.2
+										}
+									},
+									"type": "bar"
+								}
+							],
+							"choropleth": [
+								{
+									"colorbar": {
+										"outlinewidth": 0,
+										"ticks": ""
+									},
+									"type": "choropleth"
+								}
+							],
+							"contour": [
+								{
+									"colorbar": {
+										"outlinewidth": 0,
+										"ticks": ""
+									},
+									"colorscale": [
+										[
+											0.0,
+											"#f2fbf5"
+										],
+										[
+											0.2,
+											"#d5f1dd"
+										],
+										[
+											0.4,
+											"#a8e0bf"
+										],
+										[
+											0.6,
+											"#74cf9f"
+										],
+										[
+											0.8,
+											"#3bbd79"
+										],
+										[
+											1.0,
+											"#138f4c"
+										]
+									],
+									"type": "contour"
+								}
+							],
+							"heatmap": [
+								{
+									"colorbar": {
+										"outlinewidth": 0,
+										"ticks": ""
+									},
+									"colorscale": [
+										[
+											0.0,
+											"#f2fbf5"
+										],
+										[
+											0.2,
+											"#d5f1dd"
+										],
+										[
+											0.4,
+											"#a8e0bf"
+										],
+										[
+											0.6,
+											"#74cf9f"
+										],
+										[
+											0.8,
+											"#3bbd79"
+										],
+										[
+											1.0,
+											"#138f4c"
+										]
+									],
+									"type": "heatmap"
+								}
+							],
+							"histogram2dcontour": [
+								{
+									"colorbar": {
+										"outlinewidth": 0,
+										"ticks": ""
+									},
+									"colorscale": [
+										[
+											0.0,
+											"#f2fbf5"
+										],
+										[
+											0.2,
+											"#d5f1dd"
+										],
+										[
+											0.4,
+											"#a8e0bf"
+										],
+										[
+											0.6,
+											"#74cf9f"
+										],
+										[
+											0.8,
+											"#3bbd79"
+										],
+										[
+											1.0,
+											"#138f4c"
+										]
+									],
+									"type": "histogram2dcontour"
+								}
+							],
+							"histogram2d": [
+								{
+									"colorbar": {
+										"outlinewidth": 0,
+										"ticks": ""
+									},
+									"colorscale": [
+										[
+											0.0,
+											"#f2fbf5"
+										],
+										[
+											0.2,
+											"#d5f1dd"
+										],
+										[
+											0.4,
+											"#a8e0bf"
+										],
+										[
+											0.6,
+											"#74cf9f"
+										],
+										[
+											0.8,
+											"#3bbd79"
+										],
+										[
+											1.0,
+											"#138f4c"
+										]
+									],
+									"type": "histogram2d"
+								}
+							],
+							"scatter": [
+								{
+									"fillpattern": {
+										"fillmode": "overlay",
+										"size": 10,
+										"solidity": 0.2
+									},
+									"type": "scatter"
+								}
+							],
+							"surface": [
+								{
+									"colorbar": {
+										"outlinewidth": 0,
+										"ticks": ""
+									},
+									"colorscale": [
+										[
+											0.0,
+											"#f2fbf5"
+										],
+										[
+											0.2,
+											"#d5f1dd"
+										],
+										[
+											0.4,
+											"#a8e0bf"
+										],
+										[
+											0.6,
+											"#74cf9f"
+										],
+										[
+											0.8,
+											"#3bbd79"
+										],
+										[
+											1.0,
+											"#138f4c"
+										]
+									],
+									"type": "surface"
+								}
+							],
+							"table": [
+								{
+									"cells": {
+										"fill": {
+											"color": "#e6f6ec"
+										},
+										"font": {
+											"color": "#164233",
+											"family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
+											"size": 13
+										},
+										"line": {
+											"color": "#cfe8d7"
+										}
+									},
+									"header": {
+										"fill": {
+											"color": "#b8e3c6"
+										},
+										"font": {
+											"color": "#164233",
+											"family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
+											"size": 14
+										},
+										"line": {
+											"color": "#cfe8d7"
+										}
+									},
+									"type": "table"
+								}
+							]
+						},
+						"layout": {
+							"coloraxis": {
+								"colorbar": {
+									"outlinewidth": 0,
+									"tickfont": {
+										"color": "#164233",
+										"family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
+										"size": 12
+									}
+								},
+								"colorscale": [
+									[
+										0.0,
+										"#f2fbf5"
+									],
+									[
+										0.2,
+										"#d5f1dd"
+									],
+									[
+										0.4,
+										"#a8e0bf"
+									],
+									[
+										0.6,
+										"#74cf9f"
+									],
+									[
+										0.8,
+										"#3bbd79"
+									],
+									[
+										1.0,
+										"#138f4c"
+									]
+								]
+							},
+							"colorway": [
+								"#0b5d1e",
+								"#1e7633",
+								"#2f9147",
+								"#41aa5f",
+								"#55c278",
+								"#6fce8f",
+								"#8bd9a6",
+								"#a8e3bd",
+								"#c8edd5",
+								"#e4f7e9"
+							],
+							"font": {
+								"color": "#164233",
+								"family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
+								"size": 14
+							},
+							"geo": {
+								"bgcolor": "#f6fbf8",
+								"lakecolor": "#f3f9f4",
+								"landcolor": "#d4f0e0",
+								"showlakes": true,
+								"showland": true,
+								"subunitcolor": "#ffffff"
+							},
+							"hoverlabel": {
+								"bgcolor": "#123b2a",
+								"bordercolor": "#0a251a",
+								"font": {
+									"color": "#f2fbf5",
+									"family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
+									"size": 12
+								}
+							},
+							"legend": {
+								"font": {
+									"color": "#164233",
+									"family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
+									"size": 14
+								}
+							},
+							"mapbox": {
+								"style": "light"
+							},
+							"paper_bgcolor": "#f6fbf8",
+							"plot_bgcolor": "#ecf7f0",
+							"polar": {
+								"angularaxis": {
+									"gridcolor": "#ffffff",
+									"linecolor": "#ffffff",
+									"ticks": ""
+								},
+								"bgcolor": "#ecf7f0",
+								"radialaxis": {
+									"gridcolor": "#ffffff",
+									"linecolor": "#ffffff",
+									"ticks": ""
+								}
+							},
+							"title": {
+								"font": {
+									"color": "#0d3b29",
+									"family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
+									"size": 24
+								},
+								"x": 0.05
+							},
+							"xaxis": {
+								"automargin": true,
+								"gridcolor": "white",
+								"linecolor": "white",
+								"tickfont": {
+									"color": "#164233",
+									"family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
+									"size": 12
+								},
+								"ticks": "",
+								"title": {
+									"font": {
+										"color": "#0d3b29",
+										"family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
+										"size": 16
+									},
+									"standoff": 15
+								},
+								"zerolinecolor": "white",
+								"zerolinewidth": 2
+							},
+							"yaxis": {
+								"automargin": true,
+								"gridcolor": "white",
+								"linecolor": "white",
+								"tickfont": {
+									"color": "#164233",
+									"family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
+									"size": 12
+								},
+								"ticks": "",
+								"title": {
+									"font": {
+										"color": "#0d3b29",
+										"family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
+										"size": 16
+									},
+									"standoff": 15
+								},
+								"zerolinecolor": "white",
+								"zerolinewidth": 2
+							}
+						}
+					},
+					"xaxis": {
+						"anchor": "y",
+						"domain": [
+							0.0,
+							1.0
+						],
+						"title": {
+							"text": "Score ponderado"
+						},
+						"range": [
+							1.0552033338353477,
+							1.5958534046909572
+						]
+					},
+					"yaxis": {
+						"anchor": "x",
+						"domain": [
+							0.0,
+							1.0
+						],
+						"title": {
+							"text": "company_name"
+						},
+						"automargin": true
+					},
+					"legend": {
+						"title": {
+							"text": "País",
+							"font": {
+								"color": "#164233",
+								"family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
+								"size": 14
+							}
+						},
+						"tracegroupgap": 0,
+						"font": {
+							"color": "#164233",
+							"family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
+							"size": 14
+						}
+					},
+					"title": {},
+					"barmode": "relative",
+					"height": 720,
+					"width": 860
 				},
 				{
-				    "responsive": true
+					"responsive": true
 				}
 			);
 		}

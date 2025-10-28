@@ -4,898 +4,519 @@
 	<script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
 	<script charset="utf-8" src="https://cdn.plot.ly/plotly-3.1.0.min.js" integrity="sha256-Ei4740bWZhaUTQuD6q9yQlgVCMPBz6CZWhevDYPv93A=" crossorigin="anonymous"></script>
 	<style>
-@font-face { font-family: 'Josefin Sans'; src: url('../../JosefinSans-Medium.ttf') format('truetype'); font-weight: 500; font-style: normal; font-display: swap; }
-body { font-family: 'Josefin Sans', 'Helvetica Neue', Arial, sans-serif; background-color: #f6fbf8; color: #164233; }
-.plotly-graph-div { background-color: #ecf7f0; }
-</style>
+	@font-face { font-family: 'Josefin Sans'; src: url('../../JosefinSans-Medium.ttf') format('truetype'); font-weight: 500; font-style: normal; font-display: swap; }
+	body { font-family: 'Josefin Sans', 'Helvetica Neue', Arial, sans-serif; background-color: #f6fbf8; color: #164233; }
+	.plotly-graph-div { background-color: #ecf7f0; }
+	</style>
 </head>
 <body>
-	<div id="plotly-6c1bb3539cf94db19d70879f1a47760c" class="plotly-graph-div" style="height:600px; width:950px;"></div>
+	<div id="plotly-09225a7d87c54694be3e3161c1076836" class="plotly-graph-div" style="height:580px; width:860px;"></div>
 	<script type="text/javascript">
 		window.PLOTLYENV=window.PLOTLYENV || {};
-		if (document.getElementById("plotly-6c1bb3539cf94db19d70879f1a47760c")) {
+		if (document.getElementById("plotly-09225a7d87c54694be3e3161c1076836")) {
 			Plotly.newPlot(
-				"plotly-6c1bb3539cf94db19d70879f1a47760c",
+				"plotly-09225a7d87c54694be3e3161c1076836",
 				[
-				    {
-				        "colorbar": {
-				            "title": {
-				                "text": "# señales"
-				            }
-				        },
-				        "colorscale": [
-				            [
-				                0.0,
-				                "rgb(176, 242, 188)"
-				            ],
-				            [
-				                0.16666666666666666,
-				                "rgb(137, 232, 172)"
-				            ],
-				            [
-				                0.3333333333333333,
-				                "rgb(103, 219, 165)"
-				            ],
-				            [
-				                0.5,
-				                "rgb(76, 200, 163)"
-				            ],
-				            [
-				                0.6666666666666666,
-				                "rgb(56, 178, 163)"
-				            ],
-				            [
-				                0.8333333333333334,
-				                "rgb(44, 152, 160)"
-				            ],
-				            [
-				                1.0,
-				                "rgb(37, 125, 152)"
-				            ]
-				        ],
-				        "customdata": {
-				            "dtype": "f8",
-				            "bdata": "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",
-				            "shape": "7, 15, 2"
-				        },
-				        "hovertemplate": "industria=%{x}<br>país=%{y}<br>señales=%{z:.0f}<br>empresas únicas=%{customdata[0]:.0f}<br>score ponderado=%{customdata[1]:.2f}<extra></extra>",
-				        "x": [
-				            "Agro & alimentos",
-				            "Construcción, Infraestructura<br>& Bienes Raíces",
-				            "Energía & Servicios Públicos",
-				            "Servicios ambientales & circulares",
-				            "Finanzas, Seguros & Capital",
-				            "Salud, Pharma & Biotech",
-				            "Hospitalidad, Turismo & Ocio",
-				            "TIC, Digital & Medios",
-				            "Manufactura industrial",
-				            "Minería & materiales básicos",
-				            "Petróleo & gas",
-				            "Servicios profesionales & técnicos",
-				            "Sector público, social & educación",
-				            "Retail & servicios al consumidor",
-				            "Transporte, Movilidad & Logística"
-				        ],
-				        "xgap": 1,
-				        "y": [
-				            "AR",
-				            "BR",
-				            "CL",
-				            "CO",
-				            "MX",
-				            "PE",
-				            "UY"
-				        ],
-				        "ygap": 1,
-				        "z": {
-				            "dtype": "f8",
-				            "bdata": "AAAAAABAZkAAAAAAAAA1QAAAAAAAADJAAAAAAAAAKkAAAAAAAABCQAAAAAAAAC5AAAAAAAAAOUAAAAAAAEBTQAAAAAAAwF5AAAAAAAAALEAAAAAAAAA1QAAAAAAAADVAAAAAAAAAMkAAAAAAAIBfQAAAAAAAwFdAAAAAAACggUAAAAAAAABjQAAAAAAAQFRAAAAAAAAAOEAAAAAAAMBcQAAAAAAAgFZAAAAAAAAATEAAAAAAADB0QAAAAAAA4GtAAAAAAAAAQUAAAAAAAEBUQAAAAAAAgEJAAAAAAAAAP0AAAAAAAHCDQAAAAAAAYHRAAAAAAAAAY0AAAAAAAABIQAAAAAAAADVAAAAAAACAQ0AAAAAAAABDQAAAAAAAADJAAAAAAAAAKkAAAAAAAIBHQAAAAAAAAEtAAAAAAAAAP0AAAAAAAAAoQAAAAAAAAElAAAAAAAAAREAAAAAAAIBXQAAAAAAAQFVAAAAAAACAbEAAAAAAAABDQAAAAAAAADJAAAAAAAAAEEAAAAAAAABDQAAAAAAAACRAAAAAAAAAHEAAAAAAAABMQAAAAAAAAFJAAAAAAAAAKkAAAAAAAABIQAAAAAAAAC5AAAAAAAAALEAAAAAAAMBUQAAAAAAAAE5AAAAAAACgbkAAAAAAAMBdQAAAAAAAADBAAAAAAAAAAEAAAAAAAABKQAAAAAAAADZAAAAAAAAAPkAAAAAAAMBXQAAAAAAAIGJAAAAAAAAAMUAAAAAAAAA9QAAAAAAAADFAAAAAAAAAIEAAAAAAAOBpQAAAAAAAAE1AAAAAAACAQ0AAAAAAAAAwQAAAAAAAACBAAAAAAAAAHEAAAAAAAAAqQAAAAAAAABxAAAAAAAAA8D8AAAAAAAA4QAAAAAAAADtAAAAAAAAAIkAAAAAAAAAIQAAAAAAAABRAAAAAAAAAAEAAAAAAAIBEQAAAAAAAADFAAAAAAAAAN0AAAAAAAAAUQAAAAAAAAABAAAAAAAAAFEAAAAAAAAAcQAAAAAAAAPA/AAAAAAAACEAAAAAAAAAsQAAAAAAAACpAAAAAAAAAAAAAAAAAAAAAQAAAAAAAABRAAAAAAAAAAAAAAAAAAAA1QAAAAAAAABRA",
-				            "shape": "7, 15"
-				        },
-				        "type": "heatmap"
-				    }
+					{
+						"colorbar": {
+							"outlinewidth": 0,
+							"tickfont": {
+								"color": "#164233",
+								"family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
+								"size": 12
+							},
+							"title": {
+								"font": {
+									"color": "#164233",
+									"family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
+									"size": 16
+								},
+								"text": "# señales"
+							}
+						},
+						"colorscale": [
+							[
+								0.0,
+								"#f2fbf5"
+							],
+							[
+								0.2,
+								"#d5f1dd"
+							],
+							[
+								0.4,
+								"#a8e0bf"
+							],
+							[
+								0.6,
+								"#74cf9f"
+							],
+							[
+								0.8,
+								"#3bbd79"
+							],
+							[
+								1.0,
+								"#138f4c"
+							]
+						],
+						"customdata": {
+							"dtype": "f8",
+							"bdata": "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",
+							"shape": "7, 15, 2"
+						},
+						"hovertemplate": "industria=%{x}<br>país=%{y}<br>señales=%{z:.0f}<br>empresas únicas=%{customdata[0]:.0f}<br>Σ score=%{customdata[1]:.2f}<extra></extra>",
+						"x": [
+							"Agro & alimentos",
+							"Construcción, Infraestructura & Bienes Raíces",
+							"Energía & Servicios Públicos",
+							"environmental_circular_services",
+							"Finanzas, Seguros & Capital",
+							"healthcare_pharma_biotech",
+							"hospitality_tourism_leisure",
+							"TIC, Digital & Medios",
+							"Manufactura industrial",
+							"Minería & materiales básicos",
+							"Petróleo & gas",
+							"professional_services_consulting",
+							"Sector público, social & educación",
+							"Retail & servicios al consumidor",
+							"Transporte, Movilidad & Logística"
+						],
+						"xgap": 1,
+						"y": [
+							"AR",
+							"BR",
+							"CL",
+							"CO",
+							"MX",
+							"PE",
+							"UY"
+						],
+						"ygap": 1,
+						"z": {
+							"dtype": "f8",
+							"bdata": "AAAAAAAAWkAAAAAAAAAsQAAAAAAAgEBAAAAAAACAQ0AAAAAAAABEQAAAAAAAAC5AAAAAAAAANkAAAAAAAABkQAAAAAAAAF5AAAAAAAAAKEAAAAAAAAA6QAAAAAAAAEFAAAAAAAAAQUAAAAAAAIBPQAAAAAAAgFJAAAAAAADQc0AAAAAAAIBhQAAAAAAAwGNAAAAAAAAATUAAAAAAAGBnQAAAAAAAwFZAAAAAAAAATUAAAAAAAAiBQAAAAAAAwG5AAAAAAACAQUAAAAAAAABSQAAAAAAAAEpAAAAAAACATEAAAAAAABB/QAAAAAAAQG9AAAAAAAAAXkAAAAAAAABHQAAAAAAAAERAAAAAAACAREAAAAAAAABLQAAAAAAAACxAAAAAAAAALkAAAAAAAIBUQAAAAAAAgEdAAAAAAAAAOEAAAAAAAAAqQAAAAAAAgE5AAAAAAAAAUEAAAAAAAABPQAAAAAAAAFBAAAAAAAAAVkAAAAAAAAA/QAAAAAAAgEFAAAAAAAAAO0AAAAAAAABNQAAAAAAAADBAAAAAAAAAJkAAAAAAAABoQAAAAAAAAE9AAAAAAAAAIkAAAAAAAIBHQAAAAAAAAC5AAAAAAAAAMkAAAAAAAIBJQAAAAAAAgEZAAAAAAADAY0AAAAAAAMBaQAAAAAAAAERAAAAAAAAAGEAAAAAAAMBVQAAAAAAAADdAAAAAAAAAP0AAAAAAAGBlQAAAAAAAgGNAAAAAAAAAMEAAAAAAAAA9QAAAAAAAADBAAAAAAAAANEAAAAAAAABjQAAAAAAAAEtAAAAAAACAQEAAAAAAAAAwQAAAAAAAACxAAAAAAAAAJkAAAAAAAAA2QAAAAAAAABBAAAAAAAAA8D8AAAAAAAA1QAAAAAAAAD5AAAAAAAAAIkAAAAAAAAAIQAAAAAAAABxAAAAAAAAAFEAAAAAAAAA1QAAAAAAAACZAAAAAAAAAMkAAAAAAAAAQQAAAAAAAABBAAAAAAAAA8D8AAAAAAAAcQAAAAAAAAPA/AAAAAAAACEAAAAAAAAAuQAAAAAAAAC5AAAAAAAAAAAAAAAAAAADwPwAAAAAAACBAAAAAAAAAAEAAAAAAAAAzQAAAAAAAABhA",
+							"shape": "7, 15"
+						},
+						"type": "heatmap"
+					}
 				],
 				{
-				    "template": {
-				        "data": {
-				            "histogram2dcontour": [
-				                {
-				                    "type": "histogram2dcontour",
-				                    "colorbar": {
-				                        "outlinewidth": 0,
-				                        "ticks": ""
-				                    },
-				                    "colorscale": [
-				                        [
-				                            0.0,
-				                            "#f2fbf5"
-				                        ],
-				                        [
-				                            0.2,
-				                            "#d5f1dd"
-				                        ],
-				                        [
-				                            0.4,
-				                            "#a8e0bf"
-				                        ],
-				                        [
-				                            0.6,
-				                            "#74cf9f"
-				                        ],
-				                        [
-				                            0.8,
-				                            "#3bbd79"
-				                        ],
-				                        [
-				                            1.0,
-				                            "#138f4c"
-				                        ]
-				                    ]
-				                }
-				            ],
-				            "choropleth": [
-				                {
-				                    "type": "choropleth",
-				                    "colorbar": {
-				                        "outlinewidth": 0,
-				                        "ticks": ""
-				                    }
-				                }
-				            ],
-				            "histogram2d": [
-				                {
-				                    "type": "histogram2d",
-				                    "colorbar": {
-				                        "outlinewidth": 0,
-				                        "ticks": ""
-				                    },
-				                    "colorscale": [
-				                        [
-				                            0.0,
-				                            "#f2fbf5"
-				                        ],
-				                        [
-				                            0.2,
-				                            "#d5f1dd"
-				                        ],
-				                        [
-				                            0.4,
-				                            "#a8e0bf"
-				                        ],
-				                        [
-				                            0.6,
-				                            "#74cf9f"
-				                        ],
-				                        [
-				                            0.8,
-				                            "#3bbd79"
-				                        ],
-				                        [
-				                            1.0,
-				                            "#138f4c"
-				                        ]
-				                    ]
-				                }
-				            ],
-				            "heatmap": [
-				                {
-				                    "type": "heatmap",
-				                    "colorbar": {
-				                        "outlinewidth": 0,
-				                        "ticks": ""
-				                    },
-				                    "colorscale": [
-				                        [
-				                            0.0,
-				                            "#f2fbf5"
-				                        ],
-				                        [
-				                            0.2,
-				                            "#d5f1dd"
-				                        ],
-				                        [
-				                            0.4,
-				                            "#a8e0bf"
-				                        ],
-				                        [
-				                            0.6,
-				                            "#74cf9f"
-				                        ],
-				                        [
-				                            0.8,
-				                            "#3bbd79"
-				                        ],
-				                        [
-				                            1.0,
-				                            "#138f4c"
-				                        ]
-				                    ]
-				                }
-				            ],
-				            "contourcarpet": [
-				                {
-				                    "type": "contourcarpet",
-				                    "colorbar": {
-				                        "outlinewidth": 0,
-				                        "ticks": ""
-				                    }
-				                }
-				            ],
-				            "contour": [
-				                {
-				                    "type": "contour",
-				                    "colorbar": {
-				                        "outlinewidth": 0,
-				                        "ticks": ""
-				                    },
-				                    "colorscale": [
-				                        [
-				                            0.0,
-				                            "#f2fbf5"
-				                        ],
-				                        [
-				                            0.2,
-				                            "#d5f1dd"
-				                        ],
-				                        [
-				                            0.4,
-				                            "#a8e0bf"
-				                        ],
-				                        [
-				                            0.6,
-				                            "#74cf9f"
-				                        ],
-				                        [
-				                            0.8,
-				                            "#3bbd79"
-				                        ],
-				                        [
-				                            1.0,
-				                            "#138f4c"
-				                        ]
-				                    ]
-				                }
-				            ],
-				            "surface": [
-				                {
-				                    "type": "surface",
-				                    "colorbar": {
-				                        "outlinewidth": 0,
-				                        "ticks": ""
-				                    },
-				                    "colorscale": [
-				                        [
-				                            0.0,
-				                            "#f2fbf5"
-				                        ],
-				                        [
-				                            0.2,
-				                            "#d5f1dd"
-				                        ],
-				                        [
-				                            0.4,
-				                            "#a8e0bf"
-				                        ],
-				                        [
-				                            0.6,
-				                            "#74cf9f"
-				                        ],
-				                        [
-				                            0.8,
-				                            "#3bbd79"
-				                        ],
-				                        [
-				                            1.0,
-				                            "#138f4c"
-				                        ]
-				                    ]
-				                }
-				            ],
-				            "mesh3d": [
-				                {
-				                    "type": "mesh3d",
-				                    "colorbar": {
-				                        "outlinewidth": 0,
-				                        "ticks": ""
-				                    }
-				                }
-				            ],
-				            "scatter": [
-				                {
-				                    "fillpattern": {
-				                        "fillmode": "overlay",
-				                        "size": 10,
-				                        "solidity": 0.2
-				                    },
-				                    "type": "scatter"
-				                }
-				            ],
-				            "parcoords": [
-				                {
-				                    "type": "parcoords",
-				                    "line": {
-				                        "colorbar": {
-				                            "outlinewidth": 0,
-				                            "ticks": ""
-				                        }
-				                    }
-				                }
-				            ],
-				            "scatterpolargl": [
-				                {
-				                    "type": "scatterpolargl",
-				                    "marker": {
-				                        "colorbar": {
-				                            "outlinewidth": 0,
-				                            "ticks": ""
-				                        }
-				                    }
-				                }
-				            ],
-				            "bar": [
-				                {
-				                    "error_x": {
-				                        "color": "#2a3f5f"
-				                    },
-				                    "error_y": {
-				                        "color": "#2a3f5f"
-				                    },
-				                    "marker": {
-				                        "line": {
-				                            "color": "#E5ECF6",
-				                            "width": 0.5
-				                        },
-				                        "pattern": {
-				                            "fillmode": "overlay",
-				                            "size": 10,
-				                            "solidity": 0.2
-				                        }
-				                    },
-				                    "type": "bar"
-				                }
-				            ],
-				            "scattergeo": [
-				                {
-				                    "type": "scattergeo",
-				                    "marker": {
-				                        "colorbar": {
-				                            "outlinewidth": 0,
-				                            "ticks": ""
-				                        }
-				                    }
-				                }
-				            ],
-				            "scatterpolar": [
-				                {
-				                    "type": "scatterpolar",
-				                    "marker": {
-				                        "colorbar": {
-				                            "outlinewidth": 0,
-				                            "ticks": ""
-				                        }
-				                    }
-				                }
-				            ],
-				            "histogram": [
-				                {
-				                    "marker": {
-				                        "pattern": {
-				                            "fillmode": "overlay",
-				                            "size": 10,
-				                            "solidity": 0.2
-				                        }
-				                    },
-				                    "type": "histogram"
-				                }
-				            ],
-				            "scattergl": [
-				                {
-				                    "type": "scattergl",
-				                    "marker": {
-				                        "colorbar": {
-				                            "outlinewidth": 0,
-				                            "ticks": ""
-				                        }
-				                    }
-				                }
-				            ],
-				            "scatter3d": [
-				                {
-				                    "type": "scatter3d",
-				                    "line": {
-				                        "colorbar": {
-				                            "outlinewidth": 0,
-				                            "ticks": ""
-				                        }
-				                    },
-				                    "marker": {
-				                        "colorbar": {
-				                            "outlinewidth": 0,
-				                            "ticks": ""
-				                        }
-				                    }
-				                }
-				            ],
-				            "scattermap": [
-				                {
-				                    "type": "scattermap",
-				                    "marker": {
-				                        "colorbar": {
-				                            "outlinewidth": 0,
-				                            "ticks": ""
-				                        }
-				                    }
-				                }
-				            ],
-				            "scattermapbox": [
-				                {
-				                    "type": "scattermapbox",
-				                    "marker": {
-				                        "colorbar": {
-				                            "outlinewidth": 0,
-				                            "ticks": ""
-				                        }
-				                    }
-				                }
-				            ],
-				            "scatterternary": [
-				                {
-				                    "type": "scatterternary",
-				                    "marker": {
-				                        "colorbar": {
-				                            "outlinewidth": 0,
-				                            "ticks": ""
-				                        }
-				                    }
-				                }
-				            ],
-				            "scattercarpet": [
-				                {
-				                    "type": "scattercarpet",
-				                    "marker": {
-				                        "colorbar": {
-				                            "outlinewidth": 0,
-				                            "ticks": ""
-				                        }
-				                    }
-				                }
-				            ],
-				            "carpet": [
-				                {
-				                    "aaxis": {
-				                        "endlinecolor": "#2a3f5f",
-				                        "gridcolor": "white",
-				                        "linecolor": "white",
-				                        "minorgridcolor": "white",
-				                        "startlinecolor": "#2a3f5f"
-				                    },
-				                    "baxis": {
-				                        "endlinecolor": "#2a3f5f",
-				                        "gridcolor": "white",
-				                        "linecolor": "white",
-				                        "minorgridcolor": "white",
-				                        "startlinecolor": "#2a3f5f"
-				                    },
-				                    "type": "carpet"
-				                }
-				            ],
-				            "table": [
-				                {
-				                    "cells": {
-				                        "fill": {
-				                            "color": "#e6f6ec"
-				                        },
-				                        "line": {
-				                            "color": "#cfe8d7"
-				                        },
-				                        "font": {
-				                            "color": "#164233",
-				                            "family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
-				                            "size": 13
-				                        }
-				                    },
-				                    "header": {
-				                        "fill": {
-				                            "color": "#b8e3c6"
-				                        },
-				                        "line": {
-				                            "color": "#cfe8d7"
-				                        },
-				                        "font": {
-				                            "color": "#164233",
-				                            "family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
-				                            "size": 14
-				                        }
-				                    },
-				                    "type": "table"
-				                }
-				            ],
-				            "barpolar": [
-				                {
-				                    "marker": {
-				                        "line": {
-				                            "color": "#ecf7f0",
-				                            "width": 0.5
-				                        },
-				                        "pattern": {
-				                            "fillmode": "overlay",
-				                            "size": 10,
-				                            "solidity": 0.2
-				                        }
-				                    },
-				                    "type": "barpolar"
-				                }
-				            ],
-				            "pie": [
-				                {
-				                    "automargin": true,
-				                    "type": "pie"
-				                }
-				            ]
-				        },
-				        "layout": {
-				            "autotypenumbers": "strict",
-				            "colorway": [
-				                "#0b5d1e",
-				                "#1e7633",
-				                "#2f9147",
-				                "#41aa5f",
-				                "#55c278",
-				                "#6fce8f",
-				                "#8bd9a6",
-				                "#a8e3bd",
-				                "#c8edd5",
-				                "#e4f7e9"
-				            ],
-				            "font": {
-				                "color": "#164233",
-				                "family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
-				                "size": 14
-				            },
-				            "hovermode": "closest",
-				            "hoverlabel": {
-				                "align": "left",
-				                "bgcolor": "#123b2a",
-				                "bordercolor": "#0a251a",
-				                "font": {
-				                    "color": "#f2fbf5",
-				                    "family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
-				                    "size": 12
-				                }
-				            },
-				            "paper_bgcolor": "#f6fbf8",
-				            "plot_bgcolor": "#ecf7f0",
-				            "polar": {
-				                "bgcolor": "#ecf7f0",
-				                "angularaxis": {
-				                    "gridcolor": "#ffffff",
-				                    "linecolor": "#ffffff",
-				                    "ticks": ""
-				                },
-				                "radialaxis": {
-				                    "gridcolor": "#ffffff",
-				                    "linecolor": "#ffffff",
-				                    "ticks": ""
-				                }
-				            },
-				            "ternary": {
-				                "bgcolor": "#ecf7f0",
-				                "aaxis": {
-				                    "gridcolor": "white",
-				                    "linecolor": "white",
-				                    "ticks": ""
-				                },
-				                "baxis": {
-				                    "gridcolor": "white",
-				                    "linecolor": "white",
-				                    "ticks": ""
-				                },
-				                "caxis": {
-				                    "gridcolor": "white",
-				                    "linecolor": "white",
-				                    "ticks": ""
-				                }
-				            },
-				            "coloraxis": {
-				                "colorbar": {
-				                    "outlinewidth": 0,
-				                    "ticks": "",
-				                    "tickfont": {
-				                        "color": "#164233",
-				                        "family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
-				                        "size": 12
-				                    }
-				                },
-				                "colorscale": [
-				                    [
-				                        0.0,
-				                        "#f2fbf5"
-				                    ],
-				                    [
-				                        0.2,
-				                        "#d5f1dd"
-				                    ],
-				                    [
-				                        0.4,
-				                        "#a8e0bf"
-				                    ],
-				                    [
-				                        0.6,
-				                        "#74cf9f"
-				                    ],
-				                    [
-				                        0.8,
-				                        "#3bbd79"
-				                    ],
-				                    [
-				                        1.0,
-				                        "#138f4c"
-				                    ]
-				                ]
-				            },
-				            "colorscale": {
-				                "sequential": [
-				                    [
-				                        0.0,
-				                        "#f2fbf5"
-				                    ],
-				                    [
-				                        0.2,
-				                        "#d5f1dd"
-				                    ],
-				                    [
-				                        0.4,
-				                        "#a8e0bf"
-				                    ],
-				                    [
-				                        0.6,
-				                        "#74cf9f"
-				                    ],
-				                    [
-				                        0.8,
-				                        "#3bbd79"
-				                    ],
-				                    [
-				                        1.0,
-				                        "#138f4c"
-				                    ]
-				                ],
-				                "sequentialminus": [
-				                    [
-				                        0.0,
-				                        "#f2fbf5"
-				                    ],
-				                    [
-				                        0.2,
-				                        "#d5f1dd"
-				                    ],
-				                    [
-				                        0.4,
-				                        "#a8e0bf"
-				                    ],
-				                    [
-				                        0.6,
-				                        "#74cf9f"
-				                    ],
-				                    [
-				                        0.8,
-				                        "#3bbd79"
-				                    ],
-				                    [
-				                        1.0,
-				                        "#138f4c"
-				                    ]
-				                ],
-				                "diverging": [
-				                    [
-				                        0.0,
-				                        "#0b442a"
-				                    ],
-				                    [
-				                        0.1,
-				                        "#0f5631"
-				                    ],
-				                    [
-				                        0.2,
-				                        "#14683a"
-				                    ],
-				                    [
-				                        0.3,
-				                        "#1d7d45"
-				                    ],
-				                    [
-				                        0.4,
-				                        "#2e9355"
-				                    ],
-				                    [
-				                        0.5,
-				                        "#47ab6a"
-				                    ],
-				                    [
-				                        0.6,
-				                        "#6bc487"
-				                    ],
-				                    [
-				                        0.7,
-				                        "#9edbb0"
-				                    ],
-				                    [
-				                        0.8,
-				                        "#c8ead0"
-				                    ],
-				                    [
-				                        0.9,
-				                        "#e6f5e6"
-				                    ],
-				                    [
-				                        1.0,
-				                        "#f5fbf3"
-				                    ]
-				                ]
-				            },
-				            "xaxis": {
-				                "gridcolor": "white",
-				                "linecolor": "white",
-				                "ticks": "",
-				                "title": {
-				                    "standoff": 15,
-				                    "font": {
-				                        "color": "#0d3b29",
-				                        "family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
-				                        "size": 16
-				                    }
-				                },
-				                "zerolinecolor": "white",
-				                "automargin": true,
-				                "zerolinewidth": 2,
-				                "tickfont": {
-				                    "color": "#164233",
-				                    "family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
-				                    "size": 12
-				                }
-				            },
-				            "yaxis": {
-				                "gridcolor": "white",
-				                "linecolor": "white",
-				                "ticks": "",
-				                "title": {
-				                    "standoff": 15,
-				                    "font": {
-				                        "color": "#0d3b29",
-				                        "family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
-				                        "size": 16
-				                    }
-				                },
-				                "zerolinecolor": "white",
-				                "automargin": true,
-				                "zerolinewidth": 2,
-				                "tickfont": {
-				                    "color": "#164233",
-				                    "family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
-				                    "size": 12
-				                }
-				            },
-				            "scene": {
-				                "xaxis": {
-				                    "backgroundcolor": "#ecf7f0",
-				                    "gridcolor": "#ffffff",
-				                    "linecolor": "#ffffff",
-				                    "showbackground": true,
-				                    "ticks": "",
-				                    "zerolinecolor": "#ffffff",
-				                    "gridwidth": 1
-				                },
-				                "yaxis": {
-				                    "backgroundcolor": "#ecf7f0",
-				                    "gridcolor": "#ffffff",
-				                    "linecolor": "#ffffff",
-				                    "showbackground": true,
-				                    "ticks": "",
-				                    "zerolinecolor": "#ffffff",
-				                    "gridwidth": 1
-				                },
-				                "zaxis": {
-				                    "backgroundcolor": "#ecf7f0",
-				                    "gridcolor": "#ffffff",
-				                    "linecolor": "#ffffff",
-				                    "showbackground": true,
-				                    "ticks": "",
-				                    "zerolinecolor": "#ffffff",
-				                    "gridwidth": 1
-				                }
-				            },
-				            "shapedefaults": {
-				                "line": {
-				                    "color": "#1f5139"
-				                }
-				            },
-				            "annotationdefaults": {
-				                "arrowcolor": "#1f5139",
-				                "arrowhead": 0,
-				                "arrowwidth": 1
-				            },
-				            "geo": {
-				                "bgcolor": "#f6fbf8",
-				                "landcolor": "#d4f0e0",
-				                "subunitcolor": "#ffffff",
-				                "showland": true,
-				                "showlakes": true,
-				                "lakecolor": "#f3f9f4"
-				            },
-				            "title": {
-				                "x": 0.05,
-				                "font": {
-				                    "color": "#0d3b29",
-				                    "family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
-				                    "size": 24
-				                }
-				            },
-				            "mapbox": {
-				                "style": "light"
-				            }
-				        }
-				    },
-				    "xaxis": {
-				        "automargin": true,
-				        "showgrid": false,
-				        "zeroline": false,
-				        "tickfont": {
-				            "color": "#164233",
-				            "family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
-				            "size": 12
-				        }
-				    },
-				    "yaxis": {
-				        "automargin": true,
-				        "showgrid": false,
-				        "zeroline": false,
-				        "tickfont": {
-				            "color": "#164233",
-				            "family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
-				            "size": 12
-				        }
-				    },
-				    "title": {
-				        "text": "Señales por país e industria",
-				        "font": {
-				            "color": "#0d3b29",
-				            "family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
-				            "size": 24
-				        }
-				    },
-				    "autosize": true,
-				    "height": 600,
-				    "plot_bgcolor": "#ecf7f0",
-				    "paper_bgcolor": "#f6fbf8",
-				    "colorway": [
-				        "#0b5d1e",
-				        "#1e7633",
-				        "#2f9147",
-				        "#41aa5f",
-				        "#55c278",
-				        "#6fce8f",
-				        "#8bd9a6",
-				        "#a8e3bd",
-				        "#c8edd5",
-				        "#e4f7e9"
-				    ],
-				    "font": {
-				        "color": "#164233",
-				        "family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
-				        "size": 14
-				    },
-				    "hoverlabel": {
-				        "bgcolor": "#123b2a",
-				        "bordercolor": "#0a251a",
-				        "font": {
-				            "color": "#f2fbf5",
-				            "family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
-				            "size": 12
-				        }
-				    }
+					"template": {
+						"data": {
+							"bar": [
+								{
+									"error_x": {
+										"color": "#2a3f5f"
+									},
+									"error_y": {
+										"color": "#2a3f5f"
+									},
+									"marker": {
+										"line": {
+											"color": "#E5ECF6",
+											"width": 0.5
+										},
+										"pattern": {
+											"fillmode": "overlay",
+											"size": 10,
+											"solidity": 0.2
+										}
+									},
+									"type": "bar"
+								}
+							],
+							"choropleth": [
+								{
+									"colorbar": {
+										"outlinewidth": 0,
+										"ticks": ""
+									},
+									"type": "choropleth"
+								}
+							],
+							"contour": [
+								{
+									"colorbar": {
+										"outlinewidth": 0,
+										"ticks": ""
+									},
+									"colorscale": [
+										[
+											0.0,
+											"#f2fbf5"
+										],
+										[
+											0.2,
+											"#d5f1dd"
+										],
+										[
+											0.4,
+											"#a8e0bf"
+										],
+										[
+											0.6,
+											"#74cf9f"
+										],
+										[
+											0.8,
+											"#3bbd79"
+										],
+										[
+											1.0,
+											"#138f4c"
+										]
+									],
+									"type": "contour"
+								}
+							],
+							"heatmap": [
+								{
+									"colorbar": {
+										"outlinewidth": 0,
+										"ticks": ""
+									},
+									"colorscale": [
+										[
+											0.0,
+											"#f2fbf5"
+										],
+										[
+											0.2,
+											"#d5f1dd"
+										],
+										[
+											0.4,
+											"#a8e0bf"
+										],
+										[
+											0.6,
+											"#74cf9f"
+										],
+										[
+											0.8,
+											"#3bbd79"
+										],
+										[
+											1.0,
+											"#138f4c"
+										]
+									],
+									"type": "heatmap"
+								}
+							],
+							"histogram2dcontour": [
+								{
+									"colorbar": {
+										"outlinewidth": 0,
+										"ticks": ""
+									},
+									"colorscale": [
+										[
+											0.0,
+											"#f2fbf5"
+										],
+										[
+											0.2,
+											"#d5f1dd"
+										],
+										[
+											0.4,
+											"#a8e0bf"
+										],
+										[
+											0.6,
+											"#74cf9f"
+										],
+										[
+											0.8,
+											"#3bbd79"
+										],
+										[
+											1.0,
+											"#138f4c"
+										]
+									],
+									"type": "histogram2dcontour"
+								}
+							],
+							"histogram2d": [
+								{
+									"colorbar": {
+										"outlinewidth": 0,
+										"ticks": ""
+									},
+									"colorscale": [
+										[
+											0.0,
+											"#f2fbf5"
+										],
+										[
+											0.2,
+											"#d5f1dd"
+										],
+										[
+											0.4,
+											"#a8e0bf"
+										],
+										[
+											0.6,
+											"#74cf9f"
+										],
+										[
+											0.8,
+											"#3bbd79"
+										],
+										[
+											1.0,
+											"#138f4c"
+										]
+									],
+									"type": "histogram2d"
+								}
+							],
+							"scatter": [
+								{
+									"fillpattern": {
+										"fillmode": "overlay",
+										"size": 10,
+										"solidity": 0.2
+									},
+									"type": "scatter"
+								}
+							],
+							"surface": [
+								{
+									"colorbar": {
+										"outlinewidth": 0,
+										"ticks": ""
+									},
+									"colorscale": [
+										[
+											0.0,
+											"#f2fbf5"
+										],
+										[
+											0.2,
+											"#d5f1dd"
+										],
+										[
+											0.4,
+											"#a8e0bf"
+										],
+										[
+											0.6,
+											"#74cf9f"
+										],
+										[
+											0.8,
+											"#3bbd79"
+										],
+										[
+											1.0,
+											"#138f4c"
+										]
+									],
+									"type": "surface"
+								}
+							],
+							"table": [
+								{
+									"cells": {
+										"fill": {
+											"color": "#e6f6ec"
+										},
+										"font": {
+											"color": "#164233",
+											"family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
+											"size": 13
+										},
+										"line": {
+											"color": "#cfe8d7"
+										}
+									},
+									"header": {
+										"fill": {
+											"color": "#b8e3c6"
+										},
+										"font": {
+											"color": "#164233",
+											"family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
+											"size": 14
+										},
+										"line": {
+											"color": "#cfe8d7"
+										}
+									},
+									"type": "table"
+								}
+							]
+						},
+						"layout": {
+							"coloraxis": {
+								"colorbar": {
+									"outlinewidth": 0,
+									"tickfont": {
+										"color": "#164233",
+										"family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
+										"size": 12
+									}
+								},
+								"colorscale": [
+									[
+										0.0,
+										"#f2fbf5"
+									],
+									[
+										0.2,
+										"#d5f1dd"
+									],
+									[
+										0.4,
+										"#a8e0bf"
+									],
+									[
+										0.6,
+										"#74cf9f"
+									],
+									[
+										0.8,
+										"#3bbd79"
+									],
+									[
+										1.0,
+										"#138f4c"
+									]
+								]
+							},
+							"colorway": [
+								"#0b5d1e",
+								"#1e7633",
+								"#2f9147",
+								"#41aa5f",
+								"#55c278",
+								"#6fce8f",
+								"#8bd9a6",
+								"#a8e3bd",
+								"#c8edd5",
+								"#e4f7e9"
+							],
+							"font": {
+								"color": "#164233",
+								"family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
+								"size": 14
+							},
+							"geo": {
+								"bgcolor": "#f6fbf8",
+								"lakecolor": "#f3f9f4",
+								"landcolor": "#d4f0e0",
+								"showlakes": true,
+								"showland": true,
+								"subunitcolor": "#ffffff"
+							},
+							"hoverlabel": {
+								"bgcolor": "#123b2a",
+								"bordercolor": "#0a251a",
+								"font": {
+									"color": "#f2fbf5",
+									"family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
+									"size": 12
+								}
+							},
+							"legend": {
+								"font": {
+									"color": "#164233",
+									"family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
+									"size": 14
+								}
+							},
+							"mapbox": {
+								"style": "light"
+							},
+							"paper_bgcolor": "#f6fbf8",
+							"plot_bgcolor": "#ecf7f0",
+							"polar": {
+								"angularaxis": {
+									"gridcolor": "#ffffff",
+									"linecolor": "#ffffff",
+									"ticks": ""
+								},
+								"bgcolor": "#ecf7f0",
+								"radialaxis": {
+									"gridcolor": "#ffffff",
+									"linecolor": "#ffffff",
+									"ticks": ""
+								}
+							},
+							"title": {
+								"font": {
+									"color": "#0d3b29",
+									"family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
+									"size": 24
+								},
+								"x": 0.05
+							},
+							"xaxis": {
+								"automargin": true,
+								"gridcolor": "white",
+								"linecolor": "white",
+								"tickfont": {
+									"color": "#164233",
+									"family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
+									"size": 12
+								},
+								"ticks": "",
+								"title": {
+									"font": {
+										"color": "#0d3b29",
+										"family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
+										"size": 16
+									},
+									"standoff": 15
+								},
+								"zerolinecolor": "white",
+								"zerolinewidth": 2
+							},
+							"yaxis": {
+								"automargin": true,
+								"gridcolor": "white",
+								"linecolor": "white",
+								"tickfont": {
+									"color": "#164233",
+									"family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
+									"size": 12
+								},
+								"ticks": "",
+								"title": {
+									"font": {
+										"color": "#0d3b29",
+										"family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
+										"size": 16
+									},
+									"standoff": 15
+								},
+								"zerolinecolor": "white",
+								"zerolinewidth": 2
+							}
+						}
+					},
+					"xaxis": {
+						"automargin": true,
+						"showgrid": false,
+						"zeroline": false
+					},
+					"yaxis": {
+						"automargin": true,
+						"showgrid": false,
+						"zeroline": false
+					},
+					"title": {},
+					"width": 860,
+					"height": 580
 				},
 				{
-				    "responsive": true
+					"responsive": true
 				}
 			);
 		}
