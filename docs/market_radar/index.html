@@ -118,6 +118,14 @@ nav {
     top: 1.5rem;
     align-self: start;
 }
+nav .nav-group + .nav-group {
+    margin-top: 1.3rem;
+}
+nav .nav-group h3 {
+    margin: 0 0 0.9rem;
+    font-size: 1.05rem;
+    color: var(--clr-accent);
+}
 nav h2 {
     font-size: 1.1rem;
     margin: 0 0 1rem;
@@ -365,7 +373,7 @@ footer .footer-logo img {
         font-size: 0.9rem;
     }
 
-    nav h2, nav .cluster-title {
+    nav h2, nav .cluster-title, nav .nav-group h3 {
         display: none; /* Oculta títulos para ahorrar espacio */
     }
     
@@ -424,93 +432,110 @@ footer .footer-logo img {
         </div>
     </footer>
     <script>
-const charts = [
+const chartGroups = [
     {
-        id: 'coverage-summary',
-        label: 'Resumen general',
-        description: 'Instantánea de cobertura y volumen de señales dentro del universo de compañías analizadas.',
-        file: 'html/coverage_summary.html',
-        height: 520,
+        title: 'Exploración de cobertura',
+        items: [
+            {
+                id: 'coverage-summary',
+                label: 'Resumen general',
+                description: 'Instantánea de cobertura y volumen de señales dentro del universo de compañías analizadas.',
+                file: 'html/coverage_summary.html',
+                height: 520,
+            },
+            {
+                id: 'coverage-gaps',
+                label: 'Brechas de cobertura',
+                description: 'Comparativa de intensidad y cobertura para priorizar industrias con potencial latente.',
+                file: 'html/coverage_gaps.html',
+                height: 600,
+            },
+            {
+                id: 'signal-mix-sankey',
+                label: 'Mix de señales',
+                description: 'Flujo entre el universo de compañías y combinaciones de certificaciones o noticias climáticas.',
+                file: 'html/signal_mix_sankey.html',
+                height: 600,
+            },
+        ],
     },
     {
-        id: 'total-signal-summary',
-        label: 'Indicadores globales',
-        description: 'Indicadores agregados sobre intensidad y distribución de señales climáticas en LATAM.',
-        file: 'html/total_signal_summary.html',
-        height: 520,
+        title: 'Exploración de señales',
+        items: [
+            {
+                type: 'divider',
+                label: 'Indicadores generales',
+            },
+            {
+                id: 'total-signal-summary',
+                label: 'Indicadores globales',
+                description: 'Indicadores agregados sobre intensidad y distribución de señales climáticas en LATAM.',
+                file: 'html/total_signal_summary.html',
+                height: 520,
+            },
+            {
+                type: 'divider',
+                label: 'Cobertura e industrias',
+            },
+            {
+                id: 'coverage-indicators',
+                label: 'Ranking por industria',
+                description: 'Volumen ponderado de señales y recuento de compañías por vertical industrial.',
+                file: 'html/coverage_indicators.html',
+                height: 550,
+            },
+            {
+                id: 'coverage-country-industry',
+                label: 'Heatmap país-industria',
+                description: 'Cruce entre industrias y países para identificar focos de actividad climática.',
+                file: 'html/coverage_country_industry.html',
+                height: 600,
+            },
+            {
+                id: 'coverage-timeline',
+                label: 'Evolución temporal',
+                description: 'Tendencias mensuales de señales por industria para detectar aceleraciones o desaceleraciones.',
+                file: 'html/coverage_timeline.html',
+                height: 520,
+            },
+            {
+                id: 'country-fact-sheet',
+                label: 'Ficha por país',
+                description: 'Detalle de indicadores y cobertura por país para contextualizar oportunidades.',
+                file: 'html/country_fact_sheet.html',
+                height: 750,
+            },
+            {
+                type: 'divider',
+                label: 'Enfoque geográfico',
+            },
+            {
+                id: 'map-intensity',
+                label: 'Intensidad por país',
+                description: 'Mapa temático que sintetiza la intensidad de señales y compañías detectadas en cada país.',
+                file: 'html/map_intensity.html',
+                height: 720,
+            },
+            {
+                type: 'divider',
+                label: 'Profundización en señales',
+            },
+            {
+                id: 'ranking-companies',
+                label: 'Ranking de compañías',
+                description: 'Listado ponderado de empresas líderes por país, con detalle de señales y sectores.',
+                file: 'html/ranking_companies.html',
+                height: 800,
+            },
+            {
+                id: 'signal-type-distribution',
+                label: 'Tipos de señales',
+                description: 'Distribución de señales por fuente (UNGC, B Corp, SBTi, prensa especializada).',
+                file: 'html/signal_type_distribution.html',
+                height: 450,
+            },
+        ],
     },
-    {
-        id: 'signal-mix-sankey',
-        label: 'Mix de señales',
-        description: 'Flujo entre el universo de compañías y combinaciones de certificaciones o noticias climáticas.',
-        file: 'html/signal_mix_sankey.html',
-        height: 600,
-    },
-    {
-        cluster: 'Cobertura sectorial'
-    },
-    {
-        id: 'coverage-indicators',
-        label: 'Ranking por industria',
-        description: 'Volumen ponderado de señales y recuento de compañías por vertical industrial.',
-        file: 'html/coverage_indicators.html',
-        height: 550,
-    },
-    {
-        id: 'coverage-country-industry',
-        label: 'Heatmap país-industria',
-        description: 'Cruce entre industrias y países para identificar focos de actividad climática.',
-        file: 'html/coverage_country_industry.html',
-        height: 600,
-    },
-    {
-        id: 'coverage-timeline',
-        label: 'Evolución temporal',
-        description: 'Tendencias mensuales de señales por industria para detectar aceleraciones o desaceleraciones.',
-        file: 'html/coverage_timeline.html',
-        height: 520,
-    },
-    {
-        id: 'coverage-gaps',
-        label: 'Brechas de cobertura',
-        description: 'Comparativa de intensidad y cobertura para priorizar industrias con potencial latente.',
-        file: 'html/coverage_gaps.html',
-        height: 600,
-    },
-    {
-        id: 'country-fact-sheet',
-        label: 'Ficha por país',
-        description: 'Detalle de indicadores y cobertura por país para contextualizar oportunidades.',
-        file: 'html/country_fact_sheet.html',
-        height: 750,
-    },
-    {
-        cluster: 'Enfoque geográfico'
-    },
-    {
-        id: 'map-intensity',
-        label: 'Intensidad por país',
-        description: 'Mapa temático que sintetiza la intensidad de señales y compañías detectadas en cada país.',
-        file: 'html/map_intensity.html',
-        height: 720,
-    },
-    {
-        cluster: 'Profundización en señales'
-    },
-    {
-        id: 'ranking-companies',
-        label: 'Ranking de compañías',
-        description: 'Listado ponderado de empresas líderes por país, con detalle de señales y sectores.',
-        file: 'html/ranking_companies.html',
-        height: 800,
-    },
-    {
-        id: 'signal-type-distribution',
-        label: 'Tipos de señales',
-        description: 'Distribución de señales por fuente (UNGC, B Corp, SBTi, prensa especializada).',
-        file: 'html/signal_type_distribution.html',
-        height: 450,
-    }
 ];
 
 const navContainer = document.getElementById('chart-nav');
@@ -521,25 +546,50 @@ let activeButton = null;
 let currentChartId = null;
 
 function createNav() {
-    const list = document.createElement('ul');
-    charts.forEach(item => {
-        if (item.cluster) {
-            const clusterLabel = document.createElement('div');
-            clusterLabel.className = 'cluster-title';
-            clusterLabel.textContent = item.cluster;
-            list.appendChild(clusterLabel);
-            return;
+    navContainer.innerHTML = '';
+    let firstInteractive = null;
+
+    chartGroups.forEach(group => {
+        const groupWrapper = document.createElement('div');
+        groupWrapper.className = 'nav-group';
+
+        if (group.title) {
+            const groupTitle = document.createElement('h3');
+            groupTitle.textContent = group.title;
+            groupWrapper.appendChild(groupTitle);
         }
-        const li = document.createElement('li');
-        const button = document.createElement('button');
-        button.type = 'button';
-        button.textContent = item.label;
-        button.dataset.chartId = item.id;
-        button.addEventListener('click', () => loadChart(item, button));
-        li.appendChild(button);
-        list.appendChild(li);
+
+        const list = document.createElement('ul');
+
+        group.items.forEach(item => {
+            if (item.type === 'divider') {
+                const divider = document.createElement('li');
+                divider.className = 'cluster-title';
+                divider.textContent = item.label;
+                divider.setAttribute('role', 'presentation');
+                list.appendChild(divider);
+                return;
+            }
+
+            const li = document.createElement('li');
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.textContent = item.label;
+            button.dataset.chartId = item.id;
+            button.addEventListener('click', () => loadChart(item, button));
+            li.appendChild(button);
+            list.appendChild(li);
+
+            if (!firstInteractive) {
+                firstInteractive = { chart: item, button };
+            }
+        });
+
+        groupWrapper.appendChild(list);
+        navContainer.appendChild(groupWrapper);
     });
-    navContainer.appendChild(list);
+
+    return firstInteractive;
 }
 
 function showLoading(message = 'Preparando visualización…') {
@@ -632,7 +682,7 @@ function loadChart(chart, button) {
     }
     currentChartId = chart.id;
     chartTitle.textContent = chart.label;
-    chartDescription.textContent = chart.description;
+    chartDescription.textContent = chart.description || '';
 
     if (activeButton) {
         activeButton.classList.remove('active');
@@ -685,13 +735,9 @@ function loadChart(chart, button) {
     viewer.appendChild(iframe);
 }
 
-createNav();
-const firstInteractiveButton = navContainer.querySelector('button[data-chart-id]');
-if (firstInteractiveButton) {
-    const firstChart = charts.find(item => item.id === firstInteractiveButton.dataset.chartId);
-    if (firstChart) {
-        loadChart(firstChart, firstInteractiveButton);
-    }
+const firstInteractive = createNav();
+if (firstInteractive) {
+    loadChart(firstInteractive.chart, firstInteractive.button);
 }
 
 window.addEventListener('resize', () => {
