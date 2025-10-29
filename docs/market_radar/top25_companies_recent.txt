@@ -1,0 +1,27 @@
+Top 25 Empresas (última señal >= 2023-10-01)
+
+- Banco do Brasil (BR · agro_food): score 57.27 (base 1.53 · recencia 1.14), promedio 1.00, señales 44, última 2025-10-09
+- Estrada de Ferro Noroeste do Brasil (BR · energy_power): score 7.95 (base 1.33 · recencia 0.75), promedio 1.00, señales 11, última 2025-02-19
+- Rio de Janeiro Metro (BR · healthcare_pharma_biotech): score 7.79 (base 1.29 · recencia 1.00), promedio 1.00, señales 8, última 2025-08-20
+- Mover Participações (BR · construction_realestate): score 7.23 (base 1.31 · recencia 0.79), promedio 1.00, señales 21, última 2025-04-03
+- Banco de Seguros del Estado (UY · finance_insurance): score 4.49 (base 1.24 · recencia 0.91), promedio 1.00, señales 4, última 2025-06-30
+- Agência Senado (BR · healthcare_pharma_biotech): score 3.49 (base 1.21 · recencia 0.96), promedio 1.00, señales 8, última 2025-07-31
+- PAPA (AR · manufacturing): score 2.90 (base 0.87 · recencia 1.11), promedio 0.72, señales 3, última 2025-10-02
+- Sociedad Anónima (UY · healthcare_pharma_biotech): score 2.87 (base 0.89 · recencia 1.07), promedio 0.87, señales 4, última 2025-09-17
+- Iochpe-Maxion (BR · retail_consumer): score 2.46 (base 1.16 · recencia 1.06), promedio 1.00, señales 2, última 2025-09-11
+- Arca Continental (MX · agro_food): score 2.24 (base 1.21 · recencia 0.62), promedio 1.00, señales 3, última 2024-02-01
+- Parque Arauco S.A. (CL · construction_realestate): score 2.23 (base 1.21 · recencia 1.04), promedio 0.56, señales 5, última 2025-09-04
+- Universidad Nacional de Córdoba (AR · public_social_education): score 1.79 (base 0.53 · recencia 1.13), promedio 0.44, señales 3, última 2025-10-08
+- Hilandería Warmi (AR · manufacturing): score 1.79 (base 0.85 · recencia 0.70), promedio 0.71, señales 3, última 2024-12-09
+- Aeropuertos Argentina (AR · transport_logistics): score 1.74 (base 0.42 · recencia 1.04), promedio 0.34, señales 4, última 2025-09-04
+- MRV Engenharia (BR · construction_realestate): score 1.67 (base 1.16 · recencia 0.72), promedio 1.00, señales 2, última 2025-01-09
+- Vista Energy (AR · oil_gas): score 1.66 (base 0.52 · recencia 1.07), promedio 0.43, señales 3, última 2025-09-16
+- BRF S.A. (BR · agro_food): score 1.63 (base 1.16 · recencia 0.70), promedio 1.00, señales 2, última 2024-12-12
+- Lojas Renner (BR · retail_consumer): score 1.55 (base 1.16 · recencia 0.67), promedio 1.00, señales 2, última 2024-09-26
+- Concha y Toro (CL · agro_food): score 1.53 (base 1.16 · recencia 0.66), promedio 1.00, señales 2, última 2024-09-05
+- Estudio Beccar Varela (AR · manufacturing): score 1.52 (base 0.67 · recencia 1.13), promedio 0.58, señales 2, última 2025-10-07
+- Brasil Telecom (BR · ict_telecom): score 1.52 (base 1.16 · recencia 0.65), promedio 1.00, señales 2, última 2024-08-15
+- Fundacion Protestante Hora de Obrar (AR · public_social_education): score 1.47 (base 0.71 · recencia 1.04), promedio 0.61, señales 2, última 2025-09-03
+- Universidad Siglo 21 (AR · public_social_education): score 1.43 (base 0.65 · recencia 1.10), promedio 0.56, señales 2, última 2025-09-25
+- Universidad Nacional de Rosario (AR · public_social_education): score 1.41 (base 0.71 · recencia 1.00), promedio 0.61, señales 2, última 2025-08-18
+- Scotiabank Chile (CL · finance_insurance): score 1.38 (base 0.63 · recencia 1.09), promedio 0.54, señales 2, última 2025-09-23

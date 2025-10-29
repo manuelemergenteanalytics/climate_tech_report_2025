@@ -1,34 +1,3 @@
-aliases:
-  healthcare_pharma_biotech:
-    - "biotecnolog"
-    - "laboratorio"
-    - "hospital"
-    - "clinica"
-    - "clínica"
-    - "medical"
-    - "medica"
-    - "médica"
-    - "farmaceut"
-    - "farmacéut"
-  retail_consumer_services:
-    - "jumbo"
-    - "supermercado"
-    - "hipermercado"
-    - "shopping"
-    - "tienda"
-    - "mall"
-  public_social_education:
-    - "instituto"
-    - "fundacion"
-    - "fundación"
-    - "universidad"
-    - "colegio"
-    - "ministerio"
-    - "gobierno"
-    - "municipio"
-    - "secretaria"
-    - "secretaría"
-
 mappings:
   # Energy & Utilities
   - pattern: "(?i)power generation|electric utility|grid operator|distribution company"
@@ -105,9 +74,6 @@ mappings:
     weight: 2
 
   # Retail & Consumer Services
-  - pattern: "(?i)jumbo|supermercad|hipermercad|retail|tienda|mall"
-    to: "retail_consumer_services"
-    weight: 3
   - pattern: "(?i)retail|commerce|minoris|tienda|store|mall"
     to: "retail_consumer_services"
     weight: 3
@@ -141,9 +107,6 @@ mappings:
     weight: 2
 
   # Healthcare, Pharma & Biotech
-  - pattern: "(?i)biotech|biotecnolog|pharma|laboratorio|dispositivo m[eé]dico"
-    to: "healthcare_pharma_biotech"
-    weight: 3
   - pattern: "(?i)healthcare|hospital|clinic|medical center"
     to: "healthcare_pharma_biotech"
     weight: 3
@@ -188,9 +151,6 @@ mappings:
     weight: 2
 
   # Public, Social & Education
-  - pattern: "(?i)instituto|fundaci[oó]n|universidad|colegio|min(isterio)?|gobierno|municipio|secretar[ií]a"
-    to: "public_social_education"
-    weight: 3
   - pattern: "(?i)government|ministry|municipal|public sector"
     to: "public_social_education"
     weight: 3
