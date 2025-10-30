@@ -10,20 +10,20 @@
 	</style>
 </head>
 <body>
-	<div id="plotly-b6ac1037e02941bdb7c4e73603931f2f" class="plotly-graph-div" style="height:540px; width:860px;"></div>
+	<div id="plotly-472d24b38f454c5a8fbce2b77ceceafc" class="plotly-graph-div" style="height:540px; width:100%; max-width:860px;"></div>
 	<script type="text/javascript">
 		window.PLOTLYENV=window.PLOTLYENV || {};
-		if (document.getElementById("plotly-b6ac1037e02941bdb7c4e73603931f2f")) {
+		if (document.getElementById("plotly-472d24b38f454c5a8fbce2b77ceceafc")) {
 			Plotly.newPlot(
-				"plotly-b6ac1037e02941bdb7c4e73603931f2f",
+				"plotly-472d24b38f454c5a8fbce2b77ceceafc",
 				[
 					{
 						"customdata": {
 							"dtype": "f8",
-							"bdata": "AAAAAABIj0DyXeyf3qnxP8P1KFyPwvE/AAAAAACgikDyXeyf3qnxP83MzMzMzPA/AAAAAAAgiUDyXeyf3qnxP8P1KFyPwvE/AAAAAAAohUDyXeyf3qnxPx+F61G4HvE/AAAAAAB4g0DyXeyf3qnxP9ejcD0K1/M/AAAAAAB4gEDyXeyf3qnxPz0K16NwPfI/AAAAAADwdkDyXeyf3qnxP0jhehSuR/E/AAAAAABgd0DyXeyf3qnxP+xRuB6F6/E/AAAAAABQcEDyXeyf3qnxP6RwPQrXo/A/AAAAAAAAc0DyXeyf3qnxPx+F61G4HvU/AAAAAABgakDyXeyf3qnxPxSuR+F6FPI/AAAAAAAAZ0DyXeyf3qnxPx+F61G4Hvk/AAAAAABAXUDyXeyf3qnxP83MzMzMzPA/AAAAAABAVEDyXeyf3qnxP3E9CtejcPk/",
-							"shape": "14, 3"
+							"bdata": "AAAAAAAojEAAAAAAAEiPQPJd7J/eqfE/w/UoXI/C8T8AAAAAAGCJQAAAAAAAoIpA8l3sn96p8T/NzMzMzMzwPwAAAAAAmIZAAAAAAAAgiUDyXeyf3qnxP8P1KFyPwvE/AAAAAADIg0AAAAAAACiFQPJd7J/eqfE/H4XrUbge8T8AAAAAAGB/QAAAAAAAeINA8l3sn96p8T/Xo3A9CtfzPwAAAAAA8HxAAAAAAAB4gEDyXeyf3qnxPz0K16NwPfI/AAAAAABAdUAAAAAAAPB2QPJd7J/eqfE/SOF6FK5H8T8AAAAAANB0QAAAAAAAYHdA8l3sn96p8T/sUbgehevxPwAAAAAAgG9AAAAAAABQcEDyXeyf3qnxP6RwPQrXo/A/AAAAAADgbEAAAAAAAABzQPJd7J/eqfE/H4XrUbge9T8AAAAAAEBnQAAAAAAAYGpA8l3sn96p8T8UrkfhehTyPwAAAAAAQF1AAAAAAAAAZ0DyXeyf3qnxPx+F61G4Hvk/AAAAAADAW0AAAAAAAEBdQPJd7J/eqfE/zczMzMzM8D8AAAAAAIBJQAAAAAAAQFRA8l3sn96p8T9xPQrXo3D5Pw==",
+							"shape": "14, 4"
 						},
-						"hovertemplate": "Σ score ponderado=%{x}<br>Industria=%{y}<br>Empresas=%{text}<br>total_events=%{customdata[0]}<br>median_intensity=%{customdata[1]:.2f}<br>avg_events_per_company=%{customdata[2]}<extra></extra>",
+						"hovertemplate": "Σ score ponderado=%{x:,.0f}<br>Industria=%{y}<br>Empresas detectadas=%{customdata[0]:,.0f}<br>Eventos totales=%{customdata[1]:,.0f}<br>Intensidad mediana=%{customdata[2]:.2f}<br>Eventos promedio por empresa=%{customdata[3]:.2f}<extra></extra>",
 						"legendgroup": "",
 						"marker": {
 							"color": "#6ccfa0",
@@ -40,7 +40,7 @@
 						"showlegend": false,
 						"text": {
 							"dtype": "f8",
-							"bdata": "AAAAAAAojEAAAAAAAGCJQAAAAAAAmIZAAAAAAADIg0AAAAAAAGB/QAAAAAAA8HxAAAAAAABAdUAAAAAAANB0QAAAAAAAgG9AAAAAAADgbEAAAAAAAEBnQAAAAAAAQF1AAAAAAADAW0AAAAAAAIBJQA=="
+							"bdata": "AAAAAAAwj0AAAAAAAAiMQAAAAAAACIlAAAAAAABohUAAAAAAAHCBQAAAAAAA4H9AAAAAAACQd0AAAAAAABB3QAAAAAAAcHFAAAAAAAAQcEAAAAAAAIBpQAAAAAAAoGBAAAAAAABAXkAAAAAAAABNQA=="
 						},
 						"textposition": "auto",
 						"x": {
@@ -65,7 +65,8 @@
 							"Servicios ambientales & circulares"
 						],
 						"yaxis": "y",
-						"type": "bar"
+						"type": "bar",
+						"texttemplate": "%{text:,.0f}"
 					}
 				],
 				{

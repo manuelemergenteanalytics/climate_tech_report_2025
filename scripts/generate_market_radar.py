@@ -168,6 +168,14 @@ def _prep_events() -> pd.DataFrame:
 
 
 def _company_rollup(events: pd.DataFrame) -> pd.DataFrame:
+    now_utc = pd.Timestamp.now(tz="UTC")
+    recent_cutoff_dynamic = now_utc - pd.DateOffset(years=5)
+    baseline_cutoff = pd.Timestamp(2020, 10, 1, tz="UTC")
+    recent_cutoff = max(recent_cutoff_dynamic, baseline_cutoff)
+
+    events = events.copy()
+    events["recent_activity_flag"] = events["ts"].ge(recent_cutoff)
+
     grouped = (
         events.groupby(
             [
@@ -187,10 +195,14 @@ def _company_rollup(events: pd.DataFrame) -> pd.DataFrame:
             company_id=("company_id", "first"),
             company_numeric_id=("company_numeric_id", "first"),
             company_qid=("company_qid", "first"),
+            recent_activity=("recent_activity_flag", "max"),
+            recent_events=("recent_activity_flag", "sum"),
         )
     )
     grouped["total_events"] = grouped["total_events"].astype(int)
     grouped["last_ts"] = pd.to_datetime(grouped["last_ts"], errors="coerce", utc=True)
+    grouped["recent_activity"] = grouped["recent_activity"].astype(bool)
+    grouped["recent_events"] = grouped["recent_events"].fillna(0).astype(int)
     boost = (1 + 0.15 * np.log1p(grouped["total_events"])).clip(upper=1.8)
     grouped["demand_score"] = grouped["avg_strength"] * boost
     grouped["intensity_score"] = grouped["avg_abs_strength"] * boost
@@ -241,6 +253,9 @@ def heatmap_country_industry(companies: pd.DataFrame) -> Path:
         pivot = pd.DataFrame({"country": [], "industry": [], "total_score": []})
 
     pivot["industry_display"] = apply_industry_labels(pivot["industry"])
+    country_order = (
+        pivot.groupby("country")["total_score"].sum().sort_values(ascending=False).index.tolist()
+    )
 
     fig = px.density_heatmap(
         pivot,
@@ -254,7 +269,16 @@ def heatmap_country_industry(companies: pd.DataFrame) -> Path:
     fig.update_coloraxes(
         colorscale=MARKET_RADAR_SEQUENTIAL, colorbar=colorbar_defaults("Σ score empresas")
     )
-    fig.update_layout(title=None, width=860, height=580, yaxis=dict(categoryorder="total ascending"))
+    fig.update_layout(
+        title=None,
+        width=860,
+        height=580,
+        yaxis=dict(
+            categoryorder="array",
+            categoryarray=country_order,
+            automargin=True,
+        ),
+    )
 
     path = OUTPUT_DIR / "heatmap_country_industry.html"
     return _write_plotly_html(fig, path)
@@ -361,16 +385,15 @@ def coverage_timeline(events: pd.DataFrame) -> Path:
         title="Evolución mensual de señales por industria (Top 8)",
         labels={
             "month": "Mes",
-            "total_signals": "# de señales",
+            "total_signals": "Número de señales",
             "industry_display": "Industria",
         },
-        hover_data={"total_strength": ":.2f"},
         color_discrete_map=industry_color_map,
         category_orders={"industry_display": legend_order},
     )
     fig.update_layout(
         title=None,
-        width=880,
+        width=820,
         height=520,
         legend=dict(
             title=dict(text="Industria", font=dict(color=PRIMARY_TEXT_COLOR, family=PRIMARY_FONT, size=14)),
@@ -390,23 +413,31 @@ def map_intensity(companies: pd.DataFrame) -> Path:
         .agg(total_score=("demand_score", "sum"), companies=("company_id", "count"))
     )
     geo["iso3"] = geo["country"].str.upper().map(ISO2_TO_ISO3)
+    geo["country"] = geo["country"].str.upper()
     fig = px.choropleth(
         geo,
         locations="iso3",
         locationmode="ISO-3",
         color="total_score",
-        hover_data={"companies": True, "total_score": ":.2f"},
+        custom_data=geo[["country", "companies", "total_score"]],
         title="Intensidad de señales climáticas/digitales por país",
         color_continuous_scale=[step[1] for step in MARKET_RADAR_SEQUENTIAL],
     )
+    fig.update_traces(
+        hovertemplate=(
+            "País=%{customdata[0]}<br>"
+            "Empresas=%{customdata[1]:,.0f}<br>"
+            "Puntaje total=%{customdata[2]:,.2f}<extra></extra>"
+        )
+    )
     fig.update_layout(title=None, width=880, height=640, margin=dict(l=20, r=20, t=40, b=20))
-    fig.update_coloraxes(colorscale=MARKET_RADAR_SEQUENTIAL, colorbar=colorbar_defaults("total_score"))
+    fig.update_coloraxes(colorscale=MARKET_RADAR_SEQUENTIAL, colorbar=colorbar_defaults("Puntaje total"))
     fig.update_geos(
         projection_type="mercator",
         center=dict(lat=-18, lon=-70),
-        projection_scale=1.2,
-        lataxis=dict(range=[-58, 33]),
-        lonaxis=dict(range=[-125, -32]),
+        projection_scale=0.95,
+        lataxis=dict(range=[-60, 35]),
+        lonaxis=dict(range=[-135, -25]),
         showcountries=True,
         countrycolor="#3b3b3b",
         showsubunits=True,
@@ -578,7 +609,7 @@ def _write_plotly_html(fig: go.Figure, path: Path, config: Dict[str, Any] | None
         "\t</style>",
         "</head>",
         "<body>",
-        f"\t<div id=\"{div_id}\" class=\"plotly-graph-div\" style=\"height:{height}px; width:{width}px;\"></div>",
+        f"\t<div id=\"{div_id}\" class=\"plotly-graph-div\" style=\"height:{height}px; width:100%; max-width:{width}px;\"></div>",
         "\t<script type=\"text/javascript\">",
         "\t\twindow.PLOTLYENV=window.PLOTLYENV || {};",
         f"\t\tif (document.getElementById(\"{div_id}\")) {{",
@@ -608,6 +639,13 @@ def ranking_companies(companies: pd.DataFrame) -> Path:
     if ranking.empty:
         ranking = ranking.head(0)
     else:
+        if "recent_activity" in ranking.columns:
+            ranking = ranking[ranking["recent_activity"]].copy()
+        if ranking.empty:
+            ranking = ranking.head(0)
+        else:
+            ranking["recent_events"] = ranking.get("recent_events", 0).fillna(0).astype(int)
+
         now = pd.Timestamp.utcnow()
         last_ts = pd.to_datetime(ranking["last_ts"], errors="coerce", utc=True)
         days_since_last = (now - last_ts).dt.total_seconds() / 86400.0
@@ -621,11 +659,7 @@ def ranking_companies(companies: pd.DataFrame) -> Path:
         ranking["total_events"] = total_events_numeric
 
         ranking["recency_factor"] = recency_factor.round(3)
-        ranking["priority_score"] = (
-            ranking["demand_score"]
-            * ranking["recency_factor"]
-            * total_events_numeric.clip(lower=1)
-        )
+        ranking["priority_score"] = total_events_numeric.clip(lower=1) * ranking["recency_factor"]
 
         ranking["_company_key_dedupe"] = (
             ranking["company_key"].fillna(ranking["company_name"]).astype(str)
@@ -648,9 +682,22 @@ def ranking_companies(companies: pd.DataFrame) -> Path:
     ranking["last_ts_fmt"] = ranking["last_ts"].dt.strftime("%Y-%m-%d").fillna("—")
     ranking["industry_display"] = apply_industry_labels(ranking["industry"])
 
+    desired_country_order = ["BR", "AR", "CO", "CL", "UY"]
+    country_rank_map = {code: idx for idx, code in enumerate(desired_country_order)}
+    ranking["_country_sort"] = ranking["country"].map(country_rank_map).fillna(len(desired_country_order))
+    ranking.sort_values(
+        ["_country_sort", "priority_score", "total_events", "demand_score"],
+        ascending=[True, False, False, False],
+        inplace=True,
+    )
+    ranking.drop(columns=["_country_sort"], inplace=True)
+
     country_values = ranking["country"].dropna().astype(str)
     color_map = build_country_color_map(country_values)
-    country_order = ordered_categories(country_values, COUNTRY_CATEGORY_ORDER)
+    country_order = [code for code in desired_country_order if code in country_values.unique()]
+    country_order += [code for code in country_values.unique() if code not in country_order]
+
+    y_category_array = ranking["company_name"].tolist()
 
     x_field = "priority_score" if "priority_score" in ranking.columns else "demand_score"
 
@@ -661,42 +708,63 @@ def ranking_companies(companies: pd.DataFrame) -> Path:
         orientation="h",
         color="country",
         text="total_events",
-        hover_data={
-            "demand_score": ":.2f",
-            "recency_factor": ":.2f",
-            "last_ts_fmt": True,
-            "industry": True,
-            "avg_strength": ":.2f",
-        },
+        hover_data={},
         title="Top 25 Empresas por Intensidad de Demanda",
         labels={
-            x_field: "Score ponderado + recencia" if x_field == "priority_score" else "Score ponderado",
+            x_field: "Señales ponderadas por recencia" if x_field == "priority_score" else "Score ponderado",
             "demand_score": "Score ponderado",
             "recency_factor": "Factor recencia",
             "total_events": "# señales",
             "last_ts_fmt": "Última señal",
+            "company_name": "Empresa",
+            "priority_score": "Señales ponderadas por recencia",
         },
         color_discrete_map=color_map,
         category_orders={"country": country_order},
+        custom_data=ranking[
+            [
+                "country",
+                "demand_score",
+                "recency_factor",
+                "last_ts_fmt",
+                "industry_display",
+                "avg_strength",
+                "total_events",
+            ]
+        ],
     )
     fig.update_traces(marker=dict(line=dict(color=MARKER_BORDER_COLOR, width=0.8)))
-    fig.update_traces(textfont=dict(color=PRIMARY_TEXT_COLOR, family=PRIMARY_FONT, size=12))
-    min_score = float(ranking[x_field].min()) if not ranking.empty else 0.0
-    max_score = float(ranking[x_field].max()) if not ranking.empty else 0.0
-    lower_bound = 0.0 if min_score <= 0 else min_score * 0.85
-    upper_bound = max_score * 1.05 if max_score else 1.0
-
+    fig.update_traces(
+        textangle=0,
+        textposition="inside",
+        textfont=dict(color=PRIMARY_TEXT_COLOR, family=PRIMARY_FONT, size=12),
+        hovertemplate=(
+            "Empresa=%{y}<br>"
+            "País=%{customdata[0]}<br>"
+            "Señales ponderadas por recencia=%{x:,.2f}<br>"
+            "Número de señales=%{text:,.0f}<br>"
+            "Score ponderado=%{customdata[1]:.2f}<br>"
+            "Factor recencia=%{customdata[2]:.2f}<br>"
+            "Última señal=%{customdata[3]}<br>"
+            "Industria=%{customdata[4]}<br>"
+            "Fuerza promedio=%{customdata[5]:.2f}<extra></extra>"
+        ),
+    )
     fig.update_layout(
         title=None,
         height=720,
         width=860,
-        yaxis=dict(automargin=True),
+        yaxis=dict(
+            automargin=True,
+            title="Empresa",
+            categoryorder="array",
+            categoryarray=y_category_array,
+        ),
         legend=dict(
             title=dict(text="País", font=dict(color=PRIMARY_TEXT_COLOR, family=PRIMARY_FONT, size=14)),
             font=dict(color=PRIMARY_TEXT_COLOR, family=PRIMARY_FONT, size=14),
         ),
     )
-    fig.update_xaxes(range=[lower_bound, upper_bound])
 
     # Export plain text summary
     lines = ["Top 25 Empresas por Intensidad de Demanda\n"]
@@ -707,7 +775,7 @@ def ranking_companies(companies: pd.DataFrame) -> Path:
         avg = f"{row['avg_strength']:.2f}"
         lines.append(
             (
-                f"- {row['company_name']} ({row['country']} · {row['industry']}): "
+                f"- {row['company_name']} ({row['country']} · {row['industry_display']}): "
                 f"score {summary_score} (base {base} · recencia {recency}), promedio {avg}, "
                 f"señales {row['total_events']}, última {row['last_ts_fmt']}"
             )
@@ -772,28 +840,43 @@ def coverage_indicators(companies: pd.DataFrame) -> Path:
     industry_order = ordered_categories(rollup["industry_friendly"], INDUSTRY_CATEGORY_ORDER)
     category_array = [item for item in ordered_by_demand if item in industry_order]
 
+    rollup["total_demand_text"] = (
+        np.sign(rollup["total_demand"]) * np.floor(np.abs(rollup["total_demand"]) + 0.5)
+    ).astype(int)
+
     fig = px.bar(
         rollup,
         x="total_demand",
         y="industry_friendly",
         orientation="h",
-        text="total_companies",
+        text="total_demand_text",
         title="Industrias con mayor intensidad de señales",
         labels={
             "total_demand": "Σ score ponderado",
             "industry_friendly": "Industria",
-            "total_companies": "Empresas",
-        },
-        hover_data={
-            "total_events": True,
-            "median_intensity": ":.2f",
-            "avg_events_per_company": True,
         },
         color_discrete_sequence=[COVERAGE_INDICATORS_BAR_COLOR],
         category_orders={"industry_friendly": industry_order},
+        custom_data=rollup[
+            [
+                "total_companies",
+                "total_events",
+                "median_intensity",
+                "avg_events_per_company",
+            ]
+        ],
     )
     fig.update_traces(
-        marker=dict(color=COVERAGE_INDICATORS_BAR_COLOR, line=dict(color=BAR_LINE_COLOR, width=0.6))
+        marker=dict(color=COVERAGE_INDICATORS_BAR_COLOR, line=dict(color=BAR_LINE_COLOR, width=0.6)),
+        texttemplate="%{text:,.0f}",
+        hovertemplate=(
+            "Σ score ponderado=%{x:,.0f}<br>"
+            "Industria=%{y}<br>"
+            "Empresas detectadas=%{customdata[0]:,.0f}<br>"
+            "Eventos totales=%{customdata[1]:,.0f}<br>"
+            "Intensidad mediana=%{customdata[2]:.2f}<br>"
+            "Eventos promedio por empresa=%{customdata[3]:.2f}<extra></extra>"
+        ),
     )
     fig.update_layout(
         title=None,
@@ -841,7 +924,14 @@ def coverage_country_industry(events: pd.DataFrame) -> Path:
         )
         return _write_plotly_html(fig, path)
 
-    matrix_events = coverage.pivot(index="country", columns="industry", values="total_events").fillna(0)
+    country_order = (
+        coverage.groupby("country")["total_demand"].sum().sort_values(ascending=False).index.tolist()
+    )
+    matrix_events = (
+        coverage.pivot(index="country", columns="industry", values="total_events")
+        .reindex(index=country_order)
+        .fillna(0)
+    )
     countries = matrix_events.index.tolist()
     industries = matrix_events.columns.tolist()
     industry_map = {name: friendly_industry_label(name) for name in industries}
@@ -882,7 +972,7 @@ def coverage_country_industry(events: pd.DataFrame) -> Path:
     fig = go.Figure(data=[heatmap])
     fig.update_layout(
         title=None,
-        width=860,
+        width=820,
         height=580,
         xaxis=dict(automargin=True, showgrid=False, zeroline=False),
         yaxis=dict(automargin=True, showgrid=False, zeroline=False),
@@ -891,7 +981,7 @@ def coverage_country_industry(events: pd.DataFrame) -> Path:
     return _write_plotly_html(fig, path)
 
 
-def signal_type_distribution(events: pd.DataFrame) -> Path:
+def signal_type_distribution(events: pd.DataFrame, universe: pd.DataFrame | None = None) -> Path:
     counts = (
         events.groupby("signal_type", dropna=False)
         .size()
@@ -900,7 +990,30 @@ def signal_type_distribution(events: pd.DataFrame) -> Path:
     counts["signal_type"] = counts["signal_type"].fillna("sin dato").astype(str)
     counts = counts.sort_values("total_signals", ascending=False)
 
-    signal_order = counts.sort_values("total_signals", ascending=False)["signal_type"].tolist()
+    signal_order = counts["signal_type"].tolist()
+
+    wikidata_total = None
+    if universe is not None and not universe.empty:
+        universe_ids = pd.to_numeric(universe.get("company_id"), errors="coerce").dropna()
+        if not universe_ids.empty:
+            wikidata_total = int(universe_ids.nunique())
+
+    if wikidata_total is not None:
+        counts = pd.concat(
+            [
+                counts,
+                pd.DataFrame(
+                    {"signal_type": ["Wikidata"], "total_signals": [wikidata_total]}
+                ),
+            ],
+            ignore_index=True,
+        )
+        signal_order.append("Wikidata")
+
+    signal_order = [label for label in signal_order if label in counts["signal_type"].tolist()]
+
+    color_map = {label: SIGNAL_TYPE_BAR_COLOR for label in counts["signal_type"].unique()}
+    color_map["Wikidata"] = "#f6ae2d"
 
     fig = px.bar(
         counts,
@@ -908,14 +1021,22 @@ def signal_type_distribution(events: pd.DataFrame) -> Path:
         y="total_signals",
         text="total_signals",
         title="Distribución de señales por tipo",
-        labels={"signal_type": "Tipo de señal", "total_signals": "Cantidad"},
+        labels={"signal_type": "Fuente", "total_signals": "Cantidad"},
         category_orders={"signal_type": signal_order},
-        color_discrete_sequence=[SIGNAL_TYPE_BAR_COLOR],
+        color="signal_type",
+        color_discrete_map=color_map,
     )
     fig.update_traces(
-        marker=dict(color=SIGNAL_TYPE_BAR_COLOR, line=dict(color=BAR_LINE_COLOR, width=0.6))
+        marker=dict(line=dict(color=BAR_LINE_COLOR, width=0.6)),
+        textfont=dict(color=PRIMARY_TEXT_COLOR, family=PRIMARY_FONT, size=12),
     )
-    fig.update_layout(title=None, width=780, height=450, xaxis=dict(categoryorder="array", categoryarray=signal_order))
+    fig.update_layout(
+        title=None,
+        width=780,
+        height=450,
+        showlegend=False,
+        xaxis=dict(categoryorder="array", categoryarray=signal_order),
+    )
 
     path = OUTPUT_DIR / "signal_type_distribution.html"
     return _write_plotly_html(fig, path)
@@ -1239,14 +1360,71 @@ def country_fact_sheet(companies: pd.DataFrame) -> Path:
         color="total_strength",
         color_continuous_scale=[step[1] for step in MARKET_RADAR_SEQUENTIAL],
         title="Fichas por país: industrias destacadas por intensidad",
+        custom_data=["country", "industry_display", "intensity"],
     )
-    fig.update_coloraxes(colorscale=MARKET_RADAR_SEQUENTIAL, colorbar=colorbar_defaults("total_strength"))
+    colorbar = colorbar_defaults("Puntaje ponderado")
+    colorbar["title"] = dict(text="Puntaje ponderado", side="top")
+    fig.update_coloraxes(
+        colorscale=MARKET_RADAR_SEQUENTIAL,
+        colorbar=colorbar,
+    )
+    no_industry_hover = (
+        "País=%{customdata[0]}<br>"
+        "Intensidad=%{customdata[2]:,.0f}<extra></extra>"
+    )
+    industry_hover = (
+        "País=%{customdata[0]}<br>"
+        "Industria=%{customdata[1]}<br>"
+        "Intensidad=%{customdata[2]:,.0f}<extra></extra>"
+    )
+
+    fig.update_traces(texttemplate="%{label}")
+
+    for trace in fig.data:
+        customdata = trace.customdata
+        if customdata is None:
+            continue
+
+        cleaned: List[List[Any]] = []
+        hover_texts: List[str] = []
+
+        for row in customdata:
+            row_list = list(row)
+            country_val = row_list[0] if len(row_list) > 0 else ""
+            industry_val = row_list[1] if len(row_list) > 1 else ""
+            intensity_val = row_list[2] if len(row_list) > 2 else 0.0
+
+            if isinstance(industry_val, str) and industry_val.strip() == "(?)":
+                industry_val = ""
+
+            row_list[1] = industry_val
+            cleaned.append(row_list)
+
+            try:
+                intensity_fmt = f"{float(intensity_val):,.0f}"
+            except (TypeError, ValueError):
+                intensity_fmt = "–"
+
+            if industry_val:
+                hover_texts.append(
+                    f"País={country_val}<br>Industria={industry_val}<br>Intensidad={intensity_fmt}"
+                )
+            else:
+                hover_texts.append(
+                    f"País={country_val}<br>Intensidad={intensity_fmt}"
+                )
+
+        trace.customdata = cleaned
+        if hover_texts:
+            trace.hovertext = hover_texts
+            trace.hovertemplate = "%{hovertext}<extra></extra>"
+
     fig.update_traces(
-        texttemplate="%{label}",
-        textfont=dict(size=12, family=PRIMARY_FONT, color=PRIMARY_TEXT_COLOR),
-        insidetextfont=dict(size=10, family=PRIMARY_FONT, color=PRIMARY_TEXT_COLOR),
+        textfont=dict(size=14, family=PRIMARY_FONT, color=PRIMARY_TEXT_COLOR),
+        insidetextfont=dict(size=12, family=PRIMARY_FONT, color=PRIMARY_TEXT_COLOR),
     )
-    fig.update_layout(title=None, width=880, height=680)
+
+    fig.update_layout(title=None, width=880, height=720, margin=dict(l=20, r=20, t=10, b=10))
 
     path = OUTPUT_DIR / "country_fact_sheet.html"
     return _write_plotly_html(fig, path)
@@ -1274,7 +1452,7 @@ def main() -> None:
         coverage_indicators(companies_focus),
         coverage_country_industry(focus_events),
         country_fact_sheet(companies_focus),
-        signal_type_distribution(focus_events),
+        signal_type_distribution(focus_events, focus_universe),
         signal_mix_sankey(focus_events, focus_universe),
     ]
 

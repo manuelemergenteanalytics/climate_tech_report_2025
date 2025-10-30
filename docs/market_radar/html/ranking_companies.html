@@ -10,136 +10,80 @@
 	</style>
 </head>
 <body>
-	<div id="plotly-58b7bbb2a7bc4241a7f28c6a8bdf400b" class="plotly-graph-div" style="height:720px; width:860px;"></div>
+	<div id="plotly-9a8d6f83571841ee8cb968d22455dff6" class="plotly-graph-div" style="height:720px; width:100%; max-width:860px;"></div>
 	<script type="text/javascript">
 		window.PLOTLYENV=window.PLOTLYENV || {};
-		if (document.getElementById("plotly-58b7bbb2a7bc4241a7f28c6a8bdf400b")) {
+		if (document.getElementById("plotly-9a8d6f83571841ee8cb968d22455dff6")) {
 			Plotly.newPlot(
-				"plotly-58b7bbb2a7bc4241a7f28c6a8bdf400b",
+				"plotly-9a8d6f83571841ee8cb968d22455dff6",
 				[
 					{
 						"customdata": [
 							[
-								1.2687639203842083,
-								0.6,
-								"2017-10-24",
-								"transport_logistics",
-								1.0
-							],
-							[
-								1.241415686865115,
-								0.6,
-								"2017-07-27",
-								"healthcare_pharma_biotech",
-								1.0
-							],
-							[
-								1.241415686865115,
-								0.6,
-								"2018-05-31",
-								"manufacturing",
-								1.0
-							],
-							[
-								1.241415686865115,
-								0.6,
-								"2016-12-20",
-								"transport_logistics",
-								1.0
-							]
-						],
-						"hovertemplate": "country=AR<br>Score ponderado + recencia=%{x}<br>company_name=%{y}<br># señales=%{text}<br>Score ponderado=%{customdata[0]:.2f}<br>Factor recencia=%{customdata[1]:.2f}<br>Última señal=%{customdata[2]}<br>industry=%{customdata[3]}<br>avg_strength=%{customdata[4]:.2f}<extra></extra>",
-						"legendgroup": "AR",
-						"marker": {
-							"color": "#a4c8f0",
-							"pattern": {
-								"shape": ""
-							},
-							"line": {
-								"color": "#0a3c28",
-								"width": 0.8
-							}
-						},
-						"name": "AR",
-						"orientation": "h",
-						"showlegend": true,
-						"text": {
-							"dtype": "f8",
-							"bdata": "AAAAAAAAFEAAAAAAAAAQQAAAAAAAABBAAAAAAAAAEEA="
-						},
-						"textposition": "auto",
-						"x": {
-							"dtype": "f8",
-							"bdata": "Z3pJGElzDkAY4S9vztUHQBjhL2/O1QdAGOEvb87VB0A="
-						},
-						"xaxis": "x",
-						"y": [
-							"Transportadora de Gas del Sur",
-							"Conexia",
-							"Dvigi",
-							"Emprendia"
-						],
-						"yaxis": "y",
-						"type": "bar",
-						"textfont": {
-							"color": "#164233",
-							"family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
-							"size": 12
-						}
-					},
-					{
-						"customdata": [
-							[
+								"BR",
 								1.5289540786924243,
-								1.135,
+								1.132,
 								"2025-10-09",
-								"finance_insurance",
-								1.0
+								"Finanzas, Seguros & Capital",
+								1.0,
+								46
 							],
 							[
+								"BR",
+								1.291886522358297,
+								1.003,
+								"2025-08-20",
+								"Retail & servicios al consumidor",
+								1.0,
+								11
+							],
+							[
+								"BR",
 								1.329583686600433,
 								0.747,
 								"2025-02-19",
-								"transport_logistics",
-								1.0
+								"Transporte, Movilidad & Logística",
+								1.0,
+								14
 							],
 							[
-								1.291886522358297,
-								1.005,
-								"2025-08-20",
-								"retail_consumer",
-								1.0
-							],
-							[
+								"BR",
 								1.3119162312519754,
-								0.787,
+								0.786,
 								"2025-04-03",
-								"oil_gas",
-								1.0
+								"Petróleo & gas",
+								1.0,
+								25
 							],
 							[
-								1.2687639203842083,
-								0.6,
-								"2017-04-14",
-								"transport_logistics",
-								1.0
-							],
-							[
+								"BR",
 								1.2079441541679836,
-								0.963,
+								0.961,
 								"2025-07-31",
-								"ict_telecom",
-								1.0
+								"TIC, Digital & Medios",
+								1.0,
+								9
 							],
 							[
+								"BR",
 								1.241415686865115,
 								0.602,
 								"2022-12-02",
-								"oil_gas",
-								1.0
+								"Petróleo & gas",
+								1.0,
+								4
+							],
+							[
+								"BR",
+								1.1647918433002165,
+								1.055,
+								"2025-09-11",
+								"Retail & servicios al consumidor",
+								1.0,
+								2
 							]
 						],
-						"hovertemplate": "country=BR<br>Score ponderado + recencia=%{x}<br>company_name=%{y}<br># señales=%{text}<br>Score ponderado=%{customdata[0]:.2f}<br>Factor recencia=%{customdata[1]:.2f}<br>Última señal=%{customdata[2]}<br>industry=%{customdata[3]}<br>avg_strength=%{customdata[4]:.2f}<extra></extra>",
+						"hovertemplate": "Empresa=%{y}<br>País=%{customdata[0]}<br>Señales ponderadas por recencia=%{x:,.2f}<br>Número de señales=%{text:,.0f}<br>Score ponderado=%{customdata[1]:.2f}<br>Factor recencia=%{customdata[2]:.2f}<br>Última señal=%{customdata[3]}<br>Industria=%{customdata[4]}<br>Fuerza promedio=%{customdata[5]:.2f}<extra></extra>",
 						"legendgroup": "BR",
 						"marker": {
 							"color": "#81c784",
@@ -156,22 +100,22 @@
 						"showlegend": true,
 						"text": {
 							"dtype": "f8",
-							"bdata": "AAAAAAAAR0AAAAAAAAAsQAAAAAAAACZAAAAAAAAAOUAAAAAAAAAUQAAAAAAAACJAAAAAAAAAEEA="
+							"bdata": "AAAAAAAAR0AAAAAAAAAmQAAAAAAAACxAAAAAAAAAOUAAAAAAAAAiQAAAAAAAABBAAAAAAAAAAEA="
 						},
-						"textposition": "auto",
+						"textposition": "inside",
 						"x": {
 							"dtype": "f8",
-							"bdata": "G1jEPCyiTEAyiWJMScgfQCDFs5wJKR9A/hyOhs3oHEBnekkYSXMOQM/1DmUC6wtAPoghTyXqB0A="
+							"bdata": "ILByaJGtQkDeT42XbhIYQIGVQ4ts5xdANl66SQwCFkCq8dJNYhAHQN0kBoGVQwNA4XoUrkfhAEA="
 						},
 						"xaxis": "x",
 						"y": [
 							"Banco do Brasil",
-							"Estrada de Ferro Noroeste do Brasil",
 							"Rio de Janeiro Metro",
+							"Estrada de Ferro Noroeste do Brasil",
 							"Mover Participações",
-							"PlanoCDE",
 							"Agência Senado",
-							"Companhia Pernambucana de Saneamento"
+							"Companhia Pernambucana de Saneamento",
+							"Iochpe-Maxion"
 						],
 						"yaxis": "y",
 						"type": "bar",
@@ -179,78 +123,106 @@
 							"color": "#164233",
 							"family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
 							"size": 12
-						}
+						},
+						"textangle": 0
 					},
 					{
 						"customdata": [
 							[
-								1.2687639203842083,
-								0.6,
-								"2017-07-11",
-								"finance_insurance",
-								1.0
+								"AR",
+								0.4185316605545092,
+								1.039,
+								"2025-09-04",
+								"Transporte, Movilidad & Logística",
+								0.337140625,
+								4
 							],
 							[
-								1.2687639203842083,
-								0.6,
-								"2016-10-09",
-								"environmental_circular_services",
-								1.0
+								"AR",
+								0.5262861686690633,
+								1.131,
+								"2025-10-08",
+								"Sector público, social & educación",
+								0.43568749999999995,
+								3
 							],
 							[
-								1.241415686865115,
-								0.6,
-								"2018-03-20",
-								"public_social_education",
-								1.0
+								"AR",
+								0.8671151614185235,
+								1.112,
+								"2025-10-02",
+								"Manufactura industrial",
+								0.71784375,
+								3
 							],
 							[
-								1.241415686865115,
-								0.6,
-								"2019-02-15",
-								"retail_consumer",
-								1.0
+								"AR",
+								0.5153517575235219,
+								1.069,
+								"2025-09-16",
+								"Petróleo & gas",
+								0.42663541666666666,
+								3
 							],
 							[
-								1.241415686865115,
-								0.6,
-								"2019-01-07",
-								"retail_consumer",
-								1.0
+								"AR",
+								0.6718118954959513,
+								1.129,
+								"2025-10-07",
+								"Manufactura industrial",
+								0.576765625,
+								2
 							],
 							[
-								1.241415686865115,
-								0.6,
-								"2018-04-25",
-								"transport_logistics",
-								1.0
+								"AR",
+								0.6507728428263412,
+								1.093,
+								"2025-09-25",
+								"Sector público, social & educación",
+								0.558703125,
+								2
 							],
 							[
-								1.241415686865115,
-								0.6,
-								"2017-11-20",
-								"transport_logistics",
-								1.0
+								"AR",
+								0.6223810416458985,
+								1.072,
+								"2025-09-17",
+								"Salud, Pharma & Biotech",
+								0.534328125,
+								2
 							],
 							[
-								1.241415686865115,
-								0.6,
-								"2017-08-04",
-								"public_social_education",
-								1.0
+								"AR",
+								0.6439114908744009,
+								1.051,
+								"2025-09-09",
+								"Agro & alimentos",
+								0.5528125,
+								2
 							],
 							[
-								1.241415686865115,
-								0.6,
-								"2016-12-22",
-								"retail_consumer",
-								1.0
+								"AR",
+								0.1298924904005257,
+								1.051,
+								"2025-09-09",
+								"Manufactura industrial",
+								0.11151562500000001,
+								2
+							],
+							[
+								"AR",
+								0.8525695005620841,
+								0.698,
+								"2024-12-09",
+								"Manufactura industrial",
+								0.7058020833333334,
+								3
 							]
 						],
-						"hovertemplate": "country=CL<br>Score ponderado + recencia=%{x}<br>company_name=%{y}<br># señales=%{text}<br>Score ponderado=%{customdata[0]:.2f}<br>Factor recencia=%{customdata[1]:.2f}<br>Última señal=%{customdata[2]}<br>industry=%{customdata[3]}<br>avg_strength=%{customdata[4]:.2f}<extra></extra>",
-						"legendgroup": "CL",
+						"hovertemplate": "Empresa=%{y}<br>País=%{customdata[0]}<br>Señales ponderadas por recencia=%{x:,.2f}<br>Número de señales=%{text:,.0f}<br>Score ponderado=%{customdata[1]:.2f}<br>Factor recencia=%{customdata[2]:.2f}<br>Última señal=%{customdata[3]}<br>Industria=%{customdata[4]}<br>Fuerza promedio=%{customdata[5]:.2f}<extra></extra>",
+						"legendgroup": "AR",
 						"marker": {
-							"color": "#ffe0a3",
+							"color": "#a4c8f0",
 							"pattern": {
 								"shape": ""
 							},
@@ -259,29 +231,30 @@
 								"width": 0.8
 							}
 						},
-						"name": "CL",
+						"name": "AR",
 						"orientation": "h",
 						"showlegend": true,
 						"text": {
 							"dtype": "f8",
-							"bdata": "AAAAAAAAFEAAAAAAAAAUQAAAAAAAABBAAAAAAAAAEEAAAAAAAAAQQAAAAAAAABBAAAAAAAAAEEAAAAAAAAAQQAAAAAAAABBA"
+							"bdata": "AAAAAAAAEEAAAAAAAAAIQAAAAAAAAAhAAAAAAAAACEAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAEAAAAAAAAAAQAAAAAAAAABAAAAAAAAACEA="
 						},
-						"textposition": "auto",
+						"textposition": "inside",
 						"x": {
 							"dtype": "f8",
-							"bdata": "Z3pJGElzDkBnekkYSXMOQBjhL2/O1QdAGOEvb87VB0AY4S9vztUHQBjhL2/O1QdAGOEvb87VB0AY4S9vztUHQBjhL2/O1QdA"
+							"bdata": "ObTIdr6fEEC+nxov3SQLQOSlm8QgsApADi2yne+nCUCq8dJNYhACQLByaJHtfAFA9P3UeOkmAUA3iUFg5dAAQDeJQWDl0ABAjZduEoPAAEA="
 						},
 						"xaxis": "x",
 						"y": [
-							"LUMNI CHILE",
-							"TriCiclos",
-							"Cultiva Empresa",
-							"Cumplo",
-							"Degraf",
-							"Ematris",
-							"Emprediem",
-							"Estudios y Consultorias Focus",
-							"Green Libros"
+							"Aeropuertos Argentina",
+							"Universidad Nacional de Córdoba",
+							"PAPA",
+							"Vista Energy",
+							"Estudio Beccar Varela",
+							"Universidad Siglo 21",
+							"Sheraton Mendoza Hotel",
+							"Grupo L",
+							"La Primera",
+							"Hilandería Warmi"
 						],
 						"yaxis": "y",
 						"type": "bar",
@@ -289,26 +262,40 @@
 							"color": "#164233",
 							"family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
 							"size": 12
-						}
+						},
+						"textangle": 0
 					},
 					{
 						"customdata": [
 							[
+								"CO",
+								0.3822484415067583,
+								1.125,
+								"2025-10-06",
+								"TIC, Digital & Medios",
+								0.3164454583333334,
+								3
+							],
+							[
+								"CO",
 								1.241415686865115,
 								0.607,
 								"2023-08-29",
-								"retail_consumer",
-								1.0
+								"Retail & servicios al consumidor",
+								1.0,
+								4
 							],
 							[
-								1.241415686865115,
-								0.6,
-								"2019-06-12",
-								"agro_food",
-								1.0
+								"CO",
+								0.33342166514468696,
+								1.105,
+								"2025-09-29",
+								"TIC, Digital & Medios",
+								0.28625,
+								2
 							]
 						],
-						"hovertemplate": "country=CO<br>Score ponderado + recencia=%{x}<br>company_name=%{y}<br># señales=%{text}<br>Score ponderado=%{customdata[0]:.2f}<br>Factor recencia=%{customdata[1]:.2f}<br>Última señal=%{customdata[2]}<br>industry=%{customdata[3]}<br>avg_strength=%{customdata[4]:.2f}<extra></extra>",
+						"hovertemplate": "Empresa=%{y}<br>País=%{customdata[0]}<br>Señales ponderadas por recencia=%{x:,.2f}<br>Número de señales=%{text:,.0f}<br>Score ponderado=%{customdata[1]:.2f}<br>Factor recencia=%{customdata[2]:.2f}<br>Última señal=%{customdata[3]}<br>Industria=%{customdata[4]}<br>Fuerza promedio=%{customdata[5]:.2f}<extra></extra>",
 						"legendgroup": "CO",
 						"marker": {
 							"color": "#9fd6d9",
@@ -325,17 +312,18 @@
 						"showlegend": true,
 						"text": {
 							"dtype": "f8",
-							"bdata": "AAAAAAAAEEAAAAAAAAAQQA=="
+							"bdata": "AAAAAAAACEAAAAAAAAAQQAAAAAAAAABA"
 						},
-						"textposition": "auto",
+						"textposition": "inside",
 						"x": {
 							"dtype": "f8",
-							"bdata": "H6r9fv4cCEAY4S9vztUHQA=="
+							"bdata": "AAAAAAAAC0AGgZVDi2wDQK5H4XoUrgFA"
 						},
 						"xaxis": "x",
 						"y": [
+							"ETB",
 							"Cámara de Comercio de Bogotá",
-							"Fruandes Frutos de los Andes"
+							"Caracol Radio"
 						],
 						"yaxis": "y",
 						"type": "bar",
@@ -343,29 +331,43 @@
 							"color": "#164233",
 							"family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
 							"size": 12
-						}
+						},
+						"textangle": 0
 					},
 					{
 						"customdata": [
 							[
-								1.2687639203842083,
-								0.6,
-								"2018-07-24",
-								"construction_realestate",
-								1.0
+								"CL",
+								0.09842491075886829,
+								1.1,
+								"2025-09-27",
+								"Manufactura industrial",
+								0.0845,
+								2
 							],
 							[
-								1.241415686865115,
-								0.6,
-								"2015-12-22",
-								"finance_insurance",
-								1.0
+								"CL",
+								0.6316083770295424,
+								1.089,
+								"2025-09-23",
+								"Finanzas, Seguros & Capital",
+								0.54225,
+								2
+							],
+							[
+								"CL",
+								0.14763736613830244,
+								1.039,
+								"2025-09-04",
+								"Retail & servicios al consumidor",
+								0.12675,
+								6
 							]
 						],
-						"hovertemplate": "country=MX<br>Score ponderado + recencia=%{x}<br>company_name=%{y}<br># señales=%{text}<br>Score ponderado=%{customdata[0]:.2f}<br>Factor recencia=%{customdata[1]:.2f}<br>Última señal=%{customdata[2]}<br>industry=%{customdata[3]}<br>avg_strength=%{customdata[4]:.2f}<extra></extra>",
-						"legendgroup": "MX",
+						"hovertemplate": "Empresa=%{y}<br>País=%{customdata[0]}<br>Señales ponderadas por recencia=%{x:,.2f}<br>Número de señales=%{text:,.0f}<br>Score ponderado=%{customdata[1]:.2f}<br>Factor recencia=%{customdata[2]:.2f}<br>Última señal=%{customdata[3]}<br>Industria=%{customdata[4]}<br>Fuerza promedio=%{customdata[5]:.2f}<extra></extra>",
+						"legendgroup": "CL",
 						"marker": {
-							"color": "#ffb4a2",
+							"color": "#ffe0a3",
 							"pattern": {
 								"shape": ""
 							},
@@ -374,22 +376,23 @@
 								"width": 0.8
 							}
 						},
-						"name": "MX",
+						"name": "CL",
 						"orientation": "h",
 						"showlegend": true,
 						"text": {
 							"dtype": "f8",
-							"bdata": "AAAAAAAAFEAAAAAAAAAQQA=="
+							"bdata": "AAAAAAAAAEAAAAAAAAAAQAAAAAAAABhA"
 						},
-						"textposition": "auto",
+						"textposition": "inside",
 						"x": {
 							"dtype": "f8",
-							"bdata": "Z3pJGElzDkAY4S9vztUHQA=="
+							"bdata": "mpmZmZmZAUAGgZVDi2wBQDm0yHa+nwBA"
 						},
 						"xaxis": "x",
 						"y": [
-							"ECHALE",
-							"FINAE"
+							"Ecocitex",
+							"Scotiabank Chile",
+							"Parque Arauco S.A."
 						],
 						"yaxis": "y",
 						"type": "bar",
@@ -397,19 +400,31 @@
 							"color": "#164233",
 							"family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
 							"size": 12
-						}
+						},
+						"textangle": 0
 					},
 					{
 						"customdata": [
 							[
+								"UY",
 								1.241415686865115,
-								0.905,
+								0.904,
 								"2025-06-30",
-								"finance_insurance",
-								1.0
+								"Finanzas, Seguros & Capital",
+								1.0,
+								4
+							],
+							[
+								"UY",
+								0.8903555036346513,
+								1.072,
+								"2025-09-17",
+								"Transporte, Movilidad & Logística",
+								0.7370833333333334,
+								4
 							]
 						],
-						"hovertemplate": "country=UY<br>Score ponderado + recencia=%{x}<br>company_name=%{y}<br># señales=%{text}<br>Score ponderado=%{customdata[0]:.2f}<br>Factor recencia=%{customdata[1]:.2f}<br>Última señal=%{customdata[2]}<br>industry=%{customdata[3]}<br>avg_strength=%{customdata[4]:.2f}<extra></extra>",
+						"hovertemplate": "Empresa=%{y}<br>País=%{customdata[0]}<br>Señales ponderadas por recencia=%{x:,.2f}<br>Número de señales=%{text:,.0f}<br>Score ponderado=%{customdata[1]:.2f}<br>Factor recencia=%{customdata[2]:.2f}<br>Última señal=%{customdata[3]}<br>Industria=%{customdata[4]}<br>Fuerza promedio=%{customdata[5]:.2f}<extra></extra>",
 						"legendgroup": "UY",
 						"marker": {
 							"color": "#cbb7e8",
@@ -426,16 +441,17 @@
 						"showlegend": true,
 						"text": {
 							"dtype": "f8",
-							"bdata": "AAAAAAAAEEA="
+							"bdata": "AAAAAAAAEEAAAAAAAAAQQA=="
 						},
-						"textposition": "auto",
+						"textposition": "inside",
 						"x": {
 							"dtype": "f8",
-							"bdata": "wvlRa8f5EUA="
+							"bdata": "IbByaJHtDEDufD81XroJQA=="
 						},
 						"xaxis": "x",
 						"y": [
-							"Banco de Seguros del Estado"
+							"Banco de Seguros del Estado",
+							"Sociedad Anónima"
 						],
 						"yaxis": "y",
 						"type": "bar",
@@ -443,7 +459,8 @@
 							"color": "#164233",
 							"family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
 							"size": 12
-						}
+						},
+						"textangle": 0
 					}
 				],
 				{
@@ -852,12 +869,8 @@
 							1.0
 						],
 						"title": {
-							"text": "Score ponderado + recencia"
-						},
-						"range": [
-							2.5324880012048343,
-							60.13032376829599
-						]
+							"text": "Señales ponderadas por recencia"
+						}
 					},
 					"yaxis": {
 						"anchor": "x",
@@ -866,9 +879,37 @@
 							1.0
 						],
 						"title": {
-							"text": "company_name"
+							"text": "Empresa"
 						},
-						"automargin": true
+						"automargin": true,
+						"categoryorder": "array",
+						"categoryarray": [
+							"Banco do Brasil",
+							"Rio de Janeiro Metro",
+							"Estrada de Ferro Noroeste do Brasil",
+							"Mover Participações",
+							"Agência Senado",
+							"Companhia Pernambucana de Saneamento",
+							"Iochpe-Maxion",
+							"Aeropuertos Argentina",
+							"Universidad Nacional de Córdoba",
+							"PAPA",
+							"Vista Energy",
+							"Estudio Beccar Varela",
+							"Universidad Siglo 21",
+							"Sheraton Mendoza Hotel",
+							"Grupo L",
+							"La Primera",
+							"Hilandería Warmi",
+							"ETB",
+							"Cámara de Comercio de Bogotá",
+							"Caracol Radio",
+							"Ecocitex",
+							"Scotiabank Chile",
+							"Parque Arauco S.A.",
+							"Banco de Seguros del Estado",
+							"Sociedad Anónima"
+						]
 					},
 					"legend": {
 						"title": {
