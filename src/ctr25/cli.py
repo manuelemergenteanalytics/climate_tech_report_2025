@@ -1,7 +1,34 @@
 from __future__ import annotations
 
 from pathlib import Path
+
+import pandas as pd
 import typer
+
+from ctr25.utils.names import normalize_company_name
+from ctr25.utils.text import classify_industry, load_industry_map
+
+
+INDUSTRY_SIMPLIFY_MAP = {
+    "agro_food_beverage": "agro_food",
+    "agro_food": "agro_food",
+    "construction_infrastructure_realestate": "construction_realestate",
+    "energy_power_utilities": "energy_power",
+    "finance_insurance_capital": "finance_insurance",
+    "ict_digital_media": "ict_telecom",
+    "industrial_manufacturing": "manufacturing",
+    "mining_materials": "mining_metals",
+    "retail_consumer_services": "retail_consumer",
+    "transport_mobility_logistics": "transport_logistics",
+    "oil_gas": "oil_gas",
+    "water_waste_circularity": "water_waste_circularity",
+    "chemicals_materials": "chemicals_materials",
+    "healthcare_pharma_biotech": "healthcare_pharma_biotech",
+    "professional_services_consulting": "professional_services_consulting",
+    "hospitality_tourism_leisure": "hospitality_tourism_leisure",
+    "environmental_circular_services": "environmental_circular_services",
+    "public_social_education": "public_social_education",
+}
 
 app = typer.Typer(help="CTR25 CLI")
 
@@ -190,6 +217,133 @@ def collect_finance(
         since=since,
     )
     typer.echo(f"[collect-finance] eventos agregados: {n}")
+
+
+@app.command("reclassify-industries")
+def reclassify_industries(
+    input_csv: Path = typer.Option(
+        Path("data/processed/events_normalized.csv"),
+        "--in",
+        help="CSV de entrada con events_normalized",
+    ),
+    output_csv: Path = typer.Option(
+        Path("data/processed/events_normalized.reclass.csv"),
+        "--out",
+        help="CSV de salida con industrias reclasificadas",
+    ),
+    log_csv: Path = typer.Option(
+        Path("data/processed/reclass.log.csv"),
+        "--log",
+        help="CSV de log con los cambios aplicados",
+    ),
+    industry_map_path: Path = typer.Option(
+        Path("config/industry_map.yml"),
+        "--industry-map",
+        help="Ruta al archivo industry_map.yml",
+    ),
+    fix_names: bool = typer.Option(
+        False,
+        "--fix-names/--no-fix-names",
+        help="Aplica heurísticas conservadoras para limpiar nombres de compañías",
+    ),
+):
+    imap = load_industry_map(str(industry_map_path))
+
+    if not input_csv.exists():
+        raise typer.BadParameter(f"No existe el archivo de entrada: {input_csv}")
+
+    df = pd.read_csv(input_csv)
+    if df.empty:
+        typer.echo("[reclassify-industries] CSV sin filas, nada que hacer")
+        return
+
+    columns = df.columns.tolist()
+
+    alias_changes = 0
+    weighted_changes = 0
+    token_hits = 0
+    unknown_hits = 0
+    log_rows: list[dict[str, object]] = []
+
+    for idx, row in df.iterrows():
+        original_industry = row.get("industry", "")
+        context = {
+            "company_name": row.get("company_name", ""),
+            "display_name": row.get("display_name", ""),
+            "source_meta": row.get("source_meta", ""),
+            "text_snippet": row.get("text_snippet", ""),
+            "title": row.get("title", ""),
+            "description": row.get("description", ""),
+            "url": row.get("url", ""),
+        }
+
+        slug, details = classify_industry((original_industry, context), imap)
+        target_slug = INDUSTRY_SIMPLIFY_MAP.get(slug, slug)
+        reason = details.get("reason") if isinstance(details, dict) else None
+
+        if reason == "token":
+            token_hits += 1
+        if target_slug == "unknown":
+            unknown_hits += 1
+
+        updated_industry = original_industry
+        change_reason: str | None = None
+        score_value = details.get("score") if isinstance(details, dict) else None
+        sector_hint = None
+        if isinstance(details, dict):
+            sector_hint = details.get("sector_hint_slug") or details.get("sector_hint")
+
+        if reason == "alias" and target_slug and target_slug != original_industry:
+            updated_industry = target_slug
+            alias_changes += 1
+            change_reason = "alias"
+        elif reason == "weighted" and target_slug and target_slug != original_industry:
+            updated_industry = target_slug
+            weighted_changes += 1
+            change_reason = "weighted"
+
+        if change_reason:
+            df.at[idx, "industry"] = updated_industry
+            entity_id = row.get("company_id") or row.get("company_qid") or row.get("company_name")
+            log_rows.append(
+                {
+                    "row_idx": int(idx),
+                    "entity_id": entity_id,
+                    "old_industry": original_industry,
+                    "new_industry": updated_industry,
+                    "reason": change_reason,
+                    "score": score_value,
+                    "sector_hint": sector_hint,
+                }
+            )
+
+        if fix_names:
+            normalized_name = normalize_company_name(row)
+            if normalized_name and normalized_name != row.get("company_name", ""):
+                df.at[idx, "company_name"] = normalized_name
+
+    # Reordenamos columnas para preservar el orden original (por precaución)
+    df = df[columns]
+
+    output_csv.parent.mkdir(parents=True, exist_ok=True)
+    df.to_csv(output_csv, index=False)
+
+    log_csv.parent.mkdir(parents=True, exist_ok=True)
+    log_df = pd.DataFrame(log_rows, columns=[
+        "row_idx",
+        "entity_id",
+        "old_industry",
+        "new_industry",
+        "reason",
+        "score",
+        "sector_hint",
+    ])
+    log_df.to_csv(log_csv, index=False)
+
+    typer.echo(
+        f"[reclassify-industries] Scanned {len(df)}; changes: alias={alias_changes} "
+        f"weighted={weighted_changes} token={token_hits}; unknown={unknown_hits}"
+    )
 
 
 @app.command("collect-webscan")

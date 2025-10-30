@@ -1,27 +1,27 @@
 Top 25 Empresas por Intensidad de Demanda
 
-- Banco do Brasil (BR · finance_insurance_capital): score 1.52, promedio 1.00, señales 31, última 2025-10-09
-- Estrada de Ferro Noroeste do Brasil (BR · transport_mobility_logistics): score 1.33, promedio 1.00, señales 8, última 2025-02-19
-- Mover Participações (BR · oil_gas): score 1.31, promedio 1.00, señales 7, última 2025-04-03
-- Rio de Janeiro Metro (BR · retail_consumer_services): score 1.31, promedio 1.00, señales 7, última 2025-08-20
-- TriCiclos (CL · public_social_education): score 1.27, promedio 1.00, señales 5, última 2016-10-09
-- LUMNI CHILE (CL · finance_insurance_capital): score 1.27, promedio 1.00, señales 5, última 2017-07-11
-- Banco de la Ciudad de Buenos Aires (AR · finance_insurance_capital): score 1.27, promedio 1.00, señales 5, última 2019-11-20
-- Transportadora de Gas del Sur (AR · oil_gas): score 1.27, promedio 1.00, señales 5, última 2017-10-24
-- ECHALE (MX · public_social_education): score 1.27, promedio 1.00, señales 5, última 2018-07-24
-- PlanoCDE (BR · transport_mobility_logistics): score 1.27, promedio 1.00, señales 5, última 2017-04-14
-- Emprendia (AR · public_social_education): score 1.24, promedio 1.00, señales 4, última 2016-12-20
-- La Tercera Mirada (CO · environmental_circular_services): score 1.24, promedio 1.00, señales 4, última 2019-02-25
-- Veomás (CL · public_social_education): score 1.24, promedio 1.00, señales 4, última 2019-04-29
-- Green Libros (CL · retail_consumer_services): score 1.24, promedio 1.00, señales 4, última 2016-12-22
-- LATE! (CL · agro_food_beverage): score 1.24, promedio 1.00, señales 4, última 2017-03-17
-- Cámara de Comercio de Bogotá (CO · retail_consumer_services): score 1.24, promedio 1.00, señales 4, última 2023-08-29
-- Companhia Pernambucana de Saneamento (BR · oil_gas): score 1.24, promedio 1.00, señales 4, última 2022-12-02
-- Maria Farinha Filmes (BR · ict_digital_media): score 1.24, promedio 1.00, señales 4, última 2016-12-26
-- Portafolio Verde (CO · professional_services_consulting): score 1.24, promedio 1.00, señales 4, última 2017-06-26
-- Needo (CL · professional_services_consulting): score 1.24, promedio 1.00, señales 4, última 2017-03-31
-- Hybrytec Solar (CO · energy_power_utilities): score 1.24, promedio 1.00, señales 4, última 2017-10-05
-- FINAE (MX · finance_insurance_capital): score 1.24, promedio 1.00, señales 4, última 2015-12-22
-- Terrium (CL · agro_food_beverage): score 1.24, promedio 1.00, señales 4, última 2016-11-04
-- Banco de Seguros del Estado (UY · finance_insurance_capital): score 1.24, promedio 1.00, señales 4, última 2025-06-30
-- Parque del Recuerdo (CL · environmental_circular_services): score 1.24, promedio 1.00, señales 4, última 2018-08-14
+- Banco do Brasil (BR · finance_insurance): score 57.27 (base 1.53 · recencia 1.14), promedio 1.00, señales 46, última 2025-10-09
+- Estrada de Ferro Noroeste do Brasil (BR · transport_logistics): score 7.95 (base 1.33 · recencia 0.75), promedio 1.00, señales 14, última 2025-02-19
+- Rio de Janeiro Metro (BR · retail_consumer): score 7.79 (base 1.29 · recencia 1.00), promedio 1.00, señales 11, última 2025-08-20
+- Mover Participações (BR · oil_gas): score 7.23 (base 1.31 · recencia 0.79), promedio 1.00, señales 25, última 2025-04-03
+- Banco de Seguros del Estado (UY · finance_insurance): score 4.49 (base 1.24 · recencia 0.91), promedio 1.00, señales 4, última 2025-06-30
+- Transportadora de Gas del Sur (AR · transport_logistics): score 3.81 (base 1.27 · recencia 0.60), promedio 1.00, señales 5, última 2017-10-24
+- ECHALE (MX · construction_realestate): score 3.81 (base 1.27 · recencia 0.60), promedio 1.00, señales 5, última 2018-07-24
+- LUMNI CHILE (CL · finance_insurance): score 3.81 (base 1.27 · recencia 0.60), promedio 1.00, señales 5, última 2017-07-11
+- PlanoCDE (BR · transport_logistics): score 3.81 (base 1.27 · recencia 0.60), promedio 1.00, señales 5, última 2017-04-14
+- TriCiclos (CL · environmental_circular_services): score 3.81 (base 1.27 · recencia 0.60), promedio 1.00, señales 5, última 2016-10-09
+- Agência Senado (BR · ict_telecom): score 3.49 (base 1.21 · recencia 0.96), promedio 1.00, señales 9, última 2025-07-31
+- Cámara de Comercio de Bogotá (CO · retail_consumer): score 3.01 (base 1.24 · recencia 0.61), promedio 1.00, señales 4, última 2023-08-29
+- Companhia Pernambucana de Saneamento (BR · oil_gas): score 2.99 (base 1.24 · recencia 0.60), promedio 1.00, señales 4, última 2022-12-02
+- Conexia (AR · healthcare_pharma_biotech): score 2.98 (base 1.24 · recencia 0.60), promedio 1.00, señales 4, última 2017-07-27
+- Cultiva Empresa (CL · public_social_education): score 2.98 (base 1.24 · recencia 0.60), promedio 1.00, señales 4, última 2018-03-20
+- Cumplo (CL · retail_consumer): score 2.98 (base 1.24 · recencia 0.60), promedio 1.00, señales 4, última 2019-02-15
+- Degraf (CL · retail_consumer): score 2.98 (base 1.24 · recencia 0.60), promedio 1.00, señales 4, última 2019-01-07
+- Dvigi (AR · manufacturing): score 2.98 (base 1.24 · recencia 0.60), promedio 1.00, señales 4, última 2018-05-31
+- Ematris (CL · transport_logistics): score 2.98 (base 1.24 · recencia 0.60), promedio 1.00, señales 4, última 2018-04-25
+- Emprediem (CL · transport_logistics): score 2.98 (base 1.24 · recencia 0.60), promedio 1.00, señales 4, última 2017-11-20
+- Emprendia (AR · transport_logistics): score 2.98 (base 1.24 · recencia 0.60), promedio 1.00, señales 4, última 2016-12-20
+- Estudios y Consultorias Focus (CL · public_social_education): score 2.98 (base 1.24 · recencia 0.60), promedio 1.00, señales 4, última 2017-08-04
+- FINAE (MX · finance_insurance): score 2.98 (base 1.24 · recencia 0.60), promedio 1.00, señales 4, última 2015-12-22
+- Fruandes Frutos de los Andes (CO · agro_food): score 2.98 (base 1.24 · recencia 0.60), promedio 1.00, señales 4, última 2019-06-12
+- Green Libros (CL · retail_consumer): score 2.98 (base 1.24 · recencia 0.60), promedio 1.00, señales 4, última 2016-12-22

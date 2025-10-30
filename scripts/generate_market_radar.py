@@ -98,6 +98,11 @@ INDUSTRY_SIMPLIFY = {
     "oil_gas": "oil_gas",
     "water_waste_circularity": "water_waste_circularity",
     "chemicals_materials": "chemicals_materials",
+    "healthcare_pharma_biotech": "healthcare_pharma_biotech",
+    "professional_services_consulting": "professional_services_consulting",
+    "hospitality_tourism_leisure": "hospitality_tourism_leisure",
+    "environmental_circular_services": "environmental_circular_services",
+    "public_social_education": "public_social_education",
 }
 
 
@@ -593,12 +598,53 @@ def _write_plotly_html(fig: go.Figure, path: Path, config: Dict[str, Any] | None
     return path
 
 
+
+
+
+
 def ranking_companies(companies: pd.DataFrame) -> Path:
-    ranking = (
-        companies.sort_values("demand_score", ascending=False)
-        .head(25)
-        .copy()
-    )
+    ranking = companies.copy()
+
+    if ranking.empty:
+        ranking = ranking.head(0)
+    else:
+        now = pd.Timestamp.utcnow()
+        last_ts = pd.to_datetime(ranking["last_ts"], errors="coerce", utc=True)
+        days_since_last = (now - last_ts).dt.total_seconds() / 86400.0
+        days_since_last = days_since_last.clip(lower=0).fillna(365.0)
+
+        decay = np.exp(-(days_since_last / 180.0))
+        recency_factor = 0.6 + 0.6 * decay
+        recency_factor = recency_factor.clip(lower=0.6, upper=1.3)
+
+        total_events_numeric = pd.to_numeric(ranking["total_events"], errors="coerce").fillna(0)
+        ranking["total_events"] = total_events_numeric
+
+        ranking["recency_factor"] = recency_factor.round(3)
+        ranking["priority_score"] = (
+            ranking["demand_score"]
+            * ranking["recency_factor"]
+            * total_events_numeric.clip(lower=1)
+        )
+
+        ranking["_company_key_dedupe"] = (
+            ranking["company_key"].fillna(ranking["company_name"]).astype(str)
+        )
+        company_events = (
+            ranking.groupby("_company_key_dedupe")["total_events"].sum()
+        )
+
+        ranking = ranking.sort_values(
+            ["priority_score", "total_events", "demand_score"],
+            ascending=[False, False, False],
+        )
+        ranking = ranking.drop_duplicates(subset=["_company_key_dedupe"], keep="first")
+        ranking = ranking.head(25).copy()
+        ranking["total_events"] = (
+            ranking["_company_key_dedupe"].map(company_events).fillna(ranking["total_events"])
+        )
+        ranking.drop(columns=["_company_key_dedupe"], inplace=True, errors="ignore")
+
     ranking["last_ts_fmt"] = ranking["last_ts"].dt.strftime("%Y-%m-%d").fillna("—")
     ranking["industry_display"] = apply_industry_labels(ranking["industry"])
 
@@ -606,23 +652,37 @@ def ranking_companies(companies: pd.DataFrame) -> Path:
     color_map = build_country_color_map(country_values)
     country_order = ordered_categories(country_values, COUNTRY_CATEGORY_ORDER)
 
+    x_field = "priority_score" if "priority_score" in ranking.columns else "demand_score"
+
     fig = px.bar(
         ranking,
-        x="demand_score",
+        x=x_field,
         y="company_name",
         orientation="h",
         color="country",
         text="total_events",
-        hover_data={"last_ts_fmt": True, "industry": True, "avg_strength": ":.2f"},
+        hover_data={
+            "demand_score": ":.2f",
+            "recency_factor": ":.2f",
+            "last_ts_fmt": True,
+            "industry": True,
+            "avg_strength": ":.2f",
+        },
         title="Top 25 Empresas por Intensidad de Demanda",
-        labels={"demand_score": "Score ponderado", "total_events": "# señales", "last_ts_fmt": "Última señal"},
+        labels={
+            x_field: "Score ponderado + recencia" if x_field == "priority_score" else "Score ponderado",
+            "demand_score": "Score ponderado",
+            "recency_factor": "Factor recencia",
+            "total_events": "# señales",
+            "last_ts_fmt": "Última señal",
+        },
         color_discrete_map=color_map,
         category_orders={"country": country_order},
     )
     fig.update_traces(marker=dict(line=dict(color=MARKER_BORDER_COLOR, width=0.8)))
     fig.update_traces(textfont=dict(color=PRIMARY_TEXT_COLOR, family=PRIMARY_FONT, size=12))
-    min_score = float(ranking["demand_score"].min()) if not ranking.empty else 0.0
-    max_score = float(ranking["demand_score"].max()) if not ranking.empty else 0.0
+    min_score = float(ranking[x_field].min()) if not ranking.empty else 0.0
+    max_score = float(ranking[x_field].max()) if not ranking.empty else 0.0
     lower_bound = 0.0 if min_score <= 0 else min_score * 0.85
     upper_bound = max_score * 1.05 if max_score else 1.0
 
@@ -641,15 +701,23 @@ def ranking_companies(companies: pd.DataFrame) -> Path:
     # Export plain text summary
     lines = ["Top 25 Empresas por Intensidad de Demanda\n"]
     for idx, row in ranking.iterrows():
-        score = f"{row['demand_score']:.2f}"
+        summary_score = f"{row[x_field]:.2f}" if x_field in row else f"{row['demand_score']:.2f}"
+        base = f"{row['demand_score']:.2f}"
+        recency = f"{row.get('recency_factor', 1.0):.2f}"
         avg = f"{row['avg_strength']:.2f}"
         lines.append(
-            f"- {row['company_name']} ({row['country']} · {row['industry']}): score {score}, promedio {avg}, señales {row['total_events']}, última {row['last_ts_fmt']}"
+            (
+                f"- {row['company_name']} ({row['country']} · {row['industry']}): "
+                f"score {summary_score} (base {base} · recencia {recency}), promedio {avg}, "
+                f"señales {row['total_events']}, última {row['last_ts_fmt']}"
+            )
         )
     TOP25_PATH.write_text("\n".join(lines), encoding="utf-8")
 
     path = OUTPUT_DIR / "ranking_companies.html"
     return _write_plotly_html(fig, path)
+
+
 
 
 def sentiment_distribution(companies: pd.DataFrame) -> Path:
