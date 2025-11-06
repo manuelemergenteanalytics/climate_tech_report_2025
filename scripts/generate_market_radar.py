@@ -38,6 +38,9 @@ from market_radar_theme import (
     colorbar_defaults,
     PRIMARY_FONT,
     PRIMARY_TEXT_COLOR,
+    SECONDARY_FONT,
+    TABLE_HEADER_FONT_SIZE,
+    TABLE_CELL_FONT_SIZE,
     friendly_industry_label,
     apply_industry_labels,
     wrap_label,
@@ -83,6 +86,10 @@ ISO2_TO_ISO3 = {
 }
 
 FOCUS_COUNTRIES = {"AR", "BR", "CL", "CO", "PE", "UY", "MX"}
+
+GENERIC_COMPANY_PLACEHOLDERS = {
+    "Sociedad Anónima",
+}
 
 INDUSTRY_SIMPLIFY = {
     "agro_food_beverage": "agro_food",
@@ -672,6 +679,10 @@ def ranking_companies(companies: pd.DataFrame) -> Path:
             ["priority_score", "total_events", "demand_score"],
             ascending=[False, False, False],
         )
+
+        if GENERIC_COMPANY_PLACEHOLDERS:
+            ranking = ranking[~ranking["company_name"].isin(GENERIC_COMPANY_PLACEHOLDERS)]
+
         ranking = ranking.drop_duplicates(subset=["_company_key_dedupe"], keep="first")
         ranking = ranking.head(25).copy()
         ranking["total_events"] = (
@@ -681,6 +692,11 @@ def ranking_companies(companies: pd.DataFrame) -> Path:
 
     ranking["last_ts_fmt"] = ranking["last_ts"].dt.strftime("%Y-%m-%d").fillna("—")
     ranking["industry_display"] = apply_industry_labels(ranking["industry"])
+
+    if "country" in ranking.columns:
+        ranking["country"] = ranking["country"].apply(
+            lambda val: val.strip().upper() if isinstance(val, str) else val
+        )
 
     desired_country_order = ["BR", "AR", "CO", "CL", "UY"]
     country_rank_map = {code: idx for idx, code in enumerate(desired_country_order)}
@@ -869,6 +885,7 @@ def coverage_indicators(companies: pd.DataFrame) -> Path:
     fig.update_traces(
         marker=dict(color=COVERAGE_INDICATORS_BAR_COLOR, line=dict(color=BAR_LINE_COLOR, width=0.6)),
         texttemplate="%{text:,.0f}",
+        textangle=0,
         hovertemplate=(
             "Σ score ponderado=%{x:,.0f}<br>"
             "Industria=%{y}<br>"
@@ -1126,25 +1143,42 @@ def coverage_gaps(companies: pd.DataFrame, universe: pd.DataFrame) -> Path:
 
     merged["industry_display"] = apply_industry_labels(merged["industry_clean"])
     merged["industry_text"] = merged["industry_display"].apply(lambda val: wrap_label(val, width=18))
-    text_positions = merged["industry_display"].apply(
-        lambda name: "bottom center" if name == "TIC, Digital & Medios" else "top center"
-    )
+
+    position_overrides = {
+        "Transporte, Movilidad & Logística": "bottom center",
+        "TIC, Digital & Medios": "middle right",
+        "Retail & servicios al consumidor": "top left",
+        "Manufactura industrial": "top right",
+        "Construcción, Infraestructura & Bienes Raíces": "bottom right",
+        "Agro & alimentos": "bottom left",
+        "Energía & Servicios Públicos": "top right",
+        "Finanzas, Seguros & Capital": "middle left",
+        "Petróleo & gas": "middle right",
+        "Minería & materiales básicos": "bottom right",
+    }
+    text_positions = [
+        position_overrides.get(name, "top center")
+        for name in merged["industry_display"]
+    ]
 
     fig = px.scatter(
         merged,
         x="coverage_pct",
         y="total_demand",
         size="avg_signals_per_company",
-        hover_name="industry_display",
+        custom_data=merged[
+            [
+                "industry_display",
+                "active_companies",
+                "universe_companies",
+                "avg_signals_per_company",
+                "median_intensity",
+            ]
+        ],
         labels={
             "coverage_pct": "% de universo con señales",
             "total_demand": "Σ score ponderado",
             "avg_signals_per_company": "Señales promedio por empresa",
-        },
-        hover_data={
-            "median_intensity": ":.2f",
-            "active_companies": True,
-            "universe_companies": True,
         },
         title="Brechas de cobertura por industria",
     )
@@ -1153,7 +1187,16 @@ def coverage_gaps(companies: pd.DataFrame, universe: pd.DataFrame) -> Path:
         marker=dict(color="#6ccfa0", opacity=0.85, line=dict(width=1, color=MARKER_BORDER_COLOR)),
         text=merged["industry_text"],
         textposition=text_positions,
-        textfont=dict(color=PRIMARY_TEXT_COLOR, family=PRIMARY_FONT, size=10),
+        textfont=dict(color=PRIMARY_TEXT_COLOR, family=PRIMARY_FONT, size=11),
+        hovertemplate=(
+            "Industria=%{customdata[0]}<br>"
+            "Cobertura del universo=%{x:.1f}%<br>"
+            "Σ score ponderado=%{y:.1f}<br>"
+            "Señales promedio por empresa=%{customdata[3]:.1f}<br>"
+            "Empresas con señales=%{customdata[1]:,.0f}<br>"
+            "Empresas en el universo=%{customdata[2]:,.0f}<br>"
+            "Intensidad mediana=%{customdata[4]:.1f}<extra></extra>"
+        ),
         cliponaxis=False,
     )
     fig.update_layout(
@@ -1255,15 +1298,47 @@ def coverage_summary(
     labels = [metric for metric, _ in metrics]
     values = [value for _, value in metrics]
 
+    body_row_color = "#f2fbf5"
+    border_color = "#9fd6d9"
+    header_color = "#74cf9f"
+
+    row_colors = [body_row_color] * len(labels)
+    body_font_size = max(TABLE_CELL_FONT_SIZE - 1, 11)
+
     fig = go.Figure(
         data=[
             go.Table(
-                header=dict(values=["Métrica", "Valor"], align="left"),
-                cells=dict(values=[labels, values], align="left"),
+                header=dict(
+                    values=["Métrica", "Valor"],
+                    align="left",
+                    fill_color=header_color,
+                    line_color=border_color,
+                    font=dict(
+                        color=PRIMARY_TEXT_COLOR,
+                        family=PRIMARY_FONT,
+                        size=TABLE_HEADER_FONT_SIZE + 2,
+                    ),
+                ),
+                cells=dict(
+                    values=[labels, values],
+                    align="left",
+                    fill=dict(color=[row_colors, row_colors]),
+                    line_color=border_color,
+                    font=dict(
+                        family=SECONDARY_FONT,
+                        size=body_font_size,
+                        color=PRIMARY_TEXT_COLOR,
+                    ),
+                ),
             )
         ]
     )
-    fig.update_layout(title=None, width=760, height=520)
+    fig.update_layout(
+        title=None,
+        width=760,
+        height=520,
+        margin=dict(l=40, r=40, t=40, b=40),
+    )
 
     path = OUTPUT_DIR / filename
     return _write_plotly_html(fig, path)

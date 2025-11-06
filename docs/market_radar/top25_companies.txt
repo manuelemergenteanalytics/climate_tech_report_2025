@@ -1,27 +1,27 @@
 Top 25 Empresas por Intensidad de Demanda
 
-- Banco do Brasil (BR · Finanzas, Seguros & Capital): score 36.89 (base 1.53 · recencia 1.12), promedio 1.00, señales 46, última 2025-10-09
-- Rio de Janeiro Metro (BR · Retail & servicios al consumidor): score 5.95 (base 1.29 · recencia 0.99), promedio 1.00, señales 11, última 2025-08-20
-- Estrada de Ferro Noroeste do Brasil (BR · Transporte, Movilidad & Logística): score 5.94 (base 1.33 · recencia 0.74), promedio 1.00, señales 14, última 2025-02-19
-- Mover Participações (BR · Petróleo & gas): score 5.47 (base 1.31 · recencia 0.78), promedio 1.00, señales 25, última 2025-04-03
-- Agência Senado (BR · TIC, Digital & Medios): score 2.85 (base 1.21 · recencia 0.95), promedio 1.00, señales 9, última 2025-07-31
+- Banco do Brasil (BR · Finanzas, Seguros & Capital): score 36.70 (base 1.53 · recencia 1.11), promedio 1.00, señales 46, última 2025-10-09
+- Estrada de Ferro Noroeste do Brasil (BR · Transporte, Movilidad & Logística): score 5.93 (base 1.33 · recencia 0.74), promedio 1.00, señales 14, última 2025-02-19
+- Rio de Janeiro Metro (BR · Retail & servicios al consumidor): score 5.93 (base 1.29 · recencia 0.99), promedio 1.00, señales 11, última 2025-08-20
+- Mover Participações (BR · Petróleo & gas): score 5.45 (base 1.31 · recencia 0.78), promedio 1.00, señales 25, última 2025-04-03
+- Agência Senado (BR · TIC, Digital & Medios): score 2.84 (base 1.21 · recencia 0.95), promedio 1.00, señales 9, última 2025-07-31
 - Companhia Pernambucana de Saneamento (BR · Petróleo & gas): score 2.41 (base 1.24 · recencia 0.60), promedio 1.00, señales 4, última 2022-12-02
-- Iochpe-Maxion (BR · Retail & servicios al consumidor): score 2.09 (base 1.16 · recencia 1.04), promedio 1.00, señales 2, última 2025-09-11
-- Aeropuertos Argentina (AR · Transporte, Movilidad & Logística): score 4.11 (base 0.42 · recencia 1.03), promedio 0.34, señales 4, última 2025-09-04
-- Universidad Nacional de Córdoba (AR · Sector público, social & educación): score 3.35 (base 0.53 · recencia 1.12), promedio 0.44, señales 3, última 2025-10-08
-- PAPA (AR · Manufactura industrial): score 3.29 (base 0.87 · recencia 1.10), promedio 0.72, señales 3, última 2025-10-02
-- Vista Energy (AR · Petróleo & gas): score 3.17 (base 0.52 · recencia 1.06), promedio 0.43, señales 3, última 2025-09-16
-- Estudio Beccar Varela (AR · Manufactura industrial): score 2.23 (base 0.67 · recencia 1.11), promedio 0.58, señales 2, última 2025-10-07
-- Universidad Siglo 21 (AR · Sector público, social & educación): score 2.16 (base 0.65 · recencia 1.08), promedio 0.56, señales 2, última 2025-09-25
-- Sheraton Mendoza Hotel (AR · Salud, Pharma & Biotech): score 2.12 (base 0.62 · recencia 1.06), promedio 0.53, señales 2, última 2025-09-17
-- Hilandería Warmi (AR · Manufactura industrial): score 2.09 (base 0.85 · recencia 0.70), promedio 0.71, señales 3, última 2024-12-09
-- Grupo L (AR · Agro & alimentos): score 2.08 (base 0.64 · recencia 1.04), promedio 0.55, señales 2, última 2025-09-09
-- La Primera (AR · Manufactura industrial): score 2.08 (base 0.13 · recencia 1.04), promedio 0.11, señales 2, última 2025-09-09
-- ETB (CO · TIC, Digital & Medios): score 3.33 (base 0.38 · recencia 1.11), promedio 0.32, señales 3, última 2025-10-06
+- Iochpe-Maxion (BR · Retail & servicios al consumidor): score 2.08 (base 1.16 · recencia 1.04), promedio 1.00, señales 2, última 2025-09-11
+- Aeropuertos Argentina (AR · Transporte, Movilidad & Logística): score 4.09 (base 0.42 · recencia 1.02), promedio 0.34, señales 4, última 2025-09-04
+- Universidad Nacional de Córdoba (AR · Sector público, social & educación): score 3.33 (base 0.53 · recencia 1.11), promedio 0.44, señales 3, última 2025-10-08
+- PAPA (AR · Manufactura industrial): score 3.28 (base 0.87 · recencia 1.09), promedio 0.72, señales 3, última 2025-10-02
+- Vista Energy (AR · Petróleo & gas): score 3.15 (base 0.52 · recencia 1.05), promedio 0.43, señales 3, última 2025-09-16
+- Estudio Beccar Varela (AR · Manufactura industrial): score 2.22 (base 0.67 · recencia 1.11), promedio 0.58, señales 2, última 2025-10-07
+- Universidad Siglo 21 (AR · Sector público, social & educación): score 2.15 (base 0.65 · recencia 1.07), promedio 0.56, señales 2, última 2025-09-25
+- Sheraton Mendoza Hotel (AR · Salud, Pharma & Biotech): score 2.11 (base 0.62 · recencia 1.05), promedio 0.53, señales 2, última 2025-09-17
+- Hilandería Warmi (AR · Manufactura industrial): score 2.08 (base 0.85 · recencia 0.69), promedio 0.71, señales 3, última 2024-12-09
+- Grupo L (AR · Agro & alimentos): score 2.07 (base 0.64 · recencia 1.03), promedio 0.55, señales 2, última 2025-09-09
+- La Primera (AR · Manufactura industrial): score 2.07 (base 0.13 · recencia 1.03), promedio 0.11, señales 2, última 2025-09-09
+- Fundacion Protestante Hora de Obrar (AR · Sector público, social & educación): score 2.04 (base 0.71 · recencia 1.02), promedio 0.61, señales 2, última 2025-09-03
+- ETB (CO · TIC, Digital & Medios): score 3.31 (base 0.38 · recencia 1.10), promedio 0.32, señales 3, última 2025-10-06
 - Cámara de Comercio de Bogotá (CO · Retail & servicios al consumidor): score 2.43 (base 1.24 · recencia 0.61), promedio 1.00, señales 4, última 2023-08-29
-- Caracol Radio (CO · TIC, Digital & Medios): score 2.18 (base 0.33 · recencia 1.09), promedio 0.29, señales 2, última 2025-09-29
-- Ecocitex (CL · Manufactura industrial): score 2.17 (base 0.10 · recencia 1.09), promedio 0.08, señales 2, última 2025-09-27
-- Scotiabank Chile (CL · Finanzas, Seguros & Capital): score 2.15 (base 0.63 · recencia 1.08), promedio 0.54, señales 2, última 2025-09-23
-- Parque Arauco S.A. (CL · Retail & servicios al consumidor): score 2.05 (base 0.15 · recencia 1.03), promedio 0.13, señales 6, última 2025-09-04
-- Banco de Seguros del Estado (UY · Finanzas, Seguros & Capital): score 3.58 (base 1.24 · recencia 0.90), promedio 1.00, señales 4, última 2025-06-30
-- Sociedad Anónima (UY · Transporte, Movilidad & Logística): score 3.18 (base 0.89 · recencia 1.06), promedio 0.74, señales 4, última 2025-09-17
+- Caracol Radio (CO · TIC, Digital & Medios): score 2.17 (base 0.33 · recencia 1.09), promedio 0.29, señales 2, última 2025-09-29
+- Ecocitex (CL · Manufactura industrial): score 2.16 (base 0.10 · recencia 1.08), promedio 0.08, señales 2, última 2025-09-27
+- Scotiabank Chile (CL · Finanzas, Seguros & Capital): score 2.14 (base 0.63 · recencia 1.07), promedio 0.54, señales 2, última 2025-09-23
+- Parque Arauco S.A. (CL · Retail & servicios al consumidor): score 2.04 (base 0.15 · recencia 1.02), promedio 0.13, señales 6, última 2025-09-04
+- Banco de Seguros del Estado (UY · Finanzas, Seguros & Capital): score 3.57 (base 1.24 · recencia 0.89), promedio 1.00, señales 4, última 2025-06-30

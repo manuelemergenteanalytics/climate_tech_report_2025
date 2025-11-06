@@ -12,6 +12,7 @@ import plotly.io as pio
 MARKET_RADAR_TEMPLATE_NAME = "emergente_market_radar"
 
 PRIMARY_FONT = "Josefin Sans, 'Helvetica Neue', Arial, sans-serif"
+SECONDARY_FONT = "'Century Gothic', 'Gill Sans', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
 PRIMARY_TEXT_COLOR = "#164233"
 TITLE_COLOR = "#0d3b29"
 BACKGROUND_COLOR = "#f6fbf8"
@@ -434,7 +435,7 @@ def _build_template() -> go.layout.Template:
                         "line": {"color": TABLE_LINE_COLOR},
                         "font": {
                             "color": PRIMARY_TEXT_COLOR,
-                            "family": PRIMARY_FONT,
+                            "family": SECONDARY_FONT,
                             "size": TABLE_CELL_FONT_SIZE,
                         },
                     },

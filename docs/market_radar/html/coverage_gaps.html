@@ -10,32 +10,87 @@
 	</style>
 </head>
 <body>
-	<div id="plotly-e9a6013267b1454eac461c29f6eeadba" class="plotly-graph-div" style="height:560px; width:100%; max-width:860px;"></div>
+	<div id="plotly-82a48cc589a54af78f6443e433cdf15d" class="plotly-graph-div" style="height:560px; width:100%; max-width:860px;"></div>
 	<script type="text/javascript">
 		window.PLOTLYENV=window.PLOTLYENV || {};
-		if (document.getElementById("plotly-e9a6013267b1454eac461c29f6eeadba")) {
+		if (document.getElementById("plotly-82a48cc589a54af78f6443e433cdf15d")) {
 			Plotly.newPlot(
-				"plotly-e9a6013267b1454eac461c29f6eeadba",
+				"plotly-82a48cc589a54af78f6443e433cdf15d",
 				[
 					{
-						"customdata": {
-							"dtype": "f8",
-							"bdata": "8l3sn96p8T8AAAAAAAAwQAAAAAAAQFlA8l3sn96p8T8AAAAAAAAcQAAAAAAAADtA8l3sn96p8T8AAAAAAAAcQAAAAAAAgEdA8l3sn96p8T8AAAAAAAA6QAAAAAAAwFlA8l3sn96p8T8AAAAAAAAyQAAAAAAAwGBA8l3sn96p8T8AAAAAAAAiQAAAAAAAAFlA8l3sn96p8T8AAAAAAAAoQAAAAAAAADxA8l3sn96p8T8AAAAAAAAoQAAAAAAAAEpA8l3sn96p8T8AAAAAAAAxQAAAAAAAoGhA8l3sn96p8T8AAAAAAABAQAAAAAAAYHhA",
-							"shape": "10, 3"
-						},
-						"hovertemplate": "<b>%{hovertext}</b><br><br>% de universo con señales=%{x}<br>Σ score ponderado=%{y}<br>Señales promedio por empresa=%{marker.size}<br>median_intensity=%{customdata[0]:.2f}<br>active_companies=%{customdata[1]}<br>universe_companies=%{customdata[2]}<extra></extra>",
-						"hovertext": [
-							"Agro & alimentos",
-							"Construcción, Infraestructura & Bienes Raíces",
-							"Energía & Servicios Públicos",
-							"Finanzas, Seguros & Capital",
-							"TIC, Digital & Medios",
-							"Manufactura industrial",
-							"Minería & materiales básicos",
-							"Petróleo & gas",
-							"Retail & servicios al consumidor",
-							"Transporte, Movilidad & Logística"
+						"customdata": [
+							[
+								"Agro & alimentos",
+								16,
+								101.0,
+								1.375,
+								1.1039720770839918
+							],
+							[
+								"Construcción, Infraestructura & Bienes Raíces",
+								7,
+								27.0,
+								1.7142857142857142,
+								1.1039720770839918
+							],
+							[
+								"Energía & Servicios Públicos",
+								7,
+								47.0,
+								1.2857142857142858,
+								1.1039720770839918
+							],
+							[
+								"Finanzas, Seguros & Capital",
+								26,
+								103.0,
+								2.5384615384615383,
+								1.1039720770839918
+							],
+							[
+								"TIC, Digital & Medios",
+								18,
+								134.0,
+								1.6111111111111112,
+								1.1039720770839918
+							],
+							[
+								"Manufactura industrial",
+								9,
+								100.0,
+								1.4444444444444444,
+								1.1039720770839918
+							],
+							[
+								"Minería & materiales básicos",
+								12,
+								28.0,
+								1.0833333333333333,
+								1.1039720770839918
+							],
+							[
+								"Petróleo & gas",
+								12,
+								52.0,
+								2.0,
+								1.1039720770839918
+							],
+							[
+								"Retail & servicios al consumidor",
+								17,
+								197.0,
+								1.7058823529411764,
+								1.1039720770839918
+							],
+							[
+								"Transporte, Movilidad & Logística",
+								32,
+								390.0,
+								1.6875,
+								1.1039720770839918
+							]
 						],
+						"hovertemplate": "Industria=%{customdata[0]}<br>Cobertura del universo=%{x:.1f}%<br>Σ score ponderado=%{y:.1f}<br>Señales promedio por empresa=%{customdata[3]:.1f}<br>Empresas con señales=%{customdata[1]:,.0f}<br>Empresas en el universo=%{customdata[2]:,.0f}<br>Intensidad mediana=%{customdata[4]:.1f}<extra></extra>",
 						"legendgroup": "",
 						"marker": {
 							"color": "#6ccfa0",
@@ -70,7 +125,7 @@
 						"textfont": {
 							"color": "#164233",
 							"family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
-							"size": 10
+							"size": 11
 						},
 						"cliponaxis": false,
 						"text": [
@@ -86,16 +141,16 @@
 							"Transporte,<br>Movilidad &<br>Logística"
 						],
 						"textposition": [
-							"top center",
-							"top center",
-							"top center",
-							"top center",
-							"bottom center",
-							"top center",
-							"top center",
-							"top center",
-							"top center",
-							"top center"
+							"bottom left",
+							"bottom right",
+							"top right",
+							"middle left",
+							"middle right",
+							"top right",
+							"bottom right",
+							"middle right",
+							"top left",
+							"bottom center"
 						]
 					}
 				],
@@ -326,7 +381,7 @@
 										},
 										"font": {
 											"color": "#164233",
-											"family": "Josefin Sans, 'Helvetica Neue', Arial, sans-serif",
+											"family": "'Century Gothic', 'Gill Sans', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif",
 											"size": 13
 										},
 										"line": {

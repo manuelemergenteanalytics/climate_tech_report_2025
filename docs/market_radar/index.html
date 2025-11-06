@@ -30,10 +30,21 @@
 }
 body {
     margin: 0;
-    font-family: 'Josefin Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Century Gothic', 'Gill Sans', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
     background-color: var(--clr-bg);
     color: var(--clr-text);
     line-height: 1.55;
+}
+
+h1, h2, h3,
+.hero-title,
+nav > h2,
+nav .nav-group h3,
+nav .cluster-title,
+#chart-meta h2,
+footer strong {
+    font-family: 'Josefin Sans', 'Helvetica Neue', Arial, sans-serif;
+    letter-spacing: 0.035em;
 }
 header {
     padding: 2.5rem clamp(1.5rem, 4vw, 3.5rem) 1.5rem;
@@ -121,15 +132,26 @@ nav {
 nav .nav-group + .nav-group {
     margin-top: 1.3rem;
 }
+nav .nav-group:nth-of-type(2) {
+    margin-top: 1.9rem;
+}
 nav .nav-group h3 {
-    margin: 0 0 0.9rem;
+    margin: 0 0 0.7rem;
     font-size: 1.05rem;
     color: var(--clr-accent);
 }
+nav .nav-group:nth-of-type(2) h3 {
+    margin-bottom: 0.55rem;
+}
 nav h2 {
-    font-size: 1.1rem;
-    margin: 0 0 1rem;
+    font-size: 1.25rem;
+    margin: 0 0 1.6rem;
     color: var(--clr-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    border-bottom: 2px solid rgba(31, 109, 74, 0.18);
+    padding-bottom: 0.75rem;
 }
 nav ul {
     list-style: none;
@@ -144,6 +166,7 @@ nav button {
     background: rgba(49, 137, 107, 0.12);
     color: var(--clr-text);
     font: inherit;
+    font-size: 0.95rem;
     text-align: left;
     padding: 0.6rem 0.8rem;
     border-radius: 12px;
@@ -175,6 +198,13 @@ nav .cluster-title {
     background: linear-gradient(135deg, rgba(230, 243, 236, 0.82), rgba(223, 239, 230, 0.78));
     border-radius: 14px;
     padding: 1rem 1.2rem;
+}
+.hero-summary,
+#chart-meta p,
+#chart-description,
+.loading-state p,
+.error-state p {
+    font-family: 'Century Gothic', 'Gill Sans', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
 }
 #chart-panel {
     background: linear-gradient(180deg, rgba(236, 248, 240, 0.96), rgba(232, 246, 236, 0.96));
@@ -444,17 +474,17 @@ const chartGroups = [
                 height: 520,
             },
             {
-                id: 'coverage-gaps',
-                label: 'Brechas de cobertura',
-                description: 'Comparativa de intensidad y cobertura para priorizar industrias con potencial latente.',
-                file: 'html/coverage_gaps.html',
-                height: 600,
-            },
-            {
                 id: 'signal-mix-sankey',
                 label: 'Mix de señales',
                 description: 'Flujo entre el universo de compañías y combinaciones de certificaciones o noticias climáticas.',
                 file: 'html/signal_mix_sankey.html',
+                height: 600,
+            },
+            {
+                id: 'coverage-gaps',
+                label: 'Brechas de cobertura',
+                description: 'Comparativa de intensidad y cobertura para priorizar industrias con potencial latente.',
+                file: 'html/coverage_gaps.html',
                 height: 600,
             },
         ],
