@@ -1146,15 +1146,15 @@ def coverage_gaps(companies: pd.DataFrame, universe: pd.DataFrame) -> Path:
 
     position_overrides = {
         "Transporte, Movilidad & Logística": "bottom center",
-        "TIC, Digital & Medios": "middle right",
-        "Retail & servicios al consumidor": "top left",
-        "Manufactura industrial": "top right",
-        "Construcción, Infraestructura & Bienes Raíces": "bottom right",
-        "Agro & alimentos": "bottom left",
-        "Energía & Servicios Públicos": "top right",
+        "TIC, Digital & Medios": "bottom center",
+        "Retail & servicios al consumidor": "top center",
+        "Manufactura industrial": "top center",
+        "Construcción, Infraestructura & Bienes Raíces": "middle right",
+        "Agro & alimentos": "middle right",
+        "Energía & Servicios Públicos": "top center",
         "Finanzas, Seguros & Capital": "middle left",
-        "Petróleo & gas": "middle right",
-        "Minería & materiales básicos": "bottom right",
+        "Petróleo & gas": "top center",
+        "Minería & materiales básicos": "top center",
     }
     text_positions = [
         position_overrides.get(name, "top center")
