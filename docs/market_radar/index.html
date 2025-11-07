@@ -166,7 +166,7 @@ nav button {
     background: rgba(49, 137, 107, 0.12);
     color: var(--clr-text);
     font: inherit;
-    font-size: 0.95rem;
+    font-size: 1rem;
     text-align: left;
     padding: 0.6rem 0.8rem;
     border-radius: 12px;
@@ -189,10 +189,10 @@ nav button.active {
 }
 nav .cluster-title {
     margin-top: 1.2rem;
-    font-size: 0.95rem;
+    font-size: 1.06rem;
     font-weight: 600;
-    color: rgba(31, 109, 74, 0.75);
-    letter-spacing: 0.015em;
+    color: rgba(31, 109, 74, 0.85);
+    letter-spacing: 0.02em;
 }
 #chart-meta {
     background: linear-gradient(135deg, rgba(230, 243, 236, 0.82), rgba(223, 239, 230, 0.78));
@@ -436,7 +436,7 @@ footer .footer-logo img {
                     <h2 class="hero-title">Interés Corporativo en Climate Tech<br>LATAM 2025</h2>
                 </div>
                 </div>
-            <p class="hero-summary">Explorá la actividad, cobertura y brechas del ecosistema corporativo latinoamericano en torno a tecnologías climáticas. Este informe integra datos de señales públicas y certificaciones para dimensionar dónde se concentra el interés corporativo en la región.</p>
+            <p class="hero-summary">¿Dónde está surgiendo el mayor interés corporativo en tecnologías climáticas en Latinoamérica en 2025, y qué señales ocultas nos revelan las tendencias del mercado?</p>
         </div>
         <div class="hero-logo">
             <img src="../Emergente%20Sin%20Logo%20Alta%20Calidad.png" alt="Logo Emergente Analytics" />
@@ -467,11 +467,11 @@ const chartGroups = [
         title: 'Exploración de cobertura',
         items: [
             {
-                id: 'coverage-summary',
-                label: 'Resumen general',
-                description: 'Instantánea de cobertura y volumen de señales dentro del universo de compañías analizadas.',
-                file: 'html/coverage_summary.html',
-                height: 520,
+                id: 'signal-type-distribution',
+                label: 'Tipos de señales',
+                description: 'Distribución de señales por fuente (UNGC, B Corp, SBTi, prensa especializada).',
+                file: 'html/signal_type_distribution.html',
+                height: 450,
             },
             {
                 id: 'signal-mix-sankey',
@@ -479,6 +479,13 @@ const chartGroups = [
                 description: 'Flujo entre el universo de compañías y combinaciones de certificaciones o noticias climáticas.',
                 file: 'html/signal_mix_sankey.html',
                 height: 600,
+            },
+            {
+                id: 'coverage-summary',
+                label: 'Resumen general',
+                description: 'Instantánea de cobertura y volumen de señales dentro del universo de compañías analizadas.',
+                file: 'html/coverage_summary.html',
+                height: 520,
             },
             {
                 id: 'coverage-gaps',
@@ -492,10 +499,6 @@ const chartGroups = [
     {
         title: 'Exploración de señales',
         items: [
-            {
-                type: 'divider',
-                label: 'Indicadores generales',
-            },
             {
                 id: 'total-signal-summary',
                 label: 'Indicadores globales',
@@ -513,13 +516,6 @@ const chartGroups = [
                 description: 'Volumen ponderado de señales y recuento de compañías por vertical industrial.',
                 file: 'html/coverage_indicators.html',
                 height: 550,
-            },
-            {
-                id: 'coverage-country-industry',
-                label: 'Heatmap país-industria',
-                description: 'Cruce entre industrias y países para identificar focos de actividad climática.',
-                file: 'html/coverage_country_industry.html',
-                height: 600,
             },
             {
                 id: 'coverage-timeline',
@@ -547,22 +543,22 @@ const chartGroups = [
                 height: 720,
             },
             {
+                id: 'coverage-country-industry',
+                label: 'Heatmap país-industria',
+                description: 'Cruce entre industrias y países para identificar focos de actividad climática.',
+                file: 'html/coverage_country_industry.html',
+                height: 600,
+            },
+            {
                 type: 'divider',
-                label: 'Profundización en señales',
+                label: 'Ranking de compañías',
             },
             {
                 id: 'ranking-companies',
-                label: 'Ranking de compañías',
+                label: 'Top 25 empresas',
                 description: 'Listado ponderado de empresas líderes por país, con detalle de señales y sectores.',
                 file: 'html/ranking_companies.html',
                 height: 800,
-            },
-            {
-                id: 'signal-type-distribution',
-                label: 'Tipos de señales',
-                description: 'Distribución de señales por fuente (UNGC, B Corp, SBTi, prensa especializada).',
-                file: 'html/signal_type_distribution.html',
-                height: 450,
             },
         ],
     },

@@ -4,6 +4,7 @@ from __future__ import annotations
 import math
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Tuple
+import textwrap
 
 import pandas as pd
 import plotly.express as px
@@ -89,6 +90,34 @@ FOCUS_COUNTRIES = {"AR", "BR", "CL", "CO", "PE", "UY", "MX"}
 
 GENERIC_COMPANY_PLACEHOLDERS = {
     "Sociedad Anónima",
+}
+
+COMPANY_ACTIVITY_SUMMARY = {
+    "Banco do Brasil": "Institución financiera estatal que ofrece banca minorista, corporativa, seguros, y servicios de inversión y agronegocios.",
+    "Estrada de Ferro Noroeste do Brasil": "Histórica compañía ferroviaria brasileña, operaba una red de 1622 km de Bauru (SP) a Corumbá (MS), conectando con Bolivia.",
+    "Rio de Janeiro Metro": "Opera la red de metro de Río de Janeiro, ofreciendo transporte masivo eficiente y conectividad a lugares emblemáticos.",
+    "Mover Participações": "Conglomerado que invierte en ingeniería, construcción, cemento, concesiones de energía y transporte, y sector naval y petróleo.",
+    "Agência Senado": "Agencia de noticias del Senado Federal brasileño. Produce y distribuye información sobre la actividad parlamentaria.",
+    "Companhia Pernambucana de Saneamento": "Empresa de economía mixta que proporciona agua potable y servicios de alcantarillado sanitario en el estado de Pernambuco.",
+    "Iochpe-Maxion": "Compañía global líder en la producción de ruedas automotrices y uno de los principales fabricantes de componentes estructurales automotrices.",
+    "Aeropuertos Argentina": "Administra y desarrolla la infraestructura de la mayoría de los aeropuertos de Argentina, gestionando el tráfico aerocomercial.",
+    "Universidad Nacional de Córdoba": "Institución pública de educación superior (la más antigua de Argentina) que ofrece grado, posgrado, investigación y extensión.",
+    "PAPA": "Probablemente es Papa Industrial o similar: fabricante de maquinaria para la industria alimentaria, como extrusoras y cortadoras.",
+    "Vista Energy": "Operador independiente de petróleo y gas, enfocado en la exploración y producción de hidrocarburos, principalmente en Vaca Muerta.",
+    "Estudio Beccar Varela": "Estudio jurídico líder en servicios legales integrales (derecho corporativo, etc.) con visión global y trayectoria de más de 125 años.",
+    "Universidad Siglo 21": "Universidad privada líder en Argentina, ofrece educación superior presencial y virtual (online) en múltiples disciplinas.",
+    "Sheraton Mendoza Hotel": "Hotel de lujo que ofrece alojamiento, gastronomía, eventos, entretenimiento (casino) y servicios turísticos en Mendoza.",
+    "Hilandería Warmi": "Fabrica textiles (mantas, ponchos, bufandas) con fibras naturales de llama y oveja, preservando la cultura andina y la tradición.",
+    "Grupo L": "Ofrece soluciones integrales para empresas, incluyendo servicios de alimentación, limpieza, mantenimiento y servicios en sitios remotos.",
+    "La Primera": "En el sector manufacturero, podría ser una empresa histórica textil o de ingeniería/construcciones, como INFA (Grupo ALUAR-FATE).",
+    "Fundacion Protestante Hora de Obrar": "Organización que trabaja por el desarrollo social y ambiental, brindando ayuda y proyectos en Argentina, Paraguay y Uruguay.",
+    "ETB": "Operador de telecomunicaciones estatal que provee servicios de telefonía móvil, internet (fibra óptica), TV y almacenamiento de datos.",
+    "Cámara de Comercio de Bogotá": "Entidad que apoya el desarrollo social, empresarial y la calidad de vida en Bogotá y la región, mediante servicios de registro y apoyo.",
+    "Caracol Radio": "Medio de comunicación que ofrece información, entretenimiento y servicio a través de la radiodifusión y nuevos medios digitales.",
+    "Ecocitex": "Empresa de reciclaje textil que vende ropa y accesorios de segunda mano, y produce lana reciclada a partir de ropa en mal estado.",
+    "Scotiabank Chile": "Institución financiera líder que ofrece banca personal, corporativa, gestión patrimonial y mercados de capitales.",
+    "Parque Arauco S.A.": "Grupo que desarrolla y administra activos inmobiliarios de uso comercial, como centros comerciales y stripcenters en varios países.",
+    "Banco de Seguros del Estado": "Ente autónomo estatal que desarrolla la actividad aseguradora en Uruguay, ofreciendo seguros de vida, patrimoniales y de accidentes.",
 }
 
 INDUSTRY_SIMPLIFY = {
@@ -692,6 +721,12 @@ def ranking_companies(companies: pd.DataFrame) -> Path:
 
     ranking["last_ts_fmt"] = ranking["last_ts"].dt.strftime("%Y-%m-%d").fillna("—")
     ranking["industry_display"] = apply_industry_labels(ranking["industry"])
+    ranking["activity_summary"] = (
+        ranking["company_name"].map(COMPANY_ACTIVITY_SUMMARY).fillna("Sin resumen disponible.")
+    )
+    ranking["activity_summary_wrapped"] = ranking["activity_summary"].apply(
+        lambda text: "<br>".join(textwrap.wrap(text, width=38)) if isinstance(text, str) else ""
+    )
 
     if "country" in ranking.columns:
         ranking["country"] = ranking["country"].apply(
@@ -746,6 +781,7 @@ def ranking_companies(companies: pd.DataFrame) -> Path:
                 "industry_display",
                 "avg_strength",
                 "total_events",
+                "activity_summary_wrapped",
             ]
         ],
     )
@@ -754,6 +790,7 @@ def ranking_companies(companies: pd.DataFrame) -> Path:
         textangle=0,
         textposition="inside",
         textfont=dict(color=PRIMARY_TEXT_COLOR, family=PRIMARY_FONT, size=12),
+        hoverlabel=dict(align="left"),
         hovertemplate=(
             "Empresa=%{y}<br>"
             "País=%{customdata[0]}<br>"
@@ -763,7 +800,8 @@ def ranking_companies(companies: pd.DataFrame) -> Path:
             "Factor recencia=%{customdata[2]:.2f}<br>"
             "Última señal=%{customdata[3]}<br>"
             "Industria=%{customdata[4]}<br>"
-            "Fuerza promedio=%{customdata[5]:.2f}<extra></extra>"
+            "Fuerza promedio=%{customdata[5]:.2f}<br>"
+            "Resumen de actividad=%{customdata[7]}<extra></extra>"
         ),
     )
     fig.update_layout(
@@ -1303,7 +1341,9 @@ def coverage_summary(
     header_color = "#74cf9f"
 
     row_colors = [body_row_color] * len(labels)
-    body_font_size = max(TABLE_CELL_FONT_SIZE - 1, 11)
+    body_font_size = max(TABLE_CELL_FONT_SIZE, 12)
+    header_height = 40
+    row_height = 32
 
     fig = go.Figure(
         data=[
@@ -1313,10 +1353,11 @@ def coverage_summary(
                     align="left",
                     fill_color=header_color,
                     line_color=border_color,
+                    height=header_height,
                     font=dict(
                         color=PRIMARY_TEXT_COLOR,
                         family=PRIMARY_FONT,
-                        size=TABLE_HEADER_FONT_SIZE + 2,
+                        size=TABLE_HEADER_FONT_SIZE + 3,
                     ),
                 ),
                 cells=dict(
@@ -1324,6 +1365,7 @@ def coverage_summary(
                     align="left",
                     fill=dict(color=[row_colors, row_colors]),
                     line_color=border_color,
+                    height=row_height,
                     font=dict(
                         family=SECONDARY_FONT,
                         size=body_font_size,
@@ -1335,9 +1377,9 @@ def coverage_summary(
     )
     fig.update_layout(
         title=None,
-        width=760,
-        height=520,
-        margin=dict(l=40, r=40, t=40, b=40),
+        width=840,
+        height=600,
+        margin=dict(l=40, r=40, t=40, b=60),
     )
 
     path = OUTPUT_DIR / filename
