@@ -41,6 +41,7 @@ EVENT_COLUMNS = [
     "climate_score",
     "sentiment_label",
     "sentiment_score",
+    "commitment_weight",
 ]
 
 GDELT_ENDPOINT = "https://api.gdeltproject.org/api/v2/doc/doc"

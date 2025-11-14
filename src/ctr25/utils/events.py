@@ -26,6 +26,7 @@ _EVENT_COLUMNS: list[str] = [
     "climate_score",
     "sentiment_label",
     "sentiment_score",
+    "commitment_weight",
 ]
 
 _DEFAULTS = {
@@ -45,6 +46,7 @@ _DEFAULTS = {
     "climate_score": 0.0,
     "sentiment_label": "",
     "sentiment_score": 0.0,
+    "commitment_weight": float("nan"),
 }
 
 

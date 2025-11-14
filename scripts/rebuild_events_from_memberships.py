@@ -37,7 +37,22 @@ EVENT_COLUMNS = [
     "climate_score",
     "sentiment_label",
     "sentiment_score",
+    "commitment_weight",
 ]
+
+
+DEFAULT_COMMITMENT_WEIGHT = 0.6
+COMMITMENT_WEIGHT_BY_SIGNAL = {
+    "ungc": 0.4,
+    "bcorp": 0.75,
+    "sbti": 1.0,
+}
+
+
+def _commitment_weight(signal_type: str) -> float:
+    """Return the weight that reflects the rigor of the given signal type."""
+
+    return COMMITMENT_WEIGHT_BY_SIGNAL.get(signal_type.lower(), DEFAULT_COMMITMENT_WEIGHT)
 
 CONTEXT_COLS = [
     "context_sector",
@@ -342,6 +357,7 @@ def _guess_industry(raw: str) -> str:
 def _common_event_fields(row: pd.Series, *, signal_type: str) -> Dict[str, object]:
     title = _TITLE_MAP.get(signal_type, f"Membership: {signal_type}")
     text = _clean_text(str(row.get("text_snippet", "") or row.get("member_name", "")))
+    weight = _commitment_weight(signal_type)
     return {
         "source": "memberships",
         "signal_type": signal_type,
@@ -353,6 +369,7 @@ def _common_event_fields(row: pd.Series, *, signal_type: str) -> Dict[str, objec
         "climate_score": 1.0,
         "sentiment_label": "positive",
         "sentiment_score": 0.6,
+        "commitment_weight": weight,
     }
 
 

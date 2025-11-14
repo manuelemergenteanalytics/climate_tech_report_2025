@@ -92,6 +92,19 @@ GENERIC_COMPANY_PLACEHOLDERS = {
     "Sociedad Anónima",
 }
 
+DEFAULT_COMMITMENT_WEIGHT = 0.6
+COMMITMENT_WEIGHT_BY_SIGNAL = {
+    "ungc": 0.4,
+    "bcorp": 0.75,
+    "sbti": 1.0,
+}
+
+SIGNAL_MATRIX_TYPES = {
+    "sbti": "SBTi",
+    "bcorp": "B Corp",
+    "ungc": "UNGC",
+}
+
 COMPANY_ACTIVITY_SUMMARY = {
     "Banco do Brasil": "Institución financiera estatal que ofrece banca minorista, corporativa, seguros, y servicios de inversión y agronegocios.",
     "Estrada de Ferro Noroeste do Brasil": "Histórica compañía ferroviaria brasileña, operaba una red de 1622 km de Bauru (SP) a Corumbá (MS), conectando con Bolivia.",
@@ -170,7 +183,28 @@ def _ensure_datetime(series: pd.Series) -> pd.Series:
 def _weighted_strength(df: pd.DataFrame) -> pd.Series:
     strength = pd.to_numeric(df.get("signal_strength"), errors="coerce")
     climate = pd.to_numeric(df.get("climate_score"), errors="coerce")
-    return (strength.fillna(0.0) * climate.fillna(1.0)).fillna(0.0)
+    commitment_raw = df.get("commitment_weight")
+    if commitment_raw is None:
+        commitment = pd.Series(np.nan, index=df.index)
+    else:
+        commitment = pd.to_numeric(commitment_raw, errors="coerce")
+
+    needs_inference = commitment.isna()
+    if needs_inference.any():
+        signal_types = df.get("signal_type")
+        inferred = None
+        if signal_types is not None:
+            inferred = (
+                signal_types.astype(str)
+                .str.lower()
+                .map(COMMITMENT_WEIGHT_BY_SIGNAL)
+            )
+        if inferred is not None:
+            commitment = commitment.where(~needs_inference, inferred)
+    commitment = commitment.fillna(DEFAULT_COMMITMENT_WEIGHT)
+    commitment = commitment.clip(lower=0.0)
+
+    return (strength.fillna(0.0) * climate.fillna(1.0) * commitment).fillna(0.0)
 
 
 def _prep_events() -> pd.DataFrame:
@@ -182,6 +216,7 @@ def _prep_events() -> pd.DataFrame:
     events["sentiment_score"] = pd.to_numeric(events.get("sentiment_score"), errors="coerce")
     events["signal_strength"] = pd.to_numeric(events.get("signal_strength"), errors="coerce")
     events["climate_score"] = pd.to_numeric(events.get("climate_score"), errors="coerce")
+    events["commitment_weight"] = pd.to_numeric(events.get("commitment_weight"), errors="coerce")
     raw_ids = events.get("company_id")
     events["company_id"] = raw_ids.astype(str) if raw_ids is not None else ""
     events["company_id"] = events["company_id"].replace({"nan": pd.NA, "None": pd.NA, "": pd.NA})
@@ -211,6 +246,15 @@ def _company_rollup(events: pd.DataFrame) -> pd.DataFrame:
 
     events = events.copy()
     events["recent_activity_flag"] = events["ts"].ge(recent_cutoff)
+    events["commitment_weight"] = (
+        pd.to_numeric(events.get("commitment_weight"), errors="coerce")
+        .fillna(DEFAULT_COMMITMENT_WEIGHT)
+    )
+
+    signal_types = events.get("signal_type").astype(str).str.lower()
+    is_sbti = signal_types.eq("sbti").astype(int)
+    events["_is_sbti"] = is_sbti
+    events["_sbti_strength"] = events["weighted_strength"].where(is_sbti == 1, 0.0)
 
     grouped = (
         events.groupby(
@@ -233,6 +277,9 @@ def _company_rollup(events: pd.DataFrame) -> pd.DataFrame:
             company_qid=("company_qid", "first"),
             recent_activity=("recent_activity_flag", "max"),
             recent_events=("recent_activity_flag", "sum"),
+            avg_commitment=("commitment_weight", "mean"),
+            sbti_events=("_is_sbti", "sum"),
+            sbti_strength=("_sbti_strength", "sum"),
         )
     )
     grouped["total_events"] = grouped["total_events"].astype(int)
@@ -694,8 +741,30 @@ def ranking_companies(companies: pd.DataFrame) -> Path:
         total_events_numeric = pd.to_numeric(ranking["total_events"], errors="coerce").fillna(0)
         ranking["total_events"] = total_events_numeric
 
+        commitment_avg = pd.to_numeric(ranking.get("avg_commitment"), errors="coerce").fillna(
+            DEFAULT_COMMITMENT_WEIGHT
+        )
+        sbti_events = pd.to_numeric(ranking.get("sbti_events"), errors="coerce").fillna(0)
+        sbti_strength = pd.to_numeric(ranking.get("sbti_strength"), errors="coerce").fillna(0.0)
+        sbti_share = np.divide(
+            sbti_events,
+            total_events_numeric.replace(0, np.nan),
+        ).fillna(0.0)
+
+        commitment_factor = (0.7 + commitment_avg).clip(lower=0.8, upper=2.0)
+        sbti_strength_factor = (1.0 + 2.5 * sbti_share + 0.3 * np.tanh(np.abs(sbti_strength))).clip(
+            lower=1.0, upper=3.5
+        )
+
         ranking["recency_factor"] = recency_factor.round(3)
-        ranking["priority_score"] = total_events_numeric.clip(lower=1) * ranking["recency_factor"]
+        ranking["commitment_factor"] = commitment_factor.round(3)
+        ranking["sbti_share"] = sbti_share.round(3)
+        ranking["priority_score"] = (
+            total_events_numeric.clip(lower=1)
+            * ranking["recency_factor"]
+            * commitment_factor
+            * sbti_strength_factor
+        )
 
         ranking["_company_key_dedupe"] = (
             ranking["company_key"].fillna(ranking["company_name"]).astype(str)
@@ -733,19 +802,24 @@ def ranking_companies(companies: pd.DataFrame) -> Path:
             lambda val: val.strip().upper() if isinstance(val, str) else val
         )
 
-    desired_country_order = ["BR", "AR", "CO", "CL", "UY"]
-    country_rank_map = {code: idx for idx, code in enumerate(desired_country_order)}
-    ranking["_country_sort"] = ranking["country"].map(country_rank_map).fillna(len(desired_country_order))
-    ranking.sort_values(
-        ["_country_sort", "priority_score", "total_events", "demand_score"],
-        ascending=[True, False, False, False],
-        inplace=True,
-    )
-    ranking.drop(columns=["_country_sort"], inplace=True)
+    country_values = ranking["country"].dropna().astype(str)
+    country_counts = country_values.value_counts()
+    country_order_for_sort = country_counts.index.tolist()
+    if country_order_for_sort:
+        country_rank_map = {code: idx for idx, code in enumerate(country_order_for_sort)}
+        ranking["_country_sort"] = ranking["country"].map(country_rank_map).fillna(
+            len(country_order_for_sort)
+        )
+        ranking.sort_values(
+            ["_country_sort", "priority_score", "total_events", "demand_score"],
+            ascending=[True, False, False, False],
+            inplace=True,
+        )
+        ranking.drop(columns=["_country_sort"], inplace=True)
 
     country_values = ranking["country"].dropna().astype(str)
     color_map = build_country_color_map(country_values)
-    country_order = [code for code in desired_country_order if code in country_values.unique()]
+    country_order = country_counts.index.tolist()
     country_order += [code for code in country_values.unique() if code not in country_order]
 
     y_category_array = ranking["company_name"].tolist()
@@ -782,6 +856,8 @@ def ranking_companies(companies: pd.DataFrame) -> Path:
                 "avg_strength",
                 "total_events",
                 "activity_summary_wrapped",
+                "commitment_factor",
+                "sbti_share",
             ]
         ],
     )
@@ -801,6 +877,8 @@ def ranking_companies(companies: pd.DataFrame) -> Path:
             "Última señal=%{customdata[3]}<br>"
             "Industria=%{customdata[4]}<br>"
             "Fuerza promedio=%{customdata[5]:.2f}<br>"
+            "Factor compromiso=%{customdata[8]:.2f}<br>"
+            "% señales SBTi=%{customdata[9]:.0%}<br>"
             "Resumen de actividad=%{customdata[7]}<extra></extra>"
         ),
     )
@@ -827,11 +905,13 @@ def ranking_companies(companies: pd.DataFrame) -> Path:
         base = f"{row['demand_score']:.2f}"
         recency = f"{row.get('recency_factor', 1.0):.2f}"
         avg = f"{row['avg_strength']:.2f}"
+        commitment = f"{row.get('commitment_factor', 1.0):.2f}"
+        sbt_pct = f"{row.get('sbti_share', 0.0) * 100:.0f}%"
         lines.append(
             (
                 f"- {row['company_name']} ({row['country']} · {row['industry_display']}): "
-                f"score {summary_score} (base {base} · recencia {recency}), promedio {avg}, "
-                f"señales {row['total_events']}, última {row['last_ts_fmt']}"
+                f"score {summary_score} (base {base} · recencia {recency} · compromiso {commitment}), "
+                f"promedio {avg}, señales {row['total_events']}, SBTi {sbt_pct}, última {row['last_ts_fmt']}"
             )
         )
     TOP25_PATH.write_text("\n".join(lines), encoding="utf-8")
@@ -1093,6 +1173,92 @@ def signal_type_distribution(events: pd.DataFrame, universe: pd.DataFrame | None
     )
 
     path = OUTPUT_DIR / "signal_type_distribution.html"
+    return _write_plotly_html(fig, path)
+
+
+def industry_signal_matrix(events: pd.DataFrame) -> Path:
+    subset = events.copy()
+    subset["industry_clean"] = _align_industry(subset.get("industry"))
+    subset["industry_display"] = apply_industry_labels(subset["industry_clean"])
+    subset["signal_label"] = (
+        subset.get("signal_type")
+        .astype(str)
+        .str.lower()
+        .map(SIGNAL_MATRIX_TYPES)
+    )
+    subset = subset[subset["signal_label"].notna()]
+
+    if subset.empty:
+        all_industries: list[str] = []
+        counts = pd.DataFrame(columns=SIGNAL_MATRIX_TYPES.values())
+    else:
+        counts = (
+            subset.groupby(["industry_display", "signal_label"])
+            .size()
+            .unstack(fill_value=0)
+        )
+        all_industries = counts.index.tolist()
+
+    for label in SIGNAL_MATRIX_TYPES.values():
+        if label not in counts:
+            counts[label] = 0
+    counts = counts[list(SIGNAL_MATRIX_TYPES.values())]
+
+    if all_industries:
+        ordered = ordered_categories(pd.Series(all_industries), INDUSTRY_CATEGORY_ORDER)
+        counts = counts.reindex(ordered, fill_value=0)
+    else:
+        counts = pd.DataFrame(
+            {label: [0] for label in SIGNAL_MATRIX_TYPES.values()},
+            index=["Sin datos disponibles"],
+        )
+
+    industries = counts.index.tolist()
+    sbti_values = counts[SIGNAL_MATRIX_TYPES["sbti"]].astype(int).tolist()
+    bcorp_values = counts[SIGNAL_MATRIX_TYPES["bcorp"]].astype(int).tolist()
+    ungc_values = counts[SIGNAL_MATRIX_TYPES["ungc"]].astype(int).tolist()
+
+    header_color = "#74cf9f"
+    border_color = "#9fd6d9"
+    row_color = "#f2fbf5"
+    row_colors = [row_color] * len(industries)
+    header_height = 42
+    row_height = 34
+    total_rows = max(1, len(industries))
+    figure_height = header_height + row_height * total_rows + 140
+
+    fig = go.Figure(
+        data=[
+            go.Table(
+                header=dict(
+                    values=["Industria", "SBTi", "B Corp", "UNGC"],
+                    fill_color=header_color,
+                    align="left",
+                    font=dict(color=PRIMARY_TEXT_COLOR, family=PRIMARY_FONT, size=TABLE_HEADER_FONT_SIZE + 2),
+                    line_color=border_color,
+                    line_width=1.2,
+                    height=header_height,
+                ),
+                cells=dict(
+                    values=[industries, sbti_values, bcorp_values, ungc_values],
+                    fill=dict(color=[row_colors, row_colors, row_colors, row_colors]),
+                    align=["left", "center", "center", "center"],
+                    font=dict(color=PRIMARY_TEXT_COLOR, family=SECONDARY_FONT, size=max(TABLE_CELL_FONT_SIZE, 12)),
+                    line_color=border_color,
+                    line_width=1.2,
+                    height=row_height,
+                ),
+            )
+        ]
+    )
+    fig.update_layout(
+        title=None,
+        width=780,
+        height=figure_height,
+        margin=dict(l=40, r=40, t=30, b=40),
+    )
+
+    path = OUTPUT_DIR / "industry_signal_matrix.html"
     return _write_plotly_html(fig, path)
 
 
@@ -1568,6 +1734,7 @@ def main() -> None:
         coverage_country_industry(focus_events),
         country_fact_sheet(companies_focus),
         signal_type_distribution(focus_events, focus_universe),
+        industry_signal_matrix(focus_events),
         signal_mix_sankey(focus_events, focus_universe),
     ]
 
