@@ -929,7 +929,6 @@ def coverage_indicators(companies: pd.DataFrame) -> Path:
             "Industria=%{y}<br>"
             "Empresas detectadas=%{customdata[0]:,.0f}<br>"
             "Eventos totales=%{customdata[1]:,.0f}<br>"
-            "Intensidad mediana=%{customdata[2]:.2f}<br>"
             "Eventos promedio por empresa=%{customdata[3]:.2f}<extra></extra>"
         ),
     )
@@ -1232,8 +1231,7 @@ def coverage_gaps(companies: pd.DataFrame, universe: pd.DataFrame) -> Path:
             "Σ score ponderado=%{y:.1f}<br>"
             "Señales promedio por empresa=%{customdata[3]:.1f}<br>"
             "Empresas con señales=%{customdata[1]:,.0f}<br>"
-            "Empresas en el universo=%{customdata[2]:,.0f}<br>"
-            "Intensidad mediana=%{customdata[4]:.1f}<extra></extra>"
+            "Empresas en el universo=%{customdata[2]:,.0f}<extra></extra>"
         ),
         cliponaxis=False,
     )

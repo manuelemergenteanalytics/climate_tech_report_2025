@@ -18,3 +18,6 @@ data/processed/universe_sample.csv
 # IDEs
 .vscode/
 .idea/
+
+# Excluir la librería que está dando error
+third_party/lib_overrides/usr/lib/x86_64-linux-gnu/libasound.so.2
