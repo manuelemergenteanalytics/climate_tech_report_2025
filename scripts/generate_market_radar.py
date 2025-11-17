@@ -92,6 +92,11 @@ GENERIC_COMPANY_PLACEHOLDERS = {
     "Sociedad Anónima",
 }
 
+COMPANY_NAME_OVERRIDES = {
+    "Fibra Mty F/2157": "Fibra Mty",
+    "TUNKER QUÍMICA IMPORTAÇÃO LTDA": "Tunker Química Importação Ltda",
+}
+
 DEFAULT_COMMITMENT_WEIGHT = 0.6
 COMMITMENT_WEIGHT_BY_SIGNAL = {
     "ungc": 0.4,
@@ -106,31 +111,48 @@ SIGNAL_MATRIX_TYPES = {
 }
 
 COMPANY_ACTIVITY_SUMMARY = {
-    "Banco do Brasil": "Institución financiera estatal que ofrece banca minorista, corporativa, seguros, y servicios de inversión y agronegocios.",
-    "Estrada de Ferro Noroeste do Brasil": "Histórica compañía ferroviaria brasileña, operaba una red de 1622 km de Bauru (SP) a Corumbá (MS), conectando con Bolivia.",
-    "Rio de Janeiro Metro": "Opera la red de metro de Río de Janeiro, ofreciendo transporte masivo eficiente y conectividad a lugares emblemáticos.",
-    "Mover Participações": "Conglomerado que invierte en ingeniería, construcción, cemento, concesiones de energía y transporte, y sector naval y petróleo.",
     "Agência Senado": "Agencia de noticias del Senado Federal brasileño. Produce y distribuye información sobre la actividad parlamentaria.",
-    "Companhia Pernambucana de Saneamento": "Empresa de economía mixta que proporciona agua potable y servicios de alcantarillado sanitario en el estado de Pernambuco.",
-    "Iochpe-Maxion": "Compañía global líder en la producción de ruedas automotrices y uno de los principales fabricantes de componentes estructurales automotrices.",
-    "Aeropuertos Argentina": "Administra y desarrolla la infraestructura de la mayoría de los aeropuertos de Argentina, gestionando el tráfico aerocomercial.",
-    "Universidad Nacional de Córdoba": "Institución pública de educación superior (la más antigua de Argentina) que ofrece grado, posgrado, investigación y extensión.",
-    "PAPA": "Probablemente es Papa Industrial o similar: fabricante de maquinaria para la industria alimentaria, como extrusoras y cortadoras.",
-    "Vista Energy": "Operador independiente de petróleo y gas, enfocado en la exploración y producción de hidrocarburos, principalmente en Vaca Muerta.",
-    "Estudio Beccar Varela": "Estudio jurídico líder en servicios legales integrales (derecho corporativo, etc.) con visión global y trayectoria de más de 125 años.",
-    "Universidad Siglo 21": "Universidad privada líder en Argentina, ofrece educación superior presencial y virtual (online) en múltiples disciplinas.",
-    "Sheraton Mendoza Hotel": "Hotel de lujo que ofrece alojamiento, gastronomía, eventos, entretenimiento (casino) y servicios turísticos en Mendoza.",
-    "Hilandería Warmi": "Fabrica textiles (mantas, ponchos, bufandas) con fibras naturales de llama y oveja, preservando la cultura andina y la tradición.",
-    "Grupo L": "Ofrece soluciones integrales para empresas, incluyendo servicios de alimentación, limpieza, mantenimiento y servicios en sitios remotos.",
-    "La Primera": "En el sector manufacturero, podría ser una empresa histórica textil o de ingeniería/construcciones, como INFA (Grupo ALUAR-FATE).",
-    "Fundacion Protestante Hora de Obrar": "Organización que trabaja por el desarrollo social y ambiental, brindando ayuda y proyectos en Argentina, Paraguay y Uruguay.",
-    "ETB": "Operador de telecomunicaciones estatal que provee servicios de telefonía móvil, internet (fibra óptica), TV y almacenamiento de datos.",
+    "Agro de Souza S.A.": "Empresa agrícola dedicada a la producción y comercialización de cereales.",
+    "Aeropuertos Argentina": "Gestión y operación de aeropuertos y servicios aeroportuarios en Argentina.",
+    "Arca Continental": "Productor y embotellador líder de bebidas y alimentos.",
+    "Ativa Logística": "Proveedor logístico especializado en transporte y distribución en Brasil.",
+    "Banco do Brasil": "Banco estatal líder en servicios financieros, banca comercial y de inversión.",
+    "Banco de Seguros del Estado": "Compañía estatal líder en seguros y servicios financieros en Uruguay.",
+    "BRF S.A.": "Corporación top de alimentos procesados, principalmente carnes y productos congelados.",
     "Cámara de Comercio de Bogotá": "Entidad que apoya el desarrollo social, empresarial y la calidad de vida en Bogotá y la región, mediante servicios de registro y apoyo.",
+    "Cargo Brasil": "Empresa dedicada al transporte y logística de mercancías.",
     "Caracol Radio": "Medio de comunicación que ofrece información, entretenimiento y servicio a través de la radiodifusión y nuevos medios digitales.",
+    "Chayè Hnos SRL": "Empresa dedicada al comercio minorista y distribución de productos de consumo.",
+    "Companhia Pernambucana de Saneamento": "Empresa de economía mixta que proporciona agua potable y servicios de alcantarillado sanitario en Pernambuco.",
+    "Cotton Knit": "Empresa textil dedicada a la confección y exportación de prendas de algodón.",
+    "CPFL Energia": "Proveedor de electricidad y servicios de energía en Brasil.",
     "Ecocitex": "Empresa de reciclaje textil que vende ropa y accesorios de segunda mano, y produce lana reciclada a partir de ropa en mal estado.",
+    "Estrada de Ferro Noroeste do Brasil": "Empresa dedicada al transporte ferroviario de mercancías.",
+    "Estudio Beccar Varela": "Estudio jurídico líder en servicios legales integrales (derecho corporativo, etc.) con visión global y trayectoria de más de 125 años.",
+    "ETB": "Operador de telecomunicaciones estatal que provee servicios de telefonía móvil, internet (fibra óptica), TV y almacenamiento de datos.",
+    "FEVISA": "Fabricante industrial especializado en la producción de envases de vidrio.",
+    "Fibra Mty F/2157": "Fideicomiso de inversión inmobiliaria dedicado a la gestión de bienes raíces.",
+    "Fundacion Protestante Hora de Obrar": "Organización que trabaja por el desarrollo social y ambiental, brindando ayuda y proyectos en Argentina, Paraguay y Uruguay.",
+    "Grupo L": "Ofrece soluciones integrales para empresas, incluyendo servicios de alimentación, limpieza, mantenimiento y servicios en sitios remotos.",
+    "Hilandería Warmi": "Fabrica textiles (mantas, ponchos, bufandas) con fibras naturales de llama y oveja, preservando la cultura andina y la tradición.",
+    "Iochpe-Maxion": "Fabricante líder de ruedas y componentes automotrices a nivel global.",
+    "Industrias Nettalco S.A.": "Fabricante especializado en productos de metalurgia y manufactura.",
+    "La Primera": "En el sector manufacturero, podría ser una empresa histórica textil o de ingeniería/construcciones, como INFA (Grupo ALUAR-FATE).",
+    "Mallplaza": "Cadena de centros comerciales con amplia presencia en Chile y la región.",
+    "Mercado Libre": "Plataforma líder de e-commerce y pagos digitales en América Latina.",
+    "Mover Participações": "Holding con inversiones en los sectores de energía, infraestructura y recursos naturales.",
+    "MRV Engenharia": "Constructora especializada en desarrollo de viviendas de interés social.",
+    "Parque Arauco S.A.": "Desarrolladora y operadora de centros comerciales y espacios comerciales.",
+    "PAPA": "Probablemente es Papa Industrial o similar: fabricante de maquinaria para la industria alimentaria, como extrusoras y cortadoras.",
+    "Rio de Janeiro Metro": "Operador del sistema de transporte subterráneo en Río de Janeiro.",
     "Scotiabank Chile": "Institución financiera líder que ofrece banca personal, corporativa, gestión patrimonial y mercados de capitales.",
-    "Parque Arauco S.A.": "Grupo que desarrolla y administra activos inmobiliarios de uso comercial, como centros comerciales y stripcenters en varios países.",
-    "Banco de Seguros del Estado": "Ente autónomo estatal que desarrolla la actividad aseguradora en Uruguay, ofreciendo seguros de vida, patrimoniales y de accidentes.",
+    "Sheraton Mendoza Hotel": "Hotel de lujo que ofrece alojamiento, gastronomía, eventos, entretenimiento (casino) y servicios turísticos en Mendoza.",
+    "Telecom": "Proveedor principal de telecomunicaciones, internet y telefonía móvil en Argentina.",
+    "TUNKER QUÍMICA IMPORTAÇÃO LTDA": "Importadora y distribuidora de productos químicos industriales.",
+    "Universidad Nacional de Córdoba": "Institución pública de educación superior (la más antigua de Argentina) que ofrece grado, posgrado, investigación y extensión.",
+    "Universidad Siglo 21": "Universidad privada líder en Argentina, ofrece educación superior presencial y virtual (online) en múltiples disciplinas.",
+    "Vista Energy": "Operador independiente de petróleo y gas, enfocado en la exploración y producción de hidrocarburos, principalmente en Vaca Muerta.",
+    "WEG S.A.": "Multinacional productora de equipos eléctricos industriales y soluciones de automatización.",
 }
 
 INDUSTRY_SIMPLIFY = {
@@ -221,6 +243,9 @@ def _prep_events() -> pd.DataFrame:
     events["company_id"] = raw_ids.astype(str) if raw_ids is not None else ""
     events["company_id"] = events["company_id"].replace({"nan": pd.NA, "None": pd.NA, "": pd.NA})
     events["company_numeric_id"] = pd.to_numeric(raw_ids, errors="coerce")
+    name_series = events.get("company_name")
+    if name_series is not None:
+        events["company_name"] = name_series.replace(COMPANY_NAME_OVERRIDES)
     events["company_key"] = events["company_id"].copy()
     missing_key = events["company_key"].isna()
     if missing_key.any():
@@ -447,6 +472,7 @@ def coverage_timeline(events: pd.DataFrame) -> Path:
     industry_order = (
         monthly.groupby("industry_clean")["total_signals"].sum().sort_values(ascending=False)
     )
+    primary_industry_clean = industry_order.index[0] if len(industry_order) else None
     top_industries = industry_order.head(8).index.tolist()
     filtered = monthly[monthly["industry_clean"].isin(top_industries)].copy()
 
@@ -455,9 +481,24 @@ def coverage_timeline(events: pd.DataFrame) -> Path:
 
     filtered.sort_values("month", inplace=True)
     filtered["industry_display"] = apply_industry_labels(filtered["industry_clean"])
+    primary_industry_display = (
+        friendly_industry_label(primary_industry_clean) if primary_industry_clean else None
+    )
 
     industry_color_map = build_industry_color_map(filtered["industry_display"].unique())
-    legend_order = ordered_categories(filtered["industry_display"], INDUSTRY_CATEGORY_ORDER)
+
+    legend_order: List[str] = []
+    seen = set()
+    for industry_key in industry_order.index:
+        label = friendly_industry_label(industry_key)
+        if label in filtered["industry_display"].unique() and label not in seen:
+            legend_order.append(label)
+            seen.add(label)
+
+    for label in filtered["industry_display"].unique():
+        if label not in seen:
+            legend_order.append(label)
+            seen.add(label)
 
     fig = px.line(
         filtered,
@@ -485,6 +526,13 @@ def coverage_timeline(events: pd.DataFrame) -> Path:
             font=dict(color=PRIMARY_TEXT_COLOR, family=PRIMARY_FONT, size=12),
         ),
     )
+
+    if primary_industry_display:
+        def _toggle_trace_visibility(trace: go.Scatter) -> None:
+            visible = True if trace.name == primary_industry_display else "legendonly"
+            trace.update(visible=visible)
+
+        fig.for_each_trace(_toggle_trace_visibility)
 
     path = OUTPUT_DIR / "coverage_timeline.html"
     return _write_plotly_html(fig, path)
