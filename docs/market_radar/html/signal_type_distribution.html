@@ -10,16 +10,21 @@
 	</style>
 </head>
 <body>
-	<div id="plotly-67588490933547a19726a95ff9d6e646" class="plotly-graph-div" style="height:450px; width:100%; max-width:780px;"></div>
+	<div id="plotly-f7399001e9854e6a92e8dd407094d416" class="plotly-graph-div" style="height:450px; width:100%; max-width:780px;"></div>
 	<script type="text/javascript">
 		window.PLOTLYENV=window.PLOTLYENV || {};
-		if (document.getElementById("plotly-67588490933547a19726a95ff9d6e646")) {
+		if (document.getElementById("plotly-f7399001e9854e6a92e8dd407094d416")) {
 			Plotly.newPlot(
-				"plotly-67588490933547a19726a95ff9d6e646",
+				"plotly-f7399001e9854e6a92e8dd407094d416",
 				[
 					{
-						"hovertemplate": "Fuente=%{x}<br>Cantidad=%{text}<extra></extra>",
-						"legendgroup": "ungc",
+						"customdata": [
+							[
+								"Reputación / compromiso inicial"
+							]
+						],
+						"hovertemplate": "Tipo=%{x}<br>Señales=%{y}<br>Requisitos=%{customdata[0]}<extra></extra>",
+						"legendgroup": "UNGC",
 						"marker": {
 							"color": "#62c68f",
 							"pattern": {
@@ -30,7 +35,7 @@
 								"width": 0.6
 							}
 						},
-						"name": "ungc",
+						"name": "UNGC",
 						"orientation": "v",
 						"showlegend": true,
 						"text": {
@@ -39,7 +44,7 @@
 						},
 						"textposition": "auto",
 						"x": [
-							"ungc"
+							"UNGC"
 						],
 						"xaxis": "x",
 						"y": {
@@ -55,8 +60,13 @@
 						}
 					},
 					{
-						"hovertemplate": "Fuente=%{x}<br>Cantidad=%{text}<extra></extra>",
-						"legendgroup": "bcorp",
+						"customdata": [
+							[
+								"Impacto integral"
+							]
+						],
+						"hovertemplate": "Tipo=%{x}<br>Señales=%{y}<br>Requisitos=%{customdata[0]}<extra></extra>",
+						"legendgroup": "B Corp",
 						"marker": {
 							"color": "#62c68f",
 							"pattern": {
@@ -67,7 +77,7 @@
 								"width": 0.6
 							}
 						},
-						"name": "bcorp",
+						"name": "B Corp",
 						"orientation": "v",
 						"showlegend": true,
 						"text": {
@@ -76,7 +86,7 @@
 						},
 						"textposition": "auto",
 						"x": [
-							"bcorp"
+							"B Corp"
 						],
 						"xaxis": "x",
 						"y": {
@@ -92,8 +102,13 @@
 						}
 					},
 					{
-						"hovertemplate": "Fuente=%{x}<br>Cantidad=%{text}<extra></extra>",
-						"legendgroup": "sbti",
+						"customdata": [
+							[
+								"Reducciones obligatorias"
+							]
+						],
+						"hovertemplate": "Tipo=%{x}<br>Señales=%{y}<br>Requisitos=%{customdata[0]}<extra></extra>",
+						"legendgroup": "SBTi",
 						"marker": {
 							"color": "#62c68f",
 							"pattern": {
@@ -104,7 +119,7 @@
 								"width": 0.6
 							}
 						},
-						"name": "sbti",
+						"name": "SBTi",
 						"orientation": "v",
 						"showlegend": true,
 						"text": {
@@ -113,7 +128,7 @@
 						},
 						"textposition": "auto",
 						"x": [
-							"sbti"
+							"SBTi"
 						],
 						"xaxis": "x",
 						"y": {
@@ -129,8 +144,13 @@
 						}
 					},
 					{
-						"hovertemplate": "Fuente=%{x}<br>Cantidad=%{text}<extra></extra>",
-						"legendgroup": "news",
+						"customdata": [
+							[
+								"—"
+							]
+						],
+						"hovertemplate": "Tipo=%{x}<br>Señales=%{y}<br>Requisitos=%{customdata[0]}<extra></extra>",
+						"legendgroup": "Presa",
 						"marker": {
 							"color": "#62c68f",
 							"pattern": {
@@ -141,7 +161,7 @@
 								"width": 0.6
 							}
 						},
-						"name": "news",
+						"name": "Presa",
 						"orientation": "v",
 						"showlegend": true,
 						"text": {
@@ -150,7 +170,7 @@
 						},
 						"textposition": "auto",
 						"x": [
-							"news"
+							"Presa"
 						],
 						"xaxis": "x",
 						"y": {
@@ -166,7 +186,12 @@
 						}
 					},
 					{
-						"hovertemplate": "Fuente=%{x}<br>Cantidad=%{text}<extra></extra>",
+						"customdata": [
+							[
+								"—"
+							]
+						],
+						"hovertemplate": "Tipo=%{x}<br>Señales=%{y}<br>Requisitos=%{customdata[0]}<extra></extra>",
 						"legendgroup": "Wikidata",
 						"marker": {
 							"color": "#f6ae2d",
@@ -609,14 +634,14 @@
 							1.0
 						],
 						"title": {
-							"text": "Fuente"
+							"text": "Tipo de señal"
 						},
 						"categoryorder": "array",
 						"categoryarray": [
-							"ungc",
-							"bcorp",
-							"sbti",
-							"news",
+							"UNGC",
+							"B Corp",
+							"SBTi",
+							"Presa",
 							"Wikidata"
 						]
 					},
@@ -632,7 +657,7 @@
 					},
 					"legend": {
 						"title": {
-							"text": "Fuente"
+							"text": "Tipo de señal"
 						},
 						"tracegroupgap": 0
 					},

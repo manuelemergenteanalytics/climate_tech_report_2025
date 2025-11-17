@@ -99,8 +99,8 @@ COMPANY_NAME_OVERRIDES = {
 
 DEFAULT_COMMITMENT_WEIGHT = 0.6
 COMMITMENT_WEIGHT_BY_SIGNAL = {
-    "ungc": 0.4,
-    "bcorp": 0.75,
+    "ungc": 0.2,
+    "bcorp": 0.5,
     "sbti": 1.0,
 }
 
@@ -108,6 +108,19 @@ SIGNAL_MATRIX_TYPES = {
     "sbti": "SBTi",
     "bcorp": "B Corp",
     "ungc": "UNGC",
+}
+
+SIGNAL_TYPE_LABELS = {
+    "ungc": "UNGC",
+    "bcorp": "B Corp",
+    "sbti": "SBTi",
+    "news": "Presa",
+}
+
+SIGNAL_TYPE_REQUIREMENTS = {
+    "UNGC": "Reputación / compromiso inicial",
+    "B Corp": "Impacto integral",
+    "SBTi": "Reducciones obligatorias",
 }
 
 COMPANY_ACTIVITY_SUMMARY = {
@@ -904,7 +917,6 @@ def ranking_companies(companies: pd.DataFrame) -> Path:
                 "avg_strength",
                 "total_events",
                 "activity_summary_wrapped",
-                "commitment_factor",
                 "sbti_share",
             ]
         ],
@@ -925,8 +937,7 @@ def ranking_companies(companies: pd.DataFrame) -> Path:
             "Última señal=%{customdata[3]}<br>"
             "Industria=%{customdata[4]}<br>"
             "Fuerza promedio=%{customdata[5]:.2f}<br>"
-            "Factor compromiso=%{customdata[8]:.2f}<br>"
-            "% señales SBTi=%{customdata[9]:.0%}<br>"
+            "% señales SBTi=%{customdata[8]:.0%}<br>"
             "Resumen de actividad=%{customdata[7]}<extra></extra>"
         ),
     )
@@ -1053,8 +1064,8 @@ def coverage_indicators(companies: pd.DataFrame) -> Path:
         texttemplate="%{text:,.0f}",
         textangle=0,
         hovertemplate=(
-            "Σ score ponderado=%{x:,.0f}<br>"
             "Industria=%{y}<br>"
+            "Σ score ponderado=%{x:,.0f}<br>"
             "Empresas detectadas=%{customdata[0]:,.0f}<br>"
             "Eventos totales=%{customdata[1]:,.0f}<br>"
             "Eventos promedio por empresa=%{customdata[3]:.2f}<extra></extra>"
@@ -1075,18 +1086,13 @@ def coverage_indicators(companies: pd.DataFrame) -> Path:
     return _write_plotly_html(fig, path)
 
 
-def coverage_country_industry(events: pd.DataFrame) -> Path:
-    coverage = (
-        events.groupby(["country", "industry"], as_index=False)
-        .agg(
-            total_events=("company_key", "count"),
-            companies=("company_key", "nunique"),
-            total_demand=("weighted_strength", "sum"),
-        )
-    )
-    coverage = coverage[coverage["total_events"] > 0]
+def coverage_country_industry(companies: pd.DataFrame) -> Path:
+    subset = companies.copy()
+    subset["country"] = subset["country"].fillna("").astype(str).str.upper()
+    subset = subset[subset["country"].isin(FOCUS_COUNTRIES)]
     path = OUTPUT_DIR / "coverage_country_industry.html"
-    if coverage.empty:
+
+    if subset.empty:
         fig = go.Figure()
         fig.update_layout(
             title=None,
@@ -1106,46 +1112,94 @@ def coverage_country_industry(events: pd.DataFrame) -> Path:
         )
         return _write_plotly_html(fig, path)
 
-    country_order = (
-        coverage.groupby("country")["total_demand"].sum().sort_values(ascending=False).index.tolist()
+    agg = (
+        subset.groupby(["country", "industry"], as_index=False)
+        .agg(
+            total_demand=("demand_score", "sum"),
+            total_intensity=("intensity_score", "sum"),
+            total_events=("total_events", "sum"),
+            companies=("company_key", "nunique"),
+        )
     )
-    matrix_events = (
-        coverage.pivot(index="country", columns="industry", values="total_events")
-        .reindex(index=country_order)
-        .fillna(0)
-    )
-    countries = matrix_events.index.tolist()
-    industries = matrix_events.columns.tolist()
-    industry_map = {name: friendly_industry_label(name) for name in industries}
-    matrix_events = matrix_events.rename(columns=industry_map)
-    industries = matrix_events.columns.tolist()
-    z_values = matrix_events.to_numpy()
+    agg = agg[agg["companies"] > 0]
+    agg["industry_display"] = apply_industry_labels(agg["industry"])
 
-    companies_matrix = (
-        coverage.pivot(index="country", columns="industry", values="companies")
-        .reindex(index=countries, columns=industry_map.keys())
-        .rename(columns=industry_map)
-        .fillna(0)
+    if agg.empty:
+        fig = go.Figure()
+        fig.update_layout(
+            title=None,
+            width=860,
+            height=580,
+            annotations=[
+                dict(
+                    text="Sin datos disponibles",
+                    x=0.5,
+                    y=0.5,
+                    xref="paper",
+                    yref="paper",
+                    showarrow=False,
+                    font=dict(size=18),
+                )
+            ],
+        )
+        return _write_plotly_html(fig, path)
+
+    industry_order = ordered_categories(agg["industry_display"], INDUSTRY_CATEGORY_ORDER)
+    country_order = (
+        agg.groupby("country")["total_demand"].sum().sort_values(ascending=False).index.tolist()
     )
+
     demand_matrix = (
-        coverage.pivot(index="country", columns="industry", values="total_demand")
-        .reindex(index=countries, columns=industry_map.keys())
-        .rename(columns=industry_map)
+        agg.pivot(index="country", columns="industry_display", values="total_demand")
+        .reindex(index=country_order, columns=industry_order)
+        .fillna(0.0)
+    )
+    events_matrix = (
+        agg.pivot(index="country", columns="industry_display", values="total_events")
+        .reindex(index=country_order, columns=industry_order)
+        .fillna(0.0)
+    )
+    companies_matrix = (
+        agg.pivot(index="country", columns="industry_display", values="companies")
+        .reindex(index=country_order, columns=industry_order)
         .fillna(0.0)
     )
 
-    custom = np.stack([companies_matrix.to_numpy(), demand_matrix.to_numpy()], axis=-1)
+    countries = demand_matrix.index.tolist()
+    industries = demand_matrix.columns.tolist()
+    if not countries or not industries:
+        fig = go.Figure()
+        fig.update_layout(
+            title=None,
+            width=860,
+            height=580,
+            annotations=[
+                dict(
+                    text="Sin datos disponibles",
+                    x=0.5,
+                    y=0.5,
+                    xref="paper",
+                    yref="paper",
+                    showarrow=False,
+                    font=dict(size=18),
+                )
+            ],
+        )
+        return _write_plotly_html(fig, path)
+
+    custom = np.stack([events_matrix.to_numpy(), companies_matrix.to_numpy()], axis=-1)
 
     heatmap = go.Heatmap(
-        z=z_values,
+        z=demand_matrix.to_numpy(),
         x=industries,
         y=countries,
         colorscale=MARKET_RADAR_SEQUENTIAL,
-        colorbar=colorbar_defaults("# señales"),
+        colorbar=colorbar_defaults("Σ score ponderado"),
         customdata=custom,
         hovertemplate=(
-            "industria=%{x}<br>país=%{y}<br>señales=%{z:.0f}<br>"
-            "empresas únicas=%{customdata[0]:.0f}<br>Σ score=%{customdata[1]:.2f}<extra></extra>"
+            "industria=%{x}<br>país=%{y}<br>Σ score=%{z:.2f}<br>"
+            "señales=%{customdata[0]:.0f}<br>"
+            "empresas=%{customdata[1]:.0f}<extra></extra>"
         ),
         xgap=1,
         ygap=1,
@@ -1172,8 +1226,6 @@ def signal_type_distribution(events: pd.DataFrame, universe: pd.DataFrame | None
     counts["signal_type"] = counts["signal_type"].fillna("sin dato").astype(str)
     counts = counts.sort_values("total_signals", ascending=False)
 
-    signal_order = counts["signal_type"].tolist()
-
     wikidata_total = None
     if universe is not None and not universe.empty:
         universe_ids = pd.to_numeric(universe.get("company_id"), errors="coerce").dropna()
@@ -1190,27 +1242,36 @@ def signal_type_distribution(events: pd.DataFrame, universe: pd.DataFrame | None
             ],
             ignore_index=True,
         )
-        signal_order.append("Wikidata")
+    counts["signal_key"] = counts["signal_type"].str.lower()
+    counts["signal_label"] = counts["signal_key"].map(SIGNAL_TYPE_LABELS).fillna(
+        counts["signal_type"].str.title()
+    )
+    counts["requirements"] = counts["signal_label"].map(SIGNAL_TYPE_REQUIREMENTS).fillna("—")
+    signal_order = counts.sort_values("total_signals", ascending=False)["signal_label"].tolist()
+    if "Wikidata" in signal_order:
+        signal_order = [label for label in signal_order if label != "Wikidata"] + ["Wikidata"]
 
-    signal_order = [label for label in signal_order if label in counts["signal_type"].tolist()]
-
-    color_map = {label: SIGNAL_TYPE_BAR_COLOR for label in counts["signal_type"].unique()}
+    color_map = {label: SIGNAL_TYPE_BAR_COLOR for label in counts["signal_label"].unique()}
     color_map["Wikidata"] = "#f6ae2d"
 
     fig = px.bar(
         counts,
-        x="signal_type",
+        x="signal_label",
         y="total_signals",
         text="total_signals",
         title="Distribución de señales por tipo",
-        labels={"signal_type": "Fuente", "total_signals": "Cantidad"},
-        category_orders={"signal_type": signal_order},
-        color="signal_type",
+        labels={"signal_label": "Tipo de señal", "total_signals": "Cantidad"},
+        category_orders={"signal_label": signal_order},
+        color="signal_label",
         color_discrete_map=color_map,
+        custom_data=["requirements"],
     )
     fig.update_traces(
         marker=dict(line=dict(color=BAR_LINE_COLOR, width=0.6)),
         textfont=dict(color=PRIMARY_TEXT_COLOR, family=PRIMARY_FONT, size=12),
+        hovertemplate=(
+            "Tipo=%{x}<br>Señales=%{y}<br>Requisitos=%{customdata[0]}<extra></extra>"
+        ),
     )
     fig.update_layout(
         title=None,
@@ -1397,11 +1458,11 @@ def coverage_gaps(companies: pd.DataFrame, universe: pd.DataFrame) -> Path:
 
     position_overrides = {
         "Transporte, Movilidad & Logística": "bottom center",
-        "TIC, Digital & Medios": "bottom center",
+        "TIC, Digital & Medios": "top center",
         "Retail & servicios al consumidor": "top center",
         "Manufactura industrial": "top center",
         "Construcción, Infraestructura & Bienes Raíces": "middle right",
-        "Agro & alimentos": "middle right",
+        "Agro & alimentos": "top center",
         "Energía & Servicios Públicos": "top center",
         "Finanzas, Seguros & Capital": "middle left",
         "Petróleo & gas": "top center",
@@ -1657,8 +1718,17 @@ def signal_mix_sankey(events: pd.DataFrame, universe: pd.DataFrame) -> Path:
             thickness=SANKEY_NODE_THICKNESS,
             color=node_colors,
             line=dict(color=SANKEY_NODE_LINE_COLOR, width=SANKEY_NODE_LINE_WIDTH),
+            hovertemplate="Nodo=%{label}<extra></extra>",
         ),
-        link=dict(source=sources, target=targets, value=values, color=link_colors),
+        link=dict(
+            source=sources,
+            target=targets,
+            value=values,
+            color=link_colors,
+            hovertemplate=(
+                "Origen=%{source.label}<br>Destino=%{target.label}<br>Empresas=%{value}<extra></extra>"
+            ),
+        ),
         arrangement="snap",
     )
 
@@ -1767,19 +1837,18 @@ def main() -> None:
 
     focus_events_universe = _filter_events_by_universe(focus_events, focus_universe)
 
-    companies_all = _company_rollup(events)
     companies_focus = _company_rollup(focus_events)
     companies_focus_universe = _company_rollup(focus_events_universe)
 
     outputs = [
         coverage_summary(companies_focus_universe, focus_universe),
-        total_signal_summary(companies_all),
+        total_signal_summary(companies_focus),
         coverage_timeline(focus_events),
         coverage_gaps(companies_focus_universe, focus_universe),
-        map_intensity(companies_all),
+        map_intensity(companies_focus),
         ranking_companies(companies_focus),
         coverage_indicators(companies_focus),
-        coverage_country_industry(focus_events),
+        coverage_country_industry(companies_focus),
         country_fact_sheet(companies_focus),
         signal_type_distribution(focus_events, focus_universe),
         industry_signal_matrix(focus_events),

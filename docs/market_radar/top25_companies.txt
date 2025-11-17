@@ -1,27 +1,27 @@
 Top 25 Empresas por Intensidad de Demanda
 
-- Banco do Brasil (BR · Finanzas, Seguros & Capital): score 74.40 (base 0.72 · recencia 1.08 · compromiso 1.30), promedio 0.47, señales 46, SBTi 12%, última 2025-10-09
-- Mover Participações (BR · Petróleo & gas): score 14.02 (base 0.75 · recencia 0.77 · compromiso 1.30), promedio 0.57, señales 25, SBTi 29%, última 2025-04-03
-- Estrada de Ferro Noroeste do Brasil (BR · Transporte, Movilidad & Logística): score 7.62 (base 0.53 · recencia 0.73 · compromiso 1.30), promedio 0.40, señales 14, SBTi 0%, última 2025-02-19
-- Rio de Janeiro Metro (BR · Retail & servicios al consumidor): score 7.53 (base 0.52 · recencia 0.96 · compromiso 1.30), promedio 0.40, señales 11, SBTi 0%, última 2025-08-20
-- Iochpe-Maxion (BR · Retail & servicios al consumidor): score 6.52 (base 0.82 · recencia 1.01 · compromiso 1.30), promedio 0.70, señales 2, SBTi 50%, última 2025-09-11
+- Banco do Brasil (BR · Finanzas, Seguros & Capital): score 74.33 (base 0.45 · recencia 1.08 · compromiso 1.30), promedio 0.30, señales 46, SBTi 12%, última 2025-10-09
+- Mover Participações (BR · Petróleo & gas): score 14.00 (base 0.56 · recencia 0.77 · compromiso 1.30), promedio 0.43, señales 25, SBTi 29%, última 2025-04-03
+- Estrada de Ferro Noroeste do Brasil (BR · Transporte, Movilidad & Logística): score 7.62 (base 0.27 · recencia 0.73 · compromiso 1.30), promedio 0.20, señales 14, SBTi 0%, última 2025-02-19
+- Rio de Janeiro Metro (BR · Retail & servicios al consumidor): score 7.53 (base 0.26 · recencia 0.96 · compromiso 1.30), promedio 0.20, señales 11, SBTi 0%, última 2025-08-20
+- Iochpe-Maxion (BR · Retail & servicios al consumidor): score 6.52 (base 0.70 · recencia 1.01 · compromiso 1.30), promedio 0.60, señales 2, SBTi 50%, última 2025-09-11
 - CPFL Energia (BR · Energía & Servicios Públicos): score 4.68 (base 1.10 · recencia 1.03 · compromiso 1.30), promedio 1.00, señales 1, SBTi 100%, última 2025-09-18
 - WEG S.A. (BR · Energía & Servicios Públicos): score 4.68 (base 1.10 · recencia 1.03 · compromiso 1.30), promedio 1.00, señales 1, SBTi 100%, última 2025-09-18
-- MRV Engenharia (BR · Construcción, Infraestructura & Bienes Raíces): score 4.55 (base 0.82 · recencia 0.71 · compromiso 1.30), promedio 0.70, señales 2, SBTi 50%, última 2025-01-09
-- BRF S.A. (BR · Agro & alimentos): score 4.45 (base 0.82 · recencia 0.69 · compromiso 1.30), promedio 0.70, señales 2, SBTi 50%, última 2024-12-12
+- MRV Engenharia (BR · Construcción, Infraestructura & Bienes Raíces): score 4.55 (base 0.70 · recencia 0.71 · compromiso 1.30), promedio 0.60, señales 2, SBTi 50%, última 2025-01-09
+- BRF S.A. (BR · Agro & alimentos): score 4.45 (base 0.70 · recencia 0.69 · compromiso 1.30), promedio 0.60, señales 2, SBTi 50%, última 2024-12-12
 - Ativa Logística (BR · Transporte, Movilidad & Logística): score 4.40 (base 1.10 · recencia 0.97 · compromiso 1.30), promedio 1.00, señales 1, SBTi 100%, última 2025-08-21
 - Tunker Química Importação Ltda (BR · Transporte, Movilidad & Logística): score 4.40 (base 1.10 · recencia 0.97 · compromiso 1.30), promedio 1.00, señales 1, SBTi 100%, última 2025-08-21
-- Cargo Brasil (BR · Transporte, Movilidad & Logística): score 4.28 (base 1.10 · recencia 0.94 · compromiso 1.30), promedio 1.00, señales 1, SBTi 100%, última 2025-08-07
+- Cargo Brasil (BR · Transporte, Movilidad & Logística): score 4.27 (base 1.10 · recencia 0.94 · compromiso 1.30), promedio 1.00, señales 1, SBTi 100%, última 2025-08-07
 - Mercado Libre (AR · TIC, Digital & Medios): score 5.31 (base 0.61 · recencia 0.82 · compromiso 1.30), promedio 0.52, señales 2, SBTi 50%, última 2025-05-24
-- Aeropuertos Argentina (AR · Transporte, Movilidad & Logística): score 5.18 (base 0.19 · recencia 1.00 · compromiso 1.30), promedio 0.15, señales 4, SBTi 0%, última 2025-09-04
+- Aeropuertos Argentina (AR · Transporte, Movilidad & Logística): score 5.18 (base 0.13 · recencia 1.00 · compromiso 1.30), promedio 0.10, señales 4, SBTi 0%, última 2025-09-04
 - Chayè Hnos SRL (AR · Retail & servicios al consumidor): score 4.84 (base 1.10 · recencia 1.06 · compromiso 1.30), promedio 1.00, señales 1, SBTi 100%, última 2025-10-02
-- Telecom (AR · TIC, Digital & Medios): score 4.47 (base 1.10 · recencia 0.98 · compromiso 1.30), promedio 1.00, señales 1, SBTi 100%, última 2025-08-28
-- Agro de Souza S.A. (AR · Retail & servicios al consumidor): score 4.28 (base 1.10 · recencia 0.94 · compromiso 1.30), promedio 1.00, señales 1, SBTi 100%, última 2025-08-07
-- Arca Continental (MX · Agro & alimentos): score 4.95 (base 0.72 · recencia 0.62 · compromiso 1.30), promedio 0.60, señales 3, SBTi 33%, última 2024-02-01
+- Telecom (AR · TIC, Digital & Medios): score 4.46 (base 1.10 · recencia 0.98 · compromiso 1.30), promedio 1.00, señales 1, SBTi 100%, última 2025-08-28
+- Agro de Souza S.A. (AR · Retail & servicios al consumidor): score 4.27 (base 1.10 · recencia 0.94 · compromiso 1.30), promedio 1.00, señales 1, SBTi 100%, última 2025-08-07
+- Arca Continental (MX · Agro & alimentos): score 4.95 (base 0.56 · recencia 0.62 · compromiso 1.30), promedio 0.47, señales 3, SBTi 33%, última 2024-02-01
 - Fibra Mty (MX · Construcción, Infraestructura & Bienes Raíces): score 4.68 (base 1.10 · recencia 1.03 · compromiso 1.30), promedio 1.00, señales 1, SBTi 100%, última 2025-09-18
 - FEVISA (MX · Manufactura industrial): score 4.60 (base 1.10 · recencia 1.01 · compromiso 1.30), promedio 1.00, señales 1, SBTi 100%, última 2025-09-11
-- Parque Arauco S.A. (CL · Construcción, Infraestructura & Bienes Raíces): score 4.93 (base 0.72 · recencia 0.61 · compromiso 1.30), promedio 0.60, señales 6, SBTi 33%, última 2024-01-04
+- Parque Arauco S.A. (CL · Construcción, Infraestructura & Bienes Raíces): score 4.93 (base 0.56 · recencia 0.61 · compromiso 1.30), promedio 0.47, señales 6, SBTi 33%, última 2024-01-04
 - Mallplaza (CL · Retail & servicios al consumidor): score 4.84 (base 1.10 · recencia 1.06 · compromiso 1.30), promedio 1.00, señales 1, SBTi 100%, última 2025-10-02
 - Cotton Knit (PE · Manufactura industrial): score 4.84 (base 1.10 · recencia 1.06 · compromiso 1.30), promedio 1.00, señales 1, SBTi 100%, última 2025-10-02
 - Industrias Nettalco S.A. (PE · Manufactura industrial): score 4.34 (base 1.10 · recencia 0.95 · compromiso 1.30), promedio 1.00, señales 1, SBTi 100%, última 2025-08-14
-- Banco de Seguros del Estado (UY · Finanzas, Seguros & Capital): score 4.55 (base 0.50 · recencia 0.88 · compromiso 1.30), promedio 0.40, señales 4, SBTi 0%, última 2025-06-30
+- Banco de Seguros del Estado (UY · Finanzas, Seguros & Capital): score 4.55 (base 0.25 · recencia 0.88 · compromiso 1.30), promedio 0.20, señales 4, SBTi 0%, última 2025-06-30
