@@ -1,0 +1,105 @@
+signals:
+  # Peso "base" por tipo de señal, para medir calidad del mix
+  base_weights:
+    sbti: 1.0
+    b_corp: 0.5
+    ungc: 0.2
+
+  # Multiplicadores para priorizar en el ranking final
+  # Ej: score_final = base_score * boost_factor * volume_factor
+  boost_factors:
+    sbti: 1.4
+    b_corp: 1.1
+    ungc: 1.0
+
+prospecting_rules:
+  # Umbrales mínimos para que una empresa sea considerada prospecto potencial
+  min_country_weight: 0.6   # descarta países claramente fuera de foco
+  min_industry_weight: 0.6  # descarta industrias claramente fuera de foco
+
+  volume:
+    per_event: 0.03         # +3% por evento
+    max_events: 20          # hasta +60% máximo (20 * 0.03)
+
+prospecting_weights:
+
+  nativas:
+    countries:
+      tier1:
+        weight: 1.0
+        countries:
+          - AR
+          - BR
+          - CO
+          - PE
+      tier2:
+        weight: 0.6
+        countries:
+          - MX
+          - CL
+          - UY
+      tier3:
+        weight: 0.3
+        countries: []
+
+    industries:
+      tier1:
+        weight: 1.0
+        industries:
+          - Agro & alimentos
+          - Minería & materiales básicos
+          - Manufactura industrial
+      tier2:
+        weight: 0.6
+        industries:
+          - Retail & servicios al consumidor
+          - Finanzas, Seguros & Capital
+          - Transporte, Movilidad & Logística
+          - Construcción, Infraestructura & Bienes Raíces
+      tier3:
+        weight: 0.3
+        industries:
+          - Sector público, social & educación
+          - Servicios ambientales & circulares
+
+  erco:
+    countries:
+      tier1:
+        weight: 1.0
+        countries:
+          - UY
+          - CL
+          - BR
+          - CO
+      tier2:
+        weight: 0.6
+        countries:
+          - PE
+      tier3:
+        weight: 0.3
+        countries:
+          - AR
+          - MX
+
+    industries:
+      tier1:
+        weight: 1.0
+        industries:
+          - Energía & Servicios Públicos
+          - Manufactura industrial
+          - Minería & materiales básicos
+      tier2:
+        weight: 0.6
+        industries:
+          - Retail & servicios al consumidor
+          - Construcción, Infraestructura & Bienes Raíces
+          - Transporte, Movilidad & Logística
+      tier3:
+        weight: 0.3
+        industries:
+          - Finanzas, Seguros & Capital
+          - Agro & alimentos
+          - TIC, Digital & Medios
+          - Salud, Pharma & Biotech
+          - Sector público, social & educación
+
