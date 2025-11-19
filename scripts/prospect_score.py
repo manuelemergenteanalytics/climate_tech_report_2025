@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Dict, Tuple
 
 import argparse
+import unicodedata
 
 import pandas as pd
 import yaml
@@ -25,6 +26,12 @@ OUTPUTS = {
 }
 
 RECENCY_CUTOFF = pd.Timestamp(2020, 10, 1, tz="UTC")
+
+INDUSTRY_OVERRIDES = {
+    "corebox agencia de comunicacao e desenvolvimento tecnico-cientifico ltda": "Salud, Pharma & Biotech",
+    "marbow resinas": "Manufactura industrial",
+    "oz producoes audiovisuais e comunicacao ltda": "TIC, Digital & Medios",
+}
 
 
 def _resolve_events_path(path: Path | None = None) -> Path:
@@ -60,6 +67,14 @@ def _normalize_signal(name: str) -> str:
     if name in {"bcorp", "b corp", "b-corp"}:
         return "b_corp"
     return name
+
+
+def _normalize_company_key(name: str) -> str:
+    if not isinstance(name, str):
+        return ""
+    normalized = unicodedata.normalize("NFKD", name)
+    ascii_value = "".join(ch for ch in normalized if not unicodedata.combining(ch))
+    return ascii_value.lower().strip()
 
 
 @dataclass
@@ -121,6 +136,9 @@ def _summarize_company_signals(events: pd.DataFrame, config: dict) -> pd.DataFra
         country_value = country.iat[0] if not country.empty else ""
         industry = group["industry_friendly"].dropna().astype(str).mode()
         industry_value = industry.iat[0] if not industry.empty else "Sin industria"
+        override = INDUSTRY_OVERRIDES.get(_normalize_company_key(company_name))
+        if override:
+            industry_value = override
 
         grouped.append(
             CompanySignals(
