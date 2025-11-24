@@ -97,6 +97,11 @@ COMPANY_NAME_OVERRIDES = {
     "TUNKER QUÍMICA IMPORTAÇÃO LTDA": "Tunker Química Importação Ltda",
 }
 
+COMPANY_INDUSTRY_OVERRIDES = {
+    # Ajustes manuales cuando la industria original no refleja la clasificación usada en el radar
+    "Fibra Mty": "finance_insurance_capital",
+}
+
 DEFAULT_COMMITMENT_WEIGHT = 0.6
 COMMITMENT_WEIGHT_BY_SIGNAL = {
     "ungc": 0.2,
@@ -144,6 +149,7 @@ COMPANY_ACTIVITY_SUMMARY = {
     "Estudio Beccar Varela": "Estudio jurídico líder en servicios legales integrales (derecho corporativo, etc.) con visión global y trayectoria de más de 125 años.",
     "ETB": "Operador de telecomunicaciones estatal que provee servicios de telefonía móvil, internet (fibra óptica), TV y almacenamiento de datos.",
     "FEVISA": "Fabricante industrial especializado en la producción de envases de vidrio.",
+    "Fibra Mty": "Fideicomiso de inversión inmobiliaria dedicado a la gestión de bienes raíces.",
     "Fibra Mty F/2157": "Fideicomiso de inversión inmobiliaria dedicado a la gestión de bienes raíces.",
     "Fundacion Protestante Hora de Obrar": "Organización que trabaja por el desarrollo social y ambiental, brindando ayuda y proyectos en Argentina, Paraguay y Uruguay.",
     "Grupo L": "Ofrece soluciones integrales para empresas, incluyendo servicios de alimentación, limpieza, mantenimiento y servicios en sitios remotos.",
@@ -259,6 +265,9 @@ def _prep_events() -> pd.DataFrame:
     name_series = events.get("company_name")
     if name_series is not None:
         events["company_name"] = name_series.replace(COMPANY_NAME_OVERRIDES)
+        override_industries = events["company_name"].map(COMPANY_INDUSTRY_OVERRIDES)
+        if override_industries.notna().any():
+            events.loc[override_industries.notna(), "industry"] = override_industries.dropna()
     events["company_key"] = events["company_id"].copy()
     missing_key = events["company_key"].isna()
     if missing_key.any():
@@ -1123,6 +1132,15 @@ def coverage_country_industry(companies: pd.DataFrame) -> Path:
     )
     agg = agg[agg["companies"] > 0]
     agg["industry_display"] = apply_industry_labels(agg["industry"])
+    agg = (
+        agg.groupby(["country", "industry_display"], as_index=False)
+        .agg(
+            total_demand=("total_demand", "sum"),
+            total_intensity=("total_intensity", "sum"),
+            total_events=("total_events", "sum"),
+            companies=("companies", "sum"),
+        )
+    )
 
     if agg.empty:
         fig = go.Figure()

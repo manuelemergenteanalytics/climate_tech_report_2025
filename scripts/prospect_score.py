@@ -29,8 +29,12 @@ RECENCY_CUTOFF = pd.Timestamp(2020, 10, 1, tz="UTC")
 
 INDUSTRY_OVERRIDES = {
     "corebox agencia de comunicacao e desenvolvimento tecnico-cientifico ltda": "Salud, Pharma & Biotech",
-    "marbow resinas": "Manufactura industrial",
+    "marbow resinas": "Agro & alimentos",
     "oz producoes audiovisuais e comunicacao ltda": "TIC, Digital & Medios",
+    "tutiplast industria e comercio ltda": "Manufactura industrial",
+    "zanettini, barossi s/a industria e comercio": "Sin industria",
+    "lars partners": "Sin industria",
+    "rv solucoes industriais ltda.": "Servicios profesionales & técnicos",
 }
 
 
